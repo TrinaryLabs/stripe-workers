@@ -35,7 +35,7 @@ declare global {
         success_url: string,
         cancel_url: string,
         mode: string,
-        payment_method_types: PaymentMethodTypes,
+        payment_method_types: Array<string>,
         client_reference_id?: string,
         customer?: any,
         customer_email?: string,

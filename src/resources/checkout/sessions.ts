@@ -1,14 +1,17 @@
 import { HttpClient } from "../../HTTPclient"
+import { toFormUrlEncoded } from '../../helpers'
 
 class Sessions {
     client?: HttpClient
     
     create(params: StripeCheckoutSession) : Promise<StripeCheckoutSessionObject> {
-        return this.client!.post('', '') 
+        let data = toFormUrlEncoded(params)
+
+        return this.client!.post('https://api.stripe.com/v1/checkout/sessions', data) 
     }
     
     retrieve(id: string) : Promise<StripeCheckoutSessionObject> {
-        return this.client!.get('')
+        return this.client!.get(`https://api.stripe.com/v1/checkout/sessions/${id}`)
     }
     
     list(params?: StripeCheckoutListSessionsObject) : Promise<unknown> {
@@ -20,8 +23,8 @@ class Sessions {
         return this.client!.get(url)
     }
     
-    async listLineItems(params: StripeCheckoutLineitemsObject) : Promise<unknown> {
-        return this.client!.get('')
+    listLineItems(params: StripeCheckoutLineitemsObject) : Promise<unknown> {
+        return this.client!.get(`https://api.stripe.com/v1/checkout/sessions/${params.id}/line_items?limit=${params.limit}&ending_before=${params.ending_before}&starting_after=${params.starting_after}`)
     }
 }   
 

@@ -4,7 +4,7 @@ An unofficial stripe-sdk for workers.dev and environments that use [fetch](https
 
 ### 👩 💻 Developing
 
-[`src/index.js`](./src/index.ts)
+[`src/index.ts`](./src/index.ts)
 
 ### 🧪 Testing
 
