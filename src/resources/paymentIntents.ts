@@ -1,38 +1,88 @@
 export namespace paymentIntents {
     export let client: Function
 
-    export function create(params: {
-        success_url: string
-        cancel_url: string
-        mode: string
-        payment_method_types: Array<string>
-        client_reference_id?: string
-        customer?: any
-        customer_email?: string
-        line_items: Array<any>
-        metadata?: [string, any]
-        allow_promotion_codes?: boolean
-        billing_address_collection?: unknown
-        discounts?: Array<string>
-        locale?: string
-        payment_intent_data?: any
-        setup_intent_data?: any
-        shipping_address_collection?: Array<string>
-        submit_type?: string
-        subscription_data?: any
-    }) : Promise<unknown> {
+    export function create(
+        params: {
+            amount: number,
+            currency: string,
+            confirm?: boolean,
+            customer?: string,
+            description?: string,
+            metadata?: [string, unknown], 
+            off_session?: boolean,
+            payment_method?: string,
+            payment_method_types?: string[],
+            receipt_email?: string,
+            setup_future_usage?: string,
+            shipping?: object,
+            statement_descriptor?: string,
+            statement_descriptor_suffix?: string,
+            application_fee_amount?: number, 
+            capture_method?: unknown,
+            confirmation_method?: unknown,
+            error_on_requires_action?: unknown,
+            mandate?: unknown,
+            mandate_data?: unknown,
+            on_behalf_of?: unknown,
+            payment_method_data?: unknown,
+            payment_method_options?: unknown,
+            return_url?: string,
+            transfer_data?: unknown,
+            transfer_group?: unknown,
+            use_stripe_sdk?: unknown 
+        }
+    ) : Promise<unknown> {
         return client('/payment_intents', params, 'POST')
     }
 
-    export function retrieve(id: string) : Promise<unknown> {
-        return client(`/payment_intents/${id}`, {}, 'GET')
+    export function update(
+        id: string,
+        params: {
+            amount?: number,
+            currency?: string,
+            confirm?: boolean,
+            customer?: string,
+            description?: string,
+            metadata?: [string, unknown], 
+            off_session?: boolean,
+            payment_method?: string,
+            payment_method_types?: string[],
+            receipt_email?: string,
+            setup_future_usage?: string,
+            shipping?: object,
+            statement_descriptor?: string,
+            statement_descriptor_suffix?: string,
+            application_fee_amount?: number, 
+            capture_method?: unknown,
+            confirmation_method?: unknown,
+            error_on_requires_action?: unknown,
+            mandate?: unknown,
+            mandate_data?: unknown,
+            on_behalf_of?: unknown,
+            payment_method_data?: unknown,
+            payment_method_options?: unknown,
+            return_url?: string,
+            transfer_data?: unknown,
+            transfer_group?: unknown,
+            use_stripe_sdk?: unknown 
+        }
+    ) : Promise<unknown> {
+        return client(`/payment_intents/${id}`, params, 'POST')
+    }
+
+    export function confirm(id: string, params: unknown) : Promise<unknown> {
+        return client(`/payment_intents/${id}/confirm`, params, 'POST')
+    }
+
+    export function capture(id: string, params: unknown) : Promise<unknown> {
+        return client(`/payment_intents/${id}/capture`, params, 'POST')
+    }
+
+    export function cancel(id: string, params: unknown) : Promise<unknown> {
+        return client(`/payment_intents/${id}/confirm`, params, 'POST')
     }
 
     export function list(params: unknown) : Promise<unknown> {
-        return client('/checkout/sessions', {}, 'GET')
-    }
-
-    export function listLineItems(id: string, params: unknown) : Promise<unknown> {
-        return client(`/checkout/sessions/${id}/line_items`, {}, 'GET')
+        return client(`/payment_intents/`, params, 'GET')
     }
 }

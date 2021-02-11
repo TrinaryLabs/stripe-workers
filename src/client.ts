@@ -6,7 +6,7 @@ export class HTTPClient {
 
     constructor(key: string, customFetch?: Function) {
         this.STRIPE_SECRET_KEY = key
-        this.FETCH = ( customFetch ? customFetch : fetch)
+        this.FETCH = ( customFetch ? customFetch : fetch.bind(globalThis))
         
     }
 
@@ -16,7 +16,7 @@ export class HTTPClient {
         method: string,
         headers?: object,
     ) : Promise<unknown> => {
-        const resp = await fetch(`https://api.stripe.com/v1${path}`, {
+        const resp = await this.FETCH(`https://api.stripe.com/v1${path}`, {
             ...(method === 'POST' ? { body: qs.stringify(body) } : {}),
             headers: {
                 Authorization: `Bearer ${this.STRIPE_SECRET_KEY}`,
