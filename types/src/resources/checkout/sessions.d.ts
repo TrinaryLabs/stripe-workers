@@ -20,10 +20,20 @@ export declare namespace checkout {
             shipping_address_collection?: Array<string>;
             submit_type?: string;
             subscription_data?: any;
-        }, stripeAccount?: string): any;
-        function retrieve(id: string, stripeAccount?: string): any;
-        function list(params: unknown, stripeAccount?: string): any;
-        function listLineItems(id: string, params: unknown, stripeAccount?: string): any;
+        }, stripeAccount?: string): Promise<unknown>;
+        function retrieve(id: string, stripeAccount?: string): Promise<unknown>;
+        function list(params: {
+            payment_intent?: string;
+            subscription?: string;
+            limit?: number;
+            ending_before?: string;
+            starting_after?: string;
+        }, stripeAccount?: string): Promise<unknown>;
+        function listLineItems(id: string, params: {
+            ending_before?: string;
+            limit?: number;
+            starting_after?: string;
+        }, stripeAccount?: string): Promise<unknown>;
     }
 }
 //# sourceMappingURL=sessions.d.ts.map

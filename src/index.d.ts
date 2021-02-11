@@ -130,93 +130,11 @@ declare global {
     }
 }
 
-export declare namespace paymentIntents {
-    let client: Function;
-    function create(params: {
-        success_url: string;
-        cancel_url: string;
-        mode: string;
-        payment_method_types: Array<string>;
-        client_reference_id?: string;
-        customer?: any;
-        customer_email?: string;
-        line_items: Array<any>;
-        metadata?: [string, any];
-        allow_promotion_codes?: boolean;
-        billing_address_collection?: unknown;
-        discounts?: Array<string>;
-        locale?: string;
-        payment_intent_data?: any;
-        setup_intent_data?: any;
-        shipping_address_collection?: Array<string>;
-        submit_type?: string;
-        subscription_data?: any;
-    }): any;
-    function retrieve(id: string): any;
-    function list(params: unknown): any;
-    function listLineItems(id: string, params: unknown): any;
-}
-
-export declare namespace accounts {
-    let client: Function;
-    function create(params: unknown): any;
-    function retrieve(id: string): any;
-    function update(id: string, params: unknown): any;
-    function del(id: string): any;
-    function reject(id: string, params: unknown): any;
-    function list(params: unknown): any;
-    function createLoginLink(id: string): any;
-}
-
-export declare namespace checkout {
-    namespace sessions {
-        let client: Function;
-        function create(params: {
-            success_url: string;
-            cancel_url: string;
-            mode: string;
-            payment_method_types: Array<string>;
-            client_reference_id?: string;
-            customer?: any;
-            customer_email?: string;
-            line_items: Array<any>;
-            metadata?: [string, any];
-            allow_promotion_codes?: boolean;
-            billing_address_collection?: unknown;
-            discounts?: Array<string>;
-            locale?: string;
-            payment_intent_data?: any;
-            setup_intent_data?: any;
-            shipping_address_collection?: Array<string>;
-            submit_type?: string;
-            subscription_data?: any;
-        }, stripeAccount?: string): any;
-        function retrieve(id: string, stripeAccount?: string): any;
-        function list(params: unknown, stripeAccount?: string): any;
-        function listLineItems(id: string, params: unknown, stripeAccount?: string): any;
-    }
-}
-
-export declare namespace billingPortal {
-    namespace sessions {
-        let client: Function;
-        function create(customer: string, return_url?: string): any;
-    }
-}
-
-export declare class HTTPClient {
-    private STRIPE_SECRET_KEY;
-    private Fetch;
-    constructor(key: string, customFetch?: Function);
-    request: (path: string, body: any, method: string, headers?: object | undefined) => Promise<any>;
-}
-
-export class Stripe {
-    checkout: typeof checkout;
-    paymentIntents: typeof paymentIntents;
-    billingPortal: typeof billingPortal;
-    accounts: typeof accounts;
-    constructor(stripe_secret: string);
-}
+export * from '../types/src/resources/billing/billingPortal'
+export * from '../types/src/resources/checkout/sessions'
+export * from '../types/src/resources/connect/accounts'
+export * from '../types/src/resources/paymentIntents'
+export * from '../types/src/client'
+export * from '../types/src/index'
 
 declare module 'stripe-js';

@@ -10,7 +10,7 @@
         "test:clean": "rimraf ./transpiled/src ./transpiled/test",
         "test": "npm run test:clean && npm run transpile && mocha --require source-map-support/register --recursive transpiled/test",
         "transpile": "tsc --project ./test",
-        "build:types": "tsc -d --declarationDir test/types --declarationMap --emitDeclarationOnly"
+        "build:types": "tsc -d --declarationDir ./types --declarationMap --emitDeclarationOnly"
     },
     "types": "./src/index.d.ts",
     "author": "EduM22",

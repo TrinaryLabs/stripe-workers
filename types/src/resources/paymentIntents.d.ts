@@ -19,9 +19,9 @@ export declare namespace paymentIntents {
         shipping_address_collection?: Array<string>;
         submit_type?: string;
         subscription_data?: any;
-    }): any;
-    function retrieve(id: string): any;
-    function list(params: unknown): any;
-    function listLineItems(id: string, params: unknown): any;
+    }): Promise<unknown>;
+    function retrieve(id: string): Promise<unknown>;
+    function list(params: unknown): Promise<unknown>;
+    function listLineItems(id: string, params: unknown): Promise<unknown>;
 }
 //# sourceMappingURL=paymentIntents.d.ts.map
