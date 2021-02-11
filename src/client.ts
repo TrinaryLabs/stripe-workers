@@ -2,9 +2,12 @@ import qs from 'qs'
 
 export class HTTPClient {
     STRIPE_SECRET_KEY: string
+    FETCH: Function
 
-    constructor(key: string) {
+    constructor(key: string, customFetch?: Function) {
         this.STRIPE_SECRET_KEY = key
+        this.FETCH = ( customFetch ? customFetch : fetch)
+        
     }
 
     request = async (

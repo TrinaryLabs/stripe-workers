@@ -11,8 +11,8 @@ export class Stripe {
     billingPortal: typeof billingPortal
     accounts: typeof accounts
 
-    constructor(stripe_secret: string) {
-        let client = new HTTPClient(stripe_secret)
+    constructor(stripe_secret: string, fetch?: Function) {
+        let client = new HTTPClient(stripe_secret, fetch)
 
         this.checkout = checkout
         this.paymentIntents = paymentIntents
