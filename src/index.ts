@@ -1,39 +1,26 @@
-import * as checkout from './resources/checkout/checkout';
-import { HttpClient } from './HTTPclient';
-import fetch from 'node-fetch';
-import { toFormUrlEncoded } from './helpers'
+import { checkout } from './resources/checkout/sessions'
+import { paymentIntents } from './resources/paymentIntents'
+import { billingPortal } from './resources/billing/billingPortal'
+import { accounts } from './resources/connect/accounts'
+
+import { HTTPClient } from './client'
 
 export class Stripe {
-  checkout: checkout.checkout
-  constructor(authHeader: string) {
-    let client = new HttpClient(authHeader, fetch.bind(globalThis))
-    this.checkout = new checkout.checkout()
+    checkout: typeof checkout
+    paymentIntents: typeof paymentIntents
+    billingPortal: typeof billingPortal
+    accounts: typeof accounts
 
-    this.checkout.sessions.client = client
-    
-  }
+    constructor(stripe_secret: string) {
+        let client = new HTTPClient(stripe_secret)
 
-  async test() {
-    try {
-      var test = {
-        success_url: 'https://test.com',
-        cancel_url: 'https://test.com',
-        mode: 'payment',
-        payment_method_types: ['card'],
-        line_items: [
-          {price: 'price_1HUX2SAQ5SYPvLIK79TL0i0S', quantity: 2}
-        ],
-      }
+        this.checkout = checkout
+        this.paymentIntents = paymentIntents
+        this.billingPortal = billingPortal
+        this.accounts = accounts
 
-      var data = await this.checkout.sessions.create(test)
-      console.log(data)
-    } catch (error) {
-      console.log(error)
+        this.checkout.sessions.client = client.request
+        this.billingPortal.sessions.client = client.request
+        this.accounts.client = client.request
     }
-  }
-
 }
-
-let a = new Stripe('sk_test_51HSqaTAQ5SYPvLIK6DMqLpjznhEdyCF3xqffKcdaY6aRgbWrCgWoTEQRvVwspQFZfLBFgoqSsrYFOb4528oaHV4m00FeMRgAXU')
-
-a.test()

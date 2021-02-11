@@ -1,31 +1,75 @@
-import { HttpClient } from "../../HTTPclient"
-import { toFormUrlEncoded } from '../../helpers'
+export namespace checkout {
+    export namespace sessions {
+        export let client: Function
 
-class Sessions {
-    client?: HttpClient
-    
-    create(params: StripeCheckoutSession) : Promise<StripeCheckoutSessionObject> {
-        let data = toFormUrlEncoded(params)
-
-        return this.client!.post('https://api.stripe.com/v1/checkout/sessions', data) 
-    }
-    
-    retrieve(id: string) : Promise<StripeCheckoutSessionObject> {
-        return this.client!.get(`https://api.stripe.com/v1/checkout/sessions/${id}`)
-    }
-    
-    list(params?: StripeCheckoutListSessionsObject) : Promise<unknown> {
-        let url = 'https://api.stripe.com/v1/checkout/sessions?limit=3'
-        if (params !== undefined) {
-            params.limit
-            url = `https://api.stripe.com/v1/checkout/sessions?limit=${params.limit}&ending_before=${params.ending_before}&starting_after=${params.starting_after}&subscription=${params.subsciption}&pyment_intent=${params.payment_intent}`
+        export async function create(
+            params: {
+                success_url: string
+                cancel_url: string
+                mode: string
+                payment_method_types: Array<string>
+                client_reference_id?: string
+                customer?: any
+                customer_email?: string
+                line_items: Array<any>
+                metadata?: [string, any]
+                allow_promotion_codes?: boolean
+                billing_address_collection?: unknown
+                discounts?: Array<string>
+                locale?: string
+                payment_intent_data?: any
+                setup_intent_data?: any
+                shipping_address_collection?: Array<string>
+                submit_type?: string
+                subscription_data?: any
+            },
+            stripeAccount?: string,
+        ) : Promise<unknown> {
+            return client(
+                '/checkout/sessions',
+                params,
+                'POST',
+                stripeAccount 
+                    ? { 'Stripe-Account': stripeAccount }
+                    : {},
+            )
         }
-        return this.client!.get(url)
-    }
-    
-    listLineItems(params: StripeCheckoutLineitemsObject) : Promise<unknown> {
-        return this.client!.get(`https://api.stripe.com/v1/checkout/sessions/${params.id}/line_items?limit=${params.limit}&ending_before=${params.ending_before}&starting_after=${params.starting_after}`)
-    }
-}   
 
-export const sessions = new Sessions()
+        export async function retrieve(id: string, stripeAccount?: string) : Promise<unknown> {
+            return client(
+                `/checkout/sessions/${id}`,
+                {},
+                'GET',
+                stripeAccount
+                    ? { 'Stripe-Account': stripeAccount }
+                    : {},
+            )
+        }
+
+        export async function list(params: unknown, stripeAccount?: string) : Promise<unknown> {
+            return client(
+                '/checkout/sessions',
+                {},
+                'GET',
+                stripeAccount
+                    ? { 'Stripe-Account': stripeAccount }
+                    : {},
+            )
+        }
+
+        export async function listLineItems(
+            id: string,
+            params: unknown,
+            stripeAccount?: string,
+        ) : Promise<unknown> {
+            return client(
+                `/checkout/sessions/${id}/line_items`,
+                {},
+                'GET',
+                stripeAccount
+                    ? { 'Stripe-Account': stripeAccount }
+                    : {},
+            )
+        }
+    }
+}

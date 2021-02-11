@@ -1,6 +1,6 @@
 # `stripe-js`
 
-An unofficial stripe-sdk for workers.dev and environments that use [fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) 
+An unofficial stripe-sdk for workers.dev and environments that use [fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)
 
 ### 👩 💻 Developing
 
