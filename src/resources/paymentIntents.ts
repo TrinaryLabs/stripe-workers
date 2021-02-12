@@ -30,9 +30,11 @@ export namespace paymentIntents {
             transfer_data?: unknown,
             transfer_group?: unknown,
             use_stripe_sdk?: unknown 
-        }
+        }, stripeAccount?: string,
     ) : Promise<unknown> {
-        return client('/payment_intents', params, 'POST')
+        return client('/payment_intents', params, 'POST', stripeAccount
+        ? { 'Stripe-Account': stripeAccount }
+        : {},)
     }
 
     export function update(
@@ -65,24 +67,70 @@ export namespace paymentIntents {
             transfer_data?: unknown,
             transfer_group?: unknown,
             use_stripe_sdk?: unknown 
-        }
+        }, stripeAccount?: string,
     ) : Promise<unknown> {
-        return client(`/payment_intents/${id}`, params, 'POST')
+        return client(`/payment_intents/${id}`, params, 'POST', stripeAccount
+        ? { 'Stripe-Account': stripeAccount }
+        : {},)
     }
 
-    export function confirm(id: string, params: unknown) : Promise<unknown> {
-        return client(`/payment_intents/${id}/confirm`, params, 'POST')
+    export function confirm(id: string, 
+        params: {
+            payment_method?: unknown,
+            receipt_email?: string,
+            setup_future_usage?: string,
+            shipping?: object,
+            error_on_requires_action?: unknown,
+            mandate?: string,
+            mandate_data?: object,
+            off_session?: unknown,
+            payment_method_data?: object,
+            payment_method_options?: object,
+            payment_method_types?: string[],
+            return_url?: string,
+            use_stripe_sdk?: unknown
+        }, stripeAccount?: string
+    ) : Promise<unknown> {
+        return client(`/payment_intents/${id}/confirm`, params, 'POST', stripeAccount
+        ? { 'Stripe-Account': stripeAccount }
+        : {},)
     }
 
-    export function capture(id: string, params: unknown) : Promise<unknown> {
-        return client(`/payment_intents/${id}/capture`, params, 'POST')
+    export function capture(id: string, 
+        params: {
+            amount_to_capture?: number,
+            application_fee_amount?: number,
+            statement_descriptor?: string,
+            statement_descriptor_suffix?: string,
+            transfer_data?: object
+        }, stripeAccount?: string
+    ) : Promise<unknown> {
+        return client(`/payment_intents/${id}/capture`, params, 'POST', stripeAccount
+        ? { 'Stripe-Account': stripeAccount }
+        : {},)
     }
 
-    export function cancel(id: string, params: unknown) : Promise<unknown> {
-        return client(`/payment_intents/${id}/confirm`, params, 'POST')
+    export function cancel(id: string, 
+        params: {
+            cancellation_reason?: string
+        }, stripeAccount?: string
+    ) : Promise<unknown> {
+        return client(`/payment_intents/${id}/confirm`, params, 'POST', stripeAccount
+        ? { 'Stripe-Account': stripeAccount }
+        : {},)
     }
 
-    export function list(params: unknown) : Promise<unknown> {
-        return client(`/payment_intents/`, params, 'GET')
+    export function list(
+        params: {
+            customer?: string,
+            created?: object,
+            ending_before?: string,
+            limit?: number,
+            starting_after?: string 
+        }, stripeAccount?: string
+    ) : Promise<unknown> {
+        return client(`/payment_intents?customer=${params.customer}&created=${params.created}&limit=${params.limit}&starting_after=${params.starting_after}&ending_before=${params.ending_before}`, params, 'GET', stripeAccount
+        ? { 'Stripe-Account': stripeAccount }
+        : {},)
     }
 }

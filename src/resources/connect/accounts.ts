@@ -18,13 +18,17 @@ export namespace accounts {
             documents?: object,
             external_account?: object,
             settings?: object 
-        }
+        }, stripeAccount?: string,
     ) : Promise<unknown> {
-        return client('/accounts', params, 'POST')
+        return client('/accounts', params, 'POST', stripeAccount
+        ? { 'Stripe-Account': stripeAccount }
+        : {},)
     }
 
-    export function retrieve(id: string) : Promise<unknown> {
-        return client(`/accounts/${id}`, {}, 'GET')
+    export function retrieve(id: string, stripeAccount?: string) : Promise<unknown> {
+        return client(`/accounts/${id}`, {}, 'GET', stripeAccount
+        ? { 'Stripe-Account': stripeAccount }
+        : {},)
     }
 
     export function update(id: string, 
@@ -44,17 +48,23 @@ export namespace accounts {
             documents?: object,
             external_account?: object,
             settings?: object 
-        }
+        }, stripeAccount?: string,
     ) : Promise<unknown> {
-        return client(`/accounts/${id}`, params, 'POST')
+        return client(`/accounts/${id}`, params, 'POST', stripeAccount
+        ? { 'Stripe-Account': stripeAccount }
+        : {},)
     }
 
-    export function del(id: string) : Promise<unknown> {
-        return client(`/accounts/${id}`, {}, 'DELETE')
+    export function del(id: string, stripeAccount?: string) : Promise<unknown> {
+        return client(`/accounts/${id}`, {}, 'DELETE', stripeAccount
+        ? { 'Stripe-Account': stripeAccount }
+        : {},)
     }
 
-    export function reject(id: string, params: { reason: string }) : Promise<unknown> {
-        return client(`/accounts/${id}/reject`, params, 'POST')
+    export function reject(id: string, params: { reason: string }, stripeAccount?: string,) : Promise<unknown> {
+        return client(`/accounts/${id}/reject`, params, 'POST', stripeAccount
+        ? { 'Stripe-Account': stripeAccount }
+        : {},)
     }
 
     export function list(
@@ -63,12 +73,16 @@ export namespace accounts {
             limit?: number
             ending_before?: string,
             starting_after?: string
-        }
+        }, stripeAccount?: string,
     ) : Promise<unknown> {
-        return client(`/accounts`, params, 'GET')
+        return client(`/accounts`, params, 'GET', stripeAccount
+        ? { 'Stripe-Account': stripeAccount }
+        : {},)
     }
 
-    export function createLoginLink(id: string) : Promise<unknown> {
-        return client(`/accounts/${id}/login_links`, {}, 'POST')
+    export function createLoginLink(id: string, stripeAccount?: string) : Promise<unknown> {
+        return client(`/accounts/${id}/login_links`, {}, 'POST', stripeAccount
+        ? { 'Stripe-Account': stripeAccount }
+        : {},)
     }
 }
