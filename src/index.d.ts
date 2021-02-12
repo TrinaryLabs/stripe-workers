@@ -135,6 +135,7 @@ export * from '../types/src/resources/checkout/sessions'
 export * from '../types/src/resources/connect/accounts'
 export * from '../types/src/resources/paymentIntents'
 export * from '../types/src/resources/customers'
+export * from '../types/src/error'
 export * from '../types/src/client'
 export * from '../types/src/index'
 
