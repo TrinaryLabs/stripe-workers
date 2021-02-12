@@ -2,13 +2,20 @@ import qs from 'qs'
 import { StripeAuthenticationError, StripeError, StripePermissionError, StripeRateLimitError } from './error'
 
 export class HTTPClient {
-    STRIPE_SECRET_KEY: string
-    FETCH: Function
+    private STRIPE_SECRET_KEY: string
+    private API_VERSION: string
+    private UA: string
+    private FETCH: Function
 
-    constructor(key: string, customFetch?: Function) {
+    constructor(key: string, 
+        apiVersion?: string,
+        userAgent?: string,
+        customFetch?: Function
+    ) {
         this.STRIPE_SECRET_KEY = key
         this.FETCH = ( customFetch ? customFetch : fetch.bind(globalThis))
-        
+        this.API_VERSION = ( apiVersion ? apiVersion : '2020-08-27')
+        this.UA = ( userAgent ? userAgent : 'stripe/workers.dev (SDK-0.0.1-beta)')
     }
 
     request = async (
@@ -23,6 +30,8 @@ export class HTTPClient {
                 headers: {
                     Authorization: `Bearer ${this.STRIPE_SECRET_KEY}`,
                     'Content-type': 'application/x-www-form-urlencoded',
+                    'Stripe-Version': `${this.API_VERSION}`,
+                    'User-Agent': `${this.UA}`,
                     ...headers,
                 },
                 method,

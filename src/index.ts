@@ -5,7 +5,6 @@ import { accounts } from './resources/connect/accounts'
 import { customers } from './resources/customers'
 
 import { HTTPClient } from './client'
-
 export class Stripe {
     checkout: typeof checkout
     paymentIntents: typeof paymentIntents
@@ -13,8 +12,18 @@ export class Stripe {
     accounts: typeof accounts
     customers: typeof customers
 
-    constructor(stripe_secret: string, fetch?: Function) {
-        let client = new HTTPClient(stripe_secret, fetch)
+    constructor(stripe_secret: string, 
+        params: {
+            apiVersion?: string,
+            fetch?: Function,
+            userAgent?: string
+        }
+    ) {
+        let client = new HTTPClient(stripe_secret,
+            params.apiVersion,
+            params.userAgent,
+            params.fetch
+        )
 
         this.checkout = checkout
         this.paymentIntents = paymentIntents

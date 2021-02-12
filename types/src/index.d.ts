@@ -9,6 +9,10 @@ export declare class Stripe {
     billingPortal: typeof billingPortal;
     accounts: typeof accounts;
     customers: typeof customers;
-    constructor(stripe_secret: string, fetch?: Function);
+    constructor(stripe_secret: string, params: {
+        apiVersion?: string;
+        fetch?: Function;
+        userAgent?: string;
+    });
 }
 //# sourceMappingURL=index.d.ts.map
