@@ -54,4 +54,53 @@ export namespace transfers {
         : {},)
     }
 
+    export function createReversal(
+        id: string,
+        params: {
+            amount: number,
+            description?: string,
+            metadata?: [string, unknown],
+            refund_application_fee?: boolean
+        }, stripeAccount?: string,
+    ) : Promise<unknown> {
+        return client(`/transfers/${id}/reversals`, params, 'POST', stripeAccount
+        ? { 'Stripe-Account': stripeAccount }
+        : {},)
+    }
+
+    export function retrieveReversal(
+        id: string,
+        rever_id: string,
+        stripeAccount?: string,
+    ) : Promise<unknown> {
+        return client(`/transfers/${id}/reversals/${rever_id}`, {}, 'GET', stripeAccount
+        ? { 'Stripe-Account': stripeAccount }
+        : {},)
+    }
+
+    export function updateReversal(
+        id: string,
+        rever_id: string,
+        params: {
+            metadata?: [string, unknown],
+        }, stripeAccount?: string,
+    ) : Promise<unknown> {
+        return client(`/transfers/${id}/reversals/${rever_id}`, params, 'POST', stripeAccount
+        ? { 'Stripe-Account': stripeAccount }
+        : {},)
+    }
+
+    export function listReversals(
+        id: string,
+        params: {
+            ending_before?: string,
+            limit?: number,
+            starting_after?: string
+        }, stripeAccount?: string,
+    ) : Promise<unknown> {
+        return client(`/transfer/${id}/reversals?limit=${params.limit}&ending_before=${params.ending_before}&starting_after=${params.starting_after}`, {}, 'GET', stripeAccount
+        ? { 'Stripe-Account': stripeAccount }
+        : {},)
+    }
+
 }
