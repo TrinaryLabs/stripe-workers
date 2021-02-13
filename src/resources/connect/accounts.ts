@@ -215,4 +215,75 @@ export namespace accounts {
         ? { 'Stripe-Account': stripeAccount }
         : {},)
     }
+
+    export function createExternalAccount(
+        id: string,
+        params: {
+            external_account: object,
+            metadata?: [string, unknown],
+            default_for_currency?: string
+        }, stripeAccount?: string
+    ) : Promise<unknown> {
+        return client(`/accounts/${id}/external_accounts`, params, 'POST', stripeAccount
+        ? { 'Stripe-Account': stripeAccount }
+        : {},)
+    }
+
+    export function retrieveExternalAccount(
+        id: string,
+        ext_id: string,
+        stripeAccount?: string
+    ) : Promise<unknown> {
+        return client(`/accounts/${id}/external_accounts/${ext_id}`, {}, 'GET', stripeAccount
+        ? { 'Stripe-Account': stripeAccount }
+        : {},)
+    }
+
+    export function updateExternalAccount(
+        id: string,
+        ext_id: string,
+        params: {
+            metadata?: [string, unknown],
+            default_for_currency?: string,
+            account_holder_name?: string,
+            account_holder_type?: string,
+            addess_city?: string,
+            address_country?: string,
+            address_line1?: string,
+            address_line2?: string, 
+            address_state?: string,
+            address_zip?: string,
+            exp_month?: number,
+            exp_year?: number,
+            name?: string 
+        }, stripeAccount?: string
+    ) : Promise<unknown> {
+        return client(`/accounts/${id}/external_accounts/${ext_id}`, params, 'POST', stripeAccount
+        ? { 'Stripe-Account': stripeAccount }
+        : {},)
+    }
+
+    export function deleteExternalAccount(
+        id: string,
+        ext_id: string,
+        stripeAccount?: string
+    ) : Promise<unknown> {
+        return client(`/accounts/${id}/external_accounts/${ext_id}`, {}, 'DELETE', stripeAccount
+        ? { 'Stripe-Account': stripeAccount }
+        : {},)
+    }
+
+    export function listExternalAccounts(
+        id: string,
+        params: {
+            object: string, // bank_account or card
+            ending_before?: string,
+            limit?: number,
+            starting_after?: string
+        }, stripeAccount?: string
+    ) : Promise<unknown> {
+        return client(`/accounts/${id}/external_accounts?object=${params.object}&limit=${params.limit}&ending_before=${params.ending_before}&starting_after=${params.starting_after}`, {}, 'GET', stripeAccount
+        ? { 'Stripe-Account': stripeAccount }
+        : {},)
+    }
 }
