@@ -1,4 +1,4 @@
-export namespace accountLinks {
+export namespace applicationFees {
     export let client: Function
 
     export function retrieve(
