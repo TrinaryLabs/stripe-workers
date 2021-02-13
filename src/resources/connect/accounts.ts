@@ -85,4 +85,35 @@ export namespace accounts {
         ? { 'Stripe-Account': stripeAccount }
         : {},)
     }
+
+    export function retrieveCapability(
+        user_id: string,
+        cap_id: string,
+        stripeAccount?: string
+    ) : Promise<unknown> {
+        return client(`/accounts/${user_id}/capabilities/${cap_id}`, {}, 'GET', stripeAccount
+        ? { 'Stripe-Account': stripeAccount }
+        : {},)
+    }
+
+    export function updateCapability(
+        user_id: string,
+        cap_id: string,
+        params: {
+            requested?: boolean
+        }, stripeAccount?: string
+    ) : Promise<unknown> {
+        return client(`/accounts/${user_id}/capabilities/${cap_id}`, params, 'POST', stripeAccount
+        ? { 'Stripe-Account': stripeAccount }
+        : {},)
+    }
+
+    export function listCapabilities(
+        user_id: string,
+        stripeAccount?: string
+    ) : Promise<unknown> {
+        return client(`/accounts/${user_id}/capabilities`, {}, 'GET', stripeAccount
+        ? { 'Stripe-Account': stripeAccount }
+        : {},)
+    }
 }
