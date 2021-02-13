@@ -116,4 +116,103 @@ export namespace accounts {
         ? { 'Stripe-Account': stripeAccount }
         : {},)
     }
+
+    export function createPerson(
+        user_id: string,
+        params: {
+            adress?: object,
+            dob?: object,
+            email?: string,
+            first_name?: string,
+            id_number?: string,
+            last_name?: string,
+            metadata?: [string, unknown],
+            phone?: string,
+            relationship?: object,
+            ssn_last_4?: number,
+            address_kana?: object,
+            address_kanji?: object,
+            first_name_kana?: string,
+            first_name_kanji?: string,
+            gender?: string,
+            last_name_kana?: string,
+            last_name_kanji?: string,
+            maiden_name?: string,
+            nationality?: string,
+            person_token?: string,
+            political_exposure?: unknown,
+            verification?: object 
+        }, stripeAccount?: string
+    ) : Promise<unknown> {
+        return client(`/accounts/${user_id}/persons`, params, 'POST', stripeAccount
+        ? { 'Stripe-Account': stripeAccount }
+        : {},)
+    }
+
+    export function retrievePerson(
+        user_id: string,
+        person_id: string,
+        stripeAccount?: string
+    ) : Promise<unknown> {
+        return client(`/accounts/${user_id}/persons/${person_id}`, {}, 'GET', stripeAccount
+        ? { 'Stripe-Account': stripeAccount }
+        : {},)
+    }
+
+    export function updatePerson(
+        user_id: string,
+        person_id: string,
+        params: {
+            adress?: object,
+            dob?: object,
+            email?: string,
+            first_name?: string,
+            id_number?: string,
+            last_name?: string,
+            metadata?: [string, unknown],
+            phone?: string,
+            relationship?: object,
+            ssn_last_4?: number,
+            address_kana?: object,
+            address_kanji?: object,
+            first_name_kana?: string,
+            first_name_kanji?: string,
+            gender?: string,
+            last_name_kana?: string,
+            last_name_kanji?: string,
+            maiden_name?: string,
+            nationality?: string,
+            person_token?: string,
+            political_exposure?: unknown,
+            verification?: object 
+        }, stripeAccount?: string
+    ) : Promise<unknown> {
+        return client(`/accounts/${user_id}/persons/${person_id}`, params, 'POST', stripeAccount
+        ? { 'Stripe-Account': stripeAccount }
+        : {},)
+    }
+
+    export function deletePerson(
+        user_id: string,
+        person_id: string,
+        stripeAccount?: string
+    ) : Promise<unknown> {
+        return client(`/accounts/${user_id}/persons/${person_id}`, {}, 'DELETE', stripeAccount
+        ? { 'Stripe-Account': stripeAccount }
+        : {},)
+    }
+
+    export function listPersons(
+        user_id: string,
+        params: {
+            relationship?: object,
+            limit?: number,
+            ending_before?: string,
+            starting_after?: string
+        }, stripeAccount?: string
+    ) : Promise<unknown> {
+        return client(`/accounts/${user_id}/persons?relationship=${params.relationship}&limit=${params.limit}&ending_before=${params.ending_before}&starting_after=${params.starting_after}`, {}, 'GET', stripeAccount
+        ? { 'Stripe-Account': stripeAccount }
+        : {},)
+    }
 }
