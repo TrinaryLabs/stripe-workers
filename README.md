@@ -1,6 +1,6 @@
-# `stripe-js`
+# `stripe-workers`
 
-An unofficial stripe-sdk for workers.dev and environments that use [fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)
+An unofficial stripe-sdk for [workers.dev](https://workers.dev) and environments that use [fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)
 
 ### BETA
 This project is in beta, this SDK is built to follow the offical stripe-node package.
