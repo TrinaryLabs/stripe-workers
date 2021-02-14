@@ -81,4 +81,84 @@ export namespace customers {
         ? { 'Stripe-Account': stripeAccount }
         : {},)
     }
+
+    export function createSource(
+        cus_id: string,
+        params: {
+            source: {
+                object: string,
+                country: string,
+                currency: string,
+                account_holder_name?: string,
+                account_holder_type?: string,
+                routing_number?: string,
+                account_number: string
+            },
+            metadata?: [string, unknown],
+        }, stripeAccount?: string,
+    ) : Promise<unknown> {
+        return client(`/customers/${cus_id}/sources`, params, 'POST', stripeAccount
+        ? { 'Stripe-Account': stripeAccount }
+        : {},)
+    }
+
+    export function retrieveSource(
+        cus_id: string,
+        ba_id: string,
+        stripeAccount?: string,
+    ) : Promise<unknown> {
+        return client(`/customers/${cus_id}/sources/${ba_id}`, {}, 'GET', stripeAccount
+        ? { 'Stripe-Account': stripeAccount }
+        : {},)
+    }
+
+    export function updateSource(
+        cus_id: string,
+        ba_id: string,
+        params: {
+            amounts: number[]
+        }, stripeAccount?: string,
+    ) : Promise<unknown> {
+        return client(`/customers/${cus_id}/sources/${ba_id}`, params, 'POST', stripeAccount
+        ? { 'Stripe-Account': stripeAccount }
+        : {},)
+    }
+
+    export function verifySource(
+        cus_id: string,
+        ba_id: string,
+        params: {
+            account_holder_name?: string,
+            account_holder_type?: string,
+            metadata?: [string, unknown],
+        }, stripeAccount?: string,
+    ) : Promise<unknown> {
+        return client(`/customers/${cus_id}/sources/${ba_id}/verify`, params, 'POST', stripeAccount
+        ? { 'Stripe-Account': stripeAccount }
+        : {},)
+    }
+
+    export function deleteSource(
+        cus_id: string,
+        ba_id: string,
+        stripeAccount?: string,
+    ) : Promise<unknown> {
+        return client(`/customers/${cus_id}/sources/${ba_id}`, {}, 'DELETE', stripeAccount
+        ? { 'Stripe-Account': stripeAccount }
+        : {},)
+    }
+
+    export function listSource(
+        cus_id: string,
+        params: {
+            object: string, // bank_account
+            ending_before?: string,
+            limit?: number,
+            starting_after?: string 
+        }, stripeAccount?: string,
+    ) : Promise<unknown> {
+        return client(`/customers/${cus_id}/sources?object=${params.object}&limit=${params.limit}&ending_before=${params.ending_before}&starting_after=${params.starting_after}`, {}, 'GET', stripeAccount
+        ? { 'Stripe-Account': stripeAccount }
+        : {},)
+    }
 }
