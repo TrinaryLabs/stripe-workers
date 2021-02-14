@@ -46,5 +46,35 @@ export declare namespace customers {
         limit?: number;
         starting_after?: string;
     }, stripeAccount?: string): Promise<unknown>;
+    function createSource(cus_id: string, params: {
+        source: unknown;
+        metadata?: [string, unknown];
+    }, stripeAccount?: string): Promise<unknown>;
+    function retrieveSource(cus_id: string, id: string, stripeAccount?: string): Promise<unknown>;
+    function updateSource(cus_id: string, id: string, params: {
+        amounts?: number[];
+        address_city?: string;
+        address_country?: string;
+        address_line1?: string;
+        address_line2?: string;
+        address_state?: string;
+        address_zip?: string;
+        exp_month?: number;
+        exp_year?: number;
+        name?: string;
+        metadata?: [string, unknown];
+    }, stripeAccount?: string): Promise<unknown>;
+    function verifySource(cus_id: string, ba_id: string, params: {
+        account_holder_name?: string;
+        account_holder_type?: string;
+        metadata?: [string, unknown];
+    }, stripeAccount?: string): Promise<unknown>;
+    function deleteSource(cus_id: string, id: string, stripeAccount?: string): Promise<unknown>;
+    function listSource(cus_id: string, params: {
+        object: string;
+        ending_before?: string;
+        limit?: number;
+        starting_after?: string;
+    }, stripeAccount?: string): Promise<unknown>;
 }
 //# sourceMappingURL=customers.d.ts.map
