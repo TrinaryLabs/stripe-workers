@@ -259,4 +259,13 @@ export namespace customers {
         : {},)
     }
 
+    export function deleteDiscount(
+        cus_id: string,
+        stripeAccount?: string,
+    ) : Promise<unknown> {
+        return client(`/customers/${cus_id}/discount`, {}, 'DELETE', stripeAccount
+        ? { 'Stripe-Account': stripeAccount }
+        : {},)
+    }
+
 }
