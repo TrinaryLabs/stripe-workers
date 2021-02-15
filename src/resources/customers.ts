@@ -163,4 +163,55 @@ export namespace customers {
         ? { 'Stripe-Account': stripeAccount }
         : {},)
     }
+
+    export function createBalanceTransaction(
+        id: string,
+        params: {
+            amount: number,
+            currency: string,
+            description?: string,
+            metadata?: [string, unknown],
+        }, stripeAccount?: string,
+    ) : Promise<unknown> {
+        return client(`/customers/${id}/balance_transactions`, params, 'POST', stripeAccount
+        ? { 'Stripe-Account': stripeAccount }
+        : {},)
+    }
+
+    export function retrieveBalanceTransaction(
+        id: string,
+        tra_id: string,
+        stripeAccount?: string,
+    ) : Promise<unknown> {
+        return client(`/customers/${id}/balance_transactions/${tra_id}`, {}, 'GET', stripeAccount
+        ? { 'Stripe-Account': stripeAccount }
+        : {},)
+    }
+
+    export function updateBalanceTransaction(
+        id: string,
+        tra_id: string,
+        params: {
+            description?: string,
+            metadata?: [string, unknown],
+        }, stripeAccount?: string,
+    ) : Promise<unknown> {
+        return client(`/customers/${id}/balance_transactions/${tra_id}`, params, 'POST', stripeAccount
+        ? { 'Stripe-Account': stripeAccount }
+        : {},)
+    }
+
+    export function listBalanceTransaction(
+        id: string,
+        params: {
+            ending_before?: string,
+            limit?: number,
+            starting_after?: string
+        }, stripeAccount?: string,
+    ) : Promise<unknown> {
+        return client(`/customers/${id}/balance_transactions?limit=${params.limit}&ending_before=${params.ending_before}&starting_after=${params.starting_after}`, {}, 'GET', stripeAccount
+        ? { 'Stripe-Account': stripeAccount }
+        : {},)
+    }
+
 }
