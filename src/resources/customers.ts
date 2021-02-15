@@ -214,4 +214,49 @@ export namespace customers {
         : {},)
     }
 
+    export function createTaxId(
+        id: string,
+        params: {
+            type: string,
+            value: string
+        }, stripeAccount?: string,
+    ) : Promise<unknown> {
+        return client(`/customers/${id}/tax_ids`, params, 'POST', stripeAccount
+        ? { 'Stripe-Account': stripeAccount }
+        : {},)
+    }
+
+    export function retrieveTaxId(
+        cus_id: string,
+        tax_id: string,
+        stripeAccount?: string,
+    ) : Promise<unknown> {
+        return client(`/customers/${cus_id}/tax_ids/${tax_id}`, {}, 'GET', stripeAccount
+        ? { 'Stripe-Account': stripeAccount }
+        : {},)
+    }
+
+    export function deleteTaxId(
+        cus_id: string,
+        tax_id: string,
+        stripeAccount?: string,
+    ) : Promise<unknown> {
+        return client(`/customers/${cus_id}/tax_ids/${tax_id}`, {}, 'DELETE', stripeAccount
+        ? { 'Stripe-Account': stripeAccount }
+        : {},)
+    }
+
+    export function listTaxId(
+        id: string,
+        params: {
+            ending_before?: string,
+            limit?: number,
+            starting_after?: string
+        }, stripeAccount?: string,
+    ) : Promise<unknown> {
+        return client(`/customers/${id}/tax_ids?limit=${params.limit}&ending_before=${params.ending_before}&starting_after=${params.starting_after}`, {}, 'GET', stripeAccount
+        ? { 'Stripe-Account': stripeAccount }
+        : {},)
+    }
+
 }
