@@ -153,10 +153,20 @@ export * from '../types/src/resources/connect/transfers'
 export * from '../types/src/resources/paymentMethods/paymentMethods'
 export * from '../types/src/resources/paymentMethods/sources'
 
+export * from '../types/src/resources/reporting/report'
+
+export * from '../types/src/resources/sigma/scheduledQueryRuns'
+
+export * from '../types/src/resources/webhooks/webhookEndpoints'
+
+export * from '../types/src/resources/orders/orderReturns'
+export * from '../types/src/resources/orders/orders'
+export * from '../types/src/resources/orders/skus'
+
 export * from '../types/src/resources/paymentIntents'
 export * from '../types/src/resources/customers'
 export * from '../types/src/error'
 export * from '../types/src/client'
 export * from '../types/src/index'
 
-declare module 'stripe-workers';
+declare module 'stripe-workers'

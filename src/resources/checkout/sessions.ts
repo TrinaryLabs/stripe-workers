@@ -24,63 +24,59 @@ export namespace checkout {
                 subscription_data?: any
             },
             stripeAccount?: string,
-        ) : Promise<unknown> {
+        ): Promise<unknown> {
             return client(
                 '/checkout/sessions',
                 params,
                 'POST',
-                stripeAccount 
-                    ? { 'Stripe-Account': stripeAccount }
-                    : {},
+                stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
             )
         }
 
-        export async function retrieve(id: string, stripeAccount?: string) : Promise<unknown> {
+        export async function retrieve(
+            id: string,
+            stripeAccount?: string,
+        ): Promise<unknown> {
             return client(
                 `/checkout/sessions/${id}`,
                 {},
                 'GET',
-                stripeAccount
-                    ? { 'Stripe-Account': stripeAccount }
-                    : {},
+                stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
             )
         }
 
         export async function list(
             params: {
-                payment_intent?: string,
-                subscription?: string,
+                payment_intent?: string
+                subscription?: string
                 limit?: number
-                ending_before?: string,
+                ending_before?: string
                 starting_after?: string
-            }, stripeAccount?: string,
-        ) : Promise<unknown> {
+            },
+            stripeAccount?: string,
+        ): Promise<unknown> {
             return client(
                 `/checkout/sessions?limit=${params.limit}&payment_intent=${params.payment_intent}&subscription=${params.subscription}&starting_before=${params.starting_after}&ending_before=${params.ending_before}`,
                 {},
                 'GET',
-                stripeAccount
-                    ? { 'Stripe-Account': stripeAccount }
-                    : {},
+                stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
             )
         }
 
         export async function listLineItems(
             id: string,
             params: {
-                ending_before?: string,
-                limit?: number,
-                starting_after?: string,
+                ending_before?: string
+                limit?: number
+                starting_after?: string
             },
             stripeAccount?: string,
-        ) : Promise<unknown> {
+        ): Promise<unknown> {
             return client(
                 `/checkout/sessions/${id}/line_items?limit=${params.limit}&starting_after=${params.starting_after}&ending_before=${params.ending_before}`,
                 {},
                 'GET',
-                stripeAccount
-                    ? { 'Stripe-Account': stripeAccount }
-                    : {},
+                stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
             )
         }
     }
