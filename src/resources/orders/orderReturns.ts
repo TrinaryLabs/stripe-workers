@@ -15,12 +15,13 @@ export namespace orderReturns {
 
     export function list(
         params: {
-            order?: string,
-            created?: object,
-            ending_before?: string,
-            limit?: number,
-            starting_after?: string,
-        }, stripeAccount?: string,
+            order?: string
+            created?: object
+            ending_before?: string
+            limit?: number
+            starting_after?: string
+        },
+        stripeAccount?: string,
     ): Promise<unknown> {
         throw Error('not implemented')
         /* return client(
@@ -30,5 +31,4 @@ export namespace orderReturns {
             stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         ) */
     }
-
 }

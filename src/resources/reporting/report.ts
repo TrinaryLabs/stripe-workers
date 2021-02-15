@@ -49,7 +49,7 @@ export namespace reporting {
 
     export namespace reportTypes {
         export let client: Function
-    
+
         export function retrieve(
             id: string,
             stripeAccount?: string,
@@ -61,7 +61,7 @@ export namespace reporting {
                 stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
             )
         }
-    
+
         export function list(stripeAccount?: string): Promise<unknown> {
             return client(
                 `/reporting/report_types`,

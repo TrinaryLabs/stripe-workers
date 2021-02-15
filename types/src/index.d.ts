@@ -11,6 +11,9 @@ import { transfers } from './resources/connect/transfers';
 import { webhookEndpoints } from './resources/webhooks/webhookEndpoints';
 import { sigma } from './resources/sigma/scheduledQueryRuns';
 import { reporting } from './resources/reporting/report';
+import { orders } from './resources/orders/orders';
+import { orderReturns } from './resources/orders/orderReturns';
+import { skus } from "./resources/orders/skus";
 export declare class Stripe {
     checkout: typeof checkout;
     paymentIntents: typeof paymentIntents;
@@ -25,6 +28,9 @@ export declare class Stripe {
     webhookEndpoints: typeof webhookEndpoints;
     sigma: typeof sigma;
     reporting: typeof reporting;
+    orders: typeof orders;
+    orderReturns: typeof orderReturns;
+    skus: typeof skus;
     constructor(stripe_secret: string, params: {
         apiVersion?: string;
         fetch?: Function;

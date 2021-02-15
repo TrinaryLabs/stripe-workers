@@ -3,17 +3,18 @@ export namespace skus {
 
     export function create(
         params: {
-            id?: string,
-            currency: string,
-            inventory: object,
-            price: number,
-            product: string,
-            active?: boolean,
-            attributes?: object,
-            image?: string,
-            metadata?: [string, unknown],
-            package_dimensions?: object  
-        }, stripeAccount?: string,
+            id?: string
+            currency: string
+            inventory: object
+            price: number
+            product: string
+            active?: boolean
+            attributes?: object
+            image?: string
+            metadata?: [string, unknown]
+            package_dimensions?: object
+        },
+        stripeAccount?: string,
     ): Promise<unknown> {
         return client(
             '/skus',
@@ -38,16 +39,17 @@ export namespace skus {
     export function update(
         id: string,
         params: {
-            currency: string,
-            inventory: object,
-            price: number,
-            product: string,
-            active?: boolean,
-            attributes?: object,
-            image?: string,
-            metadata?: [string, unknown],
-            package_dimensions?: object  
-        }, stripeAccount?: string,
+            currency: string
+            inventory: object
+            price: number
+            product: string
+            active?: boolean
+            attributes?: object
+            image?: string
+            metadata?: [string, unknown]
+            package_dimensions?: object
+        },
+        stripeAccount?: string,
     ): Promise<unknown> {
         return client(
             `/skus/${id}`,
@@ -59,15 +61,16 @@ export namespace skus {
 
     export function list(
         params: {
-            active?: boolean,
-            product?: string,
-            attributes?: object,
-            ending_before?: string,
-            ids?: string[],
-            in_stock?: boolean,
-            limit?: number,
+            active?: boolean
+            product?: string
+            attributes?: object
+            ending_before?: string
+            ids?: string[]
+            in_stock?: boolean
+            limit?: number
             starting_after?: string
-        }, stripeAccount?: string,
+        },
+        stripeAccount?: string,
     ): Promise<unknown> {
         throw Error('not implemented')
         /* return client(
@@ -78,10 +81,7 @@ export namespace skus {
         ) */
     }
 
-    export function del(
-        id: string,
-        stripeAccount?: string,
-    ): Promise<unknown> {
+    export function del(id: string, stripeAccount?: string): Promise<unknown> {
         return client(
             `/skus/${id}`,
             {},
@@ -89,5 +89,4 @@ export namespace skus {
             stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         )
     }
-
 }

@@ -11,6 +11,9 @@ import { transfers } from './resources/connect/transfers'
 import { webhookEndpoints } from './resources/webhooks/webhookEndpoints'
 import { sigma } from './resources/sigma/scheduledQueryRuns'
 import { reporting } from './resources/reporting/report'
+import { orders } from './resources/orders/orders'
+import { orderReturns } from './resources/orders/orderReturns'
+import { skus } from "./resources/orders/skus";
 
 import { HTTPClient } from './client'
 export class Stripe {
@@ -27,6 +30,9 @@ export class Stripe {
     webhookEndpoints: typeof webhookEndpoints
     sigma: typeof sigma
     reporting: typeof reporting
+    orders: typeof orders
+    orderReturns: typeof orderReturns
+    skus: typeof skus
 
     constructor(
         stripe_secret: string,
@@ -56,6 +62,9 @@ export class Stripe {
         this.webhookEndpoints = webhookEndpoints
         this.sigma = sigma
         this.reporting = reporting
+        this.orders = orders
+        this.orderReturns = orderReturns
+        this.skus = skus
 
         this.checkout.sessions.client = client.request
         this.billingPortal.sessions.client = client.request
@@ -70,5 +79,8 @@ export class Stripe {
         this.sigma.scheduledQueryRuns.client = client.request
         this.reporting.reportRuns.client = client.request
         this.reporting.reportTypes.client = client.request
+        this.orders.client = client.request
+        this.orderReturns.client = client.request
+        this.skus.client = client.request
     }
 }

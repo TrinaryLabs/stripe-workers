@@ -159,6 +159,10 @@ export * from '../types/src/resources/sigma/scheduledQueryRuns'
 
 export * from '../types/src/resources/webhooks/webhookEndpoints'
 
+export * from '../types/src/resources/orders/orderReturns'
+export * from '../types/src/resources/orders/orders'
+export * from '../types/src/resources/orders/skus'
+
 export * from '../types/src/resources/paymentIntents'
 export * from '../types/src/resources/customers'
 export * from '../types/src/error'
