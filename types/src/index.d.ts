@@ -8,6 +8,9 @@ import { applicationFees } from './resources/connect/applicationFees';
 import { countrySpecs } from './resources/connect/countrySpecs';
 import { topups } from './resources/connect/topups';
 import { transfers } from './resources/connect/transfers';
+import { webhookEndpoints } from './resources/webhooks/webhookEndpoints';
+import { sigma } from './resources/sigma/scheduledQueryRuns';
+import { reporting } from './resources/reporting/report';
 export declare class Stripe {
     checkout: typeof checkout;
     paymentIntents: typeof paymentIntents;
@@ -19,6 +22,9 @@ export declare class Stripe {
     countrySpecs: typeof countrySpecs;
     topups: typeof topups;
     transfers: typeof transfers;
+    webhookEndpoints: typeof webhookEndpoints;
+    sigma: typeof sigma;
+    reporting: typeof reporting;
     constructor(stripe_secret: string, params: {
         apiVersion?: string;
         fetch?: Function;

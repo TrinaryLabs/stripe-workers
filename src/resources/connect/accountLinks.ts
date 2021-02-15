@@ -3,15 +3,19 @@ export namespace accountLinks {
 
     export function create(
         params: {
-            account: string,
-            refresh_url: string,
-            return_url: string,
-            type: string,
+            account: string
+            refresh_url: string
+            return_url: string
+            type: string
             collect?: string
-        }, stripeAccount?: string,
-    ) : Promise<unknown> {
-        return client('/account_links', params, 'POST', stripeAccount
-        ? { 'Stripe-Account': stripeAccount }
-        : {},)
+        },
+        stripeAccount?: string,
+    ): Promise<unknown> {
+        return client(
+            '/account_links',
+            params,
+            'POST',
+            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        )
     }
 }
