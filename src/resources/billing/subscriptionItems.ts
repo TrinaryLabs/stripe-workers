@@ -73,4 +73,30 @@ export namespace subscriptionItems {
         ? { 'Stripe-Account': stripeAccount }
         : {},)
     }
+
+    export function createUsageRecord(
+        id: string,
+        params: {
+            quantity: number,
+            timestmap: number,
+            action?: string
+        }, stripeAccount?: string,
+    ) : Promise<unknown> {
+        return client(`/subscription_items/${id}/usage_records`, params, 'POST', stripeAccount
+        ? { 'Stripe-Account': stripeAccount }
+        : {},)
+    }
+
+    export function listUsageRecordSummaries(
+        id: string,
+        params: {
+            ending_before?: string,
+            limit?: number,
+            starting_after?: string
+        }, stripeAccount?: string,
+    ) : Promise<unknown> {
+        return client(`/subscription_items/${id}/usage_record_summaries?limit=${params.limit}&ending_before=${params.ending_before}&starting_after=${params.starting_after}`, {}, 'GET', stripeAccount
+        ? { 'Stripe-Account': stripeAccount }
+        : {},)
+    }
 }
