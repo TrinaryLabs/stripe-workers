@@ -237,7 +237,7 @@ export namespace invoices {
         ) */
     }
 
-    export function lsit(
+    export function list(
         params: {
             customer?: string
             status?: string
