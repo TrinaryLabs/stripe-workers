@@ -76,5 +76,33 @@ export declare namespace customers {
         limit?: number;
         starting_after?: string;
     }, stripeAccount?: string): Promise<unknown>;
+    function createBalanceTransaction(id: string, params: {
+        amount: number;
+        currency: string;
+        description?: string;
+        metadata?: [string, unknown];
+    }, stripeAccount?: string): Promise<unknown>;
+    function retrieveBalanceTransaction(id: string, tra_id: string, stripeAccount?: string): Promise<unknown>;
+    function updateBalanceTransaction(id: string, tra_id: string, params: {
+        description?: string;
+        metadata?: [string, unknown];
+    }, stripeAccount?: string): Promise<unknown>;
+    function listBalanceTransaction(id: string, params: {
+        ending_before?: string;
+        limit?: number;
+        starting_after?: string;
+    }, stripeAccount?: string): Promise<unknown>;
+    function createTaxId(id: string, params: {
+        type: string;
+        value: string;
+    }, stripeAccount?: string): Promise<unknown>;
+    function retrieveTaxId(cus_id: string, tax_id: string, stripeAccount?: string): Promise<unknown>;
+    function deleteTaxId(cus_id: string, tax_id: string, stripeAccount?: string): Promise<unknown>;
+    function listTaxId(id: string, params: {
+        ending_before?: string;
+        limit?: number;
+        starting_after?: string;
+    }, stripeAccount?: string): Promise<unknown>;
+    function deleteDiscount(cus_id: string, stripeAccount?: string): Promise<unknown>;
 }
 //# sourceMappingURL=customers.d.ts.map
