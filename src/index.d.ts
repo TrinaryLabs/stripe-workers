@@ -131,19 +131,32 @@ declare global {
 }
 
 export * from '../types/src/resources/billing/billingPortal'
+export * from '../types/src/resources/billing/coupons'
+export * from '../types/src/resources/billing/creditNotes'
+export * from '../types/src/resources/billing/invoiceItems'
+export * from '../types/src/resources/billing/invoices'
+export * from '../types/src/resources/billing/promotionCodes'
+export * from '../types/src/resources/billing/subscriptionItems'
+export * from '../types/src/resources/billing/subscriptionSchedules'
+export * from '../types/src/resources/billing/subscriptions'
+export * from '../types/src/resources/billing/taxRates'
+
 export * from '../types/src/resources/checkout/sessions'
+
 export * from '../types/src/resources/connect/accounts'
 export * from '../types/src/resources/connect/accountLinks'
 export * from '../types/src/resources/connect/applicationFees'
 export * from '../types/src/resources/connect/countrySpecs'
 export * from '../types/src/resources/connect/topups'
 export * from '../types/src/resources/connect/transfers'
+
 export * from '../types/src/resources/paymentMethods/paymentMethods'
 export * from '../types/src/resources/paymentMethods/sources'
+
 export * from '../types/src/resources/paymentIntents'
 export * from '../types/src/resources/customers'
 export * from '../types/src/error'
 export * from '../types/src/client'
 export * from '../types/src/index'
 
-declare module 'stripe-js';
+declare module 'stripe-workers';
