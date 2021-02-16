@@ -325,4 +325,55 @@ export namespace issuing {
             )
         }
     }
+
+    export namespace transactions {
+        export let client: Function
+
+        export function retrieve(
+            id: string,
+            stripeAccount?: string,
+        ): Promise<unknown> {
+            return client(
+                `/issuing/transactions/${id}`,
+                {},
+                'GET',
+                stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            )
+        }
+
+        export function update(
+            id: string,
+            params: {
+                metadata?: [string, unknown]
+            },
+            stripeAccount?: string,
+        ): Promise<unknown> {
+            return client(
+                `/issuing/transactions/${id}`,
+                params,
+                'POST',
+                stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            )
+        }
+
+        export function list(
+            params: {
+                card?: string,
+                cardholder?: string,
+                created?: object,
+                ending_before?: string,
+                limit?: number,
+                starting_after?: string,
+                type?: string
+            },
+            stripeAccount?: string,
+        ): Promise<unknown> {
+            return client(
+                `/issuing/transactions?${qs.stringify(params)}`,
+                {},
+                'GET',
+                stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            )
+        }
+    }
 }
