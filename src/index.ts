@@ -13,7 +13,9 @@ import { sigma } from './resources/sigma/scheduledQueryRuns'
 import { reporting } from './resources/reporting/report'
 import { orders } from './resources/orders/orders'
 import { orderReturns } from './resources/orders/orderReturns'
-import { skus } from "./resources/orders/skus";
+import { skus } from './resources/orders/skus';
+import { issuing } from './resources/issuing/issuing'
+import { terminal } from './resources/terminal/terminal'
 
 import { HTTPClient } from './client'
 export class Stripe {
@@ -33,6 +35,8 @@ export class Stripe {
     orders: typeof orders
     orderReturns: typeof orderReturns
     skus: typeof skus
+    issuing: typeof issuing
+    terminal: typeof terminal
 
     constructor(
         stripe_secret: string,
@@ -65,6 +69,8 @@ export class Stripe {
         this.orders = orders
         this.orderReturns = orderReturns
         this.skus = skus
+        this.issuing = issuing
+        this.terminal = terminal
 
         this.checkout.sessions.client = client.request
         this.billingPortal.sessions.client = client.request
@@ -82,5 +88,13 @@ export class Stripe {
         this.orders.client = client.request
         this.orderReturns.client = client.request
         this.skus.client = client.request
+        this.issuing.authorizations.client = client.request
+        this.issuing.cardholders.client = client.request
+        this.issuing.cards.client = client.request
+        this.issuing.disputes.client = client.request
+        this.issuing.transactions.client = client.request
+        this.terminal.connectionTokens.client = client.request
+        this.terminal.locations.client = client.request
+        this.terminal.readers.client = client.request
     }
 }
