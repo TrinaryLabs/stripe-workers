@@ -99,7 +99,7 @@ export declare namespace invoices {
         subscription_trial_end?: unknown;
         subscription_trial_from_plan?: unknown;
     }, stripeAccount?: string): Promise<unknown>;
-    function lsit(params: {
+    function list(params: {
         customer?: string;
         status?: string;
         subscription?: string;
