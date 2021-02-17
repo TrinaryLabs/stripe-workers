@@ -6,7 +6,7 @@ export namespace terminal {
 
         export function create(
             params: {
-                location?: string,
+                location?: string
             },
             stripeAccount?: string,
         ): Promise<unknown> {
@@ -24,9 +24,9 @@ export namespace terminal {
 
         export function create(
             params: {
-                address: object,
-                display_name: string,
-                metadata?: [string, unknown] 
+                address: object
+                display_name: string
+                metadata?: [string, unknown]
             },
             stripeAccount?: string,
         ): Promise<unknown> {
@@ -53,9 +53,9 @@ export namespace terminal {
         export function update(
             id: string,
             params: {
-                address?: object,
-                display_name?: string,
-                metadata?: [string, unknown] 
+                address?: object
+                display_name?: string
+                metadata?: [string, unknown]
             },
             stripeAccount?: string,
         ): Promise<unknown> {
@@ -81,8 +81,8 @@ export namespace terminal {
 
         export function list(
             params: {
-                ending_before?: string,
-                limit?: number,
+                ending_before?: string
+                limit?: number
                 starting_after?: string
             },
             stripeAccount?: string,
@@ -101,10 +101,10 @@ export namespace terminal {
 
         export function create(
             params: {
-                registration_code?: string,
-                label?: string,
-                location?: string,
-                metadata?: [string, unknown] 
+                registration_code?: string
+                label?: string
+                location?: string
+                metadata?: [string, unknown]
             },
             stripeAccount?: string,
         ): Promise<unknown> {
@@ -131,8 +131,8 @@ export namespace terminal {
         export function update(
             id: string,
             params: {
-                label?: string,
-                metadata?: [string, unknown] 
+                label?: string
+                metadata?: [string, unknown]
             },
             stripeAccount?: string,
         ): Promise<unknown> {
@@ -158,11 +158,11 @@ export namespace terminal {
 
         export function list(
             params: {
-                device_type?: string,
-                location?: string,
-                status?: string,
-                ending_before?: string,
-                limit?: number,
+                device_type?: string
+                location?: string
+                status?: string
+                ending_before?: string
+                limit?: number
                 starting_after?: string
             },
             stripeAccount?: string,

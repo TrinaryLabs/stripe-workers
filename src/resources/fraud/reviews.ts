@@ -29,9 +29,9 @@ export namespace reviews {
 
     export function list(
         params: {
-            created?: object,
-            ending_before?: string,
-            limit?: number,
+            created?: object
+            ending_before?: string
+            limit?: number
             starting_after?: string
         },
         stripeAccount?: string,

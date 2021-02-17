@@ -18,9 +18,9 @@ export namespace radar {
 
         export function list(
             params: {
-                charge?: string,
-                ending_before?: string,
-                limit?: number,
+                charge?: string
+                ending_before?: string
+                limit?: number
                 starting_after?: string
             },
             stripeAccount?: string,
@@ -39,9 +39,9 @@ export namespace radar {
 
         export function create(
             params: {
-                alias: string,
-                name: string,
-                item_type?: string,
+                alias: string
+                name: string
+                item_type?: string
                 metadata?: [string, unknown]
             },
             stripeAccount?: string,
@@ -69,8 +69,8 @@ export namespace radar {
         export function update(
             id: string,
             params: {
-                alias?: string,
-                name?: string,
+                alias?: string
+                name?: string
                 metadata?: [string, unknown]
             },
             stripeAccount?: string,
@@ -97,11 +97,11 @@ export namespace radar {
 
         export function list(
             params: {
-                alias?: string,
-                contains?: string,
-                created?: object,
-                ending_before?: string,
-                limit?: number,
+                alias?: string
+                contains?: string
+                created?: object
+                ending_before?: string
+                limit?: number
                 starting_after?: string
             },
             stripeAccount?: string,
@@ -120,7 +120,7 @@ export namespace radar {
 
         export function create(
             params: {
-                value: string,
+                value: string
                 value_list: string
             },
             stripeAccount?: string,
@@ -159,11 +159,11 @@ export namespace radar {
 
         export function list(
             params: {
-                value_list: string,
-                value?: string,
-                created?: object,
-                ending_before?: string,
-                limit?: number,
+                value_list: string
+                value?: string
+                created?: object
+                ending_before?: string
+                limit?: number
                 starting_after?: string
             },
             stripeAccount?: string,

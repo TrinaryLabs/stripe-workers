@@ -1,9 +1,9 @@
-export declare namespace orderReturns {
+export declare namespace reviews {
     let client: Function
+    function approve(id: string, stripeAccount?: string): Promise<unknown>
     function retrieve(id: string, stripeAccount?: string): Promise<unknown>
     function list(
         params: {
-            order?: string
             created?: object
             ending_before?: string
             limit?: number
@@ -12,4 +12,4 @@ export declare namespace orderReturns {
         stripeAccount?: string,
     ): Promise<unknown>
 }
-//# sourceMappingURL=orderReturns.d.ts.map
+//# sourceMappingURL=reviews.d.ts.map

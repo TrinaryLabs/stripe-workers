@@ -13,9 +13,11 @@ import { sigma } from './resources/sigma/scheduledQueryRuns'
 import { reporting } from './resources/reporting/report'
 import { orders } from './resources/orders/orders'
 import { orderReturns } from './resources/orders/orderReturns'
-import { skus } from './resources/orders/skus';
+import { skus } from './resources/orders/skus'
 import { issuing } from './resources/issuing/issuing'
 import { terminal } from './resources/terminal/terminal'
+import { radar } from './resources/fraud/radar' 
+import { reviews } from './resources/fraud/reviews' 
 
 import { HTTPClient } from './client'
 export class Stripe {
@@ -37,6 +39,8 @@ export class Stripe {
     skus: typeof skus
     issuing: typeof issuing
     terminal: typeof terminal
+    radar: typeof radar
+    reviews: typeof reviews
 
     constructor(
         stripe_secret: string,
@@ -71,6 +75,8 @@ export class Stripe {
         this.skus = skus
         this.issuing = issuing
         this.terminal = terminal
+        this.radar = radar
+        this.reviews = reviews
 
         this.checkout.sessions.client = client.request
         this.billingPortal.sessions.client = client.request
@@ -96,5 +102,9 @@ export class Stripe {
         this.terminal.connectionTokens.client = client.request
         this.terminal.locations.client = client.request
         this.terminal.readers.client = client.request
+        this.radar.earlyFraudWarnings.client = client.request
+        this.radar.valueList.client = client.request
+        this.radar.valueListItems.client = client.request
+        this.reviews.client = client.request
     }
 }
