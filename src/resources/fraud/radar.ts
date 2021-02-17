@@ -114,4 +114,66 @@ export namespace radar {
             )
         }
     }
+
+    export namespace valueListItems {
+        export let client: Function
+
+        export function create(
+            params: {
+                value: string,
+                value_list: string
+            },
+            stripeAccount?: string,
+        ): Promise<unknown> {
+            return client(
+                `/radar/value_list_items`,
+                params,
+                'POST',
+                stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            )
+        }
+
+        export function retrieve(
+            id: string,
+            stripeAccount?: string,
+        ): Promise<unknown> {
+            return client(
+                `/radar/value_list_items/${id}`,
+                {},
+                'GET',
+                stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            )
+        }
+
+        export function del(
+            id: string,
+            stripeAccount?: string,
+        ): Promise<unknown> {
+            return client(
+                `/radar/value_list_items/${id}`,
+                {},
+                'DELETE',
+                stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            )
+        }
+
+        export function list(
+            params: {
+                value_list: string,
+                value?: string,
+                created?: object,
+                ending_before?: string,
+                limit?: number,
+                starting_after?: string
+            },
+            stripeAccount?: string,
+        ): Promise<unknown> {
+            return client(
+                `/radar/value_list_items?${qs.stringify(params)}`,
+                {},
+                'GET',
+                stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            )
+        }
+    }
 }
