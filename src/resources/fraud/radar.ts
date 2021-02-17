@@ -33,4 +33,85 @@ export namespace radar {
             )
         }
     }
+
+    export namespace valueList {
+        export let client: Function
+
+        export function create(
+            params: {
+                alias: string,
+                name: string,
+                item_type?: string,
+                metadata?: [string, unknown]
+            },
+            stripeAccount?: string,
+        ): Promise<unknown> {
+            return client(
+                `/radar/value_lists`,
+                params,
+                'POST',
+                stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            )
+        }
+
+        export function retrieve(
+            id: string,
+            stripeAccount?: string,
+        ): Promise<unknown> {
+            return client(
+                `/radar/value_lists/${id}`,
+                {},
+                'GET',
+                stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            )
+        }
+
+        export function update(
+            id: string,
+            params: {
+                alias?: string,
+                name?: string,
+                metadata?: [string, unknown]
+            },
+            stripeAccount?: string,
+        ): Promise<unknown> {
+            return client(
+                `/radar/value_lists/${id}`,
+                params,
+                'POST',
+                stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            )
+        }
+
+        export function del(
+            id: string,
+            stripeAccount?: string,
+        ): Promise<unknown> {
+            return client(
+                `/radar/value_lists/${id}`,
+                {},
+                'DELETE',
+                stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            )
+        }
+
+        export function list(
+            params: {
+                alias?: string,
+                contains?: string,
+                created?: object,
+                ending_before?: string,
+                limit?: number,
+                starting_after?: string
+            },
+            stripeAccount?: string,
+        ): Promise<unknown> {
+            return client(
+                `/radar/value_lists?${qs.stringify(params)}`,
+                {},
+                'GET',
+                stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            )
+        }
+    }
 }
