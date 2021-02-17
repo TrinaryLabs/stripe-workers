@@ -167,6 +167,9 @@ export * from './resources/issuing/issuing'
 
 export * from './resources/terminal/terminal'
 
+export * from './resources/fraud/radar'
+export * from './resources/fraud/reviews'
+
 export * from '../types/src/resources/paymentIntents'
 export * from '../types/src/resources/customers'
 export * from '../types/src/error'

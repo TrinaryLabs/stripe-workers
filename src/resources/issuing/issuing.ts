@@ -19,7 +19,7 @@ export namespace issuing {
         export function update(
             id: string,
             params: {
-                metadata?: [string, unknown] 
+                metadata?: [string, unknown]
             },
             stripeAccount?: string,
         ): Promise<unknown> {
@@ -34,8 +34,8 @@ export namespace issuing {
         export function approve(
             id: string,
             params: {
-                amount?: number,
-                metadata?: [string, unknown] 
+                amount?: number
+                metadata?: [string, unknown]
             },
             stripeAccount?: string,
         ): Promise<unknown> {
@@ -50,7 +50,7 @@ export namespace issuing {
         export function decline(
             id: string,
             params: {
-                metadata?: [string, unknown] 
+                metadata?: [string, unknown]
             },
             stripeAccount?: string,
         ): Promise<unknown> {
@@ -64,12 +64,12 @@ export namespace issuing {
 
         export function list(
             params: {
-                card?: string,
-                cardholder?: string,
-                status?: string,
-                created?: object,
-                ending_before?: string,
-                limit?: number,
+                card?: string
+                cardholder?: string
+                status?: string
+                created?: object
+                ending_before?: string
+                limit?: number
                 starting_after?: string
             },
             stripeAccount?: string,
@@ -88,15 +88,15 @@ export namespace issuing {
 
         export function create(
             params: {
-                billing: object,
-                name: string,
-                type: string,
-                email?: string,
-                metadata?: [string, unknown],
-                phone_number?: string,
-                company?: object,
-                individual?: object,
-                spending_controls?: object,
+                billing: object
+                name: string
+                type: string
+                email?: string
+                metadata?: [string, unknown]
+                phone_number?: string
+                company?: object
+                individual?: object
+                spending_controls?: object
                 status?: string
             },
             stripeAccount?: string,
@@ -124,13 +124,13 @@ export namespace issuing {
         export function update(
             id: string,
             params: {
-                billing: object,
-                email?: string,
-                metadata?: [string, unknown],
-                phone_number?: string,
-                company?: object,
-                individual?: object,
-                spending_controls?: object,
+                billing: object
+                email?: string
+                metadata?: [string, unknown]
+                phone_number?: string
+                company?: object
+                individual?: object
+                spending_controls?: object
                 status?: string
             },
             stripeAccount?: string,
@@ -145,13 +145,13 @@ export namespace issuing {
 
         export function list(
             params: {
-                created?: object,
-                email?: string,
-                ending_before?: string,
-                limit?: number,
-                phone_number?: string,
-                starting_after?: string,
-                status?: string,
+                created?: object
+                email?: string
+                ending_before?: string
+                limit?: number
+                phone_number?: string
+                starting_after?: string
+                status?: string
                 type?: string
             },
             stripeAccount?: string,
@@ -170,14 +170,14 @@ export namespace issuing {
 
         export function create(
             params: {
-                cardholder: string,
-                currency: string,
-                type: string,
-                metadata?: [string, unknown],
-                status?: string,
-                replacement_for?: unknown,
-                replacement_reason?: string,
-                shipping?: object,
+                cardholder: string
+                currency: string
+                type: string
+                metadata?: [string, unknown]
+                status?: string
+                replacement_for?: unknown
+                replacement_reason?: string
+                shipping?: object
                 spending_controls?: object
             },
             stripeAccount?: string,
@@ -205,9 +205,9 @@ export namespace issuing {
         export function update(
             id: string,
             params: {
-                cancellation_reason?: string,
-                metadata?: [string, unknown],
-                status?: string,
+                cancellation_reason?: string
+                metadata?: [string, unknown]
+                status?: string
                 spending_controls?: object
             },
             stripeAccount?: string,
@@ -222,15 +222,15 @@ export namespace issuing {
 
         export function list(
             params: {
-                cardholder?: string,
-                type?: string,
-                created?: object,
-                ending_before?: string,
-                exp_month?: number,
-                exp_year?: number,
-                last4?: number,
-                limit?: number,
-                starting_after?: string,
+                cardholder?: string
+                type?: string
+                created?: object
+                ending_before?: string
+                exp_month?: number
+                exp_year?: number
+                last4?: number
+                limit?: number
+                starting_after?: string
                 status?: string
             },
             stripeAccount?: string,
@@ -249,8 +249,8 @@ export namespace issuing {
 
         export function create(
             params: {
-                transaction: string,
-                evidence?: object,
+                transaction: string
+                evidence?: object
                 metadata?: [string, unknown]
             },
             stripeAccount?: string,
@@ -293,7 +293,7 @@ export namespace issuing {
         export function update(
             id: string,
             params: {
-                evidence?: object,
+                evidence?: object
                 metadata?: [string, unknown]
             },
             stripeAccount?: string,
@@ -308,11 +308,11 @@ export namespace issuing {
 
         export function list(
             params: {
-                transaction?: string,
-                created?: object,
-                ending_before?: string,
-                limit?: number,
-                starting_after?: string,
+                transaction?: string
+                created?: object
+                ending_before?: string
+                limit?: number
+                starting_after?: string
                 status?: string
             },
             stripeAccount?: string,
@@ -358,12 +358,12 @@ export namespace issuing {
 
         export function list(
             params: {
-                card?: string,
-                cardholder?: string,
-                created?: object,
-                ending_before?: string,
-                limit?: number,
-                starting_after?: string,
+                card?: string
+                cardholder?: string
+                created?: object
+                ending_before?: string
+                limit?: number
+                starting_after?: string
                 type?: string
             },
             stripeAccount?: string,

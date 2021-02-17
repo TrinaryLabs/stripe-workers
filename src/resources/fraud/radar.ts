@@ -1,37 +1,53 @@
 import qs from 'qs'
 
-export namespace terminal {
-    export namespace connectionTokens {
+export namespace radar {
+    export namespace earlyFraudWarnings {
         export let client: Function
 
-        export function create(
+        export function retrieve(
+            id: string,
+            stripeAccount?: string,
+        ): Promise<unknown> {
+            return client(
+                `/radar/early_fraud_warnings/${id}`,
+                {},
+                'GET',
+                stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            )
+        }
+
+        export function list(
             params: {
-                location?: string
+                charge?: string
+                ending_before?: string
+                limit?: number
+                starting_after?: string
             },
             stripeAccount?: string,
         ): Promise<unknown> {
             return client(
-                '/terminal/connection_tokens',
-                params,
-                'POST',
+                `/radar/early_fraud_warnings?${qs.stringify(params)}`,
+                {},
+                'GET',
                 stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
             )
         }
     }
 
-    export namespace locations {
+    export namespace valueList {
         export let client: Function
 
         export function create(
             params: {
-                address: object
-                display_name: string
+                alias: string
+                name: string
+                item_type?: string
                 metadata?: [string, unknown]
             },
             stripeAccount?: string,
         ): Promise<unknown> {
             return client(
-                '/terminal/locactions',
+                `/radar/value_lists`,
                 params,
                 'POST',
                 stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
@@ -43,7 +59,7 @@ export namespace terminal {
             stripeAccount?: string,
         ): Promise<unknown> {
             return client(
-                `/terminal/locactions/${id}`,
+                `/radar/value_lists/${id}`,
                 {},
                 'GET',
                 stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
@@ -53,14 +69,14 @@ export namespace terminal {
         export function update(
             id: string,
             params: {
-                address?: object
-                display_name?: string
+                alias?: string
+                name?: string
                 metadata?: [string, unknown]
             },
             stripeAccount?: string,
         ): Promise<unknown> {
             return client(
-                `/terminal/locactions/${id}`,
+                `/radar/value_lists/${id}`,
                 params,
                 'POST',
                 stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
@@ -72,7 +88,7 @@ export namespace terminal {
             stripeAccount?: string,
         ): Promise<unknown> {
             return client(
-                `/terminal/locactions/${id}`,
+                `/radar/value_lists/${id}`,
                 {},
                 'DELETE',
                 stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
@@ -81,6 +97,9 @@ export namespace terminal {
 
         export function list(
             params: {
+                alias?: string
+                contains?: string
+                created?: object
                 ending_before?: string
                 limit?: number
                 starting_after?: string
@@ -88,7 +107,7 @@ export namespace terminal {
             stripeAccount?: string,
         ): Promise<unknown> {
             return client(
-                `/terminal/locactions?${qs.stringify(params)}`,
+                `/radar/value_lists?${qs.stringify(params)}`,
                 {},
                 'GET',
                 stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
@@ -96,20 +115,18 @@ export namespace terminal {
         }
     }
 
-    export namespace readers {
+    export namespace valueListItems {
         export let client: Function
 
         export function create(
             params: {
-                registration_code?: string
-                label?: string
-                location?: string
-                metadata?: [string, unknown]
+                value: string
+                value_list: string
             },
             stripeAccount?: string,
         ): Promise<unknown> {
             return client(
-                '/terminal/readers',
+                `/radar/value_list_items`,
                 params,
                 'POST',
                 stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
@@ -121,25 +138,9 @@ export namespace terminal {
             stripeAccount?: string,
         ): Promise<unknown> {
             return client(
-                `/terminal/readers/${id}`,
+                `/radar/value_list_items/${id}`,
                 {},
                 'GET',
-                stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-            )
-        }
-
-        export function update(
-            id: string,
-            params: {
-                label?: string
-                metadata?: [string, unknown]
-            },
-            stripeAccount?: string,
-        ): Promise<unknown> {
-            return client(
-                `/terminal/readers/${id}`,
-                params,
-                'POST',
                 stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
             )
         }
@@ -149,7 +150,7 @@ export namespace terminal {
             stripeAccount?: string,
         ): Promise<unknown> {
             return client(
-                `/terminal/readers/${id}`,
+                `/radar/value_list_items/${id}`,
                 {},
                 'DELETE',
                 stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
@@ -158,9 +159,9 @@ export namespace terminal {
 
         export function list(
             params: {
-                device_type?: string
-                location?: string
-                status?: string
+                value_list: string
+                value?: string
+                created?: object
                 ending_before?: string
                 limit?: number
                 starting_after?: string
@@ -168,7 +169,7 @@ export namespace terminal {
             stripeAccount?: string,
         ): Promise<unknown> {
             return client(
-                `/terminal/readers?${qs.stringify(params)}`,
+                `/radar/value_list_items?${qs.stringify(params)}`,
                 {},
                 'GET',
                 stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
