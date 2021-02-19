@@ -1,3 +1,5 @@
+import qs from 'qs'
+
 export namespace topups {
     export let client: Function
 
@@ -14,7 +16,7 @@ export namespace topups {
         stripeAccount?: string,
     ): Promise<unknown> {
         return client(
-            `/topups`,
+            '/topups',
             params,
             'POST',
             stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
@@ -61,8 +63,8 @@ export namespace topups {
         stripeAccount?: string,
     ): Promise<unknown> {
         return client(
-            `/topups?status=${params.status}&limit=${params.limit}&amount=${params.amount}&created=${params.created}&ending_before=${params.ending_before}&starting_after=${params.starting_after}`,
-            {},
+            `/topups?${qs.stringify(params)}`,
+            params,
             'GET',
             stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         )

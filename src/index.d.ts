@@ -147,7 +147,6 @@ export * from '../types/src/resources/connect/accounts'
 export * from '../types/src/resources/connect/accountLinks'
 export * from '../types/src/resources/connect/applicationFees'
 export * from '../types/src/resources/connect/countrySpecs'
-export * from '../types/src/resources/connect/topups'
 export * from '../types/src/resources/connect/transfers'
 
 export * from '../types/src/resources/paymentMethods/paymentMethods'
@@ -164,6 +163,15 @@ export * from '../types/src/resources/orders/orders'
 export * from '../types/src/resources/orders/skus'
 
 export * from './resources/issuing/issuing'
+
+export * from './resources/balance'
+export * from './resources/balanceTransactions'
+export * from './resources/charges'
+export * from './resources/disputes'
+export * from './resources/events'
+export * from './resources/fileLinks'
+export * from './resources/mandates'
+export * from './resources/topups'
 
 export * from './resources/terminal/terminal'
 

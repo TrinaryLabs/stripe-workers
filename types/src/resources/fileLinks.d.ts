@@ -1,26 +1,23 @@
-export declare namespace webhookEndpoints {
+export declare namespace fileLinks {
     let client: Function;
     function create(params: {
-        enabled_events: string[];
-        url: string;
-        api_version?: string;
-        description?: string;
+        file: string;
+        expires_at?: object;
         metadata?: [string, unknown];
-        connect?: boolean;
     }, stripeAccount?: string): Promise<unknown>;
     function retrieve(id: string, stripeAccount?: string): Promise<unknown>;
     function update(id: string, params: {
-        enabled_events: string[];
-        url: string;
-        description?: string;
+        expires_at?: object;
         metadata?: [string, unknown];
-        disabled?: boolean;
     }, stripeAccount?: string): Promise<unknown>;
     function list(params: {
+        created?: object;
         ending_before?: string;
+        expired?: boolean;
+        file?: string;
         limit?: number;
         starting_after?: string;
+        type?: string;
     }, stripeAccount?: string): Promise<unknown>;
-    function del(id: string, stripeAccount?: string): Promise<unknown>;
 }
-//# sourceMappingURL=webhookEndpoints.d.ts.map
+//# sourceMappingURL=fileLinks.d.ts.map
