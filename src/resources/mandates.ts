@@ -12,5 +12,4 @@ export namespace mandates {
             stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         )
     }
-
 }

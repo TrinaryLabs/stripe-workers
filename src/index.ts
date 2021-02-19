@@ -6,7 +6,6 @@ import { accounts } from './resources/connect/accounts'
 import { accountLinks } from './resources/connect/accountLinks'
 import { applicationFees } from './resources/connect/applicationFees'
 import { countrySpecs } from './resources/connect/countrySpecs'
-import { topups } from './resources/connect/topups'
 import { transfers } from './resources/connect/transfers'
 import { webhookEndpoints } from './resources/webhooks/webhookEndpoints'
 import { sigma } from './resources/sigma/scheduledQueryRuns'
@@ -16,8 +15,16 @@ import { orderReturns } from './resources/orders/orderReturns'
 import { skus } from './resources/orders/skus'
 import { issuing } from './resources/issuing/issuing'
 import { terminal } from './resources/terminal/terminal'
-import { radar } from './resources/fraud/radar' 
-import { reviews } from './resources/fraud/reviews' 
+import { radar } from './resources/fraud/radar'
+import { reviews } from './resources/fraud/reviews'
+import { balance } from './resources/balance'
+import { topups } from './resources/topups'
+import { disputes } from './resources/disputes'
+import { events } from './resources/events'
+import { mandates } from './resources/mandates'
+import { fileLinks } from './resources/fileLinks'
+import { balanceTransactions } from './resources/balanceTransactions'
+import { charges } from './resources/charges' 
 
 import { HTTPClient } from './client'
 export class Stripe {
@@ -41,6 +48,13 @@ export class Stripe {
     terminal: typeof terminal
     radar: typeof radar
     reviews: typeof reviews
+    balance: typeof balance
+    disputes: typeof disputes
+    events: typeof events
+    mandates: typeof mandates
+    fileLinks: typeof fileLinks
+    balanceTransactions: typeof balanceTransactions
+    charges: typeof charges
 
     constructor(
         stripe_secret: string,
@@ -77,6 +91,13 @@ export class Stripe {
         this.terminal = terminal
         this.radar = radar
         this.reviews = reviews
+        this.balance = balance
+        this.disputes = disputes
+        this.events = events
+        this.mandates = mandates
+        this.fileLinks = fileLinks
+        this.balanceTransactions = balanceTransactions
+        this.charges = charges
 
         this.checkout.sessions.client = client.request
         this.billingPortal.sessions.client = client.request
@@ -106,5 +127,13 @@ export class Stripe {
         this.radar.valueList.client = client.request
         this.radar.valueListItems.client = client.request
         this.reviews.client = client.request
+        this.balance.client = client.request
+        this.topups.client = client.request
+        this.disputes.client = client.request
+        this.events.client = client.request
+        this.mandates.client = client.request
+        this.fileLinks.client = client.request
+        this.balanceTransactions.client = client.request
+        this.charges.client = client.request
     }
 }

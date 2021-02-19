@@ -17,12 +17,12 @@ export namespace events {
 
     export function list(
         params: {
-            types?: string[],
-            created?: object,
-            delivery_success?: unknown,
+            types?: string[]
+            created?: object
+            delivery_success?: unknown
             ending_before?: string
             limit?: number
-            starting_after?: string,
+            starting_after?: string
             type?: string
         },
         stripeAccount?: string,
@@ -34,5 +34,4 @@ export namespace events {
             stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         )
     }
-
 }

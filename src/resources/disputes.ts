@@ -12,14 +12,14 @@ export namespace disputes {
             {},
             'GET',
             stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-        )   
+        )
     }
 
     export function update(
         id: string,
         params: {
-            evidence?: object,
-            metadata?: [string, unknown],
+            evidence?: object
+            metadata?: [string, unknown]
             submit?: boolean
         },
         stripeAccount?: string,
@@ -46,8 +46,8 @@ export namespace disputes {
 
     export function list(
         params: {
-            charge?: string,
-            payment_intent?: string,
+            charge?: string
+            payment_intent?: string
             created?: object
             ending_before?: string
             limit?: number

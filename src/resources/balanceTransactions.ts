@@ -17,15 +17,15 @@ export namespace balanceTransactions {
 
     export function list(
         params: {
-            payout?: string,
-            type?: string,
-            available_on?: object,
-            created?: object,
-            currency?: string,
-            ending_before?: string,
-            limit?: number,
-            source?: unknown,
-            starting_after?: string 
+            payout?: string
+            type?: string
+            available_on?: object
+            created?: object
+            currency?: string
+            ending_before?: string
+            limit?: number
+            source?: unknown
+            starting_after?: string
         },
         stripeAccount?: string,
     ): Promise<unknown> {

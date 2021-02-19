@@ -5,9 +5,9 @@ export namespace fileLinks {
 
     export function create(
         params: {
-            file: string,
-            expires_at?: object,
-            metadata?: [string, unknown] 
+            file: string
+            expires_at?: object
+            metadata?: [string, unknown]
         },
         stripeAccount?: string,
     ): Promise<unknown> {
@@ -34,8 +34,8 @@ export namespace fileLinks {
     export function update(
         id: string,
         params: {
-            expires_at?: object,
-            metadata?: [string, unknown] 
+            expires_at?: object
+            metadata?: [string, unknown]
         },
         stripeAccount?: string,
     ): Promise<unknown> {
@@ -49,12 +49,12 @@ export namespace fileLinks {
 
     export function list(
         params: {
-            created?: object,
-            ending_before?: string,
-            expired?: boolean,
-            file?: string,
+            created?: object
+            ending_before?: string
+            expired?: boolean
+            file?: string
             limit?: number
-            starting_after?: string,
+            starting_after?: string
             type?: string
         },
         stripeAccount?: string,
@@ -66,5 +66,4 @@ export namespace fileLinks {
             stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         )
     }
-
 }
