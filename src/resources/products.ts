@@ -5,19 +5,19 @@ export namespace products {
 
     export function create(
         params: {
-            id?: string,
-            name: string,
-            active?: boolean,
-            description?: string,
-            metadata?: [string, unknown],
-            attributes?: string[],
-            caption?: string,
-            deactivate_on?: string[],
-            images?: string[],
-            package_dimensions?: object,
-            shippable?: boolean,
-            statement_descriptor?: string,
-            unit_label?: string,
+            id?: string
+            name: string
+            active?: boolean
+            description?: string
+            metadata?: [string, unknown]
+            attributes?: string[]
+            caption?: string
+            deactivate_on?: string[]
+            images?: string[]
+            package_dimensions?: object
+            shippable?: boolean
+            statement_descriptor?: string
+            unit_label?: string
             url?: string
         },
         stripeAccount?: string,
@@ -45,18 +45,18 @@ export namespace products {
     export function update(
         id: string,
         params: {
-            active?: boolean,
-            description?: string,
-            metadata?: [string, unknown],
-            name?: string,
-            attributes?: string[],
-            caption?: string,
-            deactivate_on?: string[],
-            images?: string[],
-            package_dimensions?: object,
-            shippable?: boolean,
-            statement_descriptor?: string,
-            unit_label?: string,
+            active?: boolean
+            description?: string
+            metadata?: [string, unknown]
+            name?: string
+            attributes?: string[]
+            caption?: string
+            deactivate_on?: string[]
+            images?: string[]
+            package_dimensions?: object
+            shippable?: boolean
+            statement_descriptor?: string
+            unit_label?: string
             url?: string
         },
         stripeAccount?: string,
@@ -71,13 +71,13 @@ export namespace products {
 
     export function list(
         params: {
-            active?: boolean,
-            created?: object,
-            ending_before?: string,
-            ids?: string[],
-            limit?: number,
-            shippable?: boolean,
-            starting_after?: string,
+            active?: boolean
+            created?: object
+            ending_before?: string
+            ids?: string[]
+            limit?: number
+            shippable?: boolean
+            starting_after?: string
             url?: string
         },
         stripeAccount?: string,
@@ -90,10 +90,7 @@ export namespace products {
         )
     }
 
-    export function del(
-        id: string,
-        stripeAccount?: string,
-    ): Promise<unknown> {
+    export function del(id: string, stripeAccount?: string): Promise<unknown> {
         return client(
             `/products/${id}`,
             {},

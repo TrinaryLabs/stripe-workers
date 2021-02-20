@@ -25,6 +25,14 @@ import { mandates } from './resources/mandates';
 import { fileLinks } from './resources/fileLinks';
 import { balanceTransactions } from './resources/balanceTransactions';
 import { charges } from './resources/charges';
+import { plans } from './resources/billing/plans';
+import { payouts } from './resources/payouts';
+import { prices } from './resources/prices';
+import { products } from './resources/products';
+import { refunds } from './resources/refunds';
+import { setupAttempts } from './resources/setupAttempts';
+import { setupIntents } from './resources/setupIntents';
+import { tokens } from './resources/tokens';
 export declare class Stripe {
     checkout: typeof checkout;
     paymentIntents: typeof paymentIntents;
@@ -53,6 +61,14 @@ export declare class Stripe {
     fileLinks: typeof fileLinks;
     balanceTransactions: typeof balanceTransactions;
     charges: typeof charges;
+    plans: typeof plans;
+    payouts: typeof payouts;
+    prices: typeof prices;
+    products: typeof products;
+    refunds: typeof refunds;
+    setupAttempts: typeof setupAttempts;
+    setupIntents: typeof setupIntents;
+    tokens: typeof tokens;
     constructor(stripe_secret: string, params: {
         apiVersion?: string;
         fetch?: Function;

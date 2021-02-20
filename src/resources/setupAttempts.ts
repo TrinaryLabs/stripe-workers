@@ -5,7 +5,7 @@ export namespace setupAttempts {
 
     export function list(
         params: {
-            setup_intent: string,
+            setup_intent: string
             created?: object
             ending_before?: string
             limit?: number

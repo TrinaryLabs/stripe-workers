@@ -5,13 +5,13 @@ export namespace payouts {
 
     export function create(
         params: {
-            amount: number,
-            currency: string,
-            description?: string,
-            metadata?: [string, unknown],
-            statement_descriptor?: string,
-            destination?: string,
-            method?: string,
+            amount: number
+            currency: string
+            description?: string
+            metadata?: [string, unknown]
+            statement_descriptor?: string
+            destination?: string
+            method?: string
             source_type?: string
         },
         stripeAccount?: string,
@@ -53,10 +53,10 @@ export namespace payouts {
 
     export function list(
         params: {
-            status?: string,
-            arrival_date?: object,
+            status?: string
+            arrival_date?: object
             created?: object
-            destination?: string,
+            destination?: string
             ending_before?: string
             limit?: number
             starting_after?: string
