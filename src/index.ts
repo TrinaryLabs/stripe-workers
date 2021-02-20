@@ -24,7 +24,15 @@ import { events } from './resources/events'
 import { mandates } from './resources/mandates'
 import { fileLinks } from './resources/fileLinks'
 import { balanceTransactions } from './resources/balanceTransactions'
-import { charges } from './resources/charges' 
+import { charges } from './resources/charges'
+import { plans } from './resources/billing/plans'
+import { payouts } from './resources/payouts'
+import { prices } from './resources/prices'
+import { products } from './resources/products'
+import { refunds } from './resources/refunds'
+import { setupAttempts } from './resources/setupAttempts'
+import { setupIntents } from './resources/setupIntents'
+import { tokens } from './resources/tokens'
 
 import { HTTPClient } from './client'
 export class Stripe {
@@ -55,6 +63,14 @@ export class Stripe {
     fileLinks: typeof fileLinks
     balanceTransactions: typeof balanceTransactions
     charges: typeof charges
+    plans: typeof plans
+    payouts: typeof payouts
+    prices: typeof prices
+    products: typeof products
+    refunds: typeof refunds
+    setupAttempts: typeof setupAttempts
+    setupIntents: typeof setupIntents
+    tokens: typeof tokens
 
     constructor(
         stripe_secret: string,
@@ -98,6 +114,14 @@ export class Stripe {
         this.fileLinks = fileLinks
         this.balanceTransactions = balanceTransactions
         this.charges = charges
+        this.plans = plans
+        this.payouts = payouts
+        this.prices = prices
+        this.products = products
+        this.refunds = refunds
+        this.setupAttempts = setupAttempts
+        this.setupIntents = setupIntents
+        this.tokens = tokens
 
         this.checkout.sessions.client = client.request
         this.billingPortal.sessions.client = client.request
@@ -135,5 +159,13 @@ export class Stripe {
         this.fileLinks.client = client.request
         this.balanceTransactions.client = client.request
         this.charges.client = client.request
+        this.plans.client = client.request
+        this.payouts.client = client.request
+        this.prices.client = client.request
+        this.products.client = client.request
+        this.refunds.client = client.request
+        this.setupAttempts.client = client.request
+        this.setupIntents.client = client.request
+        this.tokens.client = client.request
     }
 }

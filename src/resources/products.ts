@@ -1,22 +1,29 @@
 import qs from 'qs'
 
-export namespace topups {
+export namespace products {
     export let client: Function
 
     export function create(
         params: {
-            amount: number
-            currency: string
+            id?: string
+            name: string
+            active?: boolean
             description?: string
             metadata?: [string, unknown]
-            source?: unknown
+            attributes?: string[]
+            caption?: string
+            deactivate_on?: string[]
+            images?: string[]
+            package_dimensions?: object
+            shippable?: boolean
             statement_descriptor?: string
-            transfer_group?: unknown
+            unit_label?: string
+            url?: string
         },
         stripeAccount?: string,
     ): Promise<unknown> {
         return client(
-            '/topups',
+            '/products',
             params,
             'POST',
             stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
@@ -28,7 +35,7 @@ export namespace topups {
         stripeAccount?: string,
     ): Promise<unknown> {
         return client(
-            `/topups/${id}`,
+            `/products/${id}`,
             {},
             'GET',
             stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
@@ -38,13 +45,24 @@ export namespace topups {
     export function update(
         id: string,
         params: {
+            active?: boolean
             description?: string
             metadata?: [string, unknown]
+            name?: string
+            attributes?: string[]
+            caption?: string
+            deactivate_on?: string[]
+            images?: string[]
+            package_dimensions?: object
+            shippable?: boolean
+            statement_descriptor?: string
+            unit_label?: string
+            url?: string
         },
         stripeAccount?: string,
     ): Promise<unknown> {
         return client(
-            `/topups/${id}`,
+            `/products/${id}`,
             params,
             'POST',
             stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
@@ -53,31 +71,30 @@ export namespace topups {
 
     export function list(
         params: {
-            status?: string
-            amount?: object
+            active?: boolean
             created?: object
             ending_before?: string
+            ids?: string[]
             limit?: number
+            shippable?: boolean
             starting_after?: string
+            url?: string
         },
         stripeAccount?: string,
     ): Promise<unknown> {
         return client(
-            `/topups?${qs.stringify(params)}`,
+            `/products?${qs.stringify(params)}`,
             {},
             'GET',
             stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         )
     }
 
-    export function cancel(
-        id: string,
-        stripeAccount?: string,
-    ): Promise<unknown> {
+    export function del(id: string, stripeAccount?: string): Promise<unknown> {
         return client(
-            `/topups/${id}/cancel`,
+            `/products/${id}`,
             {},
-            'POST',
+            'DELETE',
             stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         )
     }

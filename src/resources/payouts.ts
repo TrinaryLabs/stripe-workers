@@ -1,6 +1,6 @@
 import qs from 'qs'
 
-export namespace topups {
+export namespace payouts {
     export let client: Function
 
     export function create(
@@ -9,14 +9,15 @@ export namespace topups {
             currency: string
             description?: string
             metadata?: [string, unknown]
-            source?: unknown
             statement_descriptor?: string
-            transfer_group?: unknown
+            destination?: string
+            method?: string
+            source_type?: string
         },
         stripeAccount?: string,
     ): Promise<unknown> {
         return client(
-            '/topups',
+            '/payouts',
             params,
             'POST',
             stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
@@ -28,7 +29,7 @@ export namespace topups {
         stripeAccount?: string,
     ): Promise<unknown> {
         return client(
-            `/topups/${id}`,
+            `/payouts/${id}`,
             {},
             'GET',
             stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
@@ -38,13 +39,12 @@ export namespace topups {
     export function update(
         id: string,
         params: {
-            description?: string
             metadata?: [string, unknown]
         },
         stripeAccount?: string,
     ): Promise<unknown> {
         return client(
-            `/topups/${id}`,
+            `/payouts/${id}`,
             params,
             'POST',
             stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
@@ -54,8 +54,9 @@ export namespace topups {
     export function list(
         params: {
             status?: string
-            amount?: object
+            arrival_date?: object
             created?: object
+            destination?: string
             ending_before?: string
             limit?: number
             starting_after?: string
@@ -63,7 +64,7 @@ export namespace topups {
         stripeAccount?: string,
     ): Promise<unknown> {
         return client(
-            `/topups?${qs.stringify(params)}`,
+            `/payouts?${qs.stringify(params)}`,
             {},
             'GET',
             stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
@@ -75,8 +76,23 @@ export namespace topups {
         stripeAccount?: string,
     ): Promise<unknown> {
         return client(
-            `/topups/${id}/cancel`,
+            `/payouts/${id}/cancel`,
             {},
+            'POST',
+            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        )
+    }
+
+    export function reverse(
+        id: string,
+        params: {
+            metadata?: [string, unknown]
+        },
+        stripeAccount?: string,
+    ): Promise<unknown> {
+        return client(
+            `/payouts/${id}/reverse`,
+            params,
             'POST',
             stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         )

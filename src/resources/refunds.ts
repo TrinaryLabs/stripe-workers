@@ -1,22 +1,22 @@
 import qs from 'qs'
 
-export namespace topups {
+export namespace refunds {
     export let client: Function
 
     export function create(
         params: {
-            amount: number
-            currency: string
-            description?: string
+            charge?: string
+            amount?: number
             metadata?: [string, unknown]
-            source?: unknown
-            statement_descriptor?: string
-            transfer_group?: unknown
+            payment_intent?: string
+            reason?: unknown // string or null,
+            refund_application_fee?: boolean
+            reverse_transfer?: boolean
         },
         stripeAccount?: string,
     ): Promise<unknown> {
         return client(
-            '/topups',
+            '/refunds',
             params,
             'POST',
             stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
@@ -28,7 +28,7 @@ export namespace topups {
         stripeAccount?: string,
     ): Promise<unknown> {
         return client(
-            `/topups/${id}`,
+            `/refunds/${id}`,
             {},
             'GET',
             stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
@@ -38,13 +38,12 @@ export namespace topups {
     export function update(
         id: string,
         params: {
-            description?: string
             metadata?: [string, unknown]
         },
         stripeAccount?: string,
     ): Promise<unknown> {
         return client(
-            `/topups/${id}`,
+            `/refunds/${id}`,
             params,
             'POST',
             stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
@@ -53,8 +52,8 @@ export namespace topups {
 
     export function list(
         params: {
-            status?: string
-            amount?: object
+            charge?: string
+            payment_intent?: string
             created?: object
             ending_before?: string
             limit?: number
@@ -63,21 +62,9 @@ export namespace topups {
         stripeAccount?: string,
     ): Promise<unknown> {
         return client(
-            `/topups?${qs.stringify(params)}`,
+            `/refunds?${qs.stringify(params)}`,
             {},
             'GET',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-        )
-    }
-
-    export function cancel(
-        id: string,
-        stripeAccount?: string,
-    ): Promise<unknown> {
-        return client(
-            `/topups/${id}/cancel`,
-            {},
-            'POST',
             stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         )
     }
