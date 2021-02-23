@@ -1,3 +1,5 @@
+import qs from 'qs'
+
 export namespace checkout {
     export namespace sessions {
         export let client: Function
@@ -56,7 +58,7 @@ export namespace checkout {
             stripeAccount?: string,
         ): Promise<unknown> {
             return client(
-                `/checkout/sessions?limit=${params.limit}&payment_intent=${params.payment_intent}&subscription=${params.subscription}&starting_before=${params.starting_after}&ending_before=${params.ending_before}`,
+                `/checkout/sessions?${qs.stringify(params)}`,
                 {},
                 'GET',
                 stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
@@ -73,7 +75,7 @@ export namespace checkout {
             stripeAccount?: string,
         ): Promise<unknown> {
             return client(
-                `/checkout/sessions/${id}/line_items?limit=${params.limit}&starting_after=${params.starting_after}&ending_before=${params.ending_before}`,
+                `/checkout/sessions/${id}/line_items?${qs.stringify(params)}`,
                 {},
                 'GET',
                 stripeAccount ? { 'Stripe-Account': stripeAccount } : {},

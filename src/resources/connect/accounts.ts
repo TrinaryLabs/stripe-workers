@@ -1,3 +1,5 @@
+import qs from 'qs'
+
 export namespace accounts {
     export let client: Function
 
@@ -272,7 +274,7 @@ export namespace accounts {
         stripeAccount?: string,
     ): Promise<unknown> {
         return client(
-            `/accounts/${user_id}/persons?relationship=${params.relationship}&limit=${params.limit}&ending_before=${params.ending_before}&starting_after=${params.starting_after}`,
+            `/accounts/${user_id}/persons?${qs.stringify(params)}`,
             {},
             'GET',
             stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
@@ -361,7 +363,7 @@ export namespace accounts {
         stripeAccount?: string,
     ): Promise<unknown> {
         return client(
-            `/accounts/${id}/external_accounts?object=${params.object}&limit=${params.limit}&ending_before=${params.ending_before}&starting_after=${params.starting_after}`,
+            `/accounts/${id}/external_accounts?${qs.stringify(params)}`,
             {},
             'GET',
             stripeAccount ? { 'Stripe-Account': stripeAccount } : {},

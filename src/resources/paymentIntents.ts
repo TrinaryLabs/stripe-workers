@@ -1,3 +1,5 @@
+import qs from 'qs'
+
 export namespace paymentIntents {
     export let client: Function
 
@@ -154,7 +156,7 @@ export namespace paymentIntents {
         stripeAccount?: string,
     ): Promise<unknown> {
         return client(
-            `/payment_intents?customer=${params.customer}&created=${params.created}&limit=${params.limit}&starting_after=${params.starting_after}&ending_before=${params.ending_before}`,
+            `/payment_intents?${qs.stringify(params)}`,
             params,
             'GET',
             stripeAccount ? { 'Stripe-Account': stripeAccount } : {},

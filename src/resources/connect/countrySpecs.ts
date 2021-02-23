@@ -1,3 +1,5 @@
+import qs from 'qs'
+
 export namespace countrySpecs {
     export let client: Function
 
@@ -10,7 +12,7 @@ export namespace countrySpecs {
         stripeAccount?: string,
     ): Promise<unknown> {
         return client(
-            `/country_specs?limit=${params.limit}&ending_before=${params.ending_before}&starting_after=${params.starting_after}`,
+            `/country_specs?${qs.stringify(params)}`,
             {},
             'GET',
             stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
