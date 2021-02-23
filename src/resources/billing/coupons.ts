@@ -1,3 +1,5 @@
+import qs from 'qs'
+
 export namespace coupons {
     export let client: Function
 
@@ -60,7 +62,7 @@ export namespace coupons {
         stripeAccount?: string,
     ): Promise<unknown> {
         return client(
-            `/coupons?limit=${params.limit}&created=${params.created}&ending_before=${params.ending_before}&starting_after=${params.starting_after}`,
+            `/coupons?${qs.stringify(params)}`,
             {},
             'GET',
             stripeAccount ? { 'Stripe-Account': stripeAccount } : {},

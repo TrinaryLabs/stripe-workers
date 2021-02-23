@@ -1,3 +1,5 @@
+import qs from 'qs'
+
 export namespace creditNotes {
     export let client: Function
 
@@ -87,7 +89,7 @@ export namespace creditNotes {
         stripeAccount?: string,
     ): Promise<unknown> {
         return client(
-            `/credit_notes/${id}/lines?limit=${params.limit}&ending_before=${params.ending_before}&starting_after=${params.starting_after}`,
+            `/credit_notes/${id}/lines?${qs.stringify(params)}`,
             {},
             'GET',
             stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
@@ -144,7 +146,7 @@ export namespace creditNotes {
         stripeAccount?: string,
     ): Promise<unknown> {
         return client(
-            `/credit_notes?customer=${params.customer}&limit=${params.limit}&ending_before=${params.ending_before}&starting_after=${params.starting_after}`,
+            `/credit_notes?${qs.stringify(params)}`,
             {},
             'GET',
             stripeAccount ? { 'Stripe-Account': stripeAccount } : {},

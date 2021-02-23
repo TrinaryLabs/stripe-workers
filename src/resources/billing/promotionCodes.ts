@@ -1,3 +1,5 @@
+import qs from 'qs'
+
 export namespace promotionCodes {
     export let client: Function
 
@@ -63,7 +65,7 @@ export namespace promotionCodes {
         stripeAccount?: string,
     ): Promise<unknown> {
         return client(
-            `/promotion_codes?limit=${params.limit}&active=${params.active}&code=${params.code}&ending_before=${params.ending_before}&starting_after=${params.starting_after}`,
+            `/promotion_codes?${qs.stringify(params)}`,
             {},
             'GET',
             stripeAccount ? { 'Stripe-Account': stripeAccount } : {},

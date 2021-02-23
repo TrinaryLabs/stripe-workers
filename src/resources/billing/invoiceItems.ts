@@ -1,3 +1,5 @@
+import qs from 'qs'
+
 export namespace invoiceItems {
     export let client: Function
 
@@ -89,7 +91,7 @@ export namespace invoiceItems {
         stripeAccount?: string,
     ): Promise<unknown> {
         return client(
-            `/invoiceitems?customer=${params.customer}&created=${params.created}&ending_before=${params.ending_before}&invoice=${params.invoice}&limit=${params.limit}&pending=${params.pending}&starting_after=${params.starting_after}`,
+            `/invoiceitems?${qs.stringify(params)}`,
             {},
             'GET',
             stripeAccount ? { 'Stripe-Account': stripeAccount } : {},

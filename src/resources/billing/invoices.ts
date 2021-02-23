@@ -1,3 +1,5 @@
+import qs from 'qs'
+
 export namespace invoices {
     export let client: Function
 
@@ -165,7 +167,7 @@ export namespace invoices {
         stripeAccount?: string,
     ): Promise<unknown> {
         return client(
-            `/invoices/${id}/lines?limit=${params.limit}&ending_before=${params.ending_before}&starting_after=${params.starting_after}`,
+            `/invoices/${id}/lines?${qs.stringify(params)}`,
             {},
             'GET',
             stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
