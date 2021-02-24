@@ -18,14 +18,13 @@ export namespace creditNotes {
         },
         stripeAccount?: string,
     ): Promise<unknown> {
-        throw Error('not implemented')
-        /* return client(
-            `/credit_notes/preview?`,
+        return client(
+            `/credit_notes/preview?${qs.stringify(params)}`,
             {},
             'GET', stripeAccount
             ? { 'Stripe-Account': stripeAccount }
             : {},
-        )*/
+        )
     }
 
     export function create(
@@ -114,14 +113,13 @@ export namespace creditNotes {
         },
         stripeAccount?: string,
     ): Promise<unknown> {
-        throw Error('not implemented')
-        /* return client(
-            `/credit_notes/preview/lines?`,
+        return client(
+            `/credit_notes/preview/lines?${qs.stringify(params)}`,
             {},
             'GET', stripeAccount
             ? { 'Stripe-Account': stripeAccount }
             : {},
-        )*/
+        )
     }
 
     export function voidCreditNote(
