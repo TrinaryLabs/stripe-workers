@@ -1,3 +1,5 @@
+import qs from 'qs'
+
 export namespace applicationFees {
     export let client: Function
 
@@ -16,14 +18,14 @@ export namespace applicationFees {
     export function list(
         params: {
             limit?: number
-            created?: object //This needs to be looked in to
+            created?: object
             ending_before?: string
             starting_after?: string
         },
         stripeAccount?: string,
     ): Promise<unknown> {
         return client(
-            `/application_fees?limit=${params.limit}&ending_before=${params.ending_before}&starting_after=${params.starting_after}`,
+            `/application_fees?${qs.stringify(params)}`,
             {},
             'GET',
             stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
@@ -85,7 +87,7 @@ export namespace applicationFees {
         stripeAccount?: string,
     ): Promise<unknown> {
         return client(
-            `/application_fees/${id}/refunds?limit=${params.limit}&ending_before=${params.ending_before}&starting_after=${params.starting_after}`,
+            `/application_fees/${id}/refunds?${qs.stringify(params)}`,
             {},
             'GET',
             stripeAccount ? { 'Stripe-Account': stripeAccount } : {},

@@ -1,3 +1,5 @@
+import qs from 'qs'
+
 export namespace webhookEndpoints {
     export let client: Function
 
@@ -60,7 +62,7 @@ export namespace webhookEndpoints {
         stripeAccount?: string,
     ): Promise<unknown> {
         return client(
-            `/webhook_endpoints?limit=${params.limit}&ending_before=${params.ending_before}&starting_after=${params.starting_after}`,
+            `/webhook_endpoints?${qs.stringify(params)}`,
             {},
             'GET',
             stripeAccount ? { 'Stripe-Account': stripeAccount } : {},

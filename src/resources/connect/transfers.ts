@@ -1,3 +1,5 @@
+import qs from 'qs'
+
 export namespace transfers {
     export let client: Function
 
@@ -62,7 +64,7 @@ export namespace transfers {
         stripeAccount?: string,
     ): Promise<unknown> {
         return client(
-            `/topups?destination=${params.destination}&limit=${params.limit}&transfer_group=${params.transfer_group}&created=${params.created}&ending_before=${params.ending_before}&starting_after=${params.starting_after}`,
+            `/topups?${qs.stringify(params)}`,
             {},
             'GET',
             stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
@@ -126,7 +128,7 @@ export namespace transfers {
         stripeAccount?: string,
     ): Promise<unknown> {
         return client(
-            `/transfer/${id}/reversals?limit=${params.limit}&ending_before=${params.ending_before}&starting_after=${params.starting_after}`,
+            `/transfer/${id}/reversals?${qs.stringify(params)}`,
             {},
             'GET',
             stripeAccount ? { 'Stripe-Account': stripeAccount } : {},

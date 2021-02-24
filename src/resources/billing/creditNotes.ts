@@ -1,3 +1,5 @@
+import qs from 'qs'
+
 export namespace creditNotes {
     export let client: Function
 
@@ -16,14 +18,12 @@ export namespace creditNotes {
         },
         stripeAccount?: string,
     ): Promise<unknown> {
-        throw Error('not implemented')
-        /* return client(
-            `/credit_notes/preview?`,
+        return client(
+            `/credit_notes/preview?${qs.stringify(params)}`,
             {},
-            'GET', stripeAccount
-            ? { 'Stripe-Account': stripeAccount }
-            : {},
-        )*/
+            'GET',
+            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        )
     }
 
     export function create(
@@ -87,7 +87,7 @@ export namespace creditNotes {
         stripeAccount?: string,
     ): Promise<unknown> {
         return client(
-            `/credit_notes/${id}/lines?limit=${params.limit}&ending_before=${params.ending_before}&starting_after=${params.starting_after}`,
+            `/credit_notes/${id}/lines?${qs.stringify(params)}`,
             {},
             'GET',
             stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
@@ -112,14 +112,12 @@ export namespace creditNotes {
         },
         stripeAccount?: string,
     ): Promise<unknown> {
-        throw Error('not implemented')
-        /* return client(
-            `/credit_notes/preview/lines?`,
+        return client(
+            `/credit_notes/preview/lines?${qs.stringify(params)}`,
             {},
-            'GET', stripeAccount
-            ? { 'Stripe-Account': stripeAccount }
-            : {},
-        )*/
+            'GET',
+            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        )
     }
 
     export function voidCreditNote(
@@ -144,7 +142,7 @@ export namespace creditNotes {
         stripeAccount?: string,
     ): Promise<unknown> {
         return client(
-            `/credit_notes?customer=${params.customer}&limit=${params.limit}&ending_before=${params.ending_before}&starting_after=${params.starting_after}`,
+            `/credit_notes?${qs.stringify(params)}`,
             {},
             'GET',
             stripeAccount ? { 'Stripe-Account': stripeAccount } : {},

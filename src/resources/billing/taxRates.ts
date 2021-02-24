@@ -1,3 +1,5 @@
+import qs from 'qs'
+
 export namespace taxRates {
     export let client: Function
 
@@ -68,7 +70,7 @@ export namespace taxRates {
         stripeAccount?: string,
     ): Promise<unknown> {
         return client(
-            `/tax_rates?active=${params.active}&limit=${params.limit}&inclusive=${params.inclusive}&created=${params.created}&ending_before=${params.ending_before}&starting_after=${params.starting_after}`,
+            `/tax_rates?${qs.stringify(params)}`,
             {},
             'GET',
             stripeAccount ? { 'Stripe-Account': stripeAccount } : {},

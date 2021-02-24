@@ -1,3 +1,5 @@
+import qs from 'qs'
+
 export namespace orders {
     export let client: Function
 
@@ -85,13 +87,12 @@ export namespace orders {
         },
         stripeAccount?: string,
     ): Promise<unknown> {
-        throw Error('not implemented')
-        /* return client(
-            `/orders?`,
+        return client(
+            `/orders?${qs.stringify(params)}`,
             {},
             'GET',
             stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-        ) */
+        )
     }
 
     export function returnOrder(

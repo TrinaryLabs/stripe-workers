@@ -1,3 +1,5 @@
+import qs from 'qs'
+
 export namespace reporting {
     export namespace reportRuns {
         export let client: Function
@@ -39,7 +41,7 @@ export namespace reporting {
             stripeAccount?: string,
         ): Promise<unknown> {
             return client(
-                `/reporting/report_runs?limit=${params.limit}&ending_before=${params.ending_before}&starting_after=${params.starting_after}`,
+                `/reporting/report_runs?${qs.stringify(params)}`,
                 {},
                 'GET',
                 stripeAccount ? { 'Stripe-Account': stripeAccount } : {},

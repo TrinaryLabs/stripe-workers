@@ -1,3 +1,5 @@
+import qs from 'qs'
+
 export namespace subscriptionSchedules {
     export let client: Function
 
@@ -98,9 +100,11 @@ export namespace subscriptionSchedules {
         },
         stripeAccount?: string,
     ): Promise<unknown> {
-        throw Error('not implemented')
-        /*return client(`/subscription_schedules?`, {}, 'GET', stripeAccount
-        ? { 'Stripe-Account': stripeAccount }
-        : {},)*/
+        return client(
+            `/subscription_schedules?${qs.stringify(params)}`,
+            {},
+            'GET',
+            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        )
     }
 }

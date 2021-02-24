@@ -1,3 +1,5 @@
+import qs from 'qs'
+
 export namespace skus {
     export let client: Function
 
@@ -72,13 +74,12 @@ export namespace skus {
         },
         stripeAccount?: string,
     ): Promise<unknown> {
-        throw Error('not implemented')
-        /* return client(
-            `/skus?`,
+        return client(
+            `/skus?${qs.stringify(params)}`,
             {},
             'GET',
             stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-        ) */
+        )
     }
 
     export function del(id: string, stripeAccount?: string): Promise<unknown> {
