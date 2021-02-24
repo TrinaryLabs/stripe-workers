@@ -1,3 +1,5 @@
+import qs from 'qs'
+
 export namespace customers {
     export let client: Function
 
@@ -93,7 +95,7 @@ export namespace customers {
         stripeAccount?: string,
     ): Promise<unknown> {
         return client(
-            `/customers?email=${params.email}&created=${params.created}&limit=${params.limit}&starting_after=${params.starting_after}&ending_before=${params.ending_before}`,
+            `/customers?${qs.stringify(params)}`,
             {},
             'GET',
             stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
@@ -197,7 +199,7 @@ export namespace customers {
         stripeAccount?: string,
     ): Promise<unknown> {
         return client(
-            `/customers/${cus_id}/sources?object=${params.object}&limit=${params.limit}&ending_before=${params.ending_before}&starting_after=${params.starting_after}`,
+            `/customers/${cus_id}/sources?${qs.stringify(params)}`,
             {},
             'GET',
             stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
@@ -262,7 +264,7 @@ export namespace customers {
         stripeAccount?: string,
     ): Promise<unknown> {
         return client(
-            `/customers/${id}/balance_transactions?limit=${params.limit}&ending_before=${params.ending_before}&starting_after=${params.starting_after}`,
+            `/customers/${id}/balance_transactions?${qs.stringify(params)}`,
             {},
             'GET',
             stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
@@ -321,7 +323,7 @@ export namespace customers {
         stripeAccount?: string,
     ): Promise<unknown> {
         return client(
-            `/customers/${id}/tax_ids?limit=${params.limit}&ending_before=${params.ending_before}&starting_after=${params.starting_after}`,
+            `/customers/${id}/tax_ids?${qs.stringify(params)}`,
             {},
             'GET',
             stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
