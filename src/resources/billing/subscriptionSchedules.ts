@@ -100,8 +100,11 @@ export namespace subscriptionSchedules {
         },
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(`/subscription_schedules?${qs.stringify(params)}`, {}, 'GET', stripeAccount
-        ? { 'Stripe-Account': stripeAccount }
-        : {},)
+        return client(
+            `/subscription_schedules?${qs.stringify(params)}`,
+            {},
+            'GET',
+            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        )
     }
 }

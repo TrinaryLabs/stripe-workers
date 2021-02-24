@@ -198,9 +198,8 @@ export namespace invoices {
         return client(
             `/invoices/upcoming?${qs.stringify(params)}`,
             {},
-            'GET', stripeAccount
-            ? { 'Stripe-Account': stripeAccount }
-            : {},
+            'GET',
+            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         )
     }
 
@@ -231,9 +230,8 @@ export namespace invoices {
         return client(
             `/invoices/upcoming/lines?${qs.stringify(params)}`,
             {},
-            'GET', stripeAccount
-            ? { 'Stripe-Account': stripeAccount }
-            : {},
+            'GET',
+            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         )
     }
 
@@ -254,9 +252,8 @@ export namespace invoices {
         return client(
             `/invoices?${qs.stringify(params)}`,
             {},
-            'GET', stripeAccount
-            ? { 'Stripe-Account': stripeAccount }
-            : {},
+            'GET',
+            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         )
     }
 }

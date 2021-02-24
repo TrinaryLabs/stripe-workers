@@ -21,9 +21,8 @@ export namespace creditNotes {
         return client(
             `/credit_notes/preview?${qs.stringify(params)}`,
             {},
-            'GET', stripeAccount
-            ? { 'Stripe-Account': stripeAccount }
-            : {},
+            'GET',
+            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         )
     }
 
@@ -116,9 +115,8 @@ export namespace creditNotes {
         return client(
             `/credit_notes/preview/lines?${qs.stringify(params)}`,
             {},
-            'GET', stripeAccount
-            ? { 'Stripe-Account': stripeAccount }
-            : {},
+            'GET',
+            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         )
     }
 

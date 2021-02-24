@@ -122,7 +122,9 @@ export namespace subscriptionItems {
         stripeAccount?: string,
     ): Promise<unknown> {
         return client(
-            `/subscription_items/${id}/usage_record_summaries?${qs.stringify(params)}`,
+            `/subscription_items/${id}/usage_record_summaries?${qs.stringify(
+                params,
+            )}`,
             {},
             'GET',
             stripeAccount ? { 'Stripe-Account': stripeAccount } : {},

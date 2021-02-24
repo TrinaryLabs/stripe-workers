@@ -121,9 +121,12 @@ export namespace subscriptions {
         },
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(`/subscriptions?${qs.stringify(params)}`, params, 'GET', stripeAccount
-        ? { 'Stripe-Account': stripeAccount }
-        : {},)
+        return client(
+            `/subscriptions?${qs.stringify(params)}`,
+            params,
+            'GET',
+            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        )
     }
 
     export function deleteDiscount(
