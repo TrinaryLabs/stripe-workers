@@ -7,12 +7,9 @@ export namespace disputes {
         id: string,
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            `/disputes/${id}`,
-            {},
-            'GET',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-        )
+        return client(`/disputes/${id}`, {}, 'GET', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 
     export function update(
@@ -24,24 +21,18 @@ export namespace disputes {
         },
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            `/disputes/${id}`,
-            params,
-            'POST',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-        )
+        return client(`/disputes/${id}`, params, 'POST', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 
     export function close(
         id: string,
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            `/disputes/${id}/close`,
-            {},
-            'POST',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-        )
+        return client(`/disputes/${id}/close`, {}, 'POST', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 
     export function list(
@@ -55,11 +46,8 @@ export namespace disputes {
         },
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            `/disputes?${qs.stringify(params)}`,
-            params,
-            'GET',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-        )
+        return client(`/disputes?${qs.stringify(params)}`, params, 'GET', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 }

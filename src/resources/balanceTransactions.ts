@@ -7,12 +7,9 @@ export namespace balanceTransactions {
         id: string,
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            `/balance_transactions/${id}`,
-            {},
-            'GET',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-        )
+        return client(`/balance_transactions/${id}`, {}, 'GET', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 
     export function list(
@@ -33,7 +30,11 @@ export namespace balanceTransactions {
             `/balance_transactions?${qs.stringify(params)}`,
             {},
             'GET',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            {
+                headers: stripeAccount
+                    ? { 'Stripe-Account': stripeAccount }
+                    : {},
+            },
         )
     }
 }

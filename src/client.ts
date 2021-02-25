@@ -21,24 +21,28 @@ export class HTTPClient {
         this.STRIPE_SECRET_KEY = key
         this.FETCH = customFetch ? customFetch : fetch.bind(globalThis)
         this.API_VERSION = apiVersion ? apiVersion : '2020-08-27'
-        this.UA = userAgent ? userAgent : 'stripe/workers.dev (SDK-0.0.1-beta)'
+        this.UA = userAgent ? userAgent : 'stripe/workers.dev (SDK-0.5.1-beta)'
     }
 
     request = async (
         path: string,
         body: any,
         method: string,
-        headers?: object,
+        params: {
+            headers?: object
+            host?: string
+        },
     ): Promise<unknown> => {
         try {
-            const res = await this.FETCH(`https://api.stripe.com/v1${path}`, {
+            let host = params.host ? params.host : 'https://api.stripe.com/v1'
+            const res = await this.FETCH(`${host}${path}`, {
                 ...(method === 'POST' ? { body: qs.stringify(body) } : {}),
                 headers: {
                     Authorization: `Bearer ${this.STRIPE_SECRET_KEY}`,
                     'Content-type': 'application/x-www-form-urlencoded',
                     'Stripe-Version': `${this.API_VERSION}`,
                     'User-Agent': `${this.UA}`,
-                    ...headers,
+                    ...params.headers,
                 },
                 method,
             })

@@ -13,11 +13,8 @@ export namespace setupAttempts {
         },
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            `/setup_attempts?${qs.stringify(params)}`,
-            {},
-            'GET',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-        )
+        return client(`/setup_attempts?${qs.stringify(params)}`, {}, 'GET', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 }

@@ -15,24 +15,18 @@ export namespace topups {
         },
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            '/topups',
-            params,
-            'POST',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-        )
+        return client('/topups', params, 'POST', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 
     export function retrieve(
         id: string,
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            `/topups/${id}`,
-            {},
-            'GET',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-        )
+        return client(`/topups/${id}`, {}, 'GET', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 
     export function update(
@@ -43,12 +37,9 @@ export namespace topups {
         },
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            `/topups/${id}`,
-            params,
-            'POST',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-        )
+        return client(`/topups/${id}`, params, 'POST', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 
     export function list(
@@ -62,23 +53,17 @@ export namespace topups {
         },
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            `/topups?${qs.stringify(params)}`,
-            {},
-            'GET',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-        )
+        return client(`/topups?${qs.stringify(params)}`, {}, 'GET', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 
     export function cancel(
         id: string,
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            `/topups/${id}/cancel`,
-            {},
-            'POST',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-        )
+        return client(`/topups/${id}/cancel`, {}, 'POST', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 }

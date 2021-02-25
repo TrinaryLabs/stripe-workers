@@ -10,12 +10,11 @@ export namespace terminal {
             },
             stripeAccount?: string,
         ): Promise<unknown> {
-            return client(
-                '/terminal/connection_tokens',
-                params,
-                'POST',
-                stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-            )
+            return client('/terminal/connection_tokens', params, 'POST', {
+                headers: stripeAccount
+                    ? { 'Stripe-Account': stripeAccount }
+                    : {},
+            })
         }
     }
 
@@ -30,24 +29,22 @@ export namespace terminal {
             },
             stripeAccount?: string,
         ): Promise<unknown> {
-            return client(
-                '/terminal/locactions',
-                params,
-                'POST',
-                stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-            )
+            return client('/terminal/locactions', params, 'POST', {
+                headers: stripeAccount
+                    ? { 'Stripe-Account': stripeAccount }
+                    : {},
+            })
         }
 
         export function retrieve(
             id: string,
             stripeAccount?: string,
         ): Promise<unknown> {
-            return client(
-                `/terminal/locactions/${id}`,
-                {},
-                'GET',
-                stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-            )
+            return client(`/terminal/locactions/${id}`, {}, 'GET', {
+                headers: stripeAccount
+                    ? { 'Stripe-Account': stripeAccount }
+                    : {},
+            })
         }
 
         export function update(
@@ -59,24 +56,22 @@ export namespace terminal {
             },
             stripeAccount?: string,
         ): Promise<unknown> {
-            return client(
-                `/terminal/locactions/${id}`,
-                params,
-                'POST',
-                stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-            )
+            return client(`/terminal/locactions/${id}`, params, 'POST', {
+                headers: stripeAccount
+                    ? { 'Stripe-Account': stripeAccount }
+                    : {},
+            })
         }
 
         export function del(
             id: string,
             stripeAccount?: string,
         ): Promise<unknown> {
-            return client(
-                `/terminal/locactions/${id}`,
-                {},
-                'DELETE',
-                stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-            )
+            return client(`/terminal/locactions/${id}`, {}, 'DELETE', {
+                headers: stripeAccount
+                    ? { 'Stripe-Account': stripeAccount }
+                    : {},
+            })
         }
 
         export function list(
@@ -91,7 +86,11 @@ export namespace terminal {
                 `/terminal/locactions?${qs.stringify(params)}`,
                 {},
                 'GET',
-                stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+                {
+                    headers: stripeAccount
+                        ? { 'Stripe-Account': stripeAccount }
+                        : {},
+                },
             )
         }
     }
@@ -108,24 +107,22 @@ export namespace terminal {
             },
             stripeAccount?: string,
         ): Promise<unknown> {
-            return client(
-                '/terminal/readers',
-                params,
-                'POST',
-                stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-            )
+            return client('/terminal/readers', params, 'POST', {
+                headers: stripeAccount
+                    ? { 'Stripe-Account': stripeAccount }
+                    : {},
+            })
         }
 
         export function retrieve(
             id: string,
             stripeAccount?: string,
         ): Promise<unknown> {
-            return client(
-                `/terminal/readers/${id}`,
-                {},
-                'GET',
-                stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-            )
+            return client(`/terminal/readers/${id}`, {}, 'GET', {
+                headers: stripeAccount
+                    ? { 'Stripe-Account': stripeAccount }
+                    : {},
+            })
         }
 
         export function update(
@@ -136,24 +133,22 @@ export namespace terminal {
             },
             stripeAccount?: string,
         ): Promise<unknown> {
-            return client(
-                `/terminal/readers/${id}`,
-                params,
-                'POST',
-                stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-            )
+            return client(`/terminal/readers/${id}`, params, 'POST', {
+                headers: stripeAccount
+                    ? { 'Stripe-Account': stripeAccount }
+                    : {},
+            })
         }
 
         export function del(
             id: string,
             stripeAccount?: string,
         ): Promise<unknown> {
-            return client(
-                `/terminal/readers/${id}`,
-                {},
-                'DELETE',
-                stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-            )
+            return client(`/terminal/readers/${id}`, {}, 'DELETE', {
+                headers: stripeAccount
+                    ? { 'Stripe-Account': stripeAccount }
+                    : {},
+            })
         }
 
         export function list(
@@ -171,7 +166,11 @@ export namespace terminal {
                 `/terminal/readers?${qs.stringify(params)}`,
                 {},
                 'GET',
-                stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+                {
+                    headers: stripeAccount
+                        ? { 'Stripe-Account': stripeAccount }
+                        : {},
+                },
             )
         }
     }

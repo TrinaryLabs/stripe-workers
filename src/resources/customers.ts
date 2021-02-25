@@ -25,24 +25,18 @@ export namespace customers {
         },
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            '/customers',
-            params,
-            'POST',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-        )
+        return client('/customers', params, 'POST', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 
     export function retrieve(
         id: string,
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            `/customers/${id}`,
-            {},
-            'GET',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-        )
+        return client(`/customers/${id}`, {}, 'GET', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 
     export function update(
@@ -67,21 +61,15 @@ export namespace customers {
         },
         stripeAccount: string,
     ): Promise<unknown> {
-        return client(
-            `/customers/${id}`,
-            params,
-            'POST',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-        )
+        return client(`/customers/${id}`, params, 'POST', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 
     export function del(id: string, stripeAccount?: string): Promise<unknown> {
-        return client(
-            `/customers/${id}`,
-            {},
-            'DELETE',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-        )
+        return client(`/customers/${id}`, {}, 'DELETE', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 
     export function list(
@@ -94,12 +82,9 @@ export namespace customers {
         },
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            `/customers?${qs.stringify(params)}`,
-            {},
-            'GET',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-        )
+        return client(`/customers?${qs.stringify(params)}`, {}, 'GET', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 
     export function createSource(
@@ -110,12 +95,9 @@ export namespace customers {
         },
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            `/customers/${cus_id}/sources`,
-            params,
-            'POST',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-        )
+        return client(`/customers/${cus_id}/sources`, params, 'POST', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 
     export function retrieveSource(
@@ -123,12 +105,9 @@ export namespace customers {
         id: string,
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            `/customers/${cus_id}/sources/${id}`,
-            {},
-            'GET',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-        )
+        return client(`/customers/${cus_id}/sources/${id}`, {}, 'GET', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 
     export function updateSource(
@@ -149,12 +128,9 @@ export namespace customers {
         },
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            `/customers/${cus_id}/sources/${id}`,
-            params,
-            'POST',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-        )
+        return client(`/customers/${cus_id}/sources/${id}`, params, 'POST', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 
     export function verifySource(
@@ -171,7 +147,11 @@ export namespace customers {
             `/customers/${cus_id}/sources/${ba_id}/verify`,
             params,
             'POST',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            {
+                headers: stripeAccount
+                    ? { 'Stripe-Account': stripeAccount }
+                    : {},
+            },
         )
     }
 
@@ -180,12 +160,9 @@ export namespace customers {
         id: string,
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            `/customers/${cus_id}/sources/${id}`,
-            {},
-            'DELETE',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-        )
+        return client(`/customers/${cus_id}/sources/${id}`, {}, 'DELETE', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 
     export function listSource(
@@ -202,7 +179,11 @@ export namespace customers {
             `/customers/${cus_id}/sources?${qs.stringify(params)}`,
             {},
             'GET',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            {
+                headers: stripeAccount
+                    ? { 'Stripe-Account': stripeAccount }
+                    : {},
+            },
         )
     }
 
@@ -216,12 +197,9 @@ export namespace customers {
         },
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            `/customers/${id}/balance_transactions`,
-            params,
-            'POST',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-        )
+        return client(`/customers/${id}/balance_transactions`, params, 'POST', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 
     export function retrieveBalanceTransaction(
@@ -233,7 +211,11 @@ export namespace customers {
             `/customers/${id}/balance_transactions/${tra_id}`,
             {},
             'GET',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            {
+                headers: stripeAccount
+                    ? { 'Stripe-Account': stripeAccount }
+                    : {},
+            },
         )
     }
 
@@ -250,7 +232,11 @@ export namespace customers {
             `/customers/${id}/balance_transactions/${tra_id}`,
             params,
             'POST',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            {
+                headers: stripeAccount
+                    ? { 'Stripe-Account': stripeAccount }
+                    : {},
+            },
         )
     }
 
@@ -267,7 +253,11 @@ export namespace customers {
             `/customers/${id}/balance_transactions?${qs.stringify(params)}`,
             {},
             'GET',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            {
+                headers: stripeAccount
+                    ? { 'Stripe-Account': stripeAccount }
+                    : {},
+            },
         )
     }
 
@@ -279,12 +269,9 @@ export namespace customers {
         },
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            `/customers/${id}/tax_ids`,
-            params,
-            'POST',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-        )
+        return client(`/customers/${id}/tax_ids`, params, 'POST', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 
     export function retrieveTaxId(
@@ -292,12 +279,9 @@ export namespace customers {
         tax_id: string,
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            `/customers/${cus_id}/tax_ids/${tax_id}`,
-            {},
-            'GET',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-        )
+        return client(`/customers/${cus_id}/tax_ids/${tax_id}`, {}, 'GET', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 
     export function deleteTaxId(
@@ -305,12 +289,9 @@ export namespace customers {
         tax_id: string,
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            `/customers/${cus_id}/tax_ids/${tax_id}`,
-            {},
-            'DELETE',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-        )
+        return client(`/customers/${cus_id}/tax_ids/${tax_id}`, {}, 'DELETE', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 
     export function listTaxId(
@@ -326,7 +307,11 @@ export namespace customers {
             `/customers/${id}/tax_ids?${qs.stringify(params)}`,
             {},
             'GET',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            {
+                headers: stripeAccount
+                    ? { 'Stripe-Account': stripeAccount }
+                    : {},
+            },
         )
     }
 
@@ -334,11 +319,8 @@ export namespace customers {
         cus_id: string,
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            `/customers/${cus_id}/discount`,
-            {},
-            'DELETE',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-        )
+        return client(`/customers/${cus_id}/discount`, {}, 'DELETE', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 }

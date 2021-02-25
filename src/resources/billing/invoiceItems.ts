@@ -23,24 +23,18 @@ export namespace invoiceItems {
         },
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            `/invoiceitems`,
-            params,
-            'POST',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-        )
+        return client(`/invoiceitems`, params, 'POST', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 
     export function retrieve(
         id: string,
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            `/invoiceitems/${id}`,
-            {},
-            'GET',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-        )
+        return client(`/invoiceitems/${id}`, {}, 'GET', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 
     export function update(
@@ -61,21 +55,15 @@ export namespace invoiceItems {
         },
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            `/invoiceitems/${id}`,
-            params,
-            'POST',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-        )
+        return client(`/invoiceitems/${id}`, params, 'POST', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 
     export function del(id: string, stripeAccount?: string): Promise<unknown> {
-        return client(
-            `/invoiceitems/${id}`,
-            {},
-            'DELETE',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-        )
+        return client(`/invoiceitems/${id}`, {}, 'DELETE', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 
     export function list(
@@ -90,11 +78,8 @@ export namespace invoiceItems {
         },
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            `/invoiceitems?${qs.stringify(params)}`,
-            {},
-            'GET',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-        )
+        return client(`/invoiceitems?${qs.stringify(params)}`, {}, 'GET', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 }

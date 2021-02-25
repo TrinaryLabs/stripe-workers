@@ -27,24 +27,18 @@ export namespace invoices {
         },
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            `/invoices`,
-            params,
-            'POST',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-        )
+        return client(`/invoices`, params, 'POST', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 
     export function retrieve(
         id: string,
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            `/invoices/${id}`,
-            {},
-            'GET',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-        )
+        return client(`/invoices/${id}`, {}, 'GET', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 
     export function update(
@@ -70,21 +64,15 @@ export namespace invoices {
         },
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            `/invoices/${id}`,
-            params,
-            'POST',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-        )
+        return client(`/invoices/${id}`, params, 'POST', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 
     export function del(id: string, stripeAccount?: string): Promise<unknown> {
-        return client(
-            `/invoices/${id}`,
-            {},
-            'DELETE',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-        )
+        return client(`/invoices/${id}`, {}, 'DELETE', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 
     export function finalizeInvoice(
@@ -94,12 +82,9 @@ export namespace invoices {
         },
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            `/invoices/${id}/finalize`,
-            params,
-            'POST',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-        )
+        return client(`/invoices/${id}/finalize`, params, 'POST', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 
     export function pay(
@@ -113,48 +98,36 @@ export namespace invoices {
         },
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            `/invoices/${id}/pay`,
-            params,
-            'POST',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-        )
+        return client(`/invoices/${id}/pay`, params, 'POST', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 
     export function sendInvoice(
         id: string,
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            `/invoices/${id}/send`,
-            {},
-            'POST',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-        )
+        return client(`/invoices/${id}/send`, {}, 'POST', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 
     export function voidInvoice(
         id: string,
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            `/invoices/${id}/void`,
-            {},
-            'POST',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-        )
+        return client(`/invoices/${id}/void`, {}, 'POST', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 
     export function markUncollectible(
         id: string,
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            `/invoices/${id}/mark_uncollectible`,
-            {},
-            'POST',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-        )
+        return client(`/invoices/${id}/mark_uncollectible`, {}, 'POST', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 
     export function listLineItems(
@@ -170,7 +143,11 @@ export namespace invoices {
             `/invoices/${id}/lines?${qs.stringify(params)}`,
             {},
             'GET',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            {
+                headers: stripeAccount
+                    ? { 'Stripe-Account': stripeAccount }
+                    : {},
+            },
         )
     }
 
@@ -195,12 +172,9 @@ export namespace invoices {
         },
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            `/invoices/upcoming?${qs.stringify(params)}`,
-            {},
-            'GET',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-        )
+        return client(`/invoices/upcoming?${qs.stringify(params)}`, {}, 'GET', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 
     export function listUpcomingLineItems(
@@ -231,7 +205,11 @@ export namespace invoices {
             `/invoices/upcoming/lines?${qs.stringify(params)}`,
             {},
             'GET',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            {
+                headers: stripeAccount
+                    ? { 'Stripe-Account': stripeAccount }
+                    : {},
+            },
         )
     }
 
@@ -249,11 +227,8 @@ export namespace invoices {
         },
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            `/invoices?${qs.stringify(params)}`,
-            {},
-            'GET',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-        )
+        return client(`/invoices?${qs.stringify(params)}`, {}, 'GET', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 }

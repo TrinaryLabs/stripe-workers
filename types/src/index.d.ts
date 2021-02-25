@@ -33,6 +33,7 @@ import { refunds } from './resources/refunds'
 import { setupAttempts } from './resources/setupAttempts'
 import { setupIntents } from './resources/setupIntents'
 import { tokens } from './resources/tokens'
+import { files } from './resources/files'
 export declare class Stripe {
     checkout: typeof checkout
     paymentIntents: typeof paymentIntents
@@ -69,6 +70,7 @@ export declare class Stripe {
     setupAttempts: typeof setupAttempts
     setupIntents: typeof setupIntents
     tokens: typeof tokens
+    files: typeof files
     constructor(
         stripe_secret: string,
         params: {

@@ -11,23 +11,17 @@ export namespace countrySpecs {
         },
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            `/country_specs?${qs.stringify(params)}`,
-            {},
-            'GET',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-        )
+        return client(`/country_specs?${qs.stringify(params)}`, {}, 'GET', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 
     export function retrieve(
         id: string,
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            `/country_specs/${id}`,
-            {},
-            'GET',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-        )
+        return client(`/country_specs/${id}`, {}, 'GET', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 }

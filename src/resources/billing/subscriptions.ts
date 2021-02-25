@@ -33,24 +33,18 @@ export namespace subscriptions {
         },
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            `/subscriptions`,
-            params,
-            'POST',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-        )
+        return client(`/subscriptions`, params, 'POST', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 
     export function retrieve(
         id: string,
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            `/subscriptions/${id}`,
-            {},
-            'GET',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-        )
+        return client(`/subscriptions/${id}`, {}, 'GET', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 
     export function update(
@@ -82,12 +76,9 @@ export namespace subscriptions {
         },
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            `/subscriptions/${id}`,
-            params,
-            'POST',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-        )
+        return client(`/subscriptions/${id}`, params, 'POST', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 
     export function del(
@@ -98,12 +89,9 @@ export namespace subscriptions {
         },
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            `/subscriptions/${id}`,
-            params,
-            'DELETE',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-        )
+        return client(`/subscriptions/${id}`, params, 'DELETE', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 
     export function list(
@@ -121,23 +109,17 @@ export namespace subscriptions {
         },
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            `/subscriptions?${qs.stringify(params)}`,
-            params,
-            'GET',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-        )
+        return client(`/subscriptions?${qs.stringify(params)}`, params, 'GET', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 
     export function deleteDiscount(
         id: string,
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            `/subscriptions/${id}/discount`,
-            {},
-            'DELETE',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-        )
+        return client(`/subscriptions/${id}/discount`, {}, 'DELETE', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 }

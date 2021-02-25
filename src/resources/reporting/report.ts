@@ -11,24 +11,22 @@ export namespace reporting {
             },
             stripeAccount?: string,
         ): Promise<unknown> {
-            return client(
-                `/reporting/report_runs`,
-                params,
-                'POST',
-                stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-            )
+            return client(`/reporting/report_runs`, params, 'POST', {
+                headers: stripeAccount
+                    ? { 'Stripe-Account': stripeAccount }
+                    : {},
+            })
         }
 
         export function retrieve(
             id: string,
             stripeAccount?: string,
         ): Promise<unknown> {
-            return client(
-                `/reporting/report_runs/${id}`,
-                {},
-                'GET',
-                stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-            )
+            return client(`/reporting/report_runs/${id}`, {}, 'GET', {
+                headers: stripeAccount
+                    ? { 'Stripe-Account': stripeAccount }
+                    : {},
+            })
         }
 
         export function list(
@@ -44,7 +42,11 @@ export namespace reporting {
                 `/reporting/report_runs?${qs.stringify(params)}`,
                 {},
                 'GET',
-                stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+                {
+                    headers: stripeAccount
+                        ? { 'Stripe-Account': stripeAccount }
+                        : {},
+                },
             )
         }
     }
@@ -56,21 +58,19 @@ export namespace reporting {
             id: string,
             stripeAccount?: string,
         ): Promise<unknown> {
-            return client(
-                `/reporting/report_types/${id}`,
-                {},
-                'GET',
-                stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-            )
+            return client(`/reporting/report_types/${id}`, {}, 'GET', {
+                headers: stripeAccount
+                    ? { 'Stripe-Account': stripeAccount }
+                    : {},
+            })
         }
 
         export function list(stripeAccount?: string): Promise<unknown> {
-            return client(
-                `/reporting/report_types`,
-                {},
-                'GET',
-                stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-            )
+            return client(`/reporting/report_types`, {}, 'GET', {
+                headers: stripeAccount
+                    ? { 'Stripe-Account': stripeAccount }
+                    : {},
+            })
         }
     }
 }

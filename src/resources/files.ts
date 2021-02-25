@@ -1,18 +1,19 @@
 import qs from 'qs'
 
-export namespace fileLinks {
+export namespace files {
     export let client: Function
 
     export function create(
         params: {
-            file: string
-            expires_at?: object
-            metadata?: [string, unknown]
+            file: unknown
+            purpose: string
+            file_link_data?: object
         },
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(`/file_links`, params, 'POST', {
+        return client('/files', params, 'POST', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            host: 'https://files.stripe.com/v1',
         })
     }
 
@@ -20,38 +21,25 @@ export namespace fileLinks {
         id: string,
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(`/file_links/${id}`, {}, 'GET', {
+        return client(`/files/${id}`, {}, 'GET', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-        })
-    }
-
-    export function update(
-        id: string,
-        params: {
-            expires_at?: object
-            metadata?: [string, unknown]
-        },
-        stripeAccount?: string,
-    ): Promise<unknown> {
-        return client(`/file_links/${id}`, params, 'POST', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            host: 'https://files.stripe.com/v1',
         })
     }
 
     export function list(
         params: {
+            purpose?: string
             created?: object
             ending_before?: string
-            expired?: boolean
-            file?: string
             limit?: number
             starting_after?: string
-            type?: string
         },
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(`/file_links?${qs.stringify(params)}`, params, 'GET', {
+        return client(`/files?${qs.stringify(params)}`, {}, 'GET', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            host: 'https://files.stripe.com/v1',
         })
     }
 }

@@ -186,6 +186,8 @@ export * from '../types/src/resources/terminal/terminal'
 export * from '../types/src/resources/fraud/radar'
 export * from '../types/src/resources/fraud/reviews'
 
+export * from '../types/src/resources/files'
+
 export * from '../types/src/resources/paymentIntents'
 export * from '../types/src/resources/customers'
 export * from '../types/src/error'

@@ -11,11 +11,8 @@ export namespace accountLinks {
         },
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            '/account_links',
-            params,
-            'POST',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-        )
+        return client('/account_links', params, 'POST', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 }

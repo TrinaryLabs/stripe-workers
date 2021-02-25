@@ -16,12 +16,9 @@ export namespace promotionCodes {
         },
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            '/promotion_codes',
-            params,
-            'POST',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-        )
+        return client('/promotion_codes', params, 'POST', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 
     export function update(
@@ -32,24 +29,18 @@ export namespace promotionCodes {
         },
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            `/promotion_codes/${id}`,
-            params,
-            'POST',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-        )
+        return client(`/promotion_codes/${id}`, params, 'POST', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 
     export function retrieve(
         id: string,
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            `/promotion_codes/${id}`,
-            {},
-            'GET',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-        )
+        return client(`/promotion_codes/${id}`, {}, 'GET', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 
     export function list(
@@ -64,11 +55,8 @@ export namespace promotionCodes {
         },
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            `/promotion_codes?${qs.stringify(params)}`,
-            {},
-            'GET',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-        )
+        return client(`/promotion_codes?${qs.stringify(params)}`, {}, 'GET', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 }

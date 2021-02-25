@@ -5,11 +5,8 @@ export namespace mandates {
         id: string,
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            `/mandates/${id}`,
-            {},
-            'GET',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-        )
+        return client(`/mandates/${id}`, {}, 'GET', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 }

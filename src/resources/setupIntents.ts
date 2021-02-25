@@ -20,12 +20,9 @@ export namespace setupIntents {
         },
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            '/setup_intents',
-            params,
-            'POST',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-        )
+        return client('/setup_intents', params, 'POST', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 
     export function retrieve(
@@ -39,7 +36,11 @@ export namespace setupIntents {
             `/setup_intents/${id}?${qs.stringify(params)}`,
             {},
             'GET',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            {
+                headers: stripeAccount
+                    ? { 'Stripe-Account': stripeAccount }
+                    : {},
+            },
         )
     }
 
@@ -55,12 +56,9 @@ export namespace setupIntents {
         },
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            `/setup_intents/${id}`,
-            params,
-            'POST',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-        )
+        return client(`/setup_intents/${id}`, params, 'POST', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 
     export function confirm(
@@ -73,12 +71,9 @@ export namespace setupIntents {
         },
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            `/setup_intents/${id}/confirm`,
-            params,
-            'POST',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-        )
+        return client(`/setup_intents/${id}/confirm`, params, 'POST', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 
     export function cancel(
@@ -88,12 +83,9 @@ export namespace setupIntents {
         },
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            `/setup_intents/${id}/cancel`,
-            params,
-            'POST',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-        )
+        return client(`/setup_intents/${id}/cancel`, params, 'POST', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 
     export function list(
@@ -107,11 +99,8 @@ export namespace setupIntents {
         },
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            `/setup_intents?${qs.stringify(params)}`,
-            params,
-            'GET',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-        )
+        return client(`/setup_intents?${qs.stringify(params)}`, params, 'GET', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 }

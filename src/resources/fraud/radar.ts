@@ -8,12 +8,11 @@ export namespace radar {
             id: string,
             stripeAccount?: string,
         ): Promise<unknown> {
-            return client(
-                `/radar/early_fraud_warnings/${id}`,
-                {},
-                'GET',
-                stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-            )
+            return client(`/radar/early_fraud_warnings/${id}`, {}, 'GET', {
+                headers: stripeAccount
+                    ? { 'Stripe-Account': stripeAccount }
+                    : {},
+            })
         }
 
         export function list(
@@ -29,7 +28,11 @@ export namespace radar {
                 `/radar/early_fraud_warnings?${qs.stringify(params)}`,
                 {},
                 'GET',
-                stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+                {
+                    headers: stripeAccount
+                        ? { 'Stripe-Account': stripeAccount }
+                        : {},
+                },
             )
         }
     }
@@ -46,24 +49,22 @@ export namespace radar {
             },
             stripeAccount?: string,
         ): Promise<unknown> {
-            return client(
-                `/radar/value_lists`,
-                params,
-                'POST',
-                stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-            )
+            return client(`/radar/value_lists`, params, 'POST', {
+                headers: stripeAccount
+                    ? { 'Stripe-Account': stripeAccount }
+                    : {},
+            })
         }
 
         export function retrieve(
             id: string,
             stripeAccount?: string,
         ): Promise<unknown> {
-            return client(
-                `/radar/value_lists/${id}`,
-                {},
-                'GET',
-                stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-            )
+            return client(`/radar/value_lists/${id}`, {}, 'GET', {
+                headers: stripeAccount
+                    ? { 'Stripe-Account': stripeAccount }
+                    : {},
+            })
         }
 
         export function update(
@@ -75,24 +76,22 @@ export namespace radar {
             },
             stripeAccount?: string,
         ): Promise<unknown> {
-            return client(
-                `/radar/value_lists/${id}`,
-                params,
-                'POST',
-                stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-            )
+            return client(`/radar/value_lists/${id}`, params, 'POST', {
+                headers: stripeAccount
+                    ? { 'Stripe-Account': stripeAccount }
+                    : {},
+            })
         }
 
         export function del(
             id: string,
             stripeAccount?: string,
         ): Promise<unknown> {
-            return client(
-                `/radar/value_lists/${id}`,
-                {},
-                'DELETE',
-                stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-            )
+            return client(`/radar/value_lists/${id}`, {}, 'DELETE', {
+                headers: stripeAccount
+                    ? { 'Stripe-Account': stripeAccount }
+                    : {},
+            })
         }
 
         export function list(
@@ -110,7 +109,11 @@ export namespace radar {
                 `/radar/value_lists?${qs.stringify(params)}`,
                 {},
                 'GET',
-                stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+                {
+                    headers: stripeAccount
+                        ? { 'Stripe-Account': stripeAccount }
+                        : {},
+                },
             )
         }
     }
@@ -125,36 +128,33 @@ export namespace radar {
             },
             stripeAccount?: string,
         ): Promise<unknown> {
-            return client(
-                `/radar/value_list_items`,
-                params,
-                'POST',
-                stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-            )
+            return client(`/radar/value_list_items`, params, 'POST', {
+                headers: stripeAccount
+                    ? { 'Stripe-Account': stripeAccount }
+                    : {},
+            })
         }
 
         export function retrieve(
             id: string,
             stripeAccount?: string,
         ): Promise<unknown> {
-            return client(
-                `/radar/value_list_items/${id}`,
-                {},
-                'GET',
-                stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-            )
+            return client(`/radar/value_list_items/${id}`, {}, 'GET', {
+                headers: stripeAccount
+                    ? { 'Stripe-Account': stripeAccount }
+                    : {},
+            })
         }
 
         export function del(
             id: string,
             stripeAccount?: string,
         ): Promise<unknown> {
-            return client(
-                `/radar/value_list_items/${id}`,
-                {},
-                'DELETE',
-                stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-            )
+            return client(`/radar/value_list_items/${id}`, {}, 'DELETE', {
+                headers: stripeAccount
+                    ? { 'Stripe-Account': stripeAccount }
+                    : {},
+            })
         }
 
         export function list(
@@ -172,7 +172,11 @@ export namespace radar {
                 `/radar/value_list_items?${qs.stringify(params)}`,
                 {},
                 'GET',
-                stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+                {
+                    headers: stripeAccount
+                        ? { 'Stripe-Account': stripeAccount }
+                        : {},
+                },
             )
         }
     }

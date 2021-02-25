@@ -23,24 +23,18 @@ export namespace accounts {
         },
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            '/accounts',
-            params,
-            'POST',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-        )
+        return client('/accounts', params, 'POST', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 
     export function retrieve(
         id: string,
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            `/accounts/${id}`,
-            {},
-            'GET',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-        )
+        return client(`/accounts/${id}`, {}, 'GET', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 
     export function update(
@@ -64,21 +58,15 @@ export namespace accounts {
         },
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            `/accounts/${id}`,
-            params,
-            'POST',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-        )
+        return client(`/accounts/${id}`, params, 'POST', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 
     export function del(id: string, stripeAccount?: string): Promise<unknown> {
-        return client(
-            `/accounts/${id}`,
-            {},
-            'DELETE',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-        )
+        return client(`/accounts/${id}`, {}, 'DELETE', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 
     export function reject(
@@ -86,12 +74,9 @@ export namespace accounts {
         params: { reason: string },
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            `/accounts/${id}/reject`,
-            params,
-            'POST',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-        )
+        return client(`/accounts/${id}/reject`, params, 'POST', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 
     export function list(
@@ -103,24 +88,18 @@ export namespace accounts {
         },
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            `/accounts`,
-            params,
-            'GET',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-        )
+        return client(`/accounts`, params, 'GET', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 
     export function createLoginLink(
         id: string,
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            `/accounts/${id}/login_links`,
-            {},
-            'POST',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-        )
+        return client(`/accounts/${id}/login_links`, {}, 'POST', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 
     export function retrieveCapability(
@@ -132,7 +111,11 @@ export namespace accounts {
             `/accounts/${user_id}/capabilities/${cap_id}`,
             {},
             'GET',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            {
+                headers: stripeAccount
+                    ? { 'Stripe-Account': stripeAccount }
+                    : {},
+            },
         )
     }
 
@@ -148,7 +131,11 @@ export namespace accounts {
             `/accounts/${user_id}/capabilities/${cap_id}`,
             params,
             'POST',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            {
+                headers: stripeAccount
+                    ? { 'Stripe-Account': stripeAccount }
+                    : {},
+            },
         )
     }
 
@@ -156,12 +143,9 @@ export namespace accounts {
         user_id: string,
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            `/accounts/${user_id}/capabilities`,
-            {},
-            'GET',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-        )
+        return client(`/accounts/${user_id}/capabilities`, {}, 'GET', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 
     export function createPerson(
@@ -192,12 +176,9 @@ export namespace accounts {
         },
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            `/accounts/${user_id}/persons`,
-            params,
-            'POST',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-        )
+        return client(`/accounts/${user_id}/persons`, params, 'POST', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 
     export function retrievePerson(
@@ -205,12 +186,9 @@ export namespace accounts {
         person_id: string,
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            `/accounts/${user_id}/persons/${person_id}`,
-            {},
-            'GET',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-        )
+        return client(`/accounts/${user_id}/persons/${person_id}`, {}, 'GET', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 
     export function updatePerson(
@@ -246,7 +224,11 @@ export namespace accounts {
             `/accounts/${user_id}/persons/${person_id}`,
             params,
             'POST',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            {
+                headers: stripeAccount
+                    ? { 'Stripe-Account': stripeAccount }
+                    : {},
+            },
         )
     }
 
@@ -259,7 +241,11 @@ export namespace accounts {
             `/accounts/${user_id}/persons/${person_id}`,
             {},
             'DELETE',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            {
+                headers: stripeAccount
+                    ? { 'Stripe-Account': stripeAccount }
+                    : {},
+            },
         )
     }
 
@@ -277,7 +263,11 @@ export namespace accounts {
             `/accounts/${user_id}/persons?${qs.stringify(params)}`,
             {},
             'GET',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            {
+                headers: stripeAccount
+                    ? { 'Stripe-Account': stripeAccount }
+                    : {},
+            },
         )
     }
 
@@ -290,12 +280,9 @@ export namespace accounts {
         },
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            `/accounts/${id}/external_accounts`,
-            params,
-            'POST',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-        )
+        return client(`/accounts/${id}/external_accounts`, params, 'POST', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 
     export function retrieveExternalAccount(
@@ -307,7 +294,11 @@ export namespace accounts {
             `/accounts/${id}/external_accounts/${ext_id}`,
             {},
             'GET',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            {
+                headers: stripeAccount
+                    ? { 'Stripe-Account': stripeAccount }
+                    : {},
+            },
         )
     }
 
@@ -335,7 +326,11 @@ export namespace accounts {
             `/accounts/${id}/external_accounts/${ext_id}`,
             params,
             'POST',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            {
+                headers: stripeAccount
+                    ? { 'Stripe-Account': stripeAccount }
+                    : {},
+            },
         )
     }
 
@@ -348,7 +343,11 @@ export namespace accounts {
             `/accounts/${id}/external_accounts/${ext_id}`,
             {},
             'DELETE',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            {
+                headers: stripeAccount
+                    ? { 'Stripe-Account': stripeAccount }
+                    : {},
+            },
         )
     }
 
@@ -366,7 +365,11 @@ export namespace accounts {
             `/accounts/${id}/external_accounts?${qs.stringify(params)}`,
             {},
             'GET',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            {
+                headers: stripeAccount
+                    ? { 'Stripe-Account': stripeAccount }
+                    : {},
+            },
         )
     }
 }

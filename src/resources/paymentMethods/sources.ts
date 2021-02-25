@@ -1,3 +1,5 @@
+import qs from 'qs'
+
 export namespace sources {
     export let client: Function
 
@@ -19,12 +21,9 @@ export namespace sources {
         },
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            '/sources',
-            params,
-            'POST',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-        )
+        return client('/sources', params, 'POST', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 
     export function retrieve(
@@ -34,12 +33,9 @@ export namespace sources {
         },
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            `/sources/${id}`,
-            {},
-            'GET',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-        )
+        return client(`/sources/${id}?${qs.stringify(params)}`, {}, 'GET', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 
     export function update(
@@ -53,11 +49,8 @@ export namespace sources {
         },
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            `/sources/${id}`,
-            params,
-            'POST',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-        )
+        return client(`/sources/${id}`, params, 'POST', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 }

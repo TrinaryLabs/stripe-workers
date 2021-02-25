@@ -7,12 +7,9 @@ export namespace orderReturns {
         id: string,
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            `/order_returns/${id}`,
-            {},
-            'GET',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-        )
+        return client(`/order_returns/${id}`, {}, 'GET', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 
     export function list(
@@ -25,11 +22,8 @@ export namespace orderReturns {
         },
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            `/order_returns?${qs.stringify(params)}`,
-            {},
-            'GET',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-        )
+        return client(`/order_returns?${qs.stringify(params)}`, {}, 'GET', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 }

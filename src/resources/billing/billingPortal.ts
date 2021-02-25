@@ -11,7 +11,11 @@ export namespace billingPortal {
                 '/billing_portal/sessions',
                 { customer, return_url },
                 'POST',
-                stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+                {
+                    headers: stripeAccount
+                        ? { 'Stripe-Account': stripeAccount }
+                        : {},
+                },
             )
         }
     }

@@ -1,1 +1,1 @@
-{"version":3,"file":"mandates.d.ts","sourceRoot":"","sources":["../../../src/resources/mandates.ts"],"names":[],"mappings":"AAAA,yBAAiB,QAAQ,CAAC;IACf,IAAI,MAAM,EAAE,QAAQ,CAAA;IAE3B,SAAgB,QAAQ,CACpB,EAAE,EAAE,MAAM,EACV,aAAa,CAAC,EAAE,MAAM,GACvB,OAAO,CAAC,OAAO,CAAC,CAOlB;CACJ"}
+{"version":3,"file":"mandates.d.ts","sourceRoot":"","sources":["../../../src/resources/mandates.ts"],"names":[],"mappings":"AAAA,yBAAiB,QAAQ,CAAC;IACf,IAAI,MAAM,EAAE,QAAQ,CAAA;IAE3B,SAAgB,QAAQ,CACpB,EAAE,EAAE,MAAM,EACV,aAAa,CAAC,EAAE,MAAM,GACvB,OAAO,CAAC,OAAO,CAAC,CASlB;CACJ"}

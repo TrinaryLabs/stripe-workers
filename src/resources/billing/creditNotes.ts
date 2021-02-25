@@ -22,7 +22,11 @@ export namespace creditNotes {
             `/credit_notes/preview?${qs.stringify(params)}`,
             {},
             'GET',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            {
+                headers: stripeAccount
+                    ? { 'Stripe-Account': stripeAccount }
+                    : {},
+            },
         )
     }
 
@@ -41,24 +45,18 @@ export namespace creditNotes {
         },
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            `/credit_notes`,
-            params,
-            'POST',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-        )
+        return client(`/credit_notes`, params, 'POST', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 
     export function retrieve(
         id: string,
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            `/credit_notes/${id}`,
-            {},
-            'GET',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-        )
+        return client(`/credit_notes/${id}`, {}, 'GET', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 
     export function update(
@@ -69,12 +67,9 @@ export namespace creditNotes {
         },
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            `/credit_notes/${id}`,
-            params,
-            'POST',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-        )
+        return client(`/credit_notes/${id}`, params, 'POST', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 
     export function listLineItems(
@@ -90,7 +85,11 @@ export namespace creditNotes {
             `/credit_notes/${id}/lines?${qs.stringify(params)}`,
             {},
             'GET',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            {
+                headers: stripeAccount
+                    ? { 'Stripe-Account': stripeAccount }
+                    : {},
+            },
         )
     }
 
@@ -116,7 +115,11 @@ export namespace creditNotes {
             `/credit_notes/preview/lines?${qs.stringify(params)}`,
             {},
             'GET',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            {
+                headers: stripeAccount
+                    ? { 'Stripe-Account': stripeAccount }
+                    : {},
+            },
         )
     }
 
@@ -124,12 +127,9 @@ export namespace creditNotes {
         id: string,
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            `/credit_notes/${id}/void`,
-            {},
-            'POST',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-        )
+        return client(`/credit_notes/${id}/void`, {}, 'POST', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 
     export function list(
@@ -141,11 +141,8 @@ export namespace creditNotes {
         },
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            `/credit_notes?${qs.stringify(params)}`,
-            {},
-            'GET',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-        )
+        return client(`/credit_notes?${qs.stringify(params)}`, {}, 'GET', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 }

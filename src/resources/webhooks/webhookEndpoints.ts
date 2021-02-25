@@ -14,24 +14,18 @@ export namespace webhookEndpoints {
         },
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            '/webhook_endpoints',
-            params,
-            'POST',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-        )
+        return client('/webhook_endpoints', params, 'POST', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 
     export function retrieve(
         id: string,
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            `/webhook_endpoints/${id}`,
-            {},
-            'GET',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-        )
+        return client(`/webhook_endpoints/${id}`, {}, 'GET', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 
     export function update(
@@ -45,12 +39,9 @@ export namespace webhookEndpoints {
         },
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            `/webhook_endpoints/${id}`,
-            params,
-            'POST',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-        )
+        return client(`/webhook_endpoints/${id}`, params, 'POST', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 
     export function list(
@@ -61,20 +52,14 @@ export namespace webhookEndpoints {
         },
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            `/webhook_endpoints?${qs.stringify(params)}`,
-            {},
-            'GET',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-        )
+        return client(`/webhook_endpoints?${qs.stringify(params)}`, {}, 'GET', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 
     export function del(id: string, stripeAccount?: string): Promise<unknown> {
-        return client(
-            `/webhook_endpoints/${id}`,
-            {},
-            'DELETE',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-        )
+        return client(`/webhook_endpoints/${id}`, {}, 'DELETE', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 }

@@ -7,12 +7,9 @@ export namespace applicationFees {
         id: string,
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            `/application_fees/${id}`,
-            {},
-            'GET',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-        )
+        return client(`/application_fees/${id}`, {}, 'GET', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 
     export function list(
@@ -24,12 +21,9 @@ export namespace applicationFees {
         },
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            `/application_fees?${qs.stringify(params)}`,
-            {},
-            'GET',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-        )
+        return client(`/application_fees?${qs.stringify(params)}`, {}, 'GET', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 
     export function createRefund(
@@ -40,12 +34,9 @@ export namespace applicationFees {
         },
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            `/application_fees/${id}/refunds`,
-            params,
-            'POST',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-        )
+        return client(`/application_fees/${id}/refunds`, params, 'POST', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 
     export function retrieveRefund(
@@ -57,7 +48,11 @@ export namespace applicationFees {
             `/application_fees/${fee_id}/refunds/${refund_id}`,
             {},
             'GET',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            {
+                headers: stripeAccount
+                    ? { 'Stripe-Account': stripeAccount }
+                    : {},
+            },
         )
     }
 
@@ -73,7 +68,11 @@ export namespace applicationFees {
             `/application_fees/${fee_id}/refunds/${refund_id}`,
             params,
             'POST',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            {
+                headers: stripeAccount
+                    ? { 'Stripe-Account': stripeAccount }
+                    : {},
+            },
         )
     }
 
@@ -90,7 +89,11 @@ export namespace applicationFees {
             `/application_fees/${id}/refunds?${qs.stringify(params)}`,
             {},
             'GET',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            {
+                headers: stripeAccount
+                    ? { 'Stripe-Account': stripeAccount }
+                    : {},
+            },
         )
     }
 }
