@@ -15,28 +15,18 @@ export namespace refunds {
         },
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            '/refunds',
-            params,
-            'POST',
-            {
-                headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
-            }
-        )
+        return client('/refunds', params, 'POST', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 
     export function retrieve(
         id: string,
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            `/refunds/${id}`,
-            {},
-            'GET',
-            {
-                headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
-            }
-        )
+        return client(`/refunds/${id}`, {}, 'GET', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 
     export function update(
@@ -46,14 +36,9 @@ export namespace refunds {
         },
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            `/refunds/${id}`,
-            params,
-            'POST',
-            {
-                headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
-            }
-        )
+        return client(`/refunds/${id}`, params, 'POST', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 
     export function list(
@@ -67,13 +52,8 @@ export namespace refunds {
         },
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            `/refunds?${qs.stringify(params)}`,
-            {},
-            'GET',
-            {
-                headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
-            }
-        )
+        return client(`/refunds?${qs.stringify(params)}`, {}, 'GET', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 }

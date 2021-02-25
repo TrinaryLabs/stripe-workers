@@ -8,14 +8,11 @@ export namespace sigma {
             id: string,
             stripeAccount?: string,
         ): Promise<unknown> {
-            return client(
-                `/sigma/scheduled_query_runs/${id}`,
-                {},
-                'GET',
-                {
-                    headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
-                }
-            )
+            return client(`/sigma/scheduled_query_runs/${id}`, {}, 'GET', {
+                headers: stripeAccount
+                    ? { 'Stripe-Account': stripeAccount }
+                    : {},
+            })
         }
 
         export function list(
@@ -31,8 +28,10 @@ export namespace sigma {
                 {},
                 'GET',
                 {
-                    headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
-                }
+                    headers: stripeAccount
+                        ? { 'Stripe-Account': stripeAccount }
+                        : {},
+                },
             )
         }
     }

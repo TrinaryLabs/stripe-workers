@@ -16,28 +16,18 @@ export namespace payouts {
         },
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            '/payouts',
-            params,
-            'POST',
-            {
-                headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
-            }
-        )
+        return client('/payouts', params, 'POST', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 
     export function retrieve(
         id: string,
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            `/payouts/${id}`,
-            {},
-            'GET',
-            {
-                headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
-            }
-        )
+        return client(`/payouts/${id}`, {}, 'GET', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 
     export function update(
@@ -47,14 +37,9 @@ export namespace payouts {
         },
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            `/payouts/${id}`,
-            params,
-            'POST',
-            {
-                headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
-            }
-        )
+        return client(`/payouts/${id}`, params, 'POST', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 
     export function list(
@@ -69,28 +54,18 @@ export namespace payouts {
         },
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            `/payouts?${qs.stringify(params)}`,
-            {},
-            'GET',
-            {
-                headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
-            }
-        )
+        return client(`/payouts?${qs.stringify(params)}`, {}, 'GET', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 
     export function cancel(
         id: string,
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            `/payouts/${id}/cancel`,
-            {},
-            'POST',
-            {
-                headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
-            }
-        )
+        return client(`/payouts/${id}/cancel`, {}, 'POST', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 
     export function reverse(
@@ -100,13 +75,8 @@ export namespace payouts {
         },
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            `/payouts/${id}/reverse`,
-            params,
-            'POST',
-            {
-                headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
-            }
-        )
+        return client(`/payouts/${id}/reverse`, params, 'POST', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 }

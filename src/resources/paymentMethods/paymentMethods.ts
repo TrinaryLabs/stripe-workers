@@ -26,28 +26,18 @@ export namespace paymentMethods {
         },
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            '/payment_methods',
-            params,
-            'POST',
-            {
-                headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
-            }
-        )
+        return client('/payment_methods', params, 'POST', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 
     export function retrieve(
         id: string,
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            `/payment_methods/${id}`,
-            {},
-            'GET',
-            {
-                headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
-            }
-        )
+        return client(`/payment_methods/${id}`, {}, 'GET', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 
     export function update(
@@ -59,14 +49,9 @@ export namespace paymentMethods {
         },
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            `/payment_methods/${id}`,
-            params,
-            'POST',
-            {
-                headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
-            }
-        )
+        return client(`/payment_methods/${id}`, params, 'POST', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 
     export function list(
@@ -79,14 +64,9 @@ export namespace paymentMethods {
         },
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            `/payment_methods?${qs.stringify(params)}`,
-            {},
-            'GET',
-            {
-                headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
-            }
-        )
+        return client(`/payment_methods?${qs.stringify(params)}`, {}, 'GET', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 
     export function attach(
@@ -96,27 +76,17 @@ export namespace paymentMethods {
         },
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            `/payment_methods/${id}/attach`,
-            params,
-            'POST',
-            {
-                headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
-            }
-        )
+        return client(`/payment_methods/${id}/attach`, params, 'POST', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 
     export function detach(
         id: string,
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            `/payment_methods/${id}/detach`,
-            {},
-            'POST',
-            {
-                headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
-            }
-        )
+        return client(`/payment_methods/${id}/detach`, {}, 'POST', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 }

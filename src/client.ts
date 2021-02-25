@@ -28,13 +28,13 @@ export class HTTPClient {
         path: string,
         body: any,
         method: string,
-        params?: {
-            headers?: object,
+        params: {
+            headers?: object
             host?: string
-        }
+        },
     ): Promise<unknown> => {
         try {
-            let host = (params?.host ? params.host : 'https://api.stripe.com/v1')
+            let host = params.host ? params.host : 'https://api.stripe.com/v1'
             const res = await this.FETCH(`${host}${path}`, {
                 ...(method === 'POST' ? { body: qs.stringify(body) } : {}),
                 headers: {
@@ -42,7 +42,7 @@ export class HTTPClient {
                     'Content-type': 'application/x-www-form-urlencoded',
                     'Stripe-Version': `${this.API_VERSION}`,
                     'User-Agent': `${this.UA}`,
-                    ...params?.headers,
+                    ...params.headers,
                 },
                 method,
             })

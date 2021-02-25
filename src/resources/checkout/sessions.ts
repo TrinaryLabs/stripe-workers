@@ -27,28 +27,22 @@ export namespace checkout {
             },
             stripeAccount?: string,
         ): Promise<unknown> {
-            return client(
-                '/checkout/sessions',
-                params,
-                'POST',
-                {
-                    headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
-                }
-            )
+            return client('/checkout/sessions', params, 'POST', {
+                headers: stripeAccount
+                    ? { 'Stripe-Account': stripeAccount }
+                    : {},
+            })
         }
 
         export async function retrieve(
             id: string,
             stripeAccount?: string,
         ): Promise<unknown> {
-            return client(
-                `/checkout/sessions/${id}`,
-                {},
-                'GET',
-                {
-                    headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
-                }
-            )
+            return client(`/checkout/sessions/${id}`, {}, 'GET', {
+                headers: stripeAccount
+                    ? { 'Stripe-Account': stripeAccount }
+                    : {},
+            })
         }
 
         export async function list(
@@ -66,8 +60,10 @@ export namespace checkout {
                 {},
                 'GET',
                 {
-                    headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
-                }
+                    headers: stripeAccount
+                        ? { 'Stripe-Account': stripeAccount }
+                        : {},
+                },
             )
         }
 
@@ -85,8 +81,10 @@ export namespace checkout {
                 {},
                 'GET',
                 {
-                    headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
-                }
+                    headers: stripeAccount
+                        ? { 'Stripe-Account': stripeAccount }
+                        : {},
+                },
             )
         }
     }

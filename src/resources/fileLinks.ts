@@ -11,28 +11,18 @@ export namespace fileLinks {
         },
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            `/file_links`,
-            params,
-            'POST',
-            {
-                headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
-            }
-        )
+        return client(`/file_links`, params, 'POST', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 
     export function retrieve(
         id: string,
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            `/file_links/${id}`,
-            {},
-            'GET',
-            {
-                headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
-            }
-        )
+        return client(`/file_links/${id}`, {}, 'GET', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 
     export function update(
@@ -43,14 +33,9 @@ export namespace fileLinks {
         },
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            `/file_links/${id}`,
-            params,
-            'POST',
-            {
-                headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
-            }
-        )
+        return client(`/file_links/${id}`, params, 'POST', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 
     export function list(
@@ -65,13 +50,8 @@ export namespace fileLinks {
         },
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            `/file_links?${qs.stringify(params)}`,
-            params,
-            'GET',
-            {
-                headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
-            }
-        )
+        return client(`/file_links?${qs.stringify(params)}`, params, 'GET', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 }

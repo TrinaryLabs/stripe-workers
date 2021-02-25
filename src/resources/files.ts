@@ -5,36 +5,26 @@ export namespace files {
 
     export function create(
         params: {
-            file: unknown,
-            purpose: string,
+            file: unknown
+            purpose: string
             file_link_data?: object
         },
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            '/files',
-            params,
-            'POST',
-            {
-                headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-                host: 'https://files.stripe.com/v1'
-            }
-        )
+        return client('/files', params, 'POST', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            host: 'https://files.stripe.com/v1',
+        })
     }
 
     export function retrieve(
         id: string,
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            `/files/${id}`,
-            {},
-            'GET',
-            {
-                headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-                host: 'https://files.stripe.com/v1'
-            }
-        )
+        return client(`/files/${id}`, {}, 'GET', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            host: 'https://files.stripe.com/v1',
+        })
     }
 
     export function list(
@@ -47,14 +37,9 @@ export namespace files {
         },
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            `/files?${qs.stringify(params)}`,
-            {},
-            'GET',
-            {
-                headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-                host: 'https://files.stripe.com/v1'
-            }
-        )
+        return client(`/files?${qs.stringify(params)}`, {}, 'GET', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            host: 'https://files.stripe.com/v1',
+        })
     }
 }

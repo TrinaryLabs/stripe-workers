@@ -7,14 +7,9 @@ export namespace events {
         id: string,
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            `/events/${id}`,
-            {},
-            'GET',
-            {
-                headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
-            }
-        )
+        return client(`/events/${id}`, {}, 'GET', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 
     export function list(
@@ -29,13 +24,8 @@ export namespace events {
         },
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            `/events?${qs.stringify(params)}`,
-            params,
-            'GET',
-            {
-                headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
-            }
-        )
+        return client(`/events?${qs.stringify(params)}`, params, 'GET', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 }

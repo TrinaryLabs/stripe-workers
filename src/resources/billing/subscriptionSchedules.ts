@@ -15,28 +15,18 @@ export namespace subscriptionSchedules {
         },
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            `/subscription_schedules`,
-            params,
-            'POST',
-            {
-                headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
-            }
-        )
+        return client(`/subscription_schedules`, params, 'POST', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 
     export function retrieve(
         id: string,
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            `/subscription_schedules/${id}`,
-            {},
-            'GET',
-            {
-                headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
-            }
-        )
+        return client(`/subscription_schedules/${id}`, {}, 'GET', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 
     export function update(
@@ -51,14 +41,9 @@ export namespace subscriptionSchedules {
         },
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            `/subscription_items/${id}`,
-            params,
-            'POST',
-            {
-                headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
-            }
-        )
+        return client(`/subscription_items/${id}`, params, 'POST', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 
     export function cancel(
@@ -69,14 +54,9 @@ export namespace subscriptionSchedules {
         },
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            `/subscription_schedules/${id}/cancel`,
-            params,
-            'POST',
-            {
-                headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
-            }
-        )
+        return client(`/subscription_schedules/${id}/cancel`, params, 'POST', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 
     export function release(
@@ -86,14 +66,9 @@ export namespace subscriptionSchedules {
         },
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            `/subscription_schedules/${id}/release`,
-            params,
-            'POST',
-            {
-                headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
-            }
-        )
+        return client(`/subscription_schedules/${id}/release`, params, 'POST', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 
     export function list(
@@ -115,8 +90,10 @@ export namespace subscriptionSchedules {
             {},
             'GET',
             {
-                headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
-            }
+                headers: stripeAccount
+                    ? { 'Stripe-Account': stripeAccount }
+                    : {},
+            },
         )
     }
 }

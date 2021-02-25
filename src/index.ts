@@ -33,6 +33,7 @@ import { refunds } from './resources/refunds'
 import { setupAttempts } from './resources/setupAttempts'
 import { setupIntents } from './resources/setupIntents'
 import { tokens } from './resources/tokens'
+import { files } from './resources/files'
 
 import { HTTPClient } from './client'
 export class Stripe {
@@ -71,6 +72,7 @@ export class Stripe {
     setupAttempts: typeof setupAttempts
     setupIntents: typeof setupIntents
     tokens: typeof tokens
+    files: typeof files
 
     constructor(
         stripe_secret: string,
@@ -122,6 +124,7 @@ export class Stripe {
         this.setupAttempts = setupAttempts
         this.setupIntents = setupIntents
         this.tokens = tokens
+        this.files = files
 
         this.checkout.sessions.client = client.request
         this.billingPortal.sessions.client = client.request
@@ -167,5 +170,6 @@ export class Stripe {
         this.setupAttempts.client = client.request
         this.setupIntents.client = client.request
         this.tokens.client = client.request
+        this.files.client = client.request
     }
 }

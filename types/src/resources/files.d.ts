@@ -1,17 +1,23 @@
-export declare namespace events {
+export declare namespace files {
     let client: Function
+    function create(
+        params: {
+            file: unknown
+            purpose: string
+            file_link_data?: object
+        },
+        stripeAccount?: string,
+    ): Promise<unknown>
     function retrieve(id: string, stripeAccount?: string): Promise<unknown>
     function list(
         params: {
-            types?: string[]
+            purpose?: string
             created?: object
-            delivery_success?: unknown
             ending_before?: string
             limit?: number
             starting_after?: string
-            type?: string
         },
         stripeAccount?: string,
     ): Promise<unknown>
 }
-//# sourceMappingURL=events.d.ts.map
+//# sourceMappingURL=files.d.ts.map

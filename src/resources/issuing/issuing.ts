@@ -8,14 +8,11 @@ export namespace issuing {
             id: string,
             stripeAccount?: string,
         ): Promise<unknown> {
-            return client(
-                `/issuing/authorizations/${id}`,
-                {},
-                'GET',
-                {
-                    headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
-                }
-            )
+            return client(`/issuing/authorizations/${id}`, {}, 'GET', {
+                headers: stripeAccount
+                    ? { 'Stripe-Account': stripeAccount }
+                    : {},
+            })
         }
 
         export function update(
@@ -25,14 +22,11 @@ export namespace issuing {
             },
             stripeAccount?: string,
         ): Promise<unknown> {
-            return client(
-                `/issuing/authorizations/${id}`,
-                params,
-                'POST',
-                {
-                    headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
-                }
-            )
+            return client(`/issuing/authorizations/${id}`, params, 'POST', {
+                headers: stripeAccount
+                    ? { 'Stripe-Account': stripeAccount }
+                    : {},
+            })
         }
 
         export function approve(
@@ -48,8 +42,10 @@ export namespace issuing {
                 params,
                 'POST',
                 {
-                    headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
-                }
+                    headers: stripeAccount
+                        ? { 'Stripe-Account': stripeAccount }
+                        : {},
+                },
             )
         }
 
@@ -65,8 +61,10 @@ export namespace issuing {
                 params,
                 'POST',
                 {
-                    headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
-                }
+                    headers: stripeAccount
+                        ? { 'Stripe-Account': stripeAccount }
+                        : {},
+                },
             )
         }
 
@@ -87,8 +85,10 @@ export namespace issuing {
                 {},
                 'GET',
                 {
-                    headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
-                }
+                    headers: stripeAccount
+                        ? { 'Stripe-Account': stripeAccount }
+                        : {},
+                },
             )
         }
     }
@@ -111,28 +111,22 @@ export namespace issuing {
             },
             stripeAccount?: string,
         ): Promise<unknown> {
-            return client(
-                '/issuing/cardholders',
-                params,
-                'POST',
-                {
-                    headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
-                }
-            )
+            return client('/issuing/cardholders', params, 'POST', {
+                headers: stripeAccount
+                    ? { 'Stripe-Account': stripeAccount }
+                    : {},
+            })
         }
 
         export function retrieve(
             id: string,
             stripeAccount?: string,
         ): Promise<unknown> {
-            return client(
-                `/issuing/cardholders/${id}`,
-                {},
-                'GET',
-                {
-                    headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
-                }
-            )
+            return client(`/issuing/cardholders/${id}`, {}, 'GET', {
+                headers: stripeAccount
+                    ? { 'Stripe-Account': stripeAccount }
+                    : {},
+            })
         }
 
         export function update(
@@ -149,14 +143,11 @@ export namespace issuing {
             },
             stripeAccount?: string,
         ): Promise<unknown> {
-            return client(
-                `/issuing/cardholders/${id}`,
-                params,
-                'POST',
-                {
-                    headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
-                }
-            )
+            return client(`/issuing/cardholders/${id}`, params, 'POST', {
+                headers: stripeAccount
+                    ? { 'Stripe-Account': stripeAccount }
+                    : {},
+            })
         }
 
         export function list(
@@ -177,8 +168,10 @@ export namespace issuing {
                 {},
                 'GET',
                 {
-                    headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
-                }
+                    headers: stripeAccount
+                        ? { 'Stripe-Account': stripeAccount }
+                        : {},
+                },
             )
         }
     }
@@ -200,28 +193,22 @@ export namespace issuing {
             },
             stripeAccount?: string,
         ): Promise<unknown> {
-            return client(
-                '/issuing/cards',
-                params,
-                'POST',
-                {
-                    headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
-                }
-            )
+            return client('/issuing/cards', params, 'POST', {
+                headers: stripeAccount
+                    ? { 'Stripe-Account': stripeAccount }
+                    : {},
+            })
         }
 
         export function retrieve(
             id: string,
             stripeAccount?: string,
         ): Promise<unknown> {
-            return client(
-                `/issuing/cards/${id}`,
-                {},
-                'GET',
-                {
-                    headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
-                }
-            )
+            return client(`/issuing/cards/${id}`, {}, 'GET', {
+                headers: stripeAccount
+                    ? { 'Stripe-Account': stripeAccount }
+                    : {},
+            })
         }
 
         export function update(
@@ -234,14 +221,11 @@ export namespace issuing {
             },
             stripeAccount?: string,
         ): Promise<unknown> {
-            return client(
-                `/issuing/cards/${id}`,
-                params,
-                'POST',
-                {
-                    headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
-                }
-            )
+            return client(`/issuing/cards/${id}`, params, 'POST', {
+                headers: stripeAccount
+                    ? { 'Stripe-Account': stripeAccount }
+                    : {},
+            })
         }
 
         export function list(
@@ -259,14 +243,11 @@ export namespace issuing {
             },
             stripeAccount?: string,
         ): Promise<unknown> {
-            return client(
-                `/issuing/cards?${qs.stringify(params)}`,
-                {},
-                'GET',
-                {
-                    headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
-                }
-            )
+            return client(`/issuing/cards?${qs.stringify(params)}`, {}, 'GET', {
+                headers: stripeAccount
+                    ? { 'Stripe-Account': stripeAccount }
+                    : {},
+            })
         }
     }
 
@@ -281,14 +262,11 @@ export namespace issuing {
             },
             stripeAccount?: string,
         ): Promise<unknown> {
-            return client(
-                '/issuing/disputes',
-                params,
-                'POST',
-                {
-                    headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
-                }
-            )
+            return client('/issuing/disputes', params, 'POST', {
+                headers: stripeAccount
+                    ? { 'Stripe-Account': stripeAccount }
+                    : {},
+            })
         }
 
         export function submit(
@@ -298,28 +276,22 @@ export namespace issuing {
             },
             stripeAccount?: string,
         ): Promise<unknown> {
-            return client(
-                `/issuing/disputes/${id}/submit`,
-                params,
-                'POST',
-                {
-                    headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
-                }
-            )
+            return client(`/issuing/disputes/${id}/submit`, params, 'POST', {
+                headers: stripeAccount
+                    ? { 'Stripe-Account': stripeAccount }
+                    : {},
+            })
         }
 
         export function retrieve(
             id: string,
             stripeAccount?: string,
         ): Promise<unknown> {
-            return client(
-                `/issuing/disputes/${id}`,
-                {},
-                'GET',
-                {
-                    headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
-                }
-            )
+            return client(`/issuing/disputes/${id}`, {}, 'GET', {
+                headers: stripeAccount
+                    ? { 'Stripe-Account': stripeAccount }
+                    : {},
+            })
         }
 
         export function update(
@@ -330,14 +302,11 @@ export namespace issuing {
             },
             stripeAccount?: string,
         ): Promise<unknown> {
-            return client(
-                `/issuing/disputes/${id}`,
-                params,
-                'POST',
-                {
-                    headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
-                }
-            )
+            return client(`/issuing/disputes/${id}`, params, 'POST', {
+                headers: stripeAccount
+                    ? { 'Stripe-Account': stripeAccount }
+                    : {},
+            })
         }
 
         export function list(
@@ -356,8 +325,10 @@ export namespace issuing {
                 {},
                 'GET',
                 {
-                    headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
-                }
+                    headers: stripeAccount
+                        ? { 'Stripe-Account': stripeAccount }
+                        : {},
+                },
             )
         }
     }
@@ -369,14 +340,11 @@ export namespace issuing {
             id: string,
             stripeAccount?: string,
         ): Promise<unknown> {
-            return client(
-                `/issuing/transactions/${id}`,
-                {},
-                'GET',
-                {
-                    headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
-                }
-            )
+            return client(`/issuing/transactions/${id}`, {}, 'GET', {
+                headers: stripeAccount
+                    ? { 'Stripe-Account': stripeAccount }
+                    : {},
+            })
         }
 
         export function update(
@@ -386,14 +354,11 @@ export namespace issuing {
             },
             stripeAccount?: string,
         ): Promise<unknown> {
-            return client(
-                `/issuing/transactions/${id}`,
-                params,
-                'POST',
-                {
-                    headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
-                }
-            )
+            return client(`/issuing/transactions/${id}`, params, 'POST', {
+                headers: stripeAccount
+                    ? { 'Stripe-Account': stripeAccount }
+                    : {},
+            })
         }
 
         export function list(
@@ -413,8 +378,10 @@ export namespace issuing {
                 {},
                 'GET',
                 {
-                    headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
-                }
+                    headers: stripeAccount
+                        ? { 'Stripe-Account': stripeAccount }
+                        : {},
+                },
             )
         }
     }

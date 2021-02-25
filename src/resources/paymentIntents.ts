@@ -35,14 +35,9 @@ export namespace paymentIntents {
         },
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            '/payment_intents',
-            params,
-            'POST',
-            {
-                headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
-            }
-        )
+        return client('/payment_intents', params, 'POST', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 
     export function update(
@@ -78,14 +73,9 @@ export namespace paymentIntents {
         },
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            `/payment_intents/${id}`,
-            params,
-            'POST',
-            {
-                headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
-            }
-        )
+        return client(`/payment_intents/${id}`, params, 'POST', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 
     export function confirm(
@@ -107,14 +97,9 @@ export namespace paymentIntents {
         },
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            `/payment_intents/${id}/confirm`,
-            params,
-            'POST',
-            {
-                headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
-            }
-        )
+        return client(`/payment_intents/${id}/confirm`, params, 'POST', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 
     export function capture(
@@ -128,14 +113,9 @@ export namespace paymentIntents {
         },
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            `/payment_intents/${id}/capture`,
-            params,
-            'POST',
-            {
-                headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
-            }
-        )
+        return client(`/payment_intents/${id}/capture`, params, 'POST', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 
     export function cancel(
@@ -145,14 +125,9 @@ export namespace paymentIntents {
         },
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            `/payment_intents/${id}/confirm`,
-            params,
-            'POST',
-            {
-                headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
-            }
-        )
+        return client(`/payment_intents/${id}/confirm`, params, 'POST', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 
     export function list(
@@ -170,8 +145,10 @@ export namespace paymentIntents {
             params,
             'GET',
             {
-                headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
-            }
+                headers: stripeAccount
+                    ? { 'Stripe-Account': stripeAccount }
+                    : {},
+            },
         )
     }
 }

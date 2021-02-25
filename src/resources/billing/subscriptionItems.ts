@@ -18,28 +18,18 @@ export namespace subscriptionItems {
         },
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            `/subscription_items`,
-            params,
-            'POST',
-            {
-                headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
-            }
-        )
+        return client(`/subscription_items`, params, 'POST', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 
     export function retrieve(
         id: string,
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            `/subscription_items/${id}`,
-            {},
-            'GET',
-            {
-                headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
-            }
-        )
+        return client(`/subscription_items/${id}`, {}, 'GET', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 
     export function update(
@@ -58,14 +48,9 @@ export namespace subscriptionItems {
         },
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            `/subscription_items/${id}`,
-            params,
-            'POST',
-            {
-                headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
-            }
-        )
+        return client(`/subscription_items/${id}`, params, 'POST', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 
     export function del(
@@ -76,14 +61,9 @@ export namespace subscriptionItems {
         },
         stripeAccount?: string,
     ): Promise<unknown> {
-        return client(
-            `/subscription_items/${id}`,
-            params,
-            'DELETE',
-            {
-                headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
-            }
-        )
+        return client(`/subscription_items/${id}`, params, 'DELETE', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
     }
 
     export function list(
@@ -100,8 +80,10 @@ export namespace subscriptionItems {
             {},
             'GET',
             {
-                headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
-            }
+                headers: stripeAccount
+                    ? { 'Stripe-Account': stripeAccount }
+                    : {},
+            },
         )
     }
 
@@ -119,8 +101,10 @@ export namespace subscriptionItems {
             params,
             'POST',
             {
-                headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
-            }
+                headers: stripeAccount
+                    ? { 'Stripe-Account': stripeAccount }
+                    : {},
+            },
         )
     }
 
@@ -140,8 +124,10 @@ export namespace subscriptionItems {
             {},
             'GET',
             {
-                headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
-            }
+                headers: stripeAccount
+                    ? { 'Stripe-Account': stripeAccount }
+                    : {},
+            },
         )
     }
 }
