@@ -15,7 +15,9 @@ export namespace fileLinks {
             `/file_links`,
             params,
             'POST',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            {
+                headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
+            }
         )
     }
 
@@ -27,7 +29,9 @@ export namespace fileLinks {
             `/file_links/${id}`,
             {},
             'GET',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            {
+                headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
+            }
         )
     }
 
@@ -43,7 +47,9 @@ export namespace fileLinks {
             `/file_links/${id}`,
             params,
             'POST',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            {
+                headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
+            }
         )
     }
 
@@ -63,7 +69,9 @@ export namespace fileLinks {
             `/file_links?${qs.stringify(params)}`,
             params,
             'GET',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            {
+                headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
+            }
         )
     }
 }

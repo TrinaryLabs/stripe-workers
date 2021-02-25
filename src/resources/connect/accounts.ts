@@ -27,7 +27,9 @@ export namespace accounts {
             '/accounts',
             params,
             'POST',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            {
+                headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
+            }
         )
     }
 
@@ -39,7 +41,9 @@ export namespace accounts {
             `/accounts/${id}`,
             {},
             'GET',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            {
+                headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
+            }
         )
     }
 
@@ -68,7 +72,9 @@ export namespace accounts {
             `/accounts/${id}`,
             params,
             'POST',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            {
+                headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
+            }
         )
     }
 
@@ -77,7 +83,9 @@ export namespace accounts {
             `/accounts/${id}`,
             {},
             'DELETE',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            {
+                headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
+            }
         )
     }
 
@@ -90,7 +98,9 @@ export namespace accounts {
             `/accounts/${id}/reject`,
             params,
             'POST',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            {
+                headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
+            }
         )
     }
 
@@ -107,7 +117,9 @@ export namespace accounts {
             `/accounts`,
             params,
             'GET',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            {
+                headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
+            }
         )
     }
 
@@ -119,7 +131,9 @@ export namespace accounts {
             `/accounts/${id}/login_links`,
             {},
             'POST',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            {
+                headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
+            }
         )
     }
 
@@ -132,7 +146,9 @@ export namespace accounts {
             `/accounts/${user_id}/capabilities/${cap_id}`,
             {},
             'GET',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            {
+                headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
+            }
         )
     }
 
@@ -148,7 +164,9 @@ export namespace accounts {
             `/accounts/${user_id}/capabilities/${cap_id}`,
             params,
             'POST',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            {
+                headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
+            }
         )
     }
 
@@ -160,7 +178,9 @@ export namespace accounts {
             `/accounts/${user_id}/capabilities`,
             {},
             'GET',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            {
+                headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
+            }
         )
     }
 
@@ -196,7 +216,9 @@ export namespace accounts {
             `/accounts/${user_id}/persons`,
             params,
             'POST',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            {
+                headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
+            }
         )
     }
 
@@ -209,7 +231,9 @@ export namespace accounts {
             `/accounts/${user_id}/persons/${person_id}`,
             {},
             'GET',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            {
+                headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
+            }
         )
     }
 
@@ -246,7 +270,9 @@ export namespace accounts {
             `/accounts/${user_id}/persons/${person_id}`,
             params,
             'POST',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            {
+                headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
+            }
         )
     }
 
@@ -259,7 +285,9 @@ export namespace accounts {
             `/accounts/${user_id}/persons/${person_id}`,
             {},
             'DELETE',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            {
+                headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
+            }
         )
     }
 
@@ -277,7 +305,9 @@ export namespace accounts {
             `/accounts/${user_id}/persons?${qs.stringify(params)}`,
             {},
             'GET',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            {
+                headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
+            }
         )
     }
 
@@ -294,7 +324,9 @@ export namespace accounts {
             `/accounts/${id}/external_accounts`,
             params,
             'POST',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            {
+                headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
+            }
         )
     }
 
@@ -307,7 +339,9 @@ export namespace accounts {
             `/accounts/${id}/external_accounts/${ext_id}`,
             {},
             'GET',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            {
+                headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
+            }
         )
     }
 
@@ -335,7 +369,9 @@ export namespace accounts {
             `/accounts/${id}/external_accounts/${ext_id}`,
             params,
             'POST',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            {
+                headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
+            }
         )
     }
 
@@ -348,7 +384,9 @@ export namespace accounts {
             `/accounts/${id}/external_accounts/${ext_id}`,
             {},
             'DELETE',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            {
+                headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
+            }
         )
     }
 
@@ -366,7 +404,9 @@ export namespace accounts {
             `/accounts/${id}/external_accounts?${qs.stringify(params)}`,
             {},
             'GET',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            {
+                headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
+            }
         )
     }
 }

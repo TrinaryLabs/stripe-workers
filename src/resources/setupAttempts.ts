@@ -17,7 +17,9 @@ export namespace setupAttempts {
             `/setup_attempts?${qs.stringify(params)}`,
             {},
             'GET',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            {
+                headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
+            }
         )
     }
 }

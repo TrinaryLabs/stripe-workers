@@ -20,7 +20,9 @@ export namespace promotionCodes {
             '/promotion_codes',
             params,
             'POST',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            {
+                headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
+            }
         )
     }
 
@@ -36,7 +38,9 @@ export namespace promotionCodes {
             `/promotion_codes/${id}`,
             params,
             'POST',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            {
+                headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
+            }
         )
     }
 
@@ -48,7 +52,9 @@ export namespace promotionCodes {
             `/promotion_codes/${id}`,
             {},
             'GET',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            {
+                headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
+            }
         )
     }
 
@@ -68,7 +74,9 @@ export namespace promotionCodes {
             `/promotion_codes?${qs.stringify(params)}`,
             {},
             'GET',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            {
+                headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
+            }
         )
     }
 }

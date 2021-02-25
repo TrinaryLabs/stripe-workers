@@ -24,7 +24,9 @@ export namespace setupIntents {
             '/setup_intents',
             params,
             'POST',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            {
+                headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
+            }
         )
     }
 
@@ -39,7 +41,9 @@ export namespace setupIntents {
             `/setup_intents/${id}?${qs.stringify(params)}`,
             {},
             'GET',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            {
+                headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
+            }
         )
     }
 
@@ -59,7 +63,9 @@ export namespace setupIntents {
             `/setup_intents/${id}`,
             params,
             'POST',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            {
+                headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
+            }
         )
     }
 
@@ -77,7 +83,9 @@ export namespace setupIntents {
             `/setup_intents/${id}/confirm`,
             params,
             'POST',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            {
+                headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
+            }
         )
     }
 
@@ -92,7 +100,9 @@ export namespace setupIntents {
             `/setup_intents/${id}/cancel`,
             params,
             'POST',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            {
+                headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
+            }
         )
     }
 
@@ -111,7 +121,9 @@ export namespace setupIntents {
             `/setup_intents?${qs.stringify(params)}`,
             params,
             'GET',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            {
+                headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
+            }
         )
     }
 }

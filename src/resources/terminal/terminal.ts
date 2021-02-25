@@ -14,7 +14,9 @@ export namespace terminal {
                 '/terminal/connection_tokens',
                 params,
                 'POST',
-                stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+                {
+                    headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
+                }
             )
         }
     }
@@ -34,7 +36,9 @@ export namespace terminal {
                 '/terminal/locactions',
                 params,
                 'POST',
-                stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+                {
+                    headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
+                }
             )
         }
 
@@ -46,7 +50,9 @@ export namespace terminal {
                 `/terminal/locactions/${id}`,
                 {},
                 'GET',
-                stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+                {
+                    headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
+                }
             )
         }
 
@@ -63,7 +69,9 @@ export namespace terminal {
                 `/terminal/locactions/${id}`,
                 params,
                 'POST',
-                stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+                {
+                    headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
+                }
             )
         }
 
@@ -75,7 +83,9 @@ export namespace terminal {
                 `/terminal/locactions/${id}`,
                 {},
                 'DELETE',
-                stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+                {
+                    headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
+                }
             )
         }
 
@@ -91,7 +101,9 @@ export namespace terminal {
                 `/terminal/locactions?${qs.stringify(params)}`,
                 {},
                 'GET',
-                stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+                {
+                    headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
+                }
             )
         }
     }
@@ -112,7 +124,9 @@ export namespace terminal {
                 '/terminal/readers',
                 params,
                 'POST',
-                stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+                {
+                    headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
+                }
             )
         }
 
@@ -124,7 +138,9 @@ export namespace terminal {
                 `/terminal/readers/${id}`,
                 {},
                 'GET',
-                stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+                {
+                    headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
+                }
             )
         }
 
@@ -140,7 +156,9 @@ export namespace terminal {
                 `/terminal/readers/${id}`,
                 params,
                 'POST',
-                stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+                {
+                    headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
+                }
             )
         }
 
@@ -152,7 +170,9 @@ export namespace terminal {
                 `/terminal/readers/${id}`,
                 {},
                 'DELETE',
-                stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+                {
+                    headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
+                }
             )
         }
 
@@ -171,7 +191,9 @@ export namespace terminal {
                 `/terminal/readers?${qs.stringify(params)}`,
                 {},
                 'GET',
-                stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+                {
+                    headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
+                }
             )
         }
     }

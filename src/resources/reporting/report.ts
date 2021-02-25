@@ -15,7 +15,9 @@ export namespace reporting {
                 `/reporting/report_runs`,
                 params,
                 'POST',
-                stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+                {
+                    headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
+                }
             )
         }
 
@@ -27,7 +29,9 @@ export namespace reporting {
                 `/reporting/report_runs/${id}`,
                 {},
                 'GET',
-                stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+                {
+                    headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
+                }
             )
         }
 
@@ -44,7 +48,9 @@ export namespace reporting {
                 `/reporting/report_runs?${qs.stringify(params)}`,
                 {},
                 'GET',
-                stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+                {
+                    headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
+                }
             )
         }
     }
@@ -60,7 +66,9 @@ export namespace reporting {
                 `/reporting/report_types/${id}`,
                 {},
                 'GET',
-                stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+                {
+                    headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
+                }
             )
         }
 
@@ -69,7 +77,9 @@ export namespace reporting {
                 `/reporting/report_types`,
                 {},
                 'GET',
-                stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+                {
+                    headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
+                }
             )
         }
     }

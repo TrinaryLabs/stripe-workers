@@ -12,7 +12,9 @@ export namespace sigma {
                 `/sigma/scheduled_query_runs/${id}`,
                 {},
                 'GET',
-                stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+                {
+                    headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
+                }
             )
         }
 
@@ -28,7 +30,9 @@ export namespace sigma {
                 `/sigma/scheduled_query_runs?${qs.stringify(params)}`,
                 {},
                 'GET',
-                stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+                {
+                    headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
+                }
             )
         }
     }

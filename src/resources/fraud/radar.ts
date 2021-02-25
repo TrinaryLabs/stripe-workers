@@ -12,7 +12,9 @@ export namespace radar {
                 `/radar/early_fraud_warnings/${id}`,
                 {},
                 'GET',
-                stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+                {
+                    headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
+                }
             )
         }
 
@@ -29,7 +31,9 @@ export namespace radar {
                 `/radar/early_fraud_warnings?${qs.stringify(params)}`,
                 {},
                 'GET',
-                stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+                {
+                    headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
+                }
             )
         }
     }
@@ -50,7 +54,9 @@ export namespace radar {
                 `/radar/value_lists`,
                 params,
                 'POST',
-                stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+                {
+                    headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
+                }
             )
         }
 
@@ -62,7 +68,9 @@ export namespace radar {
                 `/radar/value_lists/${id}`,
                 {},
                 'GET',
-                stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+                {
+                    headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
+                }
             )
         }
 
@@ -79,7 +87,9 @@ export namespace radar {
                 `/radar/value_lists/${id}`,
                 params,
                 'POST',
-                stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+                {
+                    headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
+                }
             )
         }
 
@@ -91,7 +101,9 @@ export namespace radar {
                 `/radar/value_lists/${id}`,
                 {},
                 'DELETE',
-                stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+                {
+                    headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
+                }
             )
         }
 
@@ -110,7 +122,9 @@ export namespace radar {
                 `/radar/value_lists?${qs.stringify(params)}`,
                 {},
                 'GET',
-                stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+                {
+                    headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
+                }
             )
         }
     }
@@ -129,7 +143,9 @@ export namespace radar {
                 `/radar/value_list_items`,
                 params,
                 'POST',
-                stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+                {
+                    headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
+                }
             )
         }
 
@@ -141,7 +157,9 @@ export namespace radar {
                 `/radar/value_list_items/${id}`,
                 {},
                 'GET',
-                stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+                {
+                    headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
+                }
             )
         }
 
@@ -153,7 +171,9 @@ export namespace radar {
                 `/radar/value_list_items/${id}`,
                 {},
                 'DELETE',
-                stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+                {
+                    headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
+                }
             )
         }
 
@@ -172,7 +192,9 @@ export namespace radar {
                 `/radar/value_list_items?${qs.stringify(params)}`,
                 {},
                 'GET',
-                stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+                {
+                    headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
+                }
             )
         }
     }

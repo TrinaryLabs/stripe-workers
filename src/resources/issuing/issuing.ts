@@ -12,7 +12,9 @@ export namespace issuing {
                 `/issuing/authorizations/${id}`,
                 {},
                 'GET',
-                stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+                {
+                    headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
+                }
             )
         }
 
@@ -27,7 +29,9 @@ export namespace issuing {
                 `/issuing/authorizations/${id}`,
                 params,
                 'POST',
-                stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+                {
+                    headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
+                }
             )
         }
 
@@ -43,7 +47,9 @@ export namespace issuing {
                 `/issuing/authorizations/${id}/approve`,
                 params,
                 'POST',
-                stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+                {
+                    headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
+                }
             )
         }
 
@@ -58,7 +64,9 @@ export namespace issuing {
                 `/issuing/authorizations/${id}/decline`,
                 params,
                 'POST',
-                stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+                {
+                    headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
+                }
             )
         }
 
@@ -78,7 +86,9 @@ export namespace issuing {
                 `/issuing/authorizations?${qs.stringify(params)}`,
                 {},
                 'GET',
-                stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+                {
+                    headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
+                }
             )
         }
     }
@@ -105,7 +115,9 @@ export namespace issuing {
                 '/issuing/cardholders',
                 params,
                 'POST',
-                stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+                {
+                    headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
+                }
             )
         }
 
@@ -117,7 +129,9 @@ export namespace issuing {
                 `/issuing/cardholders/${id}`,
                 {},
                 'GET',
-                stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+                {
+                    headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
+                }
             )
         }
 
@@ -139,7 +153,9 @@ export namespace issuing {
                 `/issuing/cardholders/${id}`,
                 params,
                 'POST',
-                stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+                {
+                    headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
+                }
             )
         }
 
@@ -160,7 +176,9 @@ export namespace issuing {
                 `/issuing/cardholders?${qs.stringify(params)}`,
                 {},
                 'GET',
-                stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+                {
+                    headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
+                }
             )
         }
     }
@@ -186,7 +204,9 @@ export namespace issuing {
                 '/issuing/cards',
                 params,
                 'POST',
-                stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+                {
+                    headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
+                }
             )
         }
 
@@ -198,7 +218,9 @@ export namespace issuing {
                 `/issuing/cards/${id}`,
                 {},
                 'GET',
-                stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+                {
+                    headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
+                }
             )
         }
 
@@ -216,7 +238,9 @@ export namespace issuing {
                 `/issuing/cards/${id}`,
                 params,
                 'POST',
-                stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+                {
+                    headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
+                }
             )
         }
 
@@ -239,7 +263,9 @@ export namespace issuing {
                 `/issuing/cards?${qs.stringify(params)}`,
                 {},
                 'GET',
-                stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+                {
+                    headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
+                }
             )
         }
     }
@@ -259,7 +285,9 @@ export namespace issuing {
                 '/issuing/disputes',
                 params,
                 'POST',
-                stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+                {
+                    headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
+                }
             )
         }
 
@@ -274,7 +302,9 @@ export namespace issuing {
                 `/issuing/disputes/${id}/submit`,
                 params,
                 'POST',
-                stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+                {
+                    headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
+                }
             )
         }
 
@@ -286,7 +316,9 @@ export namespace issuing {
                 `/issuing/disputes/${id}`,
                 {},
                 'GET',
-                stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+                {
+                    headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
+                }
             )
         }
 
@@ -302,7 +334,9 @@ export namespace issuing {
                 `/issuing/disputes/${id}`,
                 params,
                 'POST',
-                stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+                {
+                    headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
+                }
             )
         }
 
@@ -321,7 +355,9 @@ export namespace issuing {
                 `/issuing/disputes?${qs.stringify(params)}`,
                 {},
                 'GET',
-                stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+                {
+                    headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
+                }
             )
         }
     }
@@ -337,7 +373,9 @@ export namespace issuing {
                 `/issuing/transactions/${id}`,
                 {},
                 'GET',
-                stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+                {
+                    headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
+                }
             )
         }
 
@@ -352,7 +390,9 @@ export namespace issuing {
                 `/issuing/transactions/${id}`,
                 params,
                 'POST',
-                stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+                {
+                    headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
+                }
             )
         }
 
@@ -372,7 +412,9 @@ export namespace issuing {
                 `/issuing/transactions?${qs.stringify(params)}`,
                 {},
                 'GET',
-                stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+                {
+                    headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
+                }
             )
         }
     }
