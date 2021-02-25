@@ -1,6 +1,6 @@
 {
     "name": "stripe-workers",
-    "version": "0.5.0-beta",
+    "version": "0.5.1-beta",
     "description": "An unofficial stripe-sdk for workers.dev and environments that use fetch",
     "main": "./dist/stripe.js",
     "scripts": {

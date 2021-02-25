@@ -19,7 +19,9 @@ export namespace topups {
             '/topups',
             params,
             'POST',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            {
+                headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
+            }
         )
     }
 
@@ -31,7 +33,9 @@ export namespace topups {
             `/topups/${id}`,
             {},
             'GET',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            {
+                headers: (stripeAccount ? { 'Stripe-Account': stripeAccount } : {})
+            }
         )
     }
 
@@ -47,7 +51,9 @@ export namespace topups {
             `/topups/${id}`,
             params,
             'POST',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            {
+                headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
+            }
         )
     }
 
@@ -66,7 +72,9 @@ export namespace topups {
             `/topups?${qs.stringify(params)}`,
             {},
             'GET',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            {
+                headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
+            }
         )
     }
 
@@ -78,7 +86,9 @@ export namespace topups {
             `/topups/${id}/cancel`,
             {},
             'POST',
-            stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            {
+                headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
+            }
         )
     }
 }
