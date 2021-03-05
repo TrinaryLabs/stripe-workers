@@ -1,5 +1,20 @@
 import qs from 'qs'
 
+type FilesResponse = {
+    id: string,
+    object: string,
+    created: number,
+    expires_at: number,
+    filename: string,
+    links: object,
+    purpose: string,
+    size: number,
+    title: string | undefined,
+    type: string,
+    url: string,
+    file: unknown
+}
+
 export namespace files {
     export let client: Function
 
@@ -10,7 +25,7 @@ export namespace files {
             file_link_data?: object
         },
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<FilesResponse> {
         return client('/files', params, 'POST', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
             host: 'https://files.stripe.com/v1',
@@ -20,10 +35,9 @@ export namespace files {
     export function retrieve(
         id: string,
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<FilesResponse> {
         return client(`/files/${id}`, {}, 'GET', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-            host: 'https://files.stripe.com/v1',
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
         })
     }
 
@@ -36,10 +50,9 @@ export namespace files {
             starting_after?: string
         },
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<FilesResponse> {
         return client(`/files?${qs.stringify(params)}`, {}, 'GET', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
-            host: 'https://files.stripe.com/v1',
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
         })
     }
 }
