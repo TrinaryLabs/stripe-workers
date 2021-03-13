@@ -1,5 +1,21 @@
 import qs from 'qs'
 
+type RefundsResponse = {
+    id: string,
+    object: string,
+    amount: number,
+    balance_transaction: unknown,
+    charge: string,
+    created: number,
+    currency: string,
+    metadata: object,
+    payment_intent: unknown,
+    reason: unknown,
+    receipt_number: unknown,
+    source_transfer_reversal: unknown,
+    status: string,
+    transfer_reversal: unknown
+}
 export namespace refunds {
     export let client: Function
 
@@ -14,7 +30,7 @@ export namespace refunds {
             reverse_transfer?: boolean
         },
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<RefundsResponse> {
         return client('/refunds', params, 'POST', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
@@ -23,7 +39,7 @@ export namespace refunds {
     export function retrieve(
         id: string,
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<RefundsResponse> {
         return client(`/refunds/${id}`, {}, 'GET', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
@@ -35,7 +51,7 @@ export namespace refunds {
             metadata?: [string, unknown]
         },
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<RefundsResponse> {
         return client(`/refunds/${id}`, params, 'POST', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
@@ -51,7 +67,12 @@ export namespace refunds {
             starting_after?: string
         },
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<{
+        object: string ,
+        url: string,
+        has_more: boolean,
+        data: [RefundsResponse]
+      }> {
         return client(`/refunds?${qs.stringify(params)}`, {}, 'GET', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
