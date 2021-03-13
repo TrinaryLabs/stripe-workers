@@ -1,3 +1,27 @@
+declare type PayoutsResponse = {
+    id: string
+    object: string
+    amount: number
+    arrival_date: number
+    automatic: boolean
+    balance_transaction: string
+    created: number
+    currency: string
+    description: string
+    destination: string
+    failure_balance_transaction: unknown
+    failure_code: unknown
+    failure_message: unknown
+    livemode: boolean
+    metadata: object
+    method: string
+    original_payout: unknown
+    reversed_by: unknown
+    source_type: string
+    statement_descriptor: unknown
+    status: string
+    type: string
+}
 export declare namespace payouts {
     let client: Function
     function create(
@@ -12,15 +36,18 @@ export declare namespace payouts {
             source_type?: string
         },
         stripeAccount?: string,
-    ): Promise<unknown>
-    function retrieve(id: string, stripeAccount?: string): Promise<unknown>
+    ): Promise<PayoutsResponse>
+    function retrieve(
+        id: string,
+        stripeAccount?: string,
+    ): Promise<PayoutsResponse>
     function update(
         id: string,
         params: {
             metadata?: [string, unknown]
         },
         stripeAccount?: string,
-    ): Promise<unknown>
+    ): Promise<PayoutsResponse>
     function list(
         params: {
             status?: string
@@ -32,14 +59,23 @@ export declare namespace payouts {
             starting_after?: string
         },
         stripeAccount?: string,
-    ): Promise<unknown>
-    function cancel(id: string, stripeAccount?: string): Promise<unknown>
+    ): Promise<{
+        object: string
+        url: string
+        has_more: boolean
+        data: [PayoutsResponse]
+    }>
+    function cancel(
+        id: string,
+        stripeAccount?: string,
+    ): Promise<PayoutsResponse>
     function reverse(
         id: string,
         params: {
             metadata?: [string, unknown]
         },
         stripeAccount?: string,
-    ): Promise<unknown>
+    ): Promise<PayoutsResponse>
 }
+export {}
 //# sourceMappingURL=payouts.d.ts.map

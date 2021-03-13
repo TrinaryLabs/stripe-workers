@@ -1,22 +1,22 @@
 import qs from 'qs'
 
 type PricesResponse = {
-    id: string,
-    object: string,
-    active: boolean,
-    billing_scheme: string,
-    created: number,
-    currency: string,
-    livemode: boolean,
-    lookup_key: unknown,
-    metadata: object,
-    nickname: unknown,
-    product: string,
-    recurring: object,
-    tiers_mode: unknown,
-    transform_quantity: unknown,
-    type: string,
-    unit_amount: number,
+    id: string
+    object: string
+    active: boolean
+    billing_scheme: string
+    created: number
+    currency: string
+    livemode: boolean
+    lookup_key: unknown
+    metadata: object
+    nickname: unknown
+    product: string
+    recurring: object
+    tiers_mode: unknown
+    transform_quantity: unknown
+    type: string
+    unit_amount: number
     unit_amount_decimal: string
 }
 
@@ -88,9 +88,9 @@ export namespace prices {
         },
         stripeAccount?: string,
     ): Promise<{
-        object: string,
-        url: string,
-        has_more: boolean,
+        object: string
+        url: string
+        has_more: boolean
         data: [PricesResponse]
     }> {
         return client(`/prices?${qs.stringify(params)}`, {}, 'GET', {

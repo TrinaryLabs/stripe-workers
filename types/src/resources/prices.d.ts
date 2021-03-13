@@ -1,3 +1,22 @@
+declare type PricesResponse = {
+    id: string
+    object: string
+    active: boolean
+    billing_scheme: string
+    created: number
+    currency: string
+    livemode: boolean
+    lookup_key: unknown
+    metadata: object
+    nickname: unknown
+    product: string
+    recurring: object
+    tiers_mode: unknown
+    transform_quantity: unknown
+    type: string
+    unit_amount: number
+    unit_amount_decimal: string
+}
 export declare namespace prices {
     let client: Function
     function create(
@@ -19,8 +38,11 @@ export declare namespace prices {
             unit_amount_decimal?: number
         },
         stripeAccount?: string,
-    ): Promise<unknown>
-    function retrieve(id: string, stripeAccount?: string): Promise<unknown>
+    ): Promise<PricesResponse>
+    function retrieve(
+        id: string,
+        stripeAccount?: string,
+    ): Promise<PricesResponse>
     function update(
         id: string,
         params: {
@@ -31,7 +53,7 @@ export declare namespace prices {
             transfer_lookup_key?: boolean
         },
         stripeAccount?: string,
-    ): Promise<unknown>
+    ): Promise<PricesResponse>
     function list(
         params: {
             active?: boolean
@@ -46,6 +68,12 @@ export declare namespace prices {
             recurring?: object
         },
         stripeAccount?: string,
-    ): Promise<unknown>
+    ): Promise<{
+        object: string
+        url: string
+        has_more: boolean
+        data: [PricesResponse]
+    }>
 }
+export {}
 //# sourceMappingURL=prices.d.ts.map

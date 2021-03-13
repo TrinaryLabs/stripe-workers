@@ -35,7 +35,12 @@ export declare namespace files {
             starting_after?: string
         },
         stripeAccount?: string,
-    ): Promise<FilesResponse>
+    ): Promise<{
+        object: string
+        url: string
+        has_more: boolean
+        data: [FilesResponse]
+    }>
 }
 export {}
 //# sourceMappingURL=files.d.ts.map

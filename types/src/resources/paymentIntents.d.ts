@@ -1,3 +1,40 @@
+declare type PaymentIntentsResponse = {
+    id: string
+    object: string
+    amount: number
+    amount_capturable: number
+    amount_received: number
+    application: unknown
+    application_fee_amount: unknown
+    canceled_at: unknown
+    cancellation_reason: unknown
+    capture_method: string
+    charges: object
+    client_secret: string
+    confirmation_method: string
+    created: number
+    currency: string
+    customer: unknown
+    description: string
+    invoice: unknown
+    last_payment_error: unknown
+    livemode: boolean
+    metadata: object
+    next_action: unknown
+    on_behalf_of: unknown
+    payment_method: unknown
+    payment_method_options: object
+    payment_method_types: [string]
+    receipt_email: unknown
+    review: unknown
+    setup_future_usage: unknown
+    shipping: unknown
+    statement_descriptor: unknown
+    statement_descriptor_suffix: unknown
+    status: string
+    transfer_data: unknown
+    transfer_group: unknown
+}
 export declare namespace paymentIntents {
     let client: Function
     function create(
@@ -31,7 +68,14 @@ export declare namespace paymentIntents {
             use_stripe_sdk?: unknown
         },
         stripeAccount?: string,
-    ): Promise<unknown>
+    ): Promise<PaymentIntentsResponse>
+    function retrieve(
+        id: string,
+        params: {
+            client_secret?: string
+        },
+        stripeAccount?: string,
+    ): Promise<PaymentIntentsResponse>
     function update(
         id: string,
         params: {
@@ -64,7 +108,7 @@ export declare namespace paymentIntents {
             use_stripe_sdk?: unknown
         },
         stripeAccount?: string,
-    ): Promise<unknown>
+    ): Promise<PaymentIntentsResponse>
     function confirm(
         id: string,
         params: {
@@ -83,7 +127,7 @@ export declare namespace paymentIntents {
             use_stripe_sdk?: unknown
         },
         stripeAccount?: string,
-    ): Promise<unknown>
+    ): Promise<PaymentIntentsResponse>
     function capture(
         id: string,
         params: {
@@ -94,14 +138,14 @@ export declare namespace paymentIntents {
             transfer_data?: object
         },
         stripeAccount?: string,
-    ): Promise<unknown>
+    ): Promise<PaymentIntentsResponse>
     function cancel(
         id: string,
         params: {
             cancellation_reason?: string
         },
         stripeAccount?: string,
-    ): Promise<unknown>
+    ): Promise<PaymentIntentsResponse>
     function list(
         params: {
             customer?: string
@@ -111,6 +155,12 @@ export declare namespace paymentIntents {
             starting_after?: string
         },
         stripeAccount?: string,
-    ): Promise<unknown>
+    ): Promise<{
+        object: string
+        url: string
+        has_more: boolean
+        data: [PaymentIntentsResponse]
+    }>
 }
+export {}
 //# sourceMappingURL=paymentIntents.d.ts.map

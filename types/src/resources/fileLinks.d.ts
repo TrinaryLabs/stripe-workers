@@ -46,7 +46,7 @@ export declare namespace fileLinks {
         object: string
         url: string
         has_more: boolean
-        data: [object]
+        data: [FileLinksResponse]
     }>
 }
 export {}

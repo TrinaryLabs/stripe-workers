@@ -1,29 +1,29 @@
 import qs from 'qs'
 
 type PayoutsResponse = {
-    id: string,
-    object: string,
-    amount: number,
-    arrival_date: number,
-    automatic: boolean,
-    balance_transaction: string,
-    created: number,
-    currency: string,
-    description: string,
-    destination: string,
-    failure_balance_transaction: unknown,
-    failure_code: unknown,
-    failure_message: unknown,
-    livemode: boolean,
-    metadata: object,
-    method: string,
-    original_payout: unknown,
-    reversed_by: unknown,
-    source_type: string,
-    statement_descriptor: unknown,
-    status: string,
+    id: string
+    object: string
+    amount: number
+    arrival_date: number
+    automatic: boolean
+    balance_transaction: string
+    created: number
+    currency: string
+    description: string
+    destination: string
+    failure_balance_transaction: unknown
+    failure_code: unknown
+    failure_message: unknown
+    livemode: boolean
+    metadata: object
+    method: string
+    original_payout: unknown
+    reversed_by: unknown
+    source_type: string
+    statement_descriptor: unknown
+    status: string
     type: string
-  }
+}
 
 export namespace payouts {
     export let client: Function
@@ -79,11 +79,11 @@ export namespace payouts {
         },
         stripeAccount?: string,
     ): Promise<{
-        object: string,
-        url: string,
-        has_more: boolean,
+        object: string
+        url: string
+        has_more: boolean
         data: [PayoutsResponse]
-      }> {
+    }> {
         return client(`/payouts?${qs.stringify(params)}`, {}, 'GET', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })

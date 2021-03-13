@@ -13,12 +13,6 @@ declare type EventRetrieveResponse = {
     request: object
     type: string
 }
-declare type EventListResponse = {
-    object: string
-    url: string
-    has_more: boolean
-    data: [object]
-}
 export declare namespace events {
     let client: Function
     function retrieve(
@@ -36,7 +30,12 @@ export declare namespace events {
             type?: string
         },
         stripeAccount?: string,
-    ): Promise<EventListResponse>
+    ): Promise<{
+        object: string
+        url: string
+        has_more: boolean
+        data: [EventRetrieveResponse]
+    }>
 }
 export {}
 //# sourceMappingURL=events.d.ts.map

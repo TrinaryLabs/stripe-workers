@@ -15,12 +15,6 @@ declare type DisputesResponse = {
     reason: string
     status: string
 }
-declare type DisputesListResponse = {
-    object: string
-    url: string
-    has_more: boolean
-    data: [object]
-}
 export declare namespace disputes {
     let client: Function
     function retrieve(
@@ -50,7 +44,12 @@ export declare namespace disputes {
             starting_after?: string
         },
         stripeAccount?: string,
-    ): Promise<DisputesListResponse>
+    ): Promise<{
+        object: string
+        url: string
+        has_more: boolean
+        data: [DisputesResponse]
+    }>
 }
 export {}
 //# sourceMappingURL=disputes.d.ts.map

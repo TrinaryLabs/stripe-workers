@@ -1,3 +1,17 @@
+declare type ProductsResponse = {
+    id: string
+    object: string
+    active: boolean
+    created: number
+    description: unknown
+    images: []
+    livemode: boolean
+    metadata: object
+    name: string
+    statement_descriptor: unknown
+    unit_label: unknown
+    updated: number
+}
 export declare namespace products {
     let client: Function
     function create(
@@ -18,8 +32,11 @@ export declare namespace products {
             url?: string
         },
         stripeAccount?: string,
-    ): Promise<unknown>
-    function retrieve(id: string, stripeAccount?: string): Promise<unknown>
+    ): Promise<ProductsResponse>
+    function retrieve(
+        id: string,
+        stripeAccount?: string,
+    ): Promise<ProductsResponse>
     function update(
         id: string,
         params: {
@@ -38,7 +55,7 @@ export declare namespace products {
             url?: string
         },
         stripeAccount?: string,
-    ): Promise<unknown>
+    ): Promise<ProductsResponse>
     function list(
         params: {
             active?: boolean
@@ -51,7 +68,13 @@ export declare namespace products {
             url?: string
         },
         stripeAccount?: string,
-    ): Promise<unknown>
-    function del(id: string, stripeAccount?: string): Promise<unknown>
+    ): Promise<{
+        object: string
+        url: string
+        has_more: boolean
+        data: [ProductsResponse]
+    }>
+    function del(id: string, stripeAccount?: string): Promise<ProductsResponse>
 }
+export {}
 //# sourceMappingURL=products.d.ts.map
