@@ -1,5 +1,25 @@
 import qs from 'qs'
 
+type PricesResponse = {
+    id: string,
+    object: string,
+    active: boolean,
+    billing_scheme: string,
+    created: number,
+    currency: string,
+    livemode: boolean,
+    lookup_key: unknown,
+    metadata: object,
+    nickname: unknown,
+    product: string,
+    recurring: object,
+    tiers_mode: unknown,
+    transform_quantity: unknown,
+    type: string,
+    unit_amount: number,
+    unit_amount_decimal: string
+}
+
 export namespace prices {
     export let client: Function
 
@@ -22,7 +42,7 @@ export namespace prices {
             unit_amount_decimal?: number
         },
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<PricesResponse> {
         return client('/prices', params, 'POST', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
@@ -31,7 +51,7 @@ export namespace prices {
     export function retrieve(
         id: string,
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<PricesResponse> {
         return client(`/prices/${id}`, {}, 'GET', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
@@ -47,7 +67,7 @@ export namespace prices {
             transfer_lookup_key?: boolean
         },
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<PricesResponse> {
         return client(`/prices/${id}`, params, 'POST', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
@@ -67,7 +87,12 @@ export namespace prices {
             recurring?: object
         },
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<{
+        object: string,
+        url: string,
+        has_more: boolean,
+        data: [PricesResponse]
+    }> {
         return client(`/prices?${qs.stringify(params)}`, {}, 'GET', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })

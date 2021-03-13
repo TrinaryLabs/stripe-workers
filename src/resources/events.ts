@@ -16,12 +16,6 @@ type EventRetrieveResponse = {
     type: string
 }
 
-type EventListResponse = {
-    object: string
-    url: string
-    has_more: boolean
-    data: [object]
-}
 export namespace events {
     export let client: Function
 
@@ -45,7 +39,12 @@ export namespace events {
             type?: string
         },
         stripeAccount?: string,
-    ): Promise<EventListResponse> {
+    ): Promise<{
+        object: string
+        url: string
+        has_more: boolean
+        data: [EventRetrieveResponse]
+    }> {
         return client(`/events?${qs.stringify(params)}`, params, 'GET', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })

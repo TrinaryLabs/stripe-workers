@@ -50,7 +50,12 @@ export namespace files {
             starting_after?: string
         },
         stripeAccount?: string,
-    ): Promise<FilesResponse> {
+    ): Promise<{
+        object: string
+        url: string
+        has_more: boolean
+        data: [FilesResponse]
+    }> {
         return client(`/files?${qs.stringify(params)}`, {}, 'GET', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })

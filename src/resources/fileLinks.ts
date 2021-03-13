@@ -65,7 +65,7 @@ export namespace fileLinks {
         object: string
         url: string
         has_more: boolean
-        data: [object]
+        data: [FileLinksResponse]
     }> {
         return client(`/file_links?${qs.stringify(params)}`, params, 'GET', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},

@@ -17,13 +17,6 @@ type DisputesResponse = {
     reason: string
     status: string
 }
-
-type DisputesListResponse = {
-    object: string
-    url: string
-    has_more: boolean
-    data: [object]
-}
 export namespace disputes {
     export let client: Function
 
@@ -69,7 +62,12 @@ export namespace disputes {
             starting_after?: string
         },
         stripeAccount?: string,
-    ): Promise<DisputesListResponse> {
+    ): Promise<{
+        object: string
+        url: string
+        has_more: boolean
+        data: [DisputesResponse]
+    }> {
         return client(`/disputes?${qs.stringify(params)}`, params, 'GET', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
