@@ -13,12 +13,10 @@ export declare class HTTPClient {
         path: string,
         body: any,
         method: string,
-        params?:
-            | {
-                  headers?: object | undefined
-                  host?: string | undefined
-              }
-            | undefined,
+        params: {
+            headers?: object
+            host?: string
+        },
     ) => Promise<unknown>
 }
 //# sourceMappingURL=client.d.ts.map

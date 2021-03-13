@@ -1,3 +1,32 @@
+declare type CheckoutSessionsResponse = {
+    id: string
+    object: string
+    allow_promotion_codes: boolean | undefined
+    amount_subtotal: number | undefined
+    amount_total: number | undefined
+    billing_address_collection: unknown
+    cancel_url: string
+    client_reference_id: string | undefined
+    currency: string | undefined
+    customer: string | undefined
+    customer_details: unknown
+    customer_email: string | undefined
+    livemode: boolean
+    locale: string | undefined
+    metadata: object
+    mode: string
+    payment_intent: string
+    payment_method_types: [string]
+    payment_status: string
+    setup_intent: string | undefined
+    shipping: unknown
+    shipping_address_collection: unknown
+    submit_type: string | undefined
+    subscription: unknown
+    success_url: string
+    total_details: unknown
+    data?: [object]
+}
 export declare namespace checkout {
     namespace sessions {
         let client: Function
@@ -23,8 +52,11 @@ export declare namespace checkout {
                 subscription_data?: any
             },
             stripeAccount?: string,
-        ): Promise<unknown>
-        function retrieve(id: string, stripeAccount?: string): Promise<unknown>
+        ): Promise<CheckoutSessionsResponse>
+        function retrieve(
+            id: string,
+            stripeAccount?: string,
+        ): Promise<CheckoutSessionsResponse>
         function list(
             params: {
                 payment_intent?: string
@@ -34,7 +66,7 @@ export declare namespace checkout {
                 starting_after?: string
             },
             stripeAccount?: string,
-        ): Promise<unknown>
+        ): Promise<CheckoutSessionsResponse>
         function listLineItems(
             id: string,
             params: {
@@ -43,7 +75,8 @@ export declare namespace checkout {
                 starting_after?: string
             },
             stripeAccount?: string,
-        ): Promise<unknown>
+        ): Promise<CheckoutSessionsResponse>
     }
 }
+export {}
 //# sourceMappingURL=sessions.d.ts.map

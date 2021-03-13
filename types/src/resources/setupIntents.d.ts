@@ -1,3 +1,26 @@
+declare type SetupIntentsResponse = {
+    id: string
+    object: string
+    application: unknown
+    cancellation_reason: unknown
+    client_secret: string
+    created: number
+    customer: string
+    description: unknown
+    last_setup_error: unknown
+    latest_attempt: unknown
+    livemode: boolean
+    mandate: unknown
+    metadata: object
+    next_action: unknown
+    on_behalf_of: unknown
+    payment_method: unknown
+    payment_method_options: object
+    payment_method_types: [string]
+    single_use_mandate: unknown
+    status: string
+    usage: string
+}
 export declare namespace setupIntents {
     let client: Function
     function create(
@@ -16,14 +39,14 @@ export declare namespace setupIntents {
             single_use?: object
         },
         stripeAccount?: string,
-    ): Promise<unknown>
+    ): Promise<SetupIntentsResponse>
     function retrieve(
         id: string,
         params: {
             client_secret?: string
         },
         stripeAccount?: string,
-    ): Promise<unknown>
+    ): Promise<SetupIntentsResponse>
     function update(
         id: string,
         params: {
@@ -35,7 +58,7 @@ export declare namespace setupIntents {
             payment_method_options?: unknown
         },
         stripeAccount?: string,
-    ): Promise<unknown>
+    ): Promise<SetupIntentsResponse>
     function confirm(
         id: string,
         params: {
@@ -45,14 +68,14 @@ export declare namespace setupIntents {
             return_url?: string
         },
         stripeAccount?: string,
-    ): Promise<unknown>
+    ): Promise<SetupIntentsResponse>
     function cancel(
         id: string,
         params: {
             cancellation_reason?: string
         },
         stripeAccount?: string,
-    ): Promise<unknown>
+    ): Promise<SetupIntentsResponse>
     function list(
         params: {
             customer?: string
@@ -63,6 +86,12 @@ export declare namespace setupIntents {
             starting_after?: string
         },
         stripeAccount?: string,
-    ): Promise<unknown>
+    ): Promise<{
+        object: string
+        url: string
+        has_more: boolean
+        data: [SetupIntentsResponse]
+    }>
 }
+export {}
 //# sourceMappingURL=setupIntents.d.ts.map

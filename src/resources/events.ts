@@ -1,25 +1,25 @@
 import qs from 'qs'
 
 type EventRetrieveResponse = {
-    id: string,
-    object: string,
-    api_version: string,
-    created: number,
-    data: object,
-    expires_at: number,
-    url: string,
+    id: string
+    object: string
+    api_version: string
+    created: number
+    data: object
+    expires_at: number
+    url: string
     file: unknown
-    expired: boolean,
-    livemode: boolean,
-    pending_webhooks: number,
-    request: object,
+    expired: boolean
+    livemode: boolean
+    pending_webhooks: number
+    request: object
     type: string
 }
 
 type EventListResponse = {
-    object: string,
-    url: string,
-    has_more: boolean,
+    object: string
+    url: string
+    has_more: boolean
     data: [object]
 }
 export namespace events {

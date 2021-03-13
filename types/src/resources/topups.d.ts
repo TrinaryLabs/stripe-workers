@@ -1,3 +1,21 @@
+declare type TopUpsResponse = {
+    id: string
+    object: string
+    amount: number
+    balance_transaction: unknown
+    created: number
+    currency: string
+    description: string
+    expected_availability_date: number
+    failure_code: unknown
+    failure_message: unknown
+    livemode: boolean
+    metadata: object
+    source: object
+    statement_descriptor: string | unknown
+    status: string
+    transfer_group: unknown
+}
 export declare namespace topups {
     let client: Function
     function create(
@@ -11,8 +29,11 @@ export declare namespace topups {
             transfer_group?: unknown
         },
         stripeAccount?: string,
-    ): Promise<unknown>
-    function retrieve(id: string, stripeAccount?: string): Promise<unknown>
+    ): Promise<TopUpsResponse>
+    function retrieve(
+        id: string,
+        stripeAccount?: string,
+    ): Promise<TopUpsResponse>
     function update(
         id: string,
         params: {
@@ -20,7 +41,7 @@ export declare namespace topups {
             metadata?: [string, unknown]
         },
         stripeAccount?: string,
-    ): Promise<unknown>
+    ): Promise<TopUpsResponse>
     function list(
         params: {
             status?: string
@@ -31,7 +52,13 @@ export declare namespace topups {
             starting_after?: string
         },
         stripeAccount?: string,
-    ): Promise<unknown>
-    function cancel(id: string, stripeAccount?: string): Promise<unknown>
+    ): Promise<{
+        object: string
+        url: string
+        has_more: boolean
+        data: [TopUpsResponse]
+    }>
+    function cancel(id: string, stripeAccount?: string): Promise<TopUpsResponse>
 }
+export {}
 //# sourceMappingURL=topups.d.ts.map

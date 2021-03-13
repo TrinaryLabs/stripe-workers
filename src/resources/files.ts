@@ -1,17 +1,17 @@
 import qs from 'qs'
 
 type FilesResponse = {
-    id: string,
-    object: string,
-    created: number,
-    expires_at: number,
-    filename: string,
-    links: object,
-    purpose: string,
-    size: number,
-    title: string | undefined,
-    type: string,
-    url: string,
+    id: string
+    object: string
+    created: number
+    expires_at: number
+    filename: string
+    links: object
+    purpose: string
+    size: number
+    title: string | undefined
+    type: string
+    url: string
     file: unknown
 }
 
@@ -37,7 +37,7 @@ export namespace files {
         stripeAccount?: string,
     ): Promise<FilesResponse> {
         return client(`/files/${id}`, {}, 'GET', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
     }
 
@@ -52,7 +52,7 @@ export namespace files {
         stripeAccount?: string,
     ): Promise<FilesResponse> {
         return client(`/files?${qs.stringify(params)}`, {}, 'GET', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {}
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
     }
 }

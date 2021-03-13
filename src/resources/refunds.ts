@@ -1,19 +1,19 @@
 import qs from 'qs'
 
 type RefundsResponse = {
-    id: string,
-    object: string,
-    amount: number,
-    balance_transaction: unknown,
-    charge: string,
-    created: number,
-    currency: string,
-    metadata: object,
-    payment_intent: unknown,
-    reason: unknown,
-    receipt_number: unknown,
-    source_transfer_reversal: unknown,
-    status: string,
+    id: string
+    object: string
+    amount: number
+    balance_transaction: unknown
+    charge: string
+    created: number
+    currency: string
+    metadata: object
+    payment_intent: unknown
+    reason: unknown
+    receipt_number: unknown
+    source_transfer_reversal: unknown
+    status: string
     transfer_reversal: unknown
 }
 export namespace refunds {
@@ -68,11 +68,11 @@ export namespace refunds {
         },
         stripeAccount?: string,
     ): Promise<{
-        object: string ,
-        url: string,
-        has_more: boolean,
+        object: string
+        url: string
+        has_more: boolean
         data: [RefundsResponse]
-      }> {
+    }> {
         return client(`/refunds?${qs.stringify(params)}`, {}, 'GET', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })

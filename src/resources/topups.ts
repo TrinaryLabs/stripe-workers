@@ -1,21 +1,21 @@
 import qs from 'qs'
 
 type TopUpsResponse = {
-    id: string,
-    object: string,
-    amount: number,
-    balance_transaction: unknown,
-    created: number,
-    currency: string,
-    description: string,
-    expected_availability_date: number,
-    failure_code: unknown,
-    failure_message: unknown,
-    livemode: boolean,
-    metadata: object,
-    source: object,
-    statement_descriptor: string | unknown,
-    status: string,
+    id: string
+    object: string
+    amount: number
+    balance_transaction: unknown
+    created: number
+    currency: string
+    description: string
+    expected_availability_date: number
+    failure_code: unknown
+    failure_message: unknown
+    livemode: boolean
+    metadata: object
+    source: object
+    statement_descriptor: string | unknown
+    status: string
     transfer_group: unknown
 }
 export namespace topups {
@@ -71,11 +71,11 @@ export namespace topups {
         },
         stripeAccount?: string,
     ): Promise<{
-        object: string,
-        url: string,
-        has_more: boolean,
+        object: string
+        url: string
+        has_more: boolean
         data: [TopUpsResponse]
-      }> {
+    }> {
         return client(`/topups?${qs.stringify(params)}`, {}, 'GET', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })

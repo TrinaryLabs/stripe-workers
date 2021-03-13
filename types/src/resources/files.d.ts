@@ -1,3 +1,17 @@
+declare type FilesResponse = {
+    id: string
+    object: string
+    created: number
+    expires_at: number
+    filename: string
+    links: object
+    purpose: string
+    size: number
+    title: string | undefined
+    type: string
+    url: string
+    file: unknown
+}
 export declare namespace files {
     let client: Function
     function create(
@@ -7,8 +21,11 @@ export declare namespace files {
             file_link_data?: object
         },
         stripeAccount?: string,
-    ): Promise<unknown>
-    function retrieve(id: string, stripeAccount?: string): Promise<unknown>
+    ): Promise<FilesResponse>
+    function retrieve(
+        id: string,
+        stripeAccount?: string,
+    ): Promise<FilesResponse>
     function list(
         params: {
             purpose?: string
@@ -18,6 +35,7 @@ export declare namespace files {
             starting_after?: string
         },
         stripeAccount?: string,
-    ): Promise<unknown>
+    ): Promise<FilesResponse>
 }
+export {}
 //# sourceMappingURL=files.d.ts.map

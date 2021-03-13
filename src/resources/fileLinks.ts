@@ -1,14 +1,14 @@
 import qs from 'qs'
 
 type FileLinksResponse = {
-    id: string,
-    object: string,
-    created: number,
-    expires_at: number,
-    url: string,
+    id: string
+    object: string
+    created: number
+    expires_at: number
+    url: string
     file: unknown
-    expired: boolean,
-    livemode: boolean,
+    expired: boolean
+    livemode: boolean
     metadata: object
 }
 
@@ -62,13 +62,11 @@ export namespace fileLinks {
         },
         stripeAccount?: string,
     ): Promise<{
-        object: string,
-        url: string,
-        has_more: boolean,
-        data: [
-          object
-        ]
-      }> {
+        object: string
+        url: string
+        has_more: boolean
+        data: [object]
+    }> {
         return client(`/file_links?${qs.stringify(params)}`, params, 'GET', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
