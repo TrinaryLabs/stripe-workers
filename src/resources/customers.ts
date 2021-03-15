@@ -1,5 +1,28 @@
 import qs from 'qs'
 
+type CustomersResponse = {
+    id: string,
+    object: string,
+    address: unknown,
+    balance: number,
+    created: number,
+    currency: string,
+    default_source: unknown,
+    delinquent: boolean,
+    description: unknown,
+    discount: unknown,
+    email: unknown,
+    invoice_prefix: string,
+    invoice_settings: object,
+    livemode: boolean,
+    metadata: object,
+    name: unknown,
+    next_invoice_sequence: number,
+    phone: unknown,
+    preferred_locales: [],
+    shipping: unknown,
+    tax_exempt: string
+}
 export namespace customers {
     export let client: Function
 
@@ -24,7 +47,7 @@ export namespace customers {
             tax_id_data?: object
         },
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<CustomersResponse> {
         return client('/customers', params, 'POST', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
@@ -33,7 +56,7 @@ export namespace customers {
     export function retrieve(
         id: string,
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<CustomersResponse> {
         return client(`/customers/${id}`, {}, 'GET', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
@@ -60,13 +83,17 @@ export namespace customers {
             tax_exempt?: string
         },
         stripeAccount: string,
-    ): Promise<unknown> {
+    ): Promise<CustomersResponse> {
         return client(`/customers/${id}`, params, 'POST', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
     }
 
-    export function del(id: string, stripeAccount?: string): Promise<unknown> {
+    export function del(id: string, stripeAccount?: string): Promise<{
+        id: string,
+        object: string,
+        deleted: boolean
+      }> {
         return client(`/customers/${id}`, {}, 'DELETE', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
@@ -81,7 +108,12 @@ export namespace customers {
             starting_after?: string
         },
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<{
+        object: string,
+        url: string,
+        has_more: boolean,
+        data: [CustomersResponse]
+    }> {
         return client(`/customers?${qs.stringify(params)}`, {}, 'GET', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
