@@ -1,32 +1,32 @@
 import qs from 'qs'
 
 type ApplicationFeesResponse = {
-    id: string,
-    object: string,
-    account: string,
-    amount: number,
-    amount_refunded: number,
-    application: string,
-    balance_transaction: string,
-    charge: string,
-    created: number,
-    currency: string,
-    livemode: boolean,
-    originating_transaction: unknown,
-    refunded: boolean,
+    id: string
+    object: string
+    account: string
+    amount: number
+    amount_refunded: number
+    application: string
+    balance_transaction: string
+    charge: string
+    created: number
+    currency: string
+    livemode: boolean
+    originating_transaction: unknown
+    refunded: boolean
     refunds: object
 }
 
 type ApplicationFeesRefundResponse = {
-    id: string,
-    object: string,
-    amount: number,
-    balance_transaction: unknown,
-    created: number,
-    currency: string,
-    fee: string,
+    id: string
+    object: string
+    amount: number
+    balance_transaction: unknown
+    created: number
+    currency: string
+    fee: string
     metadata: object
-  }
+}
 
 export namespace applicationFees {
     export let client: Function
@@ -49,9 +49,9 @@ export namespace applicationFees {
         },
         stripeAccount?: string,
     ): Promise<{
-        object: string,
-        url: string,
-        has_more: boolean,
+        object: string
+        url: string
+        has_more: boolean
         data: [ApplicationFeesResponse]
     }> {
         return client(`/application_fees?${qs.stringify(params)}`, {}, 'GET', {
@@ -118,9 +118,9 @@ export namespace applicationFees {
         },
         stripeAccount?: string,
     ): Promise<{
-        object: string,
-        url: string,
-        has_more: boolean,
+        object: string
+        url: string
+        has_more: boolean
         data: [ApplicationFeesRefundResponse]
     }> {
         return client(

@@ -1,26 +1,26 @@
 import qs from 'qs'
 
 type ReportRunResponse = {
-    id: string,
-    object: string,
-    created: number,
-    error: unknown,
-    livemode: boolean,
+    id: string
+    object: string
+    created: number
+    error: unknown
+    livemode: boolean
     parameters: object
-    report_type: string,
+    report_type: string
     result: object
-    status: string,
+    status: string
     succeeded_at: number
 }
 
 type ReportTypeResponse = {
-    id: string,
-    object: string,
-    data_available_end: number,
-    data_available_start: number,
-    default_columns: [string],
-    name: string,
-    updated: number,
+    id: string
+    object: string
+    data_available_end: number
+    data_available_start: number
+    default_columns: [string]
+    name: string
+    updated: number
     version: number
 }
 
@@ -62,9 +62,9 @@ export namespace reporting {
             },
             stripeAccount?: string,
         ): Promise<{
-            object: string,
-            url: string,
-            has_more: boolean,
+            object: string
+            url: string
+            has_more: boolean
             data: [ReportRunResponse]
         }> {
             return client(
@@ -94,10 +94,12 @@ export namespace reporting {
             })
         }
 
-        export function list(stripeAccount?: string): Promise<{
-            object: string,
-            url: string,
-            has_more: boolean,
+        export function list(
+            stripeAccount?: string,
+        ): Promise<{
+            object: string
+            url: string
+            has_more: boolean
             data: [ReportTypeResponse]
         }> {
             return client(`/reporting/report_types`, {}, 'GET', {

@@ -1,15 +1,15 @@
 import qs from 'qs'
 
 type SQRResponse = {
-    id: string,
-    object: string,
-    created: number,
-    data_load_time: number,
-    file: object,
-    livemode: boolean,
-    result_available_until: number,
-    sql: string,
-    status: string,
+    id: string
+    object: string
+    created: number
+    data_load_time: number
+    file: object
+    livemode: boolean
+    result_available_until: number
+    sql: string
+    status: string
     title: string
 }
 
@@ -36,9 +36,9 @@ export namespace sigma {
             },
             stripeAccount?: string,
         ): Promise<{
-            object: string,
-            url: string,
-            has_more: boolean,
+            object: string
+            url: string
+            has_more: boolean
             data: [SQRResponse]
         }> {
             return client(

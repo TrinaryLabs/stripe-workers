@@ -11,11 +11,11 @@ export namespace accountLinks {
         },
         stripeAccount?: string,
     ): Promise<{
-        object: string,
-        created: number,
-        expires_at: number,
+        object: string
+        created: number
+        expires_at: number
         url: string
-      }> {
+    }> {
         return client('/account_links', params, 'POST', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })

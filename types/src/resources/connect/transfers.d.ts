@@ -1,3 +1,34 @@
+declare type TransfersResponse = {
+    id: string
+    object: string
+    amount: number
+    amount_reversed: number
+    balance_transaction: string
+    created: number
+    currency: string
+    description: unknown
+    destination: string
+    destination_payment: string
+    livemode: boolean
+    metadata: object
+    reversals: object
+    reversed: boolean
+    source_transaction: unknown
+    source_type: string
+    transfer_group: string
+}
+declare type TransfersReversalResponse = {
+    id: string
+    object: string
+    amount: number
+    balance_transaction: unknown
+    created: number
+    currency: string
+    destination_payment_refund: unknown
+    metadata: object
+    source_refund: unknown
+    transfer: string
+}
 export declare namespace transfers {
     let client: Function
     function create(
@@ -12,8 +43,11 @@ export declare namespace transfers {
             transfer_group?: unknown
         },
         stripeAccount?: string,
-    ): Promise<unknown>
-    function retrieve(id: string, stripeAccount?: string): Promise<unknown>
+    ): Promise<TransfersResponse>
+    function retrieve(
+        id: string,
+        stripeAccount?: string,
+    ): Promise<TransfersResponse>
     function update(
         id: string,
         params: {
@@ -21,7 +55,7 @@ export declare namespace transfers {
             metadata?: [string, unknown]
         },
         stripeAccount?: string,
-    ): Promise<unknown>
+    ): Promise<TransfersResponse>
     function list(
         params: {
             destination?: string
@@ -32,7 +66,12 @@ export declare namespace transfers {
             transfer_group?: unknown
         },
         stripeAccount?: string,
-    ): Promise<unknown>
+    ): Promise<{
+        object: string
+        url: string
+        has_more: boolean
+        data: [TransfersResponse]
+    }>
     function createReversal(
         id: string,
         params: {
@@ -42,12 +81,12 @@ export declare namespace transfers {
             refund_application_fee?: boolean
         },
         stripeAccount?: string,
-    ): Promise<unknown>
+    ): Promise<TransfersReversalResponse>
     function retrieveReversal(
         id: string,
         rever_id: string,
         stripeAccount?: string,
-    ): Promise<unknown>
+    ): Promise<TransfersReversalResponse>
     function updateReversal(
         id: string,
         rever_id: string,
@@ -55,7 +94,7 @@ export declare namespace transfers {
             metadata?: [string, unknown]
         },
         stripeAccount?: string,
-    ): Promise<unknown>
+    ): Promise<TransfersReversalResponse>
     function listReversals(
         id: string,
         params: {
@@ -64,6 +103,12 @@ export declare namespace transfers {
             starting_after?: string
         },
         stripeAccount?: string,
-    ): Promise<unknown>
+    ): Promise<{
+        object: string
+        url: string
+        has_more: boolean
+        data: [TransfersReversalResponse]
+    }>
 }
+export {}
 //# sourceMappingURL=transfers.d.ts.map

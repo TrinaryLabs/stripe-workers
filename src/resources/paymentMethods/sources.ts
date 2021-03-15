@@ -1,21 +1,21 @@
 import qs from 'qs'
 
 type SourcesResponse = {
-    id: string,
-    object: string,
-    ach_credit_transfer: object,
-    amount: unknown,
-    client_secret: string,
-    created: number,
-    currency: string,
-    flow: string,
-    livemode: Blob,
-    metadata: object,
-    owner: object,
-    receiver: object,
-    statement_descriptor: unknown,
-    status: string,
-    type: string,
+    id: string
+    object: string
+    ach_credit_transfer: object
+    amount: unknown
+    client_secret: string
+    created: number
+    currency: string
+    flow: string
+    livemode: Blob
+    metadata: object
+    owner: object
+    receiver: object
+    statement_descriptor: unknown
+    status: string
+    type: string
     usage: string
 }
 

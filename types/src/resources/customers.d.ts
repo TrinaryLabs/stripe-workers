@@ -1,3 +1,26 @@
+declare type CustomersResponse = {
+    id: string
+    object: string
+    address: unknown
+    balance: number
+    created: number
+    currency: string
+    default_source: unknown
+    delinquent: boolean
+    description: unknown
+    discount: unknown
+    email: unknown
+    invoice_prefix: string
+    invoice_settings: object
+    livemode: boolean
+    metadata: object
+    name: unknown
+    next_invoice_sequence: number
+    phone: unknown
+    preferred_locales: []
+    shipping: unknown
+    tax_exempt: string
+}
 export declare namespace customers {
     let client: Function
     function create(
@@ -21,8 +44,11 @@ export declare namespace customers {
             tax_id_data?: object
         },
         stripeAccount?: string,
-    ): Promise<unknown>
-    function retrieve(id: string, stripeAccount?: string): Promise<unknown>
+    ): Promise<CustomersResponse>
+    function retrieve(
+        id: string,
+        stripeAccount?: string,
+    ): Promise<CustomersResponse>
     function update(
         id: string,
         params: {
@@ -44,8 +70,15 @@ export declare namespace customers {
             tax_exempt?: string
         },
         stripeAccount: string,
-    ): Promise<unknown>
-    function del(id: string, stripeAccount?: string): Promise<unknown>
+    ): Promise<CustomersResponse>
+    function del(
+        id: string,
+        stripeAccount?: string,
+    ): Promise<{
+        id: string
+        object: string
+        deleted: boolean
+    }>
     function list(
         params: {
             email?: string
@@ -55,7 +88,12 @@ export declare namespace customers {
             starting_after?: string
         },
         stripeAccount?: string,
-    ): Promise<unknown>
+    ): Promise<{
+        object: string
+        url: string
+        has_more: boolean
+        data: [CustomersResponse]
+    }>
     function createSource(
         cus_id: string,
         params: {
@@ -177,4 +215,5 @@ export declare namespace customers {
         stripeAccount?: string,
     ): Promise<unknown>
 }
+export {}
 //# sourceMappingURL=customers.d.ts.map

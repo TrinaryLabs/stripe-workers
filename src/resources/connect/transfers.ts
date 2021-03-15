@@ -1,37 +1,37 @@
 import qs from 'qs'
 
 type TransfersResponse = {
-    id: string,
-    object: string,
-    amount: number,
-    amount_reversed: number,
-    balance_transaction: string,
-    created: number,
-    currency: string,
-    description: unknown,
-    destination: string,
-    destination_payment: string,
-    livemode: boolean,
-    metadata: object,
-    reversals: object,
-    reversed: boolean,
-    source_transaction: unknown,
-    source_type: string,
+    id: string
+    object: string
+    amount: number
+    amount_reversed: number
+    balance_transaction: string
+    created: number
+    currency: string
+    description: unknown
+    destination: string
+    destination_payment: string
+    livemode: boolean
+    metadata: object
+    reversals: object
+    reversed: boolean
+    source_transaction: unknown
+    source_type: string
     transfer_group: string
 }
 
 type TransfersReversalResponse = {
-    id: string,
-    object: string,
-    amount: number,
-    balance_transaction: unknown,
-    created: number,
-    currency: string,
-    destination_payment_refund: unknown,
-    metadata: object,
-    source_refund: unknown,
+    id: string
+    object: string
+    amount: number
+    balance_transaction: unknown
+    created: number
+    currency: string
+    destination_payment_refund: unknown
+    metadata: object
+    source_refund: unknown
     transfer: string
-  }
+}
 
 export namespace transfers {
     export let client: Function
@@ -87,9 +87,9 @@ export namespace transfers {
         },
         stripeAccount?: string,
     ): Promise<{
-        object: string,
-        url: string,
-        has_more: boolean,
+        object: string
+        url: string
+        has_more: boolean
         data: [TransfersResponse]
     }> {
         return client(`/topups?${qs.stringify(params)}`, {}, 'GET', {
@@ -151,9 +151,9 @@ export namespace transfers {
         },
         stripeAccount?: string,
     ): Promise<{
-        object: string,
-        url: string,
-        has_more: boolean,
+        object: string
+        url: string
+        has_more: boolean
         data: [TransfersReversalResponse]
     }> {
         return client(

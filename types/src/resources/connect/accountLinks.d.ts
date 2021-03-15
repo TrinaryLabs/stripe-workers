@@ -9,6 +9,11 @@ export declare namespace accountLinks {
             collect?: string
         },
         stripeAccount?: string,
-    ): Promise<unknown>
+    ): Promise<{
+        object: string
+        created: number
+        expires_at: number
+        url: string
+    }>
 }
 //# sourceMappingURL=accountLinks.d.ts.map

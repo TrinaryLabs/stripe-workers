@@ -1,45 +1,45 @@
 import qs from 'qs'
 
 type CustomersResponse = {
-    id: string,
-    object: string,
-    address: unknown,
-    balance: number,
-    created: number,
-    currency: string,
-    default_source: unknown,
-    delinquent: boolean,
-    description: unknown,
-    discount: unknown,
-    email: unknown,
-    invoice_prefix: string,
-    invoice_settings: object,
-    livemode: boolean,
-    metadata: object,
-    name: unknown,
-    next_invoice_sequence: number,
-    phone: unknown,
-    preferred_locales: [],
-    shipping: unknown,
+    id: string
+    object: string
+    address: unknown
+    balance: number
+    created: number
+    currency: string
+    default_source: unknown
+    delinquent: boolean
+    description: unknown
+    discount: unknown
+    email: unknown
+    invoice_prefix: string
+    invoice_settings: object
+    livemode: boolean
+    metadata: object
+    name: unknown
+    next_invoice_sequence: number
+    phone: unknown
+    preferred_locales: []
+    shipping: unknown
     tax_exempt: string
 }
 
 type SourcesResponse = {
-    id: string,
-    object: string,
-    ach_credit_transfer: object,
-    amount: unknown,
-    client_secret: string,
-    created: number,
-    currency: string,
-    flow: string,
-    livemode: Blob,
-    metadata: object,
-    owner: object,
-    receiver: object,
-    statement_descriptor: unknown,
-    status: string,
-    type: string,
+    id: string
+    object: string
+    ach_credit_transfer: object
+    amount: unknown
+    client_secret: string
+    created: number
+    currency: string
+    flow: string
+    livemode: Blob
+    metadata: object
+    owner: object
+    receiver: object
+    statement_descriptor: unknown
+    status: string
+    type: string
     usage: string
 }
 export namespace customers {
@@ -108,11 +108,14 @@ export namespace customers {
         })
     }
 
-    export function del(id: string, stripeAccount?: string): Promise<{
+    export function del(
         id: string,
-        object: string,
+        stripeAccount?: string,
+    ): Promise<{
+        id: string
+        object: string
         deleted: boolean
-      }> {
+    }> {
         return client(`/customers/${id}`, {}, 'DELETE', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
@@ -128,9 +131,9 @@ export namespace customers {
         },
         stripeAccount?: string,
     ): Promise<{
-        object: string,
-        url: string,
-        has_more: boolean,
+        object: string
+        url: string
+        has_more: boolean
         data: [CustomersResponse]
     }> {
         return client(`/customers?${qs.stringify(params)}`, {}, 'GET', {
