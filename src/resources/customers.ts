@@ -23,6 +23,25 @@ type CustomersResponse = {
     shipping: unknown,
     tax_exempt: string
 }
+
+type SourcesResponse = {
+    id: string,
+    object: string,
+    ach_credit_transfer: object,
+    amount: unknown,
+    client_secret: string,
+    created: number,
+    currency: string,
+    flow: string,
+    livemode: Blob,
+    metadata: object,
+    owner: object,
+    receiver: object,
+    statement_descriptor: unknown,
+    status: string,
+    type: string,
+    usage: string
+}
 export namespace customers {
     export let client: Function
 
