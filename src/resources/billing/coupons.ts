@@ -1,5 +1,23 @@
 import qs from 'qs'
 
+type CouponsResponse = {
+    id: string,
+    object: string,
+    amount_off: unknown,
+    created: number,
+    currency: string,
+    duration: string,
+    duration_in_months: number,
+    livemode: boolean,
+    max_redemptions: unknown,
+    metadata: object,
+    name: string,
+    percent_off: number,
+    redeem_by: unknown,
+    times_redeemed: number,
+    valid: boolean
+}
+
 export namespace coupons {
     export let client: Function
 
@@ -18,8 +36,17 @@ export namespace coupons {
             redeem_by?: number
         },
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<CouponsResponse> {
         return client('/coupons', params, 'POST', {
+            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+        })
+    }
+
+    export function retrieve(
+        id: string,
+        stripeAccount?: string,
+    ): Promise<CouponsResponse> {
+        return client(`/coupons/${id}`, {}, 'GET', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
     }
@@ -31,13 +58,17 @@ export namespace coupons {
             name?: string
         },
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<CouponsResponse> {
         return client(`/coupons/${id}`, params, 'POST', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
     }
 
-    export function del(id: string, stripeAccount?: string): Promise<unknown> {
+    export function del(id: string, stripeAccount?: string): Promise<{
+        id: string,
+        object: string,
+        deleted: boolean
+      }> {
         return client(`/coupons/${id}`, {}, 'DELETE', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
@@ -51,7 +82,12 @@ export namespace coupons {
             starting_after?: string
         },
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<{
+        object: string,
+        url: string,
+        has_more: boolean,
+        data: [CouponsResponse]
+    }> {
         return client(`/coupons?${qs.stringify(params)}`, {}, 'GET', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
