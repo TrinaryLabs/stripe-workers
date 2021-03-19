@@ -1,52 +1,52 @@
 import qs from 'qs'
 
 type CreditNotesLines = {
-    id: string,
-    object: string,
-    amount: number,
-    description: string,
-    discount_amount: number,
-    discount_amounts: [unknown],
-    invoice_line_item: string,
-    livemode: boolean,
-    quantity: number,
-    tax_amounts: [unknown],
-    tax_rates: [unknown],
-    type: string,
-    unit_amount: unknown,
+    id: string
+    object: string
+    amount: number
+    description: string
+    discount_amount: number
+    discount_amounts: [unknown]
+    invoice_line_item: string
+    livemode: boolean
+    quantity: number
+    tax_amounts: [unknown]
+    tax_rates: [unknown]
+    type: string
+    unit_amount: unknown
     unit_amount_decimal: unknown
 }
 
 type CreditNotesResponse = {
-    id: string,
-    object: string,
-    amount: number,
-    created: number,
-    currency: string,
-    customer: string,
-    customer_balance_transaction: unknown,
-    discount_amount: number,
-    discount_amounts: [unknown],
-    invoice: string,
+    id: string
+    object: string
+    amount: number
+    created: number
+    currency: string
+    customer: string
+    customer_balance_transaction: unknown
+    discount_amount: number
+    discount_amounts: [unknown]
+    invoice: string
     lines: {
-      object: string,
-      data: [CreditNotesLines],
-      has_more: boolean,
-      url: string
-    },
-    livemode: boolean,
-    memo: unknown,
-    metadata: object,
-    number: string,
-    out_of_band_amount: unknown,
-    pdf: string,
-    reason: unknown,
-    refund: unknown,
-    status: string,
-    subtotal: number,
-    tax_amounts: [object],
-    total: number,
-    type: string,
+        object: string
+        data: [CreditNotesLines]
+        has_more: boolean
+        url: string
+    }
+    livemode: boolean
+    memo: unknown
+    metadata: object
+    number: string
+    out_of_band_amount: unknown
+    pdf: string
+    reason: unknown
+    refund: unknown
+    status: string
+    subtotal: number
+    tax_amounts: [object]
+    total: number
+    type: string
     voided_at: unknown
 }
 
@@ -131,9 +131,9 @@ export namespace creditNotes {
         },
         stripeAccount?: string,
     ): Promise<{
-        object: string,
-        url: string,
-        has_more: boolean,
+        object: string
+        url: string
+        has_more: boolean
         data: [CreditNotesLines]
     }> {
         return client(
@@ -166,9 +166,9 @@ export namespace creditNotes {
         },
         stripeAccount?: string,
     ): Promise<{
-        object: string,
-        url: string,
-        has_more: boolean,
+        object: string
+        url: string
+        has_more: boolean
         data: [CreditNotesLines]
     }> {
         return client(
@@ -201,9 +201,9 @@ export namespace creditNotes {
         },
         stripeAccount?: string,
     ): Promise<{
-        object: string,
-        url: string,
-        has_more: boolean,
+        object: string
+        url: string
+        has_more: boolean
         data: [CreditNotesResponse]
     }> {
         return client(`/credit_notes?${qs.stringify(params)}`, {}, 'GET', {

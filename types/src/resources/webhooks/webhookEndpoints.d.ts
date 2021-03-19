@@ -1,3 +1,17 @@
+declare type WebhookEndpointResponse = {
+    id: string
+    object: string
+    api_version: unknown
+    application: unknown
+    created: number
+    description: string
+    enabled_events: [string]
+    livemode: boolean
+    metadata: object
+    status: string
+    url: string
+    secret: string
+}
 export declare namespace webhookEndpoints {
     let client: Function
     function create(
@@ -10,8 +24,11 @@ export declare namespace webhookEndpoints {
             connect?: boolean
         },
         stripeAccount?: string,
-    ): Promise<unknown>
-    function retrieve(id: string, stripeAccount?: string): Promise<unknown>
+    ): Promise<WebhookEndpointResponse>
+    function retrieve(
+        id: string,
+        stripeAccount?: string,
+    ): Promise<WebhookEndpointResponse>
     function update(
         id: string,
         params: {
@@ -22,7 +39,7 @@ export declare namespace webhookEndpoints {
             disabled?: boolean
         },
         stripeAccount?: string,
-    ): Promise<unknown>
+    ): Promise<WebhookEndpointResponse>
     function list(
         params: {
             ending_before?: string
@@ -30,7 +47,20 @@ export declare namespace webhookEndpoints {
             starting_after?: string
         },
         stripeAccount?: string,
-    ): Promise<unknown>
-    function del(id: string, stripeAccount?: string): Promise<unknown>
+    ): Promise<{
+        object: string
+        url: string
+        has_more: boolean
+        data: [WebhookEndpointResponse]
+    }>
+    function del(
+        id: string,
+        stripeAccount?: string,
+    ): Promise<{
+        id: string
+        object: string
+        deleted: boolean
+    }>
 }
+export {}
 //# sourceMappingURL=webhookEndpoints.d.ts.map

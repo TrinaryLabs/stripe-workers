@@ -1,20 +1,20 @@
 import qs from 'qs'
 
 type CouponsResponse = {
-    id: string,
-    object: string,
-    amount_off: unknown,
-    created: number,
-    currency: string,
-    duration: string,
-    duration_in_months: number,
-    livemode: boolean,
-    max_redemptions: unknown,
-    metadata: object,
-    name: string,
-    percent_off: number,
-    redeem_by: unknown,
-    times_redeemed: number,
+    id: string
+    object: string
+    amount_off: unknown
+    created: number
+    currency: string
+    duration: string
+    duration_in_months: number
+    livemode: boolean
+    max_redemptions: unknown
+    metadata: object
+    name: string
+    percent_off: number
+    redeem_by: unknown
+    times_redeemed: number
     valid: boolean
 }
 
@@ -64,11 +64,14 @@ export namespace coupons {
         })
     }
 
-    export function del(id: string, stripeAccount?: string): Promise<{
+    export function del(
         id: string,
-        object: string,
+        stripeAccount?: string,
+    ): Promise<{
+        id: string
+        object: string
         deleted: boolean
-      }> {
+    }> {
         return client(`/coupons/${id}`, {}, 'DELETE', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
@@ -83,9 +86,9 @@ export namespace coupons {
         },
         stripeAccount?: string,
     ): Promise<{
-        object: string,
-        url: string,
-        has_more: boolean,
+        object: string
+        url: string
+        has_more: boolean
         data: [CouponsResponse]
     }> {
         return client(`/coupons?${qs.stringify(params)}`, {}, 'GET', {

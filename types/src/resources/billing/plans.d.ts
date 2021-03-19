@@ -1,3 +1,24 @@
+declare type PlansResponse = {
+    id: string
+    object: string
+    active: boolean
+    aggregate_usage: unknown
+    amount: number
+    amount_decimal: string
+    billing_scheme: string
+    created: number
+    currency: string
+    interval: string
+    interval_count: number
+    livemode: boolean
+    metadata: object
+    nickname: unknown
+    product: string
+    tiers_mode: unknown
+    transform_usage: unknown
+    trial_period_days: unknown
+    usage_type: string
+}
 export declare namespace plans {
     let client: Function
     function create(
@@ -21,8 +42,11 @@ export declare namespace plans {
             usage_type?: string
         },
         stripeAccount?: string,
-    ): Promise<unknown>
-    function retrieve(id: string, stripeAccount?: string): Promise<unknown>
+    ): Promise<PlansResponse>
+    function retrieve(
+        id: string,
+        stripeAccount?: string,
+    ): Promise<PlansResponse>
     function update(
         id: string,
         params: {
@@ -33,8 +57,15 @@ export declare namespace plans {
             trial_period_days?: number
         },
         stripeAccount?: string,
-    ): Promise<unknown>
-    function del(id: string, stripeAccount?: string): Promise<unknown>
+    ): Promise<PlansResponse>
+    function del(
+        id: string,
+        stripeAccount?: string,
+    ): Promise<{
+        id: string
+        object: string
+        deleted: boolean
+    }>
     function list(
         params: {
             active?: boolean
@@ -45,6 +76,12 @@ export declare namespace plans {
             starting_after?: string
         },
         stripeAccount?: string,
-    ): Promise<unknown>
+    ): Promise<{
+        object: string
+        url: string
+        has_more: boolean
+        data: [PlansResponse]
+    }>
 }
+export {}
 //# sourceMappingURL=plans.d.ts.map

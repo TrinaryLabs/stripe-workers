@@ -1,12 +1,12 @@
 type BillingPortalResponse = {
-    id: string,
-    object: string,
-    configuration: string,
-    created: number,
-    customer: string,
-    livemode: boolean,
-    on_behalf_of: unknown,
-    return_url: string,
+    id: string
+    object: string
+    configuration: string
+    created: number
+    customer: string
+    livemode: boolean
+    on_behalf_of: unknown
+    return_url: string
     url: string
 }
 export namespace billingPortal {

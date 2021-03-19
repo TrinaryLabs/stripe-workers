@@ -1,3 +1,20 @@
+declare type CouponsResponse = {
+    id: string
+    object: string
+    amount_off: unknown
+    created: number
+    currency: string
+    duration: string
+    duration_in_months: number
+    livemode: boolean
+    max_redemptions: unknown
+    metadata: object
+    name: string
+    percent_off: number
+    redeem_by: unknown
+    times_redeemed: number
+    valid: boolean
+}
 export declare namespace coupons {
     let client: Function
     function create(
@@ -15,7 +32,11 @@ export declare namespace coupons {
             redeem_by?: number
         },
         stripeAccount?: string,
-    ): Promise<unknown>
+    ): Promise<CouponsResponse>
+    function retrieve(
+        id: string,
+        stripeAccount?: string,
+    ): Promise<CouponsResponse>
     function update(
         id: string,
         params: {
@@ -23,8 +44,15 @@ export declare namespace coupons {
             name?: string
         },
         stripeAccount?: string,
-    ): Promise<unknown>
-    function del(id: string, stripeAccount?: string): Promise<unknown>
+    ): Promise<CouponsResponse>
+    function del(
+        id: string,
+        stripeAccount?: string,
+    ): Promise<{
+        id: string
+        object: string
+        deleted: boolean
+    }>
     function list(
         params: {
             created?: string
@@ -33,6 +61,12 @@ export declare namespace coupons {
             starting_after?: string
         },
         stripeAccount?: string,
-    ): Promise<unknown>
+    ): Promise<{
+        object: string
+        url: string
+        has_more: boolean
+        data: [CouponsResponse]
+    }>
 }
+export {}
 //# sourceMappingURL=coupons.d.ts.map

@@ -1,5 +1,21 @@
 import qs from 'qs'
 
+type TaxRatesResponse = {
+    id: string
+    object: string
+    active: boolean
+    country: string
+    created: number
+    description: string
+    display_name: string
+    inclusive: boolean
+    jurisdiction: string
+    livemode: boolean
+    metadata: object
+    percentage: number
+    state: unknown
+}
+
 export namespace taxRates {
     export let client: Function
 
@@ -16,7 +32,7 @@ export namespace taxRates {
             state?: string
         },
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<TaxRatesResponse> {
         return client('/tax_rates', params, 'POST', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
@@ -25,7 +41,7 @@ export namespace taxRates {
     export function retrieve(
         id: string,
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<TaxRatesResponse> {
         return client(`/tax_rates/${id}`, {}, 'GET', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
@@ -43,7 +59,7 @@ export namespace taxRates {
             state?: string
         },
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<TaxRatesResponse> {
         return client(`/tax_rates/${id}`, params, 'POST', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
@@ -59,7 +75,12 @@ export namespace taxRates {
             starting_after?: string
         },
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<{
+        object: string
+        url: string
+        has_more: boolean
+        data: [TaxRatesResponse]
+    }> {
         return client(`/tax_rates?${qs.stringify(params)}`, {}, 'GET', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })

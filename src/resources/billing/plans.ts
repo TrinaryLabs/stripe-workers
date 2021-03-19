@@ -1,24 +1,24 @@
 import qs from 'qs'
 
 type PlansResponse = {
-    id: string,
-    object: string,
-    active: boolean,
-    aggregate_usage: unknown,
-    amount: number,
-    amount_decimal: string,
-    billing_scheme: string,
-    created: number,
-    currency: string,
-    interval: string,
-    interval_count: number,
-    livemode: boolean,
-    metadata: object,
-    nickname: unknown,
-    product: string,
-    tiers_mode: unknown,
-    transform_usage: unknown,
-    trial_period_days: unknown,
+    id: string
+    object: string
+    active: boolean
+    aggregate_usage: unknown
+    amount: number
+    amount_decimal: string
+    billing_scheme: string
+    created: number
+    currency: string
+    interval: string
+    interval_count: number
+    livemode: boolean
+    metadata: object
+    nickname: unknown
+    product: string
+    tiers_mode: unknown
+    transform_usage: unknown
+    trial_period_days: unknown
     usage_type: string
 }
 
@@ -77,11 +77,14 @@ export namespace plans {
         })
     }
 
-    export function del(id: string, stripeAccount?: string): Promise<{
+    export function del(
         id: string,
-        object: string,
+        stripeAccount?: string,
+    ): Promise<{
+        id: string
+        object: string
         deleted: boolean
-      }> {
+    }> {
         return client(`/plans/${id}`, {}, 'DELETE', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
@@ -98,9 +101,9 @@ export namespace plans {
         },
         stripeAccount?: string,
     ): Promise<{
-        object: string,
-        url: string,
-        has_more: boolean,
+        object: string
+        url: string
+        has_more: boolean
         data: [PlansResponse]
     }> {
         return client(`/plans?${qs.stringify(params)}`, {}, 'GET', {

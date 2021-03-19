@@ -1,3 +1,21 @@
+declare type SubscriptionSchedulesResponse = {
+    id: string
+    object: string
+    canceled_at: number
+    completed_at: unknown
+    created: number
+    current_phase: unknown
+    customer: string
+    default_settings: object
+    end_behavior: string
+    livemode: boolean
+    metadata: object
+    phases: [object]
+    released_at: unknown
+    released_subscription: unknown
+    status: string
+    subscription: string
+}
 export declare namespace subscriptionSchedules {
     let client: Function
     function create(
@@ -11,8 +29,11 @@ export declare namespace subscriptionSchedules {
             from_subscriptions?: unknown
         },
         stripeAccount?: string,
-    ): Promise<unknown>
-    function retrieve(id: string, stripeAccount?: string): Promise<unknown>
+    ): Promise<SubscriptionSchedulesResponse>
+    function retrieve(
+        id: string,
+        stripeAccount?: string,
+    ): Promise<SubscriptionSchedulesResponse>
     function update(
         id: string,
         params: {
@@ -24,7 +45,7 @@ export declare namespace subscriptionSchedules {
             proration_behavior?: unknown
         },
         stripeAccount?: string,
-    ): Promise<unknown>
+    ): Promise<SubscriptionSchedulesResponse>
     function cancel(
         id: string,
         params: {
@@ -32,14 +53,14 @@ export declare namespace subscriptionSchedules {
             prorate?: unknown
         },
         stripeAccount?: string,
-    ): Promise<unknown>
+    ): Promise<SubscriptionSchedulesResponse>
     function release(
         id: string,
         params: {
             preserve_cancel_date?: unknown
         },
         stripeAccount?: string,
-    ): Promise<unknown>
+    ): Promise<SubscriptionSchedulesResponse>
     function list(
         params: {
             customer?: string
@@ -53,6 +74,12 @@ export declare namespace subscriptionSchedules {
             starting_after?: string
         },
         stripeAccount?: string,
-    ): Promise<unknown>
+    ): Promise<{
+        object: string
+        url: string
+        has_more: boolean
+        data: [SubscriptionSchedulesResponse]
+    }>
 }
+export {}
 //# sourceMappingURL=subscriptionSchedules.d.ts.map
