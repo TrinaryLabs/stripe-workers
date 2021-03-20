@@ -1,5 +1,26 @@
 import qs from 'qs'
 
+type SubscriptionItemsResponse = {
+    id: string,
+    object: string,
+    billing_thresholds: unknown,
+    created: number,
+    metadata: object,
+    price: object
+    quantity: number,
+    subscription: string,
+    tax_rates: [unknown]
+}
+
+type UsageRecordsResponse = {
+    id: string,
+    object: string,
+    livemode: boolean,
+    quantity: number,
+    subscription_item: string,
+    timestamp: number
+  }
+
 export namespace subscriptionItems {
     export let client: Function
 
@@ -17,7 +38,7 @@ export namespace subscriptionItems {
             tax_rates?: string[]
         },
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<SubscriptionItemsResponse> {
         return client(`/subscription_items`, params, 'POST', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
@@ -26,7 +47,7 @@ export namespace subscriptionItems {
     export function retrieve(
         id: string,
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<SubscriptionItemsResponse> {
         return client(`/subscription_items/${id}`, {}, 'GET', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
@@ -47,7 +68,7 @@ export namespace subscriptionItems {
             tax_rates?: string[]
         },
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<SubscriptionItemsResponse> {
         return client(`/subscription_items/${id}`, params, 'POST', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
@@ -60,7 +81,11 @@ export namespace subscriptionItems {
             proration_date?: unknown
         },
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<{
+        id: string,
+        object: string,
+        deleted: boolean
+      }> {
         return client(`/subscription_items/${id}`, params, 'DELETE', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
@@ -74,7 +99,12 @@ export namespace subscriptionItems {
             starting_after?: string
         },
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<{
+        object: string,
+        url: string,
+        has_more: boolean,
+        data: [SubscriptionItemsResponse]
+    }> {
         return client(
             `/subscription_items?${qs.stringify(params)}`,
             {},
@@ -95,7 +125,7 @@ export namespace subscriptionItems {
             action?: string
         },
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<UsageRecordsResponse> {
         return client(
             `/subscription_items/${id}/usage_records`,
             params,
@@ -116,7 +146,12 @@ export namespace subscriptionItems {
             starting_after?: string
         },
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<{
+        object: string,
+        url: string,
+        has_more: boolean,
+        data: [UsageRecordsResponse]
+    }> {
         return client(
             `/subscription_items/${id}/usage_record_summaries?${qs.stringify(
                 params,

@@ -1,5 +1,28 @@
 import qs from 'qs'
 
+type InvoiceItemsResponse = {
+    id: string,
+    object: string,
+    amount: number,
+    currency: string,
+    customer: string,
+    date: number,
+    description: string,
+    discountable: boolean,
+    discounts: [unknown],
+    invoice: unknown,
+    livemode: boolean,
+    metadata: object,
+    period: object,
+    price: object,
+    proration: boolean,
+    quantity: number,
+    subscription: unknown,
+    tax_rates: [unknown],
+    unit_amount: number,
+    unit_amount_decimal: string
+}
+
 export namespace invoiceItems {
     export let client: Function
 
@@ -22,7 +45,7 @@ export namespace invoiceItems {
             unit_amount_decimal?: number
         },
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<InvoiceItemsResponse> {
         return client(`/invoiceitems`, params, 'POST', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
@@ -31,7 +54,7 @@ export namespace invoiceItems {
     export function retrieve(
         id: string,
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<InvoiceItemsResponse> {
         return client(`/invoiceitems/${id}`, {}, 'GET', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
@@ -54,13 +77,17 @@ export namespace invoiceItems {
             unit_amount_decimal?: number
         },
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<InvoiceItemsResponse> {
         return client(`/invoiceitems/${id}`, params, 'POST', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
     }
 
-    export function del(id: string, stripeAccount?: string): Promise<unknown> {
+    export function del(id: string, stripeAccount?: string): Promise<{
+        id: string,
+        object: string,
+        deleted: boolean
+      }> {
         return client(`/invoiceitems/${id}`, {}, 'DELETE', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
@@ -77,7 +104,12 @@ export namespace invoiceItems {
             starting_after?: string
         },
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<{
+        object: string,
+        url: string,
+        has_more: boolean,
+        data: [InvoiceItemsResponse]
+    }> {
         return client(`/invoiceitems?${qs.stringify(params)}`, {}, 'GET', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })

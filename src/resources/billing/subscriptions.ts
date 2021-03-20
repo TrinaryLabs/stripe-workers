@@ -1,5 +1,49 @@
 import qs from 'qs'
 
+type SubscriptionResponse = {
+    id: string,
+    object: string,
+    application_fee_percent: unknown,
+    billing_cycle_anchor: number,
+    billing_thresholds: unknown,
+    cancel_at: unknown,
+    cancel_at_period_end: boolean,
+    canceled_at: unknown,
+    collection_method: string,
+    created: number,
+    current_period_end: number,
+    current_period_start: number,
+    customer: string,
+    days_until_due: unknown,
+    default_payment_method: unknown,
+    default_source: unknown,
+    default_tax_rates: [unknown],
+    discount: unknown,
+    ended_at: unknown,
+    items: {
+      object: string,
+      data: [
+        object
+      ],
+      has_more: boolean,
+      url: string
+    },
+    latest_invoice: string,
+    livemode: boolean,
+    metadata: object,
+    next_pending_invoice_item_invoice: unknown,
+    pause_collection: object
+    pending_invoice_item_interval: unknown,
+    pending_setup_intent: unknown,
+    pending_update: unknown,
+    schedule: unknown,
+    start_date: number,
+    status: string,
+    transfer_data: unknown,
+    trial_end: unknown,
+    trial_start: unknown
+}
+
 export namespace subscriptions {
     export let client: Function
 
@@ -32,7 +76,7 @@ export namespace subscriptions {
             trial_period_days?: number
         },
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<SubscriptionResponse> {
         return client(`/subscriptions`, params, 'POST', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
@@ -41,7 +85,7 @@ export namespace subscriptions {
     export function retrieve(
         id: string,
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<SubscriptionResponse> {
         return client(`/subscriptions/${id}`, {}, 'GET', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
@@ -75,7 +119,7 @@ export namespace subscriptions {
             trial_from_plan?: unknown
         },
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<SubscriptionResponse> {
         return client(`/subscriptions/${id}`, params, 'POST', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
@@ -88,7 +132,7 @@ export namespace subscriptions {
             prorate?: unknown
         },
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<SubscriptionResponse> {
         return client(`/subscriptions/${id}`, params, 'DELETE', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
@@ -108,7 +152,12 @@ export namespace subscriptions {
             starting_after?: string
         },
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<{
+        object: string,
+        url: string,
+        has_more: boolean,
+        data: [SubscriptionResponse]
+    }> {
         return client(`/subscriptions?${qs.stringify(params)}`, params, 'GET', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
@@ -117,7 +166,10 @@ export namespace subscriptions {
     export function deleteDiscount(
         id: string,
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<{
+        object: string,
+        deleted: boolean
+      }> {
         return client(`/subscriptions/${id}/discount`, {}, 'DELETE', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
