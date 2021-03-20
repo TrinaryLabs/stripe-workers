@@ -1,25 +1,25 @@
 import qs from 'qs'
 
 type SubscriptionItemsResponse = {
-    id: string,
-    object: string,
-    billing_thresholds: unknown,
-    created: number,
-    metadata: object,
+    id: string
+    object: string
+    billing_thresholds: unknown
+    created: number
+    metadata: object
     price: object
-    quantity: number,
-    subscription: string,
+    quantity: number
+    subscription: string
     tax_rates: [unknown]
 }
 
 type UsageRecordsResponse = {
-    id: string,
-    object: string,
-    livemode: boolean,
-    quantity: number,
-    subscription_item: string,
+    id: string
+    object: string
+    livemode: boolean
+    quantity: number
+    subscription_item: string
     timestamp: number
-  }
+}
 
 export namespace subscriptionItems {
     export let client: Function
@@ -82,10 +82,10 @@ export namespace subscriptionItems {
         },
         stripeAccount?: string,
     ): Promise<{
-        id: string,
-        object: string,
+        id: string
+        object: string
         deleted: boolean
-      }> {
+    }> {
         return client(`/subscription_items/${id}`, params, 'DELETE', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
@@ -100,9 +100,9 @@ export namespace subscriptionItems {
         },
         stripeAccount?: string,
     ): Promise<{
-        object: string,
-        url: string,
-        has_more: boolean,
+        object: string
+        url: string
+        has_more: boolean
         data: [SubscriptionItemsResponse]
     }> {
         return client(
@@ -147,9 +147,9 @@ export namespace subscriptionItems {
         },
         stripeAccount?: string,
     ): Promise<{
-        object: string,
-        url: string,
-        has_more: boolean,
+        object: string
+        url: string
+        has_more: boolean
         data: [UsageRecordsResponse]
     }> {
         return client(

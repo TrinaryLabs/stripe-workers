@@ -1,25 +1,25 @@
 import qs from 'qs'
 
 type InvoiceItemsResponse = {
-    id: string,
-    object: string,
-    amount: number,
-    currency: string,
-    customer: string,
-    date: number,
-    description: string,
-    discountable: boolean,
-    discounts: [unknown],
-    invoice: unknown,
-    livemode: boolean,
-    metadata: object,
-    period: object,
-    price: object,
-    proration: boolean,
-    quantity: number,
-    subscription: unknown,
-    tax_rates: [unknown],
-    unit_amount: number,
+    id: string
+    object: string
+    amount: number
+    currency: string
+    customer: string
+    date: number
+    description: string
+    discountable: boolean
+    discounts: [unknown]
+    invoice: unknown
+    livemode: boolean
+    metadata: object
+    period: object
+    price: object
+    proration: boolean
+    quantity: number
+    subscription: unknown
+    tax_rates: [unknown]
+    unit_amount: number
     unit_amount_decimal: string
 }
 
@@ -83,11 +83,14 @@ export namespace invoiceItems {
         })
     }
 
-    export function del(id: string, stripeAccount?: string): Promise<{
+    export function del(
         id: string,
-        object: string,
+        stripeAccount?: string,
+    ): Promise<{
+        id: string
+        object: string
         deleted: boolean
-      }> {
+    }> {
         return client(`/invoiceitems/${id}`, {}, 'DELETE', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
@@ -105,9 +108,9 @@ export namespace invoiceItems {
         },
         stripeAccount?: string,
     ): Promise<{
-        object: string,
-        url: string,
-        has_more: boolean,
+        object: string
+        url: string
+        has_more: boolean
         data: [InvoiceItemsResponse]
     }> {
         return client(`/invoiceitems?${qs.stringify(params)}`, {}, 'GET', {

@@ -1,17 +1,17 @@
 import qs from 'qs'
 
 type PromotionCodesResponse = {
-    id: string,
-    object: string,
-    active: boolean,
-    code: string,
-    coupon: string | object,
-    created: number,
-    customer: unknown,
-    expires_at: unknown,
-    livemode: boolean,
-    max_redemptions: unknown,
-    metadata: object,
+    id: string
+    object: string
+    active: boolean
+    code: string
+    coupon: string | object
+    created: number
+    customer: unknown
+    expires_at: unknown
+    livemode: boolean
+    max_redemptions: unknown
+    metadata: object
     restrictions: object
     times_redeemed: number
 }
@@ -71,9 +71,9 @@ export namespace promotionCodes {
         },
         stripeAccount?: string,
     ): Promise<{
-        object: string,
-        url: string,
-        has_more: boolean,
+        object: string
+        url: string
+        has_more: boolean
         data: [PromotionCodesResponse]
     }> {
         return client(`/promotion_codes?${qs.stringify(params)}`, {}, 'GET', {
