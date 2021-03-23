@@ -1,5 +1,29 @@
 import qs from 'qs'
 
+type ReportRunResponse = {
+    id: string
+    object: string
+    created: number
+    error: unknown
+    livemode: boolean
+    parameters: object
+    report_type: string
+    result: object
+    status: string
+    succeeded_at: number
+}
+
+type ReportTypeResponse = {
+    id: string
+    object: string
+    data_available_end: number
+    data_available_start: number
+    default_columns: [string]
+    name: string
+    updated: number
+    version: number
+}
+
 export namespace reporting {
     export namespace reportRuns {
         export let client: Function
@@ -10,7 +34,7 @@ export namespace reporting {
                 parameters?: object
             },
             stripeAccount?: string,
-        ): Promise<unknown> {
+        ): Promise<ReportRunResponse> {
             return client(`/reporting/report_runs`, params, 'POST', {
                 headers: stripeAccount
                     ? { 'Stripe-Account': stripeAccount }
@@ -21,7 +45,7 @@ export namespace reporting {
         export function retrieve(
             id: string,
             stripeAccount?: string,
-        ): Promise<unknown> {
+        ): Promise<ReportRunResponse> {
             return client(`/reporting/report_runs/${id}`, {}, 'GET', {
                 headers: stripeAccount
                     ? { 'Stripe-Account': stripeAccount }
@@ -37,7 +61,12 @@ export namespace reporting {
                 starting_after?: string
             },
             stripeAccount?: string,
-        ): Promise<unknown> {
+        ): Promise<{
+            object: string
+            url: string
+            has_more: boolean
+            data: [ReportRunResponse]
+        }> {
             return client(
                 `/reporting/report_runs?${qs.stringify(params)}`,
                 {},
@@ -57,7 +86,7 @@ export namespace reporting {
         export function retrieve(
             id: string,
             stripeAccount?: string,
-        ): Promise<unknown> {
+        ): Promise<ReportTypeResponse> {
             return client(`/reporting/report_types/${id}`, {}, 'GET', {
                 headers: stripeAccount
                     ? { 'Stripe-Account': stripeAccount }
@@ -65,7 +94,14 @@ export namespace reporting {
             })
         }
 
-        export function list(stripeAccount?: string): Promise<unknown> {
+        export function list(
+            stripeAccount?: string,
+        ): Promise<{
+            object: string
+            url: string
+            has_more: boolean
+            data: [ReportTypeResponse]
+        }> {
             return client(`/reporting/report_types`, {}, 'GET', {
                 headers: stripeAccount
                     ? { 'Stripe-Account': stripeAccount }

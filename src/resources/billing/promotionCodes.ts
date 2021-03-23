@@ -1,5 +1,21 @@
 import qs from 'qs'
 
+type PromotionCodesResponse = {
+    id: string
+    object: string
+    active: boolean
+    code: string
+    coupon: string | object
+    created: number
+    customer: unknown
+    expires_at: unknown
+    livemode: boolean
+    max_redemptions: unknown
+    metadata: object
+    restrictions: object
+    times_redeemed: number
+}
+
 export namespace promotionCodes {
     export let client: Function
 
@@ -15,7 +31,7 @@ export namespace promotionCodes {
             restrictions?: object
         },
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<PromotionCodesResponse> {
         return client('/promotion_codes', params, 'POST', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
@@ -28,7 +44,7 @@ export namespace promotionCodes {
             active?: boolean
         },
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<PromotionCodesResponse> {
         return client(`/promotion_codes/${id}`, params, 'POST', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
@@ -37,7 +53,7 @@ export namespace promotionCodes {
     export function retrieve(
         id: string,
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<PromotionCodesResponse> {
         return client(`/promotion_codes/${id}`, {}, 'GET', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
@@ -54,7 +70,12 @@ export namespace promotionCodes {
             starting_after?: string
         },
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<{
+        object: string
+        url: string
+        has_more: boolean
+        data: [PromotionCodesResponse]
+    }> {
         return client(`/promotion_codes?${qs.stringify(params)}`, {}, 'GET', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })

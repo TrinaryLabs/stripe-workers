@@ -1,5 +1,20 @@
 import qs from 'qs'
 
+type WebhookEndpointResponse = {
+    id: string
+    object: string
+    api_version: unknown
+    application: unknown
+    created: number
+    description: string
+    enabled_events: [string]
+    livemode: boolean
+    metadata: object
+    status: string
+    url: string
+    secret: string
+}
+
 export namespace webhookEndpoints {
     export let client: Function
 
@@ -13,7 +28,7 @@ export namespace webhookEndpoints {
             connect?: boolean
         },
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<WebhookEndpointResponse> {
         return client('/webhook_endpoints', params, 'POST', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
@@ -22,7 +37,7 @@ export namespace webhookEndpoints {
     export function retrieve(
         id: string,
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<WebhookEndpointResponse> {
         return client(`/webhook_endpoints/${id}`, {}, 'GET', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
@@ -38,7 +53,7 @@ export namespace webhookEndpoints {
             disabled?: boolean
         },
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<WebhookEndpointResponse> {
         return client(`/webhook_endpoints/${id}`, params, 'POST', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
@@ -51,13 +66,25 @@ export namespace webhookEndpoints {
             starting_after?: string
         },
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<{
+        object: string
+        url: string
+        has_more: boolean
+        data: [WebhookEndpointResponse]
+    }> {
         return client(`/webhook_endpoints?${qs.stringify(params)}`, {}, 'GET', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
     }
 
-    export function del(id: string, stripeAccount?: string): Promise<unknown> {
+    export function del(
+        id: string,
+        stripeAccount?: string,
+    ): Promise<{
+        id: string
+        object: string
+        deleted: boolean
+    }> {
         return client(`/webhook_endpoints/${id}`, {}, 'DELETE', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })

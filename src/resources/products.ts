@@ -1,5 +1,20 @@
 import qs from 'qs'
 
+type ProductsResponse = {
+    id: string
+    object: string
+    active: boolean
+    created: number
+    description: unknown
+    images: []
+    livemode: boolean
+    metadata: object
+    name: string
+    statement_descriptor: unknown
+    unit_label: unknown
+    updated: number
+}
+
 export namespace products {
     export let client: Function
 
@@ -21,7 +36,7 @@ export namespace products {
             url?: string
         },
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<ProductsResponse> {
         return client('/products', params, 'POST', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
@@ -30,7 +45,7 @@ export namespace products {
     export function retrieve(
         id: string,
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<ProductsResponse> {
         return client(`/products/${id}`, {}, 'GET', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
@@ -54,7 +69,7 @@ export namespace products {
             url?: string
         },
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<ProductsResponse> {
         return client(`/products/${id}`, params, 'POST', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
@@ -72,13 +87,21 @@ export namespace products {
             url?: string
         },
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<{
+        object: string
+        url: string
+        has_more: boolean
+        data: [ProductsResponse]
+    }> {
         return client(`/products?${qs.stringify(params)}`, {}, 'GET', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
     }
 
-    export function del(id: string, stripeAccount?: string): Promise<unknown> {
+    export function del(
+        id: string,
+        stripeAccount?: string,
+    ): Promise<ProductsResponse> {
         return client(`/products/${id}`, {}, 'DELETE', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })

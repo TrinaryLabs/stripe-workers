@@ -1,5 +1,99 @@
 import qs from 'qs'
 
+type InvoicesResponse = {
+    id: string
+    object: string
+    account_country: string
+    account_name: string
+    account_tax_ids: unknown
+    amount_due: number
+    amount_paid: number
+    amount_remaining: number
+    application_fee_amount: unknown
+    attempt_count: number
+    attempted: boolean
+    auto_advance: boolean
+    billing_reason: unknown
+    charge: string
+    collection_method: string
+    created: number
+    currency: string
+    custom_fields: unknown
+    customer: string
+    customer_address: unknown
+    customer_email: string
+    customer_name: unknown
+    customer_phone: unknown
+    customer_shipping: unknown
+    customer_tax_exempt: string
+    customer_tax_ids: [unknown]
+    default_payment_method: unknown
+    default_source: unknown
+    default_tax_rates: [unknown]
+    description: unknown
+    discount: unknown
+    discounts: [unknown]
+    due_date: unknown
+    ending_balance: number
+    footer: unknown
+    hosted_invoice_url: string
+    invoice_pdf: string
+    last_finalization_error: unknown
+    lines: {
+        data: [InvoiceItemsResponse]
+        has_more: boolean
+        object: string
+        url: string
+    }
+    livemode: boolean
+    metadata: object
+    next_payment_attempt: unknown
+    number: unknown
+    on_behalf_of: unknown
+    paid: boolean
+    payment_intent: unknown
+    payment_settings: object
+    period_end: number
+    period_start: number
+    post_payment_credit_notes_amount: number
+    pre_payment_credit_notes_amount: number
+    receipt_number: unknown
+    starting_balance: number
+    statement_descriptor: unknown
+    status: string
+    status_transitions: object
+    subscription: string
+    subtotal: number
+    tax: unknown
+    total: number
+    total_discount_amounts: [unknown]
+    total_tax_amounts: [unknown]
+    transfer_data: unknown
+    webhooks_delivered_at: number
+}
+
+type InvoiceItemsResponse = {
+    id: string
+    object: string
+    amount: number
+    currency: string
+    description: string
+    discount_amounts: [unknown]
+    discountable: boolean
+    discounts: [unknown]
+    invoice_item: string
+    livemode: boolean
+    metadata: object
+    period: object
+    price: object
+    proration: boolean
+    quantity: number
+    subscription: unknown
+    tax_amounts: [unknown]
+    tax_rates: [unknown]
+    type: string
+}
+
 export namespace invoices {
     export let client: Function
 
@@ -26,7 +120,7 @@ export namespace invoices {
             transfer_data?: object
         },
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<InvoicesResponse> {
         return client(`/invoices`, params, 'POST', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
@@ -35,7 +129,7 @@ export namespace invoices {
     export function retrieve(
         id: string,
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<InvoicesResponse> {
         return client(`/invoices/${id}`, {}, 'GET', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
@@ -63,13 +157,20 @@ export namespace invoices {
             transfer_data?: object
         },
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<InvoicesResponse> {
         return client(`/invoices/${id}`, params, 'POST', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
     }
 
-    export function del(id: string, stripeAccount?: string): Promise<unknown> {
+    export function del(
+        id: string,
+        stripeAccount?: string,
+    ): Promise<{
+        id: string
+        object: string
+        deleted: boolean
+    }> {
         return client(`/invoices/${id}`, {}, 'DELETE', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
@@ -81,7 +182,7 @@ export namespace invoices {
             auto_advance?: boolean
         },
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<InvoicesResponse> {
         return client(`/invoices/${id}/finalize`, params, 'POST', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
@@ -97,7 +198,7 @@ export namespace invoices {
             source?: unknown
         },
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<InvoicesResponse> {
         return client(`/invoices/${id}/pay`, params, 'POST', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
@@ -106,7 +207,7 @@ export namespace invoices {
     export function sendInvoice(
         id: string,
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<InvoicesResponse> {
         return client(`/invoices/${id}/send`, {}, 'POST', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
@@ -115,7 +216,7 @@ export namespace invoices {
     export function voidInvoice(
         id: string,
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<InvoicesResponse> {
         return client(`/invoices/${id}/void`, {}, 'POST', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
@@ -124,7 +225,7 @@ export namespace invoices {
     export function markUncollectible(
         id: string,
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<InvoicesResponse> {
         return client(`/invoices/${id}/mark_uncollectible`, {}, 'POST', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
@@ -138,7 +239,12 @@ export namespace invoices {
             starting_after?: string
         },
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<{
+        object: string
+        url: string
+        has_more: boolean
+        data: [InvoiceItemsResponse]
+    }> {
         return client(
             `/invoices/${id}/lines?${qs.stringify(params)}`,
             {},
@@ -171,7 +277,7 @@ export namespace invoices {
             subscription_trial_from_plan?: unknown
         },
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<InvoicesResponse> {
         return client(`/invoices/upcoming?${qs.stringify(params)}`, {}, 'GET', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
@@ -200,7 +306,12 @@ export namespace invoices {
             subscription_trial_from_plan?: unknown
         },
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<{
+        object: string
+        url: string
+        has_more: boolean
+        data: [InvoiceItemsResponse]
+    }> {
         return client(
             `/invoices/upcoming/lines?${qs.stringify(params)}`,
             {},
@@ -226,7 +337,12 @@ export namespace invoices {
             starting_after?: string
         },
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<{
+        object: string
+        url: string
+        has_more: boolean
+        data: [InvoicesResponse]
+    }> {
         return client(`/invoices?${qs.stringify(params)}`, {}, 'GET', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })

@@ -1,5 +1,23 @@
 import qs from 'qs'
 
+type TopUpsResponse = {
+    id: string
+    object: string
+    amount: number
+    balance_transaction: unknown
+    created: number
+    currency: string
+    description: string
+    expected_availability_date: number
+    failure_code: unknown
+    failure_message: unknown
+    livemode: boolean
+    metadata: object
+    source: object
+    statement_descriptor: string | unknown
+    status: string
+    transfer_group: unknown
+}
 export namespace topups {
     export let client: Function
 
@@ -14,7 +32,7 @@ export namespace topups {
             transfer_group?: unknown
         },
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<TopUpsResponse> {
         return client('/topups', params, 'POST', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
@@ -23,7 +41,7 @@ export namespace topups {
     export function retrieve(
         id: string,
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<TopUpsResponse> {
         return client(`/topups/${id}`, {}, 'GET', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
@@ -36,7 +54,7 @@ export namespace topups {
             metadata?: [string, unknown]
         },
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<TopUpsResponse> {
         return client(`/topups/${id}`, params, 'POST', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
@@ -52,7 +70,12 @@ export namespace topups {
             starting_after?: string
         },
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<{
+        object: string
+        url: string
+        has_more: boolean
+        data: [TopUpsResponse]
+    }> {
         return client(`/topups?${qs.stringify(params)}`, {}, 'GET', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
@@ -61,7 +84,7 @@ export namespace topups {
     export function cancel(
         id: string,
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<TopUpsResponse> {
         return client(`/topups/${id}/cancel`, {}, 'POST', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })

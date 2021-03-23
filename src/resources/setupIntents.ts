@@ -1,5 +1,29 @@
 import qs from 'qs'
 
+type SetupIntentsResponse = {
+    id: string
+    object: string
+    application: unknown
+    cancellation_reason: unknown
+    client_secret: string
+    created: number
+    customer: string
+    description: unknown
+    last_setup_error: unknown
+    latest_attempt: unknown
+    livemode: boolean
+    mandate: unknown
+    metadata: object
+    next_action: unknown
+    on_behalf_of: unknown
+    payment_method: unknown
+    payment_method_options: object
+    payment_method_types: [string]
+    single_use_mandate: unknown
+    status: string
+    usage: string
+}
+
 export namespace setupIntents {
     export let client: Function
 
@@ -19,7 +43,7 @@ export namespace setupIntents {
             single_use?: object
         },
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<SetupIntentsResponse> {
         return client('/setup_intents', params, 'POST', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
@@ -31,7 +55,7 @@ export namespace setupIntents {
             client_secret?: string
         },
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<SetupIntentsResponse> {
         return client(
             `/setup_intents/${id}?${qs.stringify(params)}`,
             {},
@@ -55,7 +79,7 @@ export namespace setupIntents {
             payment_method_options?: unknown
         },
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<SetupIntentsResponse> {
         return client(`/setup_intents/${id}`, params, 'POST', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
@@ -70,7 +94,7 @@ export namespace setupIntents {
             return_url?: string
         },
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<SetupIntentsResponse> {
         return client(`/setup_intents/${id}/confirm`, params, 'POST', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
@@ -82,7 +106,7 @@ export namespace setupIntents {
             cancellation_reason?: string
         },
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<SetupIntentsResponse> {
         return client(`/setup_intents/${id}/cancel`, params, 'POST', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
@@ -98,7 +122,12 @@ export namespace setupIntents {
             starting_after?: string
         },
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<{
+        object: string
+        url: string
+        has_more: boolean
+        data: [SetupIntentsResponse]
+    }> {
         return client(`/setup_intents?${qs.stringify(params)}`, params, 'GET', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })

@@ -1,5 +1,94 @@
 import qs from 'qs'
 
+type AccountsResponse = {
+    id: string
+    object: string
+    business_profile: object
+    business_type: unknown
+    capabilities: object
+    charges_enabled: boolean
+    country: string
+    created: number
+    default_currency: string
+    details_submitted: boolean
+    email: string
+    external_accounts: object
+    metadata: object
+    payouts_enabled: boolean
+    requirements: object
+    settings: object
+    tos_acceptance: object
+    type: string
+}
+
+type AccountsCapabilityResponse = {
+    id: string
+    object: string
+    account: string
+    requested: boolean
+    requested_at: number
+    requirements: object
+    status: string
+}
+
+type PersonResponse = {
+    id: string
+    object: string
+    account: string
+    created: number
+    dob: object
+    first_name: unknown
+    id_number_provided: boolean
+    last_name: unknown
+    metadata: object
+    relationship: object
+    requirements: object
+    ssn_last_4_provided: boolean
+    verification: object
+}
+
+type AccountBankAccountResponse = {
+    id: string
+    object: string
+    account_holder_name: string
+    account_holder_type: string
+    bank_name: string
+    country: string
+    currency: string
+    fingerprint: string
+    last4: string
+    metadata: object
+    routing_number: string
+    status: string
+    account: string
+}
+
+type AccountCardResponse = {
+    id: string
+    object: string
+    address_city: unknown
+    address_country: unknown
+    address_line1: unknown
+    address_line1_check: unknown
+    address_line2: unknown
+    address_state: unknown
+    address_zip: unknown
+    address_zip_check: unknown
+    brand: string
+    country: string
+    cvc_check: string
+    dynamic_last4: unknown
+    exp_month: number
+    exp_year: number
+    fingerprint: string
+    funding: string
+    last4: string
+    metadata: object
+    name: unknown
+    tokenization_method: unknown
+    account: string
+}
+
 export namespace accounts {
     export let client: Function
 
@@ -22,7 +111,7 @@ export namespace accounts {
             settings?: object
         },
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<AccountsResponse> {
         return client('/accounts', params, 'POST', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
@@ -31,7 +120,7 @@ export namespace accounts {
     export function retrieve(
         id: string,
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<AccountsResponse> {
         return client(`/accounts/${id}`, {}, 'GET', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
@@ -57,13 +146,20 @@ export namespace accounts {
             settings?: object
         },
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<AccountsResponse> {
         return client(`/accounts/${id}`, params, 'POST', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
     }
 
-    export function del(id: string, stripeAccount?: string): Promise<unknown> {
+    export function del(
+        id: string,
+        stripeAccount?: string,
+    ): Promise<{
+        id: string
+        object: string
+        deleted: boolean
+    }> {
         return client(`/accounts/${id}`, {}, 'DELETE', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
@@ -73,7 +169,7 @@ export namespace accounts {
         id: string,
         params: { reason: string },
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<AccountsResponse> {
         return client(`/accounts/${id}/reject`, params, 'POST', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
@@ -87,7 +183,12 @@ export namespace accounts {
             starting_after?: string
         },
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<{
+        object: string
+        url: string
+        has_more: boolean
+        data: [AccountsResponse]
+    }> {
         return client(`/accounts`, params, 'GET', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
@@ -96,7 +197,12 @@ export namespace accounts {
     export function createLoginLink(
         id: string,
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<{
+        object: string
+        created: number
+        url: string
+        id: string
+    }> {
         return client(`/accounts/${id}/login_links`, {}, 'POST', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
@@ -106,7 +212,7 @@ export namespace accounts {
         user_id: string,
         cap_id: string,
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<AccountsCapabilityResponse> {
         return client(
             `/accounts/${user_id}/capabilities/${cap_id}`,
             {},
@@ -126,7 +232,7 @@ export namespace accounts {
             requested?: boolean
         },
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<AccountsCapabilityResponse> {
         return client(
             `/accounts/${user_id}/capabilities/${cap_id}`,
             params,
@@ -142,7 +248,12 @@ export namespace accounts {
     export function listCapabilities(
         user_id: string,
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<{
+        object: string
+        url: string
+        has_more: boolean
+        data: [AccountsCapabilityResponse]
+    }> {
         return client(`/accounts/${user_id}/capabilities`, {}, 'GET', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
@@ -175,7 +286,7 @@ export namespace accounts {
             verification?: object
         },
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<PersonResponse> {
         return client(`/accounts/${user_id}/persons`, params, 'POST', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
@@ -185,7 +296,7 @@ export namespace accounts {
         user_id: string,
         person_id: string,
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<PersonResponse> {
         return client(`/accounts/${user_id}/persons/${person_id}`, {}, 'GET', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
@@ -219,7 +330,7 @@ export namespace accounts {
             verification?: object
         },
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<PersonResponse> {
         return client(
             `/accounts/${user_id}/persons/${person_id}`,
             params,
@@ -236,7 +347,11 @@ export namespace accounts {
         user_id: string,
         person_id: string,
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<{
+        id: string
+        object: string
+        deleted: boolean
+    }> {
         return client(
             `/accounts/${user_id}/persons/${person_id}`,
             {},
@@ -258,7 +373,12 @@ export namespace accounts {
             starting_after?: string
         },
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<{
+        object: string
+        url: string
+        has_more: boolean
+        data: [PersonResponse]
+    }> {
         return client(
             `/accounts/${user_id}/persons?${qs.stringify(params)}`,
             {},
@@ -274,12 +394,12 @@ export namespace accounts {
     export function createExternalAccount(
         id: string,
         params: {
-            external_account: object
+            external_account: object | string
             metadata?: [string, unknown]
             default_for_currency?: string
         },
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<AccountBankAccountResponse | AccountCardResponse> {
         return client(`/accounts/${id}/external_accounts`, params, 'POST', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
@@ -289,7 +409,7 @@ export namespace accounts {
         id: string,
         ext_id: string,
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<AccountBankAccountResponse | AccountCardResponse> {
         return client(
             `/accounts/${id}/external_accounts/${ext_id}`,
             {},
@@ -321,7 +441,7 @@ export namespace accounts {
             name?: string
         },
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<AccountBankAccountResponse | AccountCardResponse> {
         return client(
             `/accounts/${id}/external_accounts/${ext_id}`,
             params,
@@ -338,7 +458,11 @@ export namespace accounts {
         id: string,
         ext_id: string,
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<{
+        id: string
+        object: string
+        deleted: boolean
+    }> {
         return client(
             `/accounts/${id}/external_accounts/${ext_id}`,
             {},
@@ -360,7 +484,12 @@ export namespace accounts {
             starting_after?: string
         },
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<{
+        object: string
+        url: string
+        has_more: boolean
+        data: [AccountBankAccountResponse | AccountCardResponse]
+    }> {
         return client(
             `/accounts/${id}/external_accounts?${qs.stringify(params)}`,
             {},

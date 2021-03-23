@@ -1,12 +1,29 @@
 import qs from 'qs'
 
+type DisputesResponse = {
+    id: string
+    object: string
+    amount: number
+    balance_transactions: [unknown]
+    charge: string
+    created: number
+    currency: string
+    evidence: object
+    evidende_details: object
+    is_charge_refundable: boolean
+    livemode: boolean
+    metadata: object
+    payment_intent: string
+    reason: string
+    status: string
+}
 export namespace disputes {
     export let client: Function
 
     export function retrieve(
         id: string,
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<DisputesResponse> {
         return client(`/disputes/${id}`, {}, 'GET', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
@@ -20,7 +37,7 @@ export namespace disputes {
             submit?: boolean
         },
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<DisputesResponse> {
         return client(`/disputes/${id}`, params, 'POST', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
@@ -29,7 +46,7 @@ export namespace disputes {
     export function close(
         id: string,
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<DisputesResponse> {
         return client(`/disputes/${id}/close`, {}, 'POST', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
@@ -45,7 +62,12 @@ export namespace disputes {
             starting_after?: string
         },
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<{
+        object: string
+        url: string
+        has_more: boolean
+        data: [DisputesResponse]
+    }> {
         return client(`/disputes?${qs.stringify(params)}`, params, 'GET', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })

@@ -1,5 +1,17 @@
 import qs from 'qs'
 
+type FileLinksResponse = {
+    id: string
+    object: string
+    created: number
+    expires_at: number
+    url: string
+    file: unknown
+    expired: boolean
+    livemode: boolean
+    metadata: object
+}
+
 export namespace fileLinks {
     export let client: Function
 
@@ -10,7 +22,7 @@ export namespace fileLinks {
             metadata?: [string, unknown]
         },
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<FileLinksResponse> {
         return client(`/file_links`, params, 'POST', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
@@ -19,7 +31,7 @@ export namespace fileLinks {
     export function retrieve(
         id: string,
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<FileLinksResponse> {
         return client(`/file_links/${id}`, {}, 'GET', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
@@ -32,7 +44,7 @@ export namespace fileLinks {
             metadata?: [string, unknown]
         },
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<FileLinksResponse> {
         return client(`/file_links/${id}`, params, 'POST', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
@@ -49,7 +61,12 @@ export namespace fileLinks {
             type?: string
         },
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<{
+        object: string
+        url: string
+        has_more: boolean
+        data: [FileLinksResponse]
+    }> {
         return client(`/file_links?${qs.stringify(params)}`, params, 'GET', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })

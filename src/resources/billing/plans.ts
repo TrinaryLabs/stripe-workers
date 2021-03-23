@@ -1,5 +1,27 @@
 import qs from 'qs'
 
+type PlansResponse = {
+    id: string
+    object: string
+    active: boolean
+    aggregate_usage: unknown
+    amount: number
+    amount_decimal: string
+    billing_scheme: string
+    created: number
+    currency: string
+    interval: string
+    interval_count: number
+    livemode: boolean
+    metadata: object
+    nickname: unknown
+    product: string
+    tiers_mode: unknown
+    transform_usage: unknown
+    trial_period_days: unknown
+    usage_type: string
+}
+
 export namespace plans {
     export let client: Function
 
@@ -24,7 +46,7 @@ export namespace plans {
             usage_type?: string
         },
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<PlansResponse> {
         return client(`/plans`, params, 'POST', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
@@ -33,7 +55,7 @@ export namespace plans {
     export function retrieve(
         id: string,
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<PlansResponse> {
         return client(`/plans/${id}`, {}, 'GET', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
@@ -49,13 +71,20 @@ export namespace plans {
             trial_period_days?: number
         },
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<PlansResponse> {
         return client(`/plans/${id}`, params, 'POST', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
     }
 
-    export function del(id: string, stripeAccount?: string): Promise<unknown> {
+    export function del(
+        id: string,
+        stripeAccount?: string,
+    ): Promise<{
+        id: string
+        object: string
+        deleted: boolean
+    }> {
         return client(`/plans/${id}`, {}, 'DELETE', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
@@ -71,7 +100,12 @@ export namespace plans {
             starting_after?: string
         },
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<{
+        object: string
+        url: string
+        has_more: boolean
+        data: [PlansResponse]
+    }> {
         return client(`/plans?${qs.stringify(params)}`, {}, 'GET', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })

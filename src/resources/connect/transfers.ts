@@ -1,5 +1,38 @@
 import qs from 'qs'
 
+type TransfersResponse = {
+    id: string
+    object: string
+    amount: number
+    amount_reversed: number
+    balance_transaction: string
+    created: number
+    currency: string
+    description: unknown
+    destination: string
+    destination_payment: string
+    livemode: boolean
+    metadata: object
+    reversals: object
+    reversed: boolean
+    source_transaction: unknown
+    source_type: string
+    transfer_group: string
+}
+
+type TransfersReversalResponse = {
+    id: string
+    object: string
+    amount: number
+    balance_transaction: unknown
+    created: number
+    currency: string
+    destination_payment_refund: unknown
+    metadata: object
+    source_refund: unknown
+    transfer: string
+}
+
 export namespace transfers {
     export let client: Function
 
@@ -15,7 +48,7 @@ export namespace transfers {
             transfer_group?: unknown
         },
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<TransfersResponse> {
         return client(`/transfers`, params, 'POST', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
@@ -24,7 +57,7 @@ export namespace transfers {
     export function retrieve(
         id: string,
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<TransfersResponse> {
         return client(`/transfers/${id}`, {}, 'GET', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
@@ -37,7 +70,7 @@ export namespace transfers {
             metadata?: [string, unknown]
         },
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<TransfersResponse> {
         return client(`/transfers/${id}`, params, 'POST', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
@@ -53,7 +86,12 @@ export namespace transfers {
             transfer_group?: unknown
         },
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<{
+        object: string
+        url: string
+        has_more: boolean
+        data: [TransfersResponse]
+    }> {
         return client(`/topups?${qs.stringify(params)}`, {}, 'GET', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
@@ -68,7 +106,7 @@ export namespace transfers {
             refund_application_fee?: boolean
         },
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<TransfersReversalResponse> {
         return client(`/transfers/${id}/reversals`, params, 'POST', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
@@ -78,7 +116,7 @@ export namespace transfers {
         id: string,
         rever_id: string,
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<TransfersReversalResponse> {
         return client(`/transfers/${id}/reversals/${rever_id}`, {}, 'GET', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
@@ -91,7 +129,7 @@ export namespace transfers {
             metadata?: [string, unknown]
         },
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<TransfersReversalResponse> {
         return client(
             `/transfers/${id}/reversals/${rever_id}`,
             params,
@@ -112,7 +150,12 @@ export namespace transfers {
             starting_after?: string
         },
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<{
+        object: string
+        url: string
+        has_more: boolean
+        data: [TransfersReversalResponse]
+    }> {
         return client(
             `/transfer/${id}/reversals?${qs.stringify(params)}`,
             {},

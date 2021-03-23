@@ -1,5 +1,34 @@
 import qs from 'qs'
 
+type OrdersResponse = {
+    id: string,
+    object: string,
+    amount: number,
+    amount_returned: number,
+    application: unknown,
+    application_fee: unknown,
+    charge: string,
+    created: number,
+    currency: string,
+    customer: unknown,
+    email: string,
+    items: [object],
+    livemode: boolean,
+    metadata: object,
+    returns: {
+      object: string,
+      data: [object],
+      has_more: boolean,
+      url: string
+    },
+    selected_shipping_method: string,
+    shipping: object,
+    shipping_methods: [object],
+    status: string,
+    status_transitions: object,
+    updated: number
+}
+
 export namespace orders {
     export let client: Function
 
@@ -14,7 +43,7 @@ export namespace orders {
             coupon?: string
         },
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<OrdersResponse> {
         return client('/orders', params, 'POST', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
@@ -23,7 +52,7 @@ export namespace orders {
     export function retrieve(
         id: string,
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<OrdersResponse> {
         return client(`/orders/${id}`, {}, 'GET', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
@@ -39,7 +68,7 @@ export namespace orders {
             selected_shipping_method?: unknown
         },
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<OrdersResponse> {
         return client(`/orders/${id}`, params, 'POST', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
@@ -55,7 +84,7 @@ export namespace orders {
             application_fee?: number
         },
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<OrdersResponse> {
         return client(`/orders/${id}`, params, 'POST', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
@@ -74,7 +103,12 @@ export namespace orders {
             upstream_ids?: string[]
         },
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<{
+        object: string,
+        url: string,
+        has_more: boolean,
+        data: [OrdersResponse]
+    }> {
         return client(`/orders?${qs.stringify(params)}`, {}, 'GET', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
@@ -86,7 +120,17 @@ export namespace orders {
             items?: object
         },
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<{
+        id: string,
+        object: string,
+        amount: number,
+        created: number,
+        currency: string,
+        items: [object],
+        livemode: boolean,
+        order: string,
+        refund: string
+      }> {
         return client(`/orders/${id}/returns`, params, 'POST', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })

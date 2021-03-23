@@ -1,5 +1,24 @@
 import qs from 'qs'
 
+type SubscriptionSchedulesResponse = {
+    id: string
+    object: string
+    canceled_at: number
+    completed_at: unknown
+    created: number
+    current_phase: unknown
+    customer: string
+    default_settings: object
+    end_behavior: string
+    livemode: boolean
+    metadata: object
+    phases: [object]
+    released_at: unknown
+    released_subscription: unknown
+    status: string
+    subscription: string
+}
+
 export namespace subscriptionSchedules {
     export let client: Function
 
@@ -14,7 +33,7 @@ export namespace subscriptionSchedules {
             from_subscriptions?: unknown
         },
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<SubscriptionSchedulesResponse> {
         return client(`/subscription_schedules`, params, 'POST', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
@@ -23,7 +42,7 @@ export namespace subscriptionSchedules {
     export function retrieve(
         id: string,
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<SubscriptionSchedulesResponse> {
         return client(`/subscription_schedules/${id}`, {}, 'GET', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
@@ -40,7 +59,7 @@ export namespace subscriptionSchedules {
             proration_behavior?: unknown
         },
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<SubscriptionSchedulesResponse> {
         return client(`/subscription_items/${id}`, params, 'POST', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
@@ -53,7 +72,7 @@ export namespace subscriptionSchedules {
             prorate?: unknown
         },
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<SubscriptionSchedulesResponse> {
         return client(`/subscription_schedules/${id}/cancel`, params, 'POST', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
@@ -65,7 +84,7 @@ export namespace subscriptionSchedules {
             preserve_cancel_date?: unknown
         },
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<SubscriptionSchedulesResponse> {
         return client(`/subscription_schedules/${id}/release`, params, 'POST', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
@@ -84,7 +103,12 @@ export namespace subscriptionSchedules {
             starting_after?: string
         },
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<{
+        object: string
+        url: string
+        has_more: boolean
+        data: [SubscriptionSchedulesResponse]
+    }> {
         return client(
             `/subscription_schedules?${qs.stringify(params)}`,
             {},
