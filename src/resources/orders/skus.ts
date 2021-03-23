@@ -1,5 +1,22 @@
 import qs from 'qs'
 
+type SKUResponse = {
+    id: string,
+    object: string,
+    active: boolean,
+    attributes: object,
+    created: number,
+    currency: string,
+    image: unknown,
+    inventory: object,
+    livemode: boolean,
+    metadata: object,
+    package_dimensions: unknown,
+    price: number,
+    product: string,
+    updated: number
+}
+
 export namespace skus {
     export let client: Function
 
@@ -17,7 +34,7 @@ export namespace skus {
             package_dimensions?: object
         },
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<SKUResponse> {
         return client('/skus', params, 'POST', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
@@ -26,7 +43,7 @@ export namespace skus {
     export function retrieve(
         id: string,
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<SKUResponse> {
         return client(`/skus/${id}`, {}, 'GET', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
@@ -46,7 +63,7 @@ export namespace skus {
             package_dimensions?: object
         },
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<SKUResponse> {
         return client(`/skus/${id}`, params, 'POST', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
@@ -64,13 +81,22 @@ export namespace skus {
             starting_after?: string
         },
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<{
+        object: string,
+        url: string,
+        has_more: boolean,
+        data: [SKUResponse]
+    }> {
         return client(`/skus?${qs.stringify(params)}`, {}, 'GET', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
     }
 
-    export function del(id: string, stripeAccount?: string): Promise<unknown> {
+    export function del(id: string, stripeAccount?: string): Promise<{
+        id: string,
+        object: string,
+        deleted: boolean
+      }> {
         return client(`/skus/${id}`, {}, 'DELETE', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
