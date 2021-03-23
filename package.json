@@ -8,7 +8,7 @@
         "format": "prettier --write '**/*.{ts,js,css,json,md}'",
         "build:types": "tsc -d --declarationDir ./dist/types --declarationMap --emitDeclarationOnly"
     },
-    "types": "./dist/types/index.d.ts",
+    "types": "./src/index.d.ts",
     "author": "EduM22",
     "license": "Apache-2.0",
     "devDependencies": {
