@@ -8,7 +8,7 @@ This project is in beta, this SDK is built to follow the offical stripe-node pac
 
 ### Including the package in your workers.dev script
 
-1: git clone `https://github.com/Enforged/stripe-workers.git`  
+1: git clone `https://github.com/TrinaryLabs/stripe-workers.git`  
 2: run `yarn build`  
 3: Go to your workers.dev project  
 4: run `yarn add <path>` where path is the path to where you saved the stripe-js project.  
@@ -17,7 +17,7 @@ This project is in beta, this SDK is built to follow the offical stripe-node pac
 ### 👩 💻 Developing
 
 [`src/index.ts`](./src/index.ts) is the starting point.  
-[`src/resources`](./src/resources) the resources directory contains all the code for the stripe API resources that this package support. [`src/client.ts`](./src/client.ts) contains the fetch client.
+[`src/resources/`](./src/resources/) the resources directory contains all the code for the stripe API resources that this package support. [`src/client.ts`](./src/client.ts) contains the fetch client.
 
 ### 🧪 Testing
 
@@ -29,4 +29,4 @@ This template uses [`prettier`](https://prettier.io/) to format the project. To 
 
 ## 🤢 Issues
 
-If you run into issues with this specific project, please feel free to file an issue [here](https://github.com/Enforged/stripe-workers/issues).
+If you run into issues with this specific project, please feel free to file an issue [here](https://github.com/TrinaryLabs/stripe-workers/issues).

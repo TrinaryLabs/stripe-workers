@@ -2,6 +2,16 @@
     "name": "stripe-workers",
     "version": "0.7.0-beta",
     "description": "An unofficial stripe-sdk for workers.dev and environments that use fetch",
+    "keywords": [
+        "stripe",
+        "workers.dev",
+        "payments",
+        "serverless"
+    ],
+    "bugs": {
+        "url": "https://github.com/TrinaryLabs/stripe-workers/issues"
+    },
+    "homepage": "https://github.com/TrinaryLabs/stripe-workers",
     "main": "./dist/stripe.js",
     "scripts": {
         "build": "webpack",
@@ -9,7 +19,7 @@
         "build:types": "tsc -d --declarationDir ./dist/types --declarationMap --emitDeclarationOnly"
     },
     "types": "./src/index.d.ts",
-    "author": "EduM22",
+    "author": "EduM22 (https://to.rnqvist.com)",
     "license": "Apache-2.0",
     "devDependencies": {
         "@types/chai": "^4.2.11",
