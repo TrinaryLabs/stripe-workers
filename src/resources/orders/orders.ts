@@ -1,31 +1,31 @@
 import qs from 'qs'
 
 type OrdersResponse = {
-    id: string,
-    object: string,
-    amount: number,
-    amount_returned: number,
-    application: unknown,
-    application_fee: unknown,
-    charge: string,
-    created: number,
-    currency: string,
-    customer: unknown,
-    email: string,
-    items: [object],
-    livemode: boolean,
-    metadata: object,
+    id: string
+    object: string
+    amount: number
+    amount_returned: number
+    application: unknown
+    application_fee: unknown
+    charge: string
+    created: number
+    currency: string
+    customer: unknown
+    email: string
+    items: [object]
+    livemode: boolean
+    metadata: object
     returns: {
-      object: string,
-      data: [object],
-      has_more: boolean,
-      url: string
-    },
-    selected_shipping_method: string,
-    shipping: object,
-    shipping_methods: [object],
-    status: string,
-    status_transitions: object,
+        object: string
+        data: [object]
+        has_more: boolean
+        url: string
+    }
+    selected_shipping_method: string
+    shipping: object
+    shipping_methods: [object]
+    status: string
+    status_transitions: object
     updated: number
 }
 
@@ -104,9 +104,9 @@ export namespace orders {
         },
         stripeAccount?: string,
     ): Promise<{
-        object: string,
-        url: string,
-        has_more: boolean,
+        object: string
+        url: string
+        has_more: boolean
         data: [OrdersResponse]
     }> {
         return client(`/orders?${qs.stringify(params)}`, {}, 'GET', {
@@ -121,16 +121,16 @@ export namespace orders {
         },
         stripeAccount?: string,
     ): Promise<{
-        id: string,
-        object: string,
-        amount: number,
-        created: number,
-        currency: string,
-        items: [object],
-        livemode: boolean,
-        order: string,
+        id: string
+        object: string
+        amount: number
+        created: number
+        currency: string
+        items: [object]
+        livemode: boolean
+        order: string
         refund: string
-      }> {
+    }> {
         return client(`/orders/${id}/returns`, params, 'POST', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })

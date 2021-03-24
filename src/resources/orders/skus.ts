@@ -1,19 +1,19 @@
 import qs from 'qs'
 
 type SKUResponse = {
-    id: string,
-    object: string,
-    active: boolean,
-    attributes: object,
-    created: number,
-    currency: string,
-    image: unknown,
-    inventory: object,
-    livemode: boolean,
-    metadata: object,
-    package_dimensions: unknown,
-    price: number,
-    product: string,
+    id: string
+    object: string
+    active: boolean
+    attributes: object
+    created: number
+    currency: string
+    image: unknown
+    inventory: object
+    livemode: boolean
+    metadata: object
+    package_dimensions: unknown
+    price: number
+    product: string
     updated: number
 }
 
@@ -82,9 +82,9 @@ export namespace skus {
         },
         stripeAccount?: string,
     ): Promise<{
-        object: string,
-        url: string,
-        has_more: boolean,
+        object: string
+        url: string
+        has_more: boolean
         data: [SKUResponse]
     }> {
         return client(`/skus?${qs.stringify(params)}`, {}, 'GET', {
@@ -92,11 +92,14 @@ export namespace skus {
         })
     }
 
-    export function del(id: string, stripeAccount?: string): Promise<{
+    export function del(
         id: string,
-        object: string,
+        stripeAccount?: string,
+    ): Promise<{
+        id: string
+        object: string
         deleted: boolean
-      }> {
+    }> {
         return client(`/skus/${id}`, {}, 'DELETE', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })

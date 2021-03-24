@@ -1,5 +1,35 @@
 import qs from 'qs'
 
+type LocationsResponse = {
+    id: string
+    object: string
+    address: {
+        city: string
+        country: string
+        line1: string
+        line2: string
+        postal_code: string
+        state: string
+    }
+    display_name: string
+    livemode: boolean
+    metadata: object
+}
+
+type ReadersResponse = {
+    id: string
+    object: string
+    device_sw_version: string
+    device_type: string
+    ip_address: string
+    label: string
+    livemode: boolean
+    location: string
+    metadata: object
+    serial_number: string
+    status: string
+}
+
 export namespace terminal {
     export namespace connectionTokens {
         export let client: Function
@@ -9,7 +39,10 @@ export namespace terminal {
                 location?: string
             },
             stripeAccount?: string,
-        ): Promise<unknown> {
+        ): Promise<{
+            object: string
+            secret: string
+        }> {
             return client('/terminal/connection_tokens', params, 'POST', {
                 headers: stripeAccount
                     ? { 'Stripe-Account': stripeAccount }
@@ -28,7 +61,7 @@ export namespace terminal {
                 metadata?: [string, unknown]
             },
             stripeAccount?: string,
-        ): Promise<unknown> {
+        ): Promise<LocationsResponse> {
             return client('/terminal/locactions', params, 'POST', {
                 headers: stripeAccount
                     ? { 'Stripe-Account': stripeAccount }
@@ -39,7 +72,7 @@ export namespace terminal {
         export function retrieve(
             id: string,
             stripeAccount?: string,
-        ): Promise<unknown> {
+        ): Promise<LocationsResponse> {
             return client(`/terminal/locactions/${id}`, {}, 'GET', {
                 headers: stripeAccount
                     ? { 'Stripe-Account': stripeAccount }
@@ -55,7 +88,7 @@ export namespace terminal {
                 metadata?: [string, unknown]
             },
             stripeAccount?: string,
-        ): Promise<unknown> {
+        ): Promise<LocationsResponse> {
             return client(`/terminal/locactions/${id}`, params, 'POST', {
                 headers: stripeAccount
                     ? { 'Stripe-Account': stripeAccount }
@@ -66,7 +99,11 @@ export namespace terminal {
         export function del(
             id: string,
             stripeAccount?: string,
-        ): Promise<unknown> {
+        ): Promise<{
+            id: string
+            object: string
+            deleted: boolean
+        }> {
             return client(`/terminal/locactions/${id}`, {}, 'DELETE', {
                 headers: stripeAccount
                     ? { 'Stripe-Account': stripeAccount }
@@ -81,7 +118,12 @@ export namespace terminal {
                 starting_after?: string
             },
             stripeAccount?: string,
-        ): Promise<unknown> {
+        ): Promise<{
+            object: string
+            url: string
+            has_more: boolean
+            data: [LocationsResponse]
+        }> {
             return client(
                 `/terminal/locactions?${qs.stringify(params)}`,
                 {},
@@ -106,7 +148,7 @@ export namespace terminal {
                 metadata?: [string, unknown]
             },
             stripeAccount?: string,
-        ): Promise<unknown> {
+        ): Promise<ReadersResponse> {
             return client('/terminal/readers', params, 'POST', {
                 headers: stripeAccount
                     ? { 'Stripe-Account': stripeAccount }
@@ -117,7 +159,7 @@ export namespace terminal {
         export function retrieve(
             id: string,
             stripeAccount?: string,
-        ): Promise<unknown> {
+        ): Promise<ReadersResponse> {
             return client(`/terminal/readers/${id}`, {}, 'GET', {
                 headers: stripeAccount
                     ? { 'Stripe-Account': stripeAccount }
@@ -132,7 +174,7 @@ export namespace terminal {
                 metadata?: [string, unknown]
             },
             stripeAccount?: string,
-        ): Promise<unknown> {
+        ): Promise<ReadersResponse> {
             return client(`/terminal/readers/${id}`, params, 'POST', {
                 headers: stripeAccount
                     ? { 'Stripe-Account': stripeAccount }
@@ -143,7 +185,11 @@ export namespace terminal {
         export function del(
             id: string,
             stripeAccount?: string,
-        ): Promise<unknown> {
+        ): Promise<{
+            id: string
+            object: string
+            deleted: boolean
+        }> {
             return client(`/terminal/readers/${id}`, {}, 'DELETE', {
                 headers: stripeAccount
                     ? { 'Stripe-Account': stripeAccount }
@@ -161,7 +207,12 @@ export namespace terminal {
                 starting_after?: string
             },
             stripeAccount?: string,
-        ): Promise<unknown> {
+        ): Promise<{
+            object: string
+            url: string
+            has_more: boolean
+            data: [ReadersResponse]
+        }> {
             return client(
                 `/terminal/readers?${qs.stringify(params)}`,
                 {},

@@ -2,23 +2,26 @@ import qs from 'qs'
 
 type SourcesResponse = {
     id: string
-    object: string
-    ach_credit_transfer: object
     amount: unknown
-    client_secret: string
-    created: number
     currency: string
-    flow: string
-    livemode: Blob
+    customer: string
     metadata: object
     owner: object
-    receiver: object
-    statement_descriptor: unknown
+    redirect: object
+    statement_descriptor: string
     status: string
     type: string
+    object: string
+    client_secret: string
+    code_verification: object
+    created: number
+    flow: string
+    livemode: boolean
+    receiver: object
+    source_order: object
     usage: string
+    ach_credit_transfer: object
 }
-
 export namespace sources {
     export let client: Function
 
@@ -39,7 +42,7 @@ export namespace sources {
             usage?: string
         },
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<SourcesResponse> {
         return client('/sources', params, 'POST', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
@@ -51,7 +54,7 @@ export namespace sources {
             client_secret: string // how should we use this????
         },
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<SourcesResponse> {
         return client(`/sources/${id}?${qs.stringify(params)}`, {}, 'GET', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
@@ -67,7 +70,7 @@ export namespace sources {
             source_order?: object
         },
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<SourcesResponse> {
         return client(`/sources/${id}`, params, 'POST', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })

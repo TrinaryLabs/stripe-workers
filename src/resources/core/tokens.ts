@@ -1,3 +1,15 @@
+type TokensResponse = {
+    id: string
+    object: string
+    bank_account: object
+    card: object
+    client_ip: string
+    created: number
+    livemode: boolean
+    type: string
+    used: boolean
+}
+
 export namespace tokens {
     export let client: Function
 
@@ -62,7 +74,7 @@ export namespace tokens {
             }
         },
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<TokensResponse> {
         return client('/tokens', params, 'POST', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
@@ -71,7 +83,7 @@ export namespace tokens {
     export function retrieve(
         id: string,
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<TokensResponse> {
         return client(`/tokens/${id}`, {}, 'GET', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
