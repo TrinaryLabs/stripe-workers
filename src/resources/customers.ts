@@ -26,22 +26,107 @@ type CustomersResponse = {
 
 type SourcesResponse = {
     id: string
-    object: string
-    ach_credit_transfer: object
     amount: unknown
-    client_secret: string
-    created: number
     currency: string
-    flow: string
-    livemode: Blob
+    customer: string
     metadata: object
     owner: object
-    receiver: object
-    statement_descriptor: unknown
+    redirect: object
+    statement_descriptor: string
     status: string
     type: string
+    object: string
+    client_secret: string
+    code_verification: object
+    created: number
+    flow: string
+    livemode: boolean
+    receiver: object
+    source_order: object
     usage: string
+    ach_credit_transfer: object
 }
+
+type CardSourceResponse = {
+    id: string
+    object: string
+    address_city: string
+    address_country: string
+    address_line1: string
+    address_line1_check: string
+    address_line2: string
+    address_state: string
+    address_zip: string
+    address_zip_check: string
+    brand: string
+    country: string
+    customer: string
+    cvc_check: string
+    dynamic_last4: string
+    exp_month: number
+    exp_year: number
+    fingerprint: string
+    funding: string
+    last4: string
+    metadata: object
+    name: string
+    tokenization_method: string
+    account: string
+    available_payout_methods: [unknown]
+    currency: string
+    recipient: string
+}
+
+type BankAccountResponse = {
+    id: string
+    object: string
+    account_holder_name: string
+    account_holder_type: string
+    bank_name: string
+    country: string
+    currency: string
+    customer: string
+    fingerprint: string
+    last4: string
+    metadata: object
+    routing_number: string
+    status: string
+    account: string
+    available_payout_methods: [unknown]
+}
+
+type TaxIDsResponse = {
+    id: string
+    object: string
+    country: string
+    created: number
+    customer: string
+    livemode: boolean
+    type: string
+    value: string
+    verification: {
+        status: string
+        verified_address: string
+        verified_name: string
+    }
+}
+
+type CustomerBalanceTransactionResponse = {
+    id: string
+    amount: number
+    currency: string
+    customer: string
+    description: string
+    ending_balance: number
+    metadata: object
+    type: string
+    object: string
+    created: number
+    credit_note: string
+    invoice: string
+    livemode: boolean
+}
+
 export namespace customers {
     export let client: Function
 
@@ -148,7 +233,7 @@ export namespace customers {
             metadata?: [string, unknown]
         },
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<SourcesResponse | CardSourceResponse | BankAccountResponse> {
         return client(`/customers/${cus_id}/sources`, params, 'POST', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
@@ -158,7 +243,7 @@ export namespace customers {
         cus_id: string,
         id: string,
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<CardSourceResponse | BankAccountResponse> {
         return client(`/customers/${cus_id}/sources/${id}`, {}, 'GET', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
@@ -181,7 +266,7 @@ export namespace customers {
             metadata?: [string, unknown]
         },
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<CardSourceResponse | BankAccountResponse> {
         return client(`/customers/${cus_id}/sources/${id}`, params, 'POST', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
@@ -196,7 +281,7 @@ export namespace customers {
             metadata?: [string, unknown]
         },
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<BankAccountResponse> {
         return client(
             `/customers/${cus_id}/sources/${ba_id}/verify`,
             params,
@@ -213,7 +298,14 @@ export namespace customers {
         cus_id: string,
         id: string,
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<
+        | SourcesResponse
+        | {
+              id: string
+              object: string
+              deleted: boolean
+          }
+    > {
         return client(`/customers/${cus_id}/sources/${id}`, {}, 'DELETE', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
@@ -228,7 +320,12 @@ export namespace customers {
             starting_after?: string
         },
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<{
+        object: string
+        url: string
+        has_more: boolean
+        data: [CardSourceResponse | BankAccountResponse]
+    }> {
         return client(
             `/customers/${cus_id}/sources?${qs.stringify(params)}`,
             {},
@@ -250,7 +347,7 @@ export namespace customers {
             metadata?: [string, unknown]
         },
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<CustomerBalanceTransactionResponse> {
         return client(`/customers/${id}/balance_transactions`, params, 'POST', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
@@ -260,7 +357,7 @@ export namespace customers {
         id: string,
         tra_id: string,
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<CustomerBalanceTransactionResponse> {
         return client(
             `/customers/${id}/balance_transactions/${tra_id}`,
             {},
@@ -281,7 +378,7 @@ export namespace customers {
             metadata?: [string, unknown]
         },
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<CustomerBalanceTransactionResponse> {
         return client(
             `/customers/${id}/balance_transactions/${tra_id}`,
             params,
@@ -302,7 +399,12 @@ export namespace customers {
             starting_after?: string
         },
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<{
+        object: string
+        url: string
+        has_more: boolean
+        data: [CustomerBalanceTransactionResponse]
+    }> {
         return client(
             `/customers/${id}/balance_transactions?${qs.stringify(params)}`,
             {},
@@ -322,7 +424,7 @@ export namespace customers {
             value: string
         },
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<TaxIDsResponse> {
         return client(`/customers/${id}/tax_ids`, params, 'POST', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
@@ -332,7 +434,7 @@ export namespace customers {
         cus_id: string,
         tax_id: string,
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<TaxIDsResponse> {
         return client(`/customers/${cus_id}/tax_ids/${tax_id}`, {}, 'GET', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
@@ -342,7 +444,11 @@ export namespace customers {
         cus_id: string,
         tax_id: string,
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<{
+        id: string
+        object: string
+        deleted: boolean
+    }> {
         return client(`/customers/${cus_id}/tax_ids/${tax_id}`, {}, 'DELETE', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
@@ -356,7 +462,12 @@ export namespace customers {
             starting_after?: string
         },
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<{
+        object: string
+        url: string
+        has_more: boolean
+        data: [TaxIDsResponse]
+    }> {
         return client(
             `/customers/${id}/tax_ids?${qs.stringify(params)}`,
             {},
@@ -372,7 +483,10 @@ export namespace customers {
     export function deleteDiscount(
         cus_id: string,
         stripeAccount?: string,
-    ): Promise<unknown> {
+    ): Promise<{
+        object: string
+        deleted: boolean
+    }> {
         return client(`/customers/${cus_id}/discount`, {}, 'DELETE', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })
