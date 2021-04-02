@@ -4,7 +4,7 @@ An unofficial stripe-sdk for [workers.dev](https://workers.dev) and environments
 
 ### BETA
 
-This project is in beta, this SDK is built to follow the offical stripe-node package.
+This project is in beta, this SDK is built to follow the offical stripe-api & follow the namespace structure of stripe-node . If you find any errors please file an issue
 
 ### Including the package in your workers.dev script
 
@@ -12,20 +12,14 @@ This project is in beta, this SDK is built to follow the offical stripe-node pac
 2: run `yarn build`  
 3: Go to your workers.dev project  
 4: run `yarn add <path>` where path is the path to where you saved the stripe-js project.  
-5: add `import { Stripe } from 'stripe-workers'` to your code
+5: add `import { Stripe } from 'stripe-workers'` to your code  
+6: create stripe `const stripe = new Stripe('key', {})`
 
 ### 👩 💻 Developing
 
 [`src/index.ts`](./src/index.ts) is the starting point.  
-[`src/resources/`](./src/resources/) the resources directory contains all the code for the stripe API resources that this package support. [`src/client.ts`](./src/client.ts) contains the fetch client.
-
-### 🧪 Testing
-
-This template comes with mocha tests which simply test that the request handler can handle each request method. `yarn test` will run your tests.
-
-### ✏️ Formatting
-
-This template uses [`prettier`](https://prettier.io/) to format the project. To invoke, run `yarn format`.
+[`src/resources/`](./src/resources/) the resources directory contains all the code for the stripe API resources that this package support. 
+[`src/client.ts`](./src/client.ts) contains the fetch client.
 
 ## 🤢 Issues
 

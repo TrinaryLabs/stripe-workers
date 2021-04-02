@@ -96,7 +96,7 @@ export namespace accounts {
         params: {
             type: string
             country?: string
-            email: string
+            email?: string
             capabilities?: object
             business_type?: string
             company?: object

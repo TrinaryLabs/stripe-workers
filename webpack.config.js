@@ -4,10 +4,10 @@ const webpack = require('webpack')
 const mode = process.env.NODE_ENV || 'production'
 
 module.exports = {
+    entry: './src/index.ts',
     output: {
-        library: 'stripe',
-        libraryTarget: 'commonjs2',
-        filename: `stripe.js`,
+        libraryTarget: 'commonjs',
+        filename: `index.js`,
         path: path.join(__dirname, 'dist'),
     },
     mode,
