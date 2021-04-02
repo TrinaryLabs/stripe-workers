@@ -21,6 +21,20 @@ jobs:
       - run: yarn build:types
       #- run: yarn test
 
+  publish-gpr:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+          registry-url: https://npm.pkg.github.com/
+      - run: yarn
+      - run: yarn publish
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+
   # publish-npm:
   # needs: build
   # runs-on: ubuntu-latest
@@ -34,17 +48,3 @@ jobs:
   #   - run: yarn publish
   #     env:
   #       NODE_AUTH_TOKEN: ${{secrets.npm_token}}
-
-    publish-gpr:
-      needs: build
-      runs-on: ubuntu-latest
-      steps:
-        - uses: actions/checkout@v2
-        - uses: actions/setup-node@v1
-          with:
-            node-version: 12
-            registry-url: https://npm.pkg.github.com/
-        - run: yarn
-        - run: yarn publish
-          env:
-            NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
