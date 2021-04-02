@@ -54,12 +54,12 @@ export * from '../dist/types/src/resources/terminal/terminal'
 export * from '../dist/types/src/resources/fraud/radar'
 export * from '../dist/types/src/resources/fraud/reviews'
 
-export * from '../dist/types/src/resources/files'
+export * from '../dist/types/src/resources/core/files'
 
-export * from '../dist/types/src/resources/paymentIntents'
-export * from '../dist/types/src/resources/customers'
+export * from '../dist/types/src/resources/core/paymentIntents'
+export * from '../dist/types/src/resources/core/customers'
 export * from '../dist/types/src/error'
 export * from '../dist/types/src/client'
 export * from '../dist/types/src/index'
 
-declare module 'stripe-workers'
+//declare module 'stripe-workers'

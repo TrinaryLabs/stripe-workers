@@ -12,14 +12,14 @@
         "url": "https://github.com/TrinaryLabs/stripe-workers/issues"
     },
     "homepage": "https://github.com/TrinaryLabs/stripe-workers",
-    "main": "./dist/stripe.js",
+    "main": "./dist/index.js",
     "scripts": {
         "build": "webpack",
         "format": "prettier --write '**/*.{ts,js,css,json,md}'",
         "build:types": "tsc -d --declarationDir ./dist/types --declarationMap --emitDeclarationOnly"
     },
     "types": "./src/index.d.ts",
-    "author": "EduM22 (https://to.rnqvist.com)",
+    "author": "EduM22 <38257387+EduM22@users.noreply.github.com> (https://to.rnqvist.com)",
     "license": "Apache-2.0",
     "devDependencies": {
         "@types/chai": "^4.2.15",
