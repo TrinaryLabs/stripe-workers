@@ -18,7 +18,7 @@ This project is in beta, this SDK is built to follow the offical stripe-api & fo
 ### 👩 💻 Developing
 
 [`src/index.ts`](./src/index.ts) is the starting point.  
-[`src/resources/`](./src/resources/) the resources directory contains all the code for the stripe API resources that this package support. 
+[`src/resources/`](./src/resources/) the resources directory contains all the code for the stripe API resources that this package support.
 [`src/client.ts`](./src/client.ts) contains the fetch client.
 
 ## 🤢 Issues

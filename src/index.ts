@@ -130,7 +130,7 @@ export class Stripe {
         this.subscriptionItems = subscriptionItems
 
         this.checkout.sessions.client = client.request
-        this.billingPortal.sessions.client = client.request
+        this.billingPortal.client = client.request
         this.accounts.client = client.request
         this.customers.client = client.request
         this.accountLinks.client = client.request

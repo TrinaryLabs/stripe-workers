@@ -16,8 +16,7 @@
     "scripts": {
         "build": "webpack",
         "format": "prettier --write '**/*.{ts,js,css,json,md}'",
-        "build:types": "tsc -d --declarationDir ./dist/types --declarationMap --emitDeclarationOnly",
-        "build-ts": "tsc -d"
+        "build:types": "tsc -d --declarationDir ./dist/types --declarationMap --emitDeclarationOnly"
     },
     "types": "./src/index.d.ts",
     "author": "EduM22 <38257387+EduM22@users.noreply.github.com> (https://to.rnqvist.com)",
