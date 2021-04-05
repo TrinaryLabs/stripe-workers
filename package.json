@@ -1,5 +1,5 @@
 {
-    "name": "stripe-workers",
+    "name": "@trinarylabs/stripe-workers",
     "version": "0.7.0-beta",
     "description": "An unofficial stripe-sdk for workers.dev and environments that use fetch",
     "keywords": [
@@ -17,6 +17,9 @@
         "build": "webpack",
         "format": "prettier --write '**/*.{ts,js,css,json,md}'",
         "build:types": "tsc -d --declarationDir ./dist/types --declarationMap --emitDeclarationOnly"
+    },
+    "publishConfig": {
+        "registry": "https://npm.pkg.github.com"
     },
     "types": "./src/index.d.ts",
     "author": "EduM22 <38257387+EduM22@users.noreply.github.com> (https://to.rnqvist.com)",
