@@ -2,14 +2,14 @@ import qs from 'qs'
 
 type FileLinksResponse = {
     id: string
+    expires_at: number
+    file: string
+    metadata: object
+    url: string
     object: string
     created: number
-    expires_at: number
-    url: string
-    file: unknown
     expired: boolean
     livemode: boolean
-    metadata: object
 }
 
 export namespace fileLinks {

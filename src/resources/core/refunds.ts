@@ -2,19 +2,22 @@ import qs from 'qs'
 
 type RefundsResponse = {
     id: string
-    object: string
     amount: number
-    balance_transaction: unknown
     charge: string
-    created: number
     currency: string
+    description: string
     metadata: object
-    payment_intent: unknown
-    reason: unknown
-    receipt_number: unknown
-    source_transfer_reversal: unknown
+    payment_intent: string
+    reason: string
     status: string
-    transfer_reversal: unknown
+    object: string
+    balance_transaction: string
+    created: number
+    failure_balance_transaction: string
+    failure_reason: string
+    receipt_number: string
+    source_transfer_reversal: string
+    transfer_reversal: string
 }
 export namespace refunds {
     export let client: Function

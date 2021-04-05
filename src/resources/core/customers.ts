@@ -3,25 +3,65 @@ import qs from 'qs'
 type CustomersResponse = {
     id: string
     object: string
-    address: unknown
+    address: {
+        city: string
+        country: string
+        line1: string
+        line2: string
+        postal_code: string
+        state: string
+    }
     balance: number
     created: number
     currency: string
-    default_source: unknown
+    default_source: string
     delinquent: boolean
-    description: unknown
-    discount: unknown
-    email: unknown
+    description: string
+    discount: object
+    email: string
     invoice_prefix: string
     invoice_settings: object
     livemode: boolean
     metadata: object
-    name: unknown
+    name: string
     next_invoice_sequence: number
-    phone: unknown
+    phone: string
     preferred_locales: []
-    shipping: unknown
+    shipping: {
+        address: {
+            city: string
+            country: string
+            line1: string
+            line2: string
+            postal_code: string
+            state: string
+        }
+        name: string
+        phone: string
+    }
     tax_exempt: string
+    tax_ids: {
+        object: string
+        has_more: boolean
+        url: string
+        data: [
+            {
+                id: string
+                object: string
+                country: string
+                created: number
+                customer: string
+                livemode: boolean
+                type: string
+                value: string
+                verification: {
+                    status: string
+                    verified_address: string
+                    verified_name: string
+                }
+            }
+        ]
+    }
 }
 
 type SourcesResponse = {

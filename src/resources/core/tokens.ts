@@ -1,8 +1,44 @@
 type TokensResponse = {
     id: string
     object: string
-    bank_account: object
-    card: object
+    bank_account: {
+        id: string
+        object: string
+        account_holder_name: string
+        account_holder_type: string
+        bank_name: string
+        country: string
+        currency: string
+        fingerprint: string
+        last4: string
+        routing_number: string
+        status: string
+    }
+    card: {
+        id: string
+        object: string
+        address_city: string
+        address_country: string
+        address_line1: string
+        address_line1_check: string
+        address_line2: string
+        address_state: string
+        address_zip: string
+        address_zip_check: string
+        brand: string
+        country: string
+        currency: string
+        cvc_check: string
+        dynamic_last4: string
+        exp_month: number
+        exp_year: number
+        fingerprint: string
+        funding: string
+        last4: string
+        metadata: object
+        name: string
+        tokenization_method: string
+    }
     client_ip: string
     created: number
     livemode: boolean

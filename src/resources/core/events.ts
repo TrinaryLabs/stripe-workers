@@ -5,7 +5,10 @@ type EventRetrieveResponse = {
     object: string
     api_version: string
     created: number
-    data: object
+    data: {
+        object: object
+        previous_attributes: object
+    }
     expires_at: number
     url: string
     file: unknown

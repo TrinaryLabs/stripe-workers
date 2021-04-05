@@ -2,17 +2,25 @@ import qs from 'qs'
 
 type ProductsResponse = {
     id: string
-    object: string
     active: boolean
-    created: number
-    description: unknown
-    images: []
-    livemode: boolean
+    description: string
     metadata: object
     name: string
-    statement_descriptor: unknown
-    unit_label: unknown
+    object: string
+    created: number
+    images: [string]
+    livemode: boolean
+    package_dimensions: {
+        height: number
+        length: number
+        weight: number
+        width: number
+    }
+    shippable: boolean
+    statement_descriptor: string
+    unit_label: string
     updated: number
+    url: string
 }
 
 export namespace products {

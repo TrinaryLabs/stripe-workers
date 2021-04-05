@@ -2,26 +2,26 @@ import qs from 'qs'
 
 type PayoutsResponse = {
     id: string
-    object: string
     amount: number
     arrival_date: number
+    currency: string
+    description: string
+    metadata: object
+    statement_descriptor: string
+    status: string
+    object: string
     automatic: boolean
     balance_transaction: string
     created: number
-    currency: string
-    description: string
     destination: string
-    failure_balance_transaction: unknown
-    failure_code: unknown
-    failure_message: unknown
+    failure_balance_transaction: string
+    failure_code: string
+    failure_message: string
     livemode: boolean
-    metadata: object
     method: string
-    original_payout: unknown
-    reversed_by: unknown
+    original_payout: string
+    reversed_by: string
     source_type: string
-    statement_descriptor: unknown
-    status: string
     type: string
 }
 

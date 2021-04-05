@@ -7,13 +7,13 @@ type BalanceTransactionsResponse = {
     available_on: number
     created: number
     currency: string
-    description: unknown
+    description: string
     exchange_rate: number
     fee: number
     fee_details: [
         {
             amount: number
-            application: unknown
+            application: string
             currency: string
             description: string
             type: string
@@ -42,12 +42,22 @@ export namespace balanceTransactions {
         params: {
             payout?: string
             type?: string
-            available_on?: object
-            created?: object
+            available_on?: {
+                gt: string
+                gte: string
+                lt: string
+                lte: string
+            } | string
+            created?: {
+                gt: string
+                gte: string
+                lt: string
+                lte: string
+            } | string
             currency?: string
             ending_before?: string
             limit?: number
-            source?: unknown
+            source?: string
             starting_after?: string
         },
         stripeAccount?: string,

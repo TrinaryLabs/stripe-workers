@@ -6,9 +6,9 @@ type ChargesResponse = {
     amount: number
     amount_captured: number
     amount_refunded: number
-    application: unknown
-    application_fee: unknown
-    application_fee_amount: unknown
+    application: string
+    application_fee: string
+    application_fee_amount: number
     balance_transaction: string
     billing_details: {
         address: {
@@ -23,39 +23,63 @@ type ChargesResponse = {
         name: string
         phone: string
     }
-    calculated_statement_descriptor: unknown
+    calculated_statement_descriptor: string
     captured: boolean
     created: number
     currency: string
-    customer: unknown
+    customer: string
     description: string
     disputed: boolean
-    failure_code: unknown
-    failure_message: unknown
+    failure_code: string
+    failure_message: string
     fraud_details: object
-    invoice: unknown
+    invoice: string
     livemode: boolean
     metadata: object
-    on_behalf_of: unknown
-    order: unknown
-    outcome: unknown
+    on_behalf_of: string
+    order: string
+    outcome: {
+        network_status: string
+        reason: string
+        risk_level: string
+        risk_score: number
+        rule: string
+        seller_message: string
+        type: string
+    }
     paid: boolean
-    payment_intent: unknown
+    payment_intent: string
     payment_method: string
     payment_method_details: object
     receipt_email: string
-    receipt_number: unknown
+    receipt_number: string
     receipt_url: string
     refunded: boolean
     refunds: object
-    review: unknown
-    shipping: unknown
-    source_transfer: unknown
-    statement_descriptor: unknown
-    statement_descriptor_suffix: unknown
+    review: string
+    shipping: {
+        address: {
+            city: string
+            country: string
+            line1: string
+            line2: string
+            postal_code: string
+            state: string
+        }
+        carrier: string
+        name: string
+        phone: string
+        tracking_number: string
+    }
+    source_transfer: string
+    statement_descriptor: string
+    statement_descriptor_suffix: string
     status: string
-    transfer_data: unknown
-    transfer_group: unknown
+    transfer_data: {
+        amount: number
+        destination: string
+    }
+    transfer_group: string
     source: string
 }
 
