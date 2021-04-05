@@ -13,6 +13,9 @@
     },
     "homepage": "https://github.com/TrinaryLabs/stripe-workers",
     "main": "./dist/index.js",
+    "files": [
+        "dist"
+    ],
     "scripts": {
         "build": "webpack",
         "format": "prettier --write '**/*.{ts,js,css,json,md}'",
