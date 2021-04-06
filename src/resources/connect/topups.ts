@@ -4,19 +4,19 @@ type TopUpsResponse = {
     id: string
     object: string
     amount: number
-    balance_transaction: unknown
+    balance_transaction: string
     created: number
     currency: string
     description: string
     expected_availability_date: number
-    failure_code: unknown
-    failure_message: unknown
+    failure_code: string
+    failure_message: string
     livemode: boolean
     metadata: object
     source: object
     statement_descriptor: string | unknown
     status: string
-    transfer_group: unknown
+    transfer_group: string
 }
 export namespace topups {
     export let client: Function

@@ -2,31 +2,96 @@ import qs from 'qs'
 
 type OrdersResponse = {
     id: string
-    object: string
     amount: number
-    amount_returned: number
-    application: unknown
-    application_fee: unknown
     charge: string
-    created: number
     currency: string
-    customer: unknown
+    customer: string
     email: string
-    items: [object]
-    livemode: boolean
+    items: [
+        {
+            object: string
+            amount: number
+            currency: string
+            description: string
+            parent: string
+            quantity: number
+            type: string
+        }
+    ]
     metadata: object
+    shipping: {
+        address: {
+            city: string
+            country: string
+            line1: string
+            line2: string
+            postal_code: string
+            state: string
+        }
+        carrier: string
+        name: string
+        phone: string
+        tracking_number: string
+    }
+    status: string
+    object: string
+    amount_returned: number
+    application: string
+    application_fee: number
+    created: number
+    external_coupon_code: string
+    livemode: boolean
     returns: {
         object: string
-        data: [object]
+        data: [
+            {
+                id: string
+                object: string
+                amount: number
+                created: number
+                currency: string
+                items: [
+                    {
+                        object: string
+                        amount: number
+                        currency: string
+                        description: string
+                        parent: string
+                        quantity: number
+                        type: string
+                    }
+                ]
+                livemode: boolean
+                order: string
+                refund: string
+            }
+        ]
         has_more: boolean
         url: string
     }
     selected_shipping_method: string
-    shipping: object
-    shipping_methods: [object]
-    status: string
-    status_transitions: object
+    shipping_methods: [
+        {
+            id: string
+            amount: number
+            currency: string
+            delivery_estimate: {
+                date: string
+                earliest: string
+                latest: string
+                type: string
+            }
+            description: string
+        }
+    ]
+    status_transitions: {
+        canceled: number
+        fulfiled: number
+        paid: number
+        returned: number
+    }
     updated: number
+    upstream_id: string
 }
 
 export namespace orders {

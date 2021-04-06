@@ -8,14 +8,14 @@ type TransfersResponse = {
     balance_transaction: string
     created: number
     currency: string
-    description: unknown
+    description: string
     destination: string
     destination_payment: string
     livemode: boolean
     metadata: object
     reversals: object
     reversed: boolean
-    source_transaction: unknown
+    source_transaction: string
     source_type: string
     transfer_group: string
 }
@@ -24,12 +24,12 @@ type TransfersReversalResponse = {
     id: string
     object: string
     amount: number
-    balance_transaction: unknown
+    balance_transaction: string
     created: number
     currency: string
-    destination_payment_refund: unknown
+    destination_payment_refund: string
     metadata: object
-    source_refund: unknown
+    source_refund: string
     transfer: string
 }
 

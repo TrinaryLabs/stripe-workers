@@ -4,7 +4,7 @@ type AccountsResponse = {
     id: string
     object: string
     business_profile: object
-    business_type: unknown
+    business_type: string
     capabilities: object
     charges_enabled: boolean
     country: string

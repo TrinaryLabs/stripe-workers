@@ -3,8 +3,8 @@ import qs from 'qs'
 type WebhookEndpointResponse = {
     id: string
     object: string
-    api_version: unknown
-    application: unknown
+    api_version: string
+    application: string
     created: number
     description: string
     enabled_events: [string]

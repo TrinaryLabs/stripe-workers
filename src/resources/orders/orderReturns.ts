@@ -2,14 +2,24 @@ import qs from 'qs'
 
 type OrderReturnsResponse = {
     id: string
-    object: string
     amount: number
-    created: number
     currency: string
-    items: [object]
-    livemode: boolean
+    items: [
+        {
+            object: string
+            amount: number
+            currency: string
+            description: string
+            parent: string
+            quantity: number
+            type: string
+        }
+    ]
     order: string
     refund: string
+    object: string
+    created: number
+    livemode: boolean
 }
 
 export namespace orderReturns {

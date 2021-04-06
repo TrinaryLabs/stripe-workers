@@ -3,17 +3,28 @@ import qs from 'qs'
 type ReviewsResponse = {
     id: string
     object: string
-    billing_zip: unknown
+    billing_zip: string
     charge: string
-    closed_reason: unknown
+    closed_reason: string
     created: number
-    ip_address: unknown
-    ip_address_location: unknown
+    ip_address: string
+    ip_address_location: {
+        city: string
+        country: string
+        latitude: number
+        longitude: number
+        region: string
+    }
     livemode: boolean
     open: boolean
     opened_reason: string
     reason: string
-    session: unknown
+    session: {
+        browser: string
+        device: string
+        platform: string
+        version: string
+    }
 }
 
 export namespace reviews {

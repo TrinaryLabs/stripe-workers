@@ -2,18 +2,27 @@ import qs from 'qs'
 
 type SKUResponse = {
     id: string
-    object: string
     active: boolean
     attributes: object
-    created: number
     currency: string
-    image: unknown
-    inventory: object
-    livemode: boolean
+    image: string
+    inventory: {
+        quantity: number
+        type: string
+        value: string
+    }
     metadata: object
-    package_dimensions: unknown
     price: number
     product: string
+    object: string
+    created: number
+    livemode: boolean
+    package_dimensions: {
+        height: number
+        length: number
+        weight: number
+        width: number
+    }
     updated: number
 }
 

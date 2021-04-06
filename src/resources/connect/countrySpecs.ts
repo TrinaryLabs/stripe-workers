@@ -8,7 +8,16 @@ type CountrySpecsResponse = {
     supported_payment_currencies: [string]
     supported_payment_methods: [string]
     supported_transfer_countries: [string]
-    verification_fields: object
+    verification_fields: {
+        company: {
+            additional: [string]
+            minimum: [string]
+        }
+        individual: {
+            additional: [string]
+            minimum: [string]
+        }
+    }
 }
 
 export namespace countrySpecs {

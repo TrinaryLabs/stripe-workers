@@ -2,25 +2,90 @@ import qs from 'qs'
 
 type SourcesResponse = {
     id: string
-    amount: unknown
+    amount: number
     currency: string
     customer: string
     metadata: object
-    owner: object
-    redirect: object
+    owner: {
+        address: {
+            city: string
+            country: string
+            line1: string
+            line2: string
+            postal_code: string
+            state: string
+        }
+        email: string
+        name: string
+        phone: string
+        verified_address: {
+            city: string
+            country: string
+            line1: string
+            line2: string
+            postal_code: string
+            state: string
+        }
+        verified_email: string
+        verified_name: string
+        verified_phone: string
+    }
+    redirect: {
+        failure_reason: string
+        return_url: string
+        status: string
+        url: string
+    }
     statement_descriptor: string
     status: string
     type: string
     object: string
     client_secret: string
-    code_verification: object
+    code_verification: {
+        attempts_remaining: number
+        status: string
+    }
     created: number
     flow: string
     livemode: boolean
-    receiver: object
-    source_order: object
+    receiver: {
+        address: string
+        amount_charged: number
+        amount_received: number
+        amount_returned: number
+        refund_attributes_method: string
+        refund_attributes_status: string
+    }
+    source_order: {
+        amount: number
+        currency: string
+        email: string
+        items: [
+            {
+                amount: number
+                currency: string
+                description: string
+                parent: string
+                quantity: number
+                type: string
+            }
+        ]
+        shipping: {
+            address: {
+                city: string
+                country: string
+                line1: string
+                line2: string
+                postal_code: string
+                state: string
+            }
+            carrier: string
+            name: string
+            phone: string
+            tracking_number: string
+        }
+    }
     usage: string
-    ach_credit_transfer: object
 }
 export namespace sources {
     export let client: Function

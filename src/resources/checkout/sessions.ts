@@ -2,32 +2,88 @@ import qs from 'qs'
 
 type CheckoutSessionsResponse = {
     id: string
-    object: string
-    allow_promotion_codes: boolean | undefined
-    amount_subtotal: number | undefined
-    amount_total: number | undefined
-    billing_address_collection: unknown
     cancel_url: string
     client_reference_id: string | undefined
-    currency: string | undefined
     customer: string | undefined
-    customer_details: unknown
     customer_email: string | undefined
-    livemode: boolean
-    locale: string | undefined
+    line_items: {
+
+    }
     metadata: object
     mode: string
     payment_intent: string
     payment_method_types: [string]
     payment_status: string
-    setup_intent: string | undefined
-    shipping: unknown
-    shipping_address_collection: unknown
-    submit_type: string | undefined
-    subscription: unknown
     success_url: string
-    total_details: unknown
-    data?: [object]
+    object: string
+    allow_promotion_codes: boolean | undefined
+    amount_subtotal: number | undefined
+    amount_total: number | undefined
+    billing_address_collection: string
+    currency: string | undefined
+    customer_details: {
+        email: string
+        tax_exempt: string
+        tax_ids: [
+            {
+                type: string
+                value: string
+            }
+        ]
+    }
+    livemode: boolean
+    locale: string | undefined
+    payment_method_options: object
+    setup_intent: string | undefined
+    shipping: {
+        address: {
+            city: string
+            country: string
+            line1: string
+            line2: string
+            postal_code: string
+            state: string
+        }
+        name: string
+    }
+    shipping_address_collection: {
+        allowed_countries: [string]
+    }
+    submit_type: string | undefined
+    subscription: string
+    total_details: {
+        amount_discount: number
+        amount_shipping: number
+        amount_tax: number
+        breakdown: {
+            discounts: [
+                {
+                    amount: number
+                    discount: object
+                }
+            ]
+            taxes: [
+                {
+                    amount: number
+                    rate: {
+                        id: string
+                        object: string
+                        active: boolean
+                        country: string
+                        created: number
+                        description: string
+                        display_name: string
+                        inclusive: boolean
+                        jurisdiction: string
+                        livemode: boolean
+                        metadata: object
+                        percentage: number
+                        state: string 
+                    }
+                }
+            ]
+        }
+    }
 }
 export namespace checkout {
     export namespace sessions {

@@ -12,16 +12,32 @@ type ApplicationFeesResponse = {
     created: number
     currency: string
     livemode: boolean
-    originating_transaction: unknown
+    originating_transaction: string
     refunded: boolean
-    refunds: object
+    refunds: {
+        object: string
+        data: [
+            {
+                id: string
+                object: string
+                amount: number
+                balance_transaction: string
+                created: number
+                currency: string
+                fee: string
+                metadata: object
+            }
+        ]
+        has_more: boolean
+        url: string
+    }
 }
 
 type ApplicationFeesRefundResponse = {
     id: string
     object: string
     amount: number
-    balance_transaction: unknown
+    balance_transaction: string
     created: number
     currency: string
     fee: string
