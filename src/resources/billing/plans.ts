@@ -4,7 +4,7 @@ type PlansResponse = {
     id: string
     object: string
     active: boolean
-    aggregate_usage: unknown
+    aggregate_usage: string
     amount: number
     amount_decimal: string
     billing_scheme: string
@@ -14,11 +14,22 @@ type PlansResponse = {
     interval_count: number
     livemode: boolean
     metadata: object
-    nickname: unknown
+    nickname: string
     product: string
-    tiers_mode: unknown
-    transform_usage: unknown
-    trial_period_days: unknown
+    tiers_mode: [
+        {
+            flat_amount: number
+            flat_amount_decimal: string
+            unit_amount: number
+            unit_amount_decimal: string
+            up_to: number
+        }
+    ]
+    transform_usage: {
+        divide_by: number
+        round: string
+    }
+    trial_period_days: number
     usage_type: string
 }
 

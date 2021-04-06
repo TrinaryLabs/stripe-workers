@@ -4,17 +4,20 @@ type SubscriptionSchedulesResponse = {
     id: string
     object: string
     canceled_at: number
-    completed_at: unknown
+    completed_at: number
     created: number
-    current_phase: unknown
+    current_phase: {
+        end_date: number
+        start_date: number
+    }
     customer: string
     default_settings: object
     end_behavior: string
     livemode: boolean
     metadata: object
     phases: [object]
-    released_at: unknown
-    released_subscription: unknown
+    released_at: number
+    released_subscription: string
     status: string
     subscription: string
 }

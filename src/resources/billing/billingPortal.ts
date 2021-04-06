@@ -7,7 +7,7 @@ type BillingPortalResponse = {
     created: number
     customer: string
     livemode: boolean
-    on_behalf_of: unknown
+    on_behalf_of: string
     return_url: string
     url: string
 }

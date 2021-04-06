@@ -3,13 +3,65 @@ import qs from 'qs'
 type SubscriptionItemsResponse = {
     id: string
     object: string
-    billing_thresholds: unknown
+    billing_thresholds: {
+        usage_gte: number
+    }
     created: number
     metadata: object
-    price: object
+    price: {
+        id: string
+        object: string
+        active: boolean
+        billing_scheme: string
+        created: number
+        currency: string
+        livemode: boolean
+        lookup_key: string
+        metadata: object
+        nickname: string
+        product: string
+        recurring: {
+            aggregate_usage: string
+            interval: string
+            interval_count: number
+            usage_type: string
+        }
+        tiers: [
+            {
+                flat_amount: number
+                flat_amount_decimal: string
+                unit_amount: number
+                unit_amount_decimal: string
+                up_to: number
+            }
+        ]
+        tiers_mode: string
+        transform_quantity: {
+            divide_by: number
+            round: string
+        }
+        type: string
+        unit_amount: number
+        unit_amount_decimal: string
+    }
     quantity: number
     subscription: string
-    tax_rates: [unknown]
+    tax_rates: [
+        {
+            id: string
+            object: string
+            active: boolean
+            country: string
+            description: string
+            display_name: string
+            inclusive: boolean
+            jurisdiction: string
+            livemode: boolean
+            metadata: object
+            percentage: number
+            state: string
+        }
+    ]
 }
 
 type UsageRecordsResponse = {

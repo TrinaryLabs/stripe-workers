@@ -7,12 +7,16 @@ type PromotionCodesResponse = {
     code: string
     coupon: string | object
     created: number
-    customer: unknown
-    expires_at: unknown
+    customer: string
+    expires_at: number
     livemode: boolean
-    max_redemptions: unknown
+    max_redemptions: number
     metadata: object
-    restrictions: object
+    restrictions: {
+        first_time_transaction: boolean
+        minimum_amount: number
+        minimum_amount_currency: string
+    }
     times_redeemed: number
 }
 

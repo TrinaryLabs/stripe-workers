@@ -5,40 +5,90 @@ type InvoicesResponse = {
     object: string
     account_country: string
     account_name: string
-    account_tax_ids: unknown
+    account_tax_ids: [string]
     amount_due: number
     amount_paid: number
     amount_remaining: number
-    application_fee_amount: unknown
+    application_fee_amount: number
     attempt_count: number
     attempted: boolean
     auto_advance: boolean
-    billing_reason: unknown
+    billing_reason: string
     charge: string
     collection_method: string
     created: number
     currency: string
-    custom_fields: unknown
+    custom_fields: [
+        {
+            name: string
+            value: string
+        }
+    ]
     customer: string
-    customer_address: unknown
+    customer_address: {
+        city: string
+        country: string
+        line1: string
+        line2: string
+        postal_code: string
+        state: string
+    }
     customer_email: string
-    customer_name: unknown
-    customer_phone: unknown
-    customer_shipping: unknown
+    customer_name: string
+    customer_phone: string
+    customer_shipping: {
+        address: {
+            city: string
+            country: string
+            line1: string
+            line2: string
+            postal_code: string
+            state: string
+        }
+        name: string
+        phone: string
+    }
     customer_tax_exempt: string
-    customer_tax_ids: [unknown]
-    default_payment_method: unknown
-    default_source: unknown
-    default_tax_rates: [unknown]
-    description: unknown
-    discount: unknown
-    discounts: [unknown]
-    due_date: unknown
+    customer_tax_ids: [
+        {
+            type: string
+            value: string
+        }
+    ]
+    default_payment_method: string
+    default_source: string
+    default_tax_rates: [
+        {
+            id: string
+            object: string
+            active: boolean
+            country: string
+            description: string
+            display_name: string
+            inclusive: boolean
+            jurisdiction: string
+            livemode: boolean
+            metadata: object
+            percentage: number
+            state: string
+        }
+    ]
+    description: string
+    discount: object
+    discounts: [string]
+    due_date: number
     ending_balance: number
-    footer: unknown
+    footer: string
     hosted_invoice_url: string
     invoice_pdf: string
-    last_finalization_error: unknown
+    last_finalization_error: {
+        code: string
+        doc_url: string
+        message: string
+        param: string
+        payment_method_type: string
+        type: string
+    }
     lines: {
         data: [InvoiceItemsResponse]
         has_more: boolean
@@ -47,28 +97,52 @@ type InvoicesResponse = {
     }
     livemode: boolean
     metadata: object
-    next_payment_attempt: unknown
-    number: unknown
-    on_behalf_of: unknown
+    next_payment_attempt: number
+    number: string
+    on_behalf_of: string
     paid: boolean
-    payment_intent: unknown
-    payment_settings: object
+    payment_intent: string
+    payment_settings: {
+        payment_method_options: {
+            bancontact: {
+                preferred_language: string
+            }
+            card: {
+                request_three_d_secure: string
+            }
+        }
+        payment_method_types: [string]
+    }
     period_end: number
     period_start: number
     post_payment_credit_notes_amount: number
     pre_payment_credit_notes_amount: number
-    receipt_number: unknown
+    receipt_number: string
     starting_balance: number
-    statement_descriptor: unknown
+    statement_descriptor: string
     status: string
     status_transitions: object
     subscription: string
     subtotal: number
-    tax: unknown
+    tax: number
     total: number
-    total_discount_amounts: [unknown]
-    total_tax_amounts: [unknown]
-    transfer_data: unknown
+    total_discount_amounts: [
+        {
+            amount: number
+            discount: string
+        }
+    ]
+    total_tax_amounts: [
+        {
+            amount: number
+            inclusive: boolean
+            tax_rate: string
+        }
+    ]
+    transfer_data: {
+        amount: number
+        destination: string
+    }
     webhooks_delivered_at: number
 }
 

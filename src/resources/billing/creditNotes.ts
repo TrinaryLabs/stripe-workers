@@ -6,15 +6,42 @@ type CreditNotesLines = {
     amount: number
     description: string
     discount_amount: number
-    discount_amounts: [unknown]
+    discount_amounts: [
+        {
+            amount: number
+            discount: string
+        }
+    ]
     invoice_line_item: string
     livemode: boolean
     quantity: number
-    tax_amounts: [unknown]
-    tax_rates: [unknown]
+    tax_amounts: [
+        {
+            amount: number
+            inclusive: boolean
+            tax_rate: string
+        }
+    ]
+    tax_rates: [
+        {
+            id: string
+            object: string
+            active: boolean
+            country: string
+            created: number
+            description: string
+            display_name: string
+            inclusive: boolean
+            jurisdiction: string
+            livemode: boolean
+            metadata: object
+            percentage: number
+            state: string
+        }
+    ]
     type: string
-    unit_amount: unknown
-    unit_amount_decimal: unknown
+    unit_amount: number
+    unit_amount_decimal: string
 }
 
 type CreditNotesResponse = {
@@ -24,9 +51,14 @@ type CreditNotesResponse = {
     created: number
     currency: string
     customer: string
-    customer_balance_transaction: unknown
+    customer_balance_transaction: string
     discount_amount: number
-    discount_amounts: [unknown]
+    discount_amounts: [
+        {
+            amount: number
+            discount: string
+        }
+    ]
     invoice: string
     lines: {
         object: string
@@ -35,19 +67,19 @@ type CreditNotesResponse = {
         url: string
     }
     livemode: boolean
-    memo: unknown
+    memo: string
     metadata: object
     number: string
-    out_of_band_amount: unknown
+    out_of_band_amount: number
     pdf: string
-    reason: unknown
-    refund: unknown
+    reason: string
+    refund: string
     status: string
     subtotal: number
     tax_amounts: [object]
     total: number
     type: string
-    voided_at: unknown
+    voided_at: number
 }
 
 export namespace creditNotes {

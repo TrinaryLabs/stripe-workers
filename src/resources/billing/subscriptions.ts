@@ -3,23 +3,42 @@ import qs from 'qs'
 type SubscriptionResponse = {
     id: string
     object: string
-    application_fee_percent: unknown
+    application_fee_percent: number
     billing_cycle_anchor: number
-    billing_thresholds: unknown
-    cancel_at: unknown
+    billing_thresholds: {
+        amount_gte: number
+        reset_billing_cycle_anchor: boolean
+    }
+    cancel_at: number
     cancel_at_period_end: boolean
-    canceled_at: unknown
+    canceled_at: number
     collection_method: string
     created: number
     current_period_end: number
     current_period_start: number
     customer: string
-    days_until_due: unknown
-    default_payment_method: unknown
-    default_source: unknown
-    default_tax_rates: [unknown]
-    discount: unknown
-    ended_at: unknown
+    days_until_due: number
+    default_payment_method: string
+    default_source: string
+    default_tax_rates: [
+        {
+            id: string
+            object: string
+            active: boolean
+            country: string
+            created: number
+            description: string
+            display_name: string
+            inclusive: boolean
+            jurisdiction: string
+            livemode: boolean
+            metadata: object
+            percentage: number
+            state: string
+        }
+    ]
+    discount: object //discount
+    ended_at: number
     items: {
         object: string
         data: [object]
@@ -29,17 +48,32 @@ type SubscriptionResponse = {
     latest_invoice: string
     livemode: boolean
     metadata: object
-    next_pending_invoice_item_invoice: unknown
+    next_pending_invoice_item_invoice: number
     pause_collection: object
-    pending_invoice_item_interval: unknown
-    pending_setup_intent: unknown
-    pending_update: unknown
-    schedule: unknown
+    pending_invoice_item_interval: {
+        interval: string
+        interval_count: number
+    }
+    pending_setup_intent: string
+    pending_update: {
+        billing_cycle_anchor: number
+        expires_at: number
+        subscription_items: [
+            object
+        ] //todo items
+        trial_end: number
+        trial_from_plan: boolean
+
+    }
+    schedule: string
     start_date: number
     status: string
-    transfer_data: unknown
-    trial_end: unknown
-    trial_start: unknown
+    transfer_data: {
+        amount_percent: number
+        destination: string
+    }
+    trial_end: number
+    trial_start: number
 }
 
 export namespace subscriptions {

@@ -13,7 +13,7 @@ type TaxRatesResponse = {
     livemode: boolean
     metadata: object
     percentage: number
-    state: unknown
+    state: string
 }
 
 export namespace taxRates {
