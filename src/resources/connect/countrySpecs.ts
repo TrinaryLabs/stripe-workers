@@ -1,24 +1,5 @@
 import qs from 'qs'
-
-type CountrySpecsResponse = {
-    id: string
-    object: string
-    default_currency: string
-    supported_bank_account_currencies: object
-    supported_payment_currencies: [string]
-    supported_payment_methods: [string]
-    supported_transfer_countries: [string]
-    verification_fields: {
-        company: {
-            additional: [string]
-            minimum: [string]
-        }
-        individual: {
-            additional: [string]
-            minimum: [string]
-        }
-    }
-}
+import { CountrySpecsResponse } from '../../types'
 
 export namespace countrySpecs {
     export let client: Function

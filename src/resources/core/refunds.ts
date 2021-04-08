@@ -1,24 +1,5 @@
 import qs from 'qs'
-
-type RefundsResponse = {
-    id: string
-    amount: number
-    charge: string
-    currency: string
-    description: string
-    metadata: object
-    payment_intent: string
-    reason: string
-    status: string
-    object: string
-    balance_transaction: string
-    created: number
-    failure_balance_transaction: string
-    failure_reason: string
-    receipt_number: string
-    source_transfer_reversal: string
-    transfer_reversal: string
-}
+import { RefundsResponse } from '../../types'
 export namespace refunds {
     export let client: Function
 

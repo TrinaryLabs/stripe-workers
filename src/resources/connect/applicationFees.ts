@@ -1,48 +1,5 @@
 import qs from 'qs'
-
-type ApplicationFeesResponse = {
-    id: string
-    object: string
-    account: string
-    amount: number
-    amount_refunded: number
-    application: string
-    balance_transaction: string
-    charge: string
-    created: number
-    currency: string
-    livemode: boolean
-    originating_transaction: string
-    refunded: boolean
-    refunds: {
-        object: string
-        data: [
-            {
-                id: string
-                object: string
-                amount: number
-                balance_transaction: string
-                created: number
-                currency: string
-                fee: string
-                metadata: object
-            }
-        ]
-        has_more: boolean
-        url: string
-    }
-}
-
-type ApplicationFeesRefundResponse = {
-    id: string
-    object: string
-    amount: number
-    balance_transaction: string
-    created: number
-    currency: string
-    fee: string
-    metadata: object
-}
+import { ApplicationFeesResponse, ApplicationFeesRefundResponse } from '../../types'
 
 export namespace applicationFees {
     export let client: Function

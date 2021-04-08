@@ -1,27 +1,5 @@
 import qs from 'qs'
-
-type SubscriptionSchedulesResponse = {
-    id: string
-    object: string
-    canceled_at: number
-    completed_at: number
-    created: number
-    current_phase: {
-        end_date: number
-        start_date: number
-    }
-    customer: string
-    default_settings: object
-    end_behavior: string
-    livemode: boolean
-    metadata: object
-    phases: [object]
-    released_at: number
-    released_subscription: string
-    status: string
-    subscription: string
-}
-
+import { SubscriptionSchedulesResponse } from '../../types'
 export namespace subscriptionSchedules {
     export let client: Function
 

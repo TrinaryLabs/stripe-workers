@@ -1,34 +1,5 @@
 import qs from 'qs'
-
-type LocationsResponse = {
-    id: string
-    object: string
-    address: {
-        city: string
-        country: string
-        line1: string
-        line2: string
-        postal_code: string
-        state: string
-    }
-    display_name: string
-    livemode: boolean
-    metadata: object
-}
-
-type ReadersResponse = {
-    id: string
-    object: string
-    device_sw_version: string
-    device_type: string
-    ip_address: string
-    label: string
-    livemode: boolean
-    location: string
-    metadata: object
-    serial_number: string
-    status: string
-}
+import { LocationsResponse, ReadersResponse } from '../../types'
 
 export namespace terminal {
     export namespace connectionTokens {

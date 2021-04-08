@@ -1,27 +1,5 @@
 import qs from 'qs'
-
-type DisputesResponse = {
-    id: string
-    object: string
-    amount: number
-    balance_transactions: [object]
-    charge: string
-    created: number
-    currency: string
-    evidence: object
-    evidende_details: {
-        due_by: number
-        has_evidence: boolean
-        post_due: boolean
-        submission_count: number
-    }
-    is_charge_refundable: boolean
-    livemode: boolean
-    metadata: object
-    payment_intent: string
-    reason: string
-    status: string
-}
+import { DisputesResponse } from '../../types'
 export namespace disputes {
     export let client: Function
 

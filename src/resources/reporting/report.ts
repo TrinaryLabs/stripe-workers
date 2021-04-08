@@ -1,29 +1,5 @@
 import qs from 'qs'
-
-type ReportRunResponse = {
-    id: string
-    object: string
-    created: number
-    error: unknown
-    livemode: boolean
-    parameters: object
-    report_type: string
-    result: object
-    status: string
-    succeeded_at: number
-}
-
-type ReportTypeResponse = {
-    id: string
-    object: string
-    data_available_end: number
-    data_available_start: number
-    default_columns: [string]
-    name: string
-    updated: number
-    version: number
-}
-
+import { ReportRunResponse, ReportTypeResponse } from '../../types'
 export namespace reporting {
     export namespace reportRuns {
         export let client: Function

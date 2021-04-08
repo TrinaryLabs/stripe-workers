@@ -1,39 +1,5 @@
 import qs from 'qs'
-
-type PricesResponse = {
-    id: string
-    active: boolean
-    currency: string
-    metadata: object
-    nickname: string
-    product: string
-    recurring: {
-        aggregate_usage: string
-        interval: string
-        interval_count: string
-        usage_type: string
-    }
-    type: string
-    unit_amount: number
-    object: string
-    billing_scheme: string
-    created: number
-    livemode: boolean
-    lookup_key: string
-    tiers: {
-        flat_amount: number
-        flat_amount_decimal: string
-        unit_amount: number
-        unit_amount_decimal: string
-        up_to: number
-    }
-    tiers_mode: string
-    transform_quantity: {
-        divide_by: number
-        round: string
-    }
-    unit_amount_decimal: string
-}
+import { PricesResponse } from '../../types'
 
 export namespace prices {
     export let client: Function

@@ -1,38 +1,5 @@
 import qs from 'qs'
-
-type TransfersResponse = {
-    id: string
-    object: string
-    amount: number
-    amount_reversed: number
-    balance_transaction: string
-    created: number
-    currency: string
-    description: string
-    destination: string
-    destination_payment: string
-    livemode: boolean
-    metadata: object
-    reversals: object
-    reversed: boolean
-    source_transaction: string
-    source_type: string
-    transfer_group: string
-}
-
-type TransfersReversalResponse = {
-    id: string
-    object: string
-    amount: number
-    balance_transaction: string
-    created: number
-    currency: string
-    destination_payment_refund: string
-    metadata: object
-    source_refund: string
-    transfer: string
-}
-
+import { TransfersResponse, TransfersReversalResponse } from '../../types'
 export namespace transfers {
     export let client: Function
 

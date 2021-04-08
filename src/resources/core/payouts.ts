@@ -1,29 +1,5 @@
 import qs from 'qs'
-
-type PayoutsResponse = {
-    id: string
-    amount: number
-    arrival_date: number
-    currency: string
-    description: string
-    metadata: object
-    statement_descriptor: string
-    status: string
-    object: string
-    automatic: boolean
-    balance_transaction: string
-    created: number
-    destination: string
-    failure_balance_transaction: string
-    failure_code: string
-    failure_message: string
-    livemode: boolean
-    method: string
-    original_payout: string
-    reversed_by: string
-    source_type: string
-    type: string
-}
+import { PayoutsResponse } from '../../types'
 
 export namespace payouts {
     export let client: Function

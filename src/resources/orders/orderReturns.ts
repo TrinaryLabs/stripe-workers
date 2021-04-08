@@ -1,26 +1,5 @@
 import qs from 'qs'
-
-type OrderReturnsResponse = {
-    id: string
-    amount: number
-    currency: string
-    items: [
-        {
-            object: string
-            amount: number
-            currency: string
-            description: string
-            parent: string
-            quantity: number
-            type: string
-        }
-    ]
-    order: string
-    refund: string
-    object: string
-    created: number
-    livemode: boolean
-}
+import { OrderReturnsResponse } from '../../types'
 
 export namespace orderReturns {
     export let client: Function

@@ -1,30 +1,5 @@
 import qs from 'qs'
-
-type BalanceTransactionsResponse = {
-    id: string
-    object: string
-    amount: number
-    available_on: number
-    created: number
-    currency: string
-    description: string
-    exchange_rate: number
-    fee: number
-    fee_details: [
-        {
-            amount: number
-            application: string
-            currency: string
-            description: string
-            type: string
-        },
-    ]
-    net: number
-    reporting_category: string
-    source: string
-    status: string
-    type: string
-}
+import { BalanceTransactionsResponse } from '../../types'
 
 export namespace balanceTransactions {
     export let client: Function

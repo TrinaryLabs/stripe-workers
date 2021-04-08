@@ -1,35 +1,5 @@
 import qs from 'qs'
-
-type FilesResponse = {
-    id: string
-    purpose: string
-    type: string
-    object: string
-    created: number
-    expires_at: number
-    filename: string
-    links: {
-        object: string
-        has_more: boolean
-        url: string
-        data: [
-            {
-                id: string
-                object: string
-                created: number
-                expired: boolean
-                expires_at: number
-                file: string
-                livemode: boolean
-                metadata: object
-                url: string
-            }
-        ]
-    }
-    size: number
-    title: string | undefined
-    url: string
-}
+import { FilesResponse } from '../../types'
 
 export namespace files {
     export let client: Function

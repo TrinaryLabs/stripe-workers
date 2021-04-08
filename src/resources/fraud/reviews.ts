@@ -1,31 +1,5 @@
 import qs from 'qs'
-
-type ReviewsResponse = {
-    id: string
-    object: string
-    billing_zip: string
-    charge: string
-    closed_reason: string
-    created: number
-    ip_address: string
-    ip_address_location: {
-        city: string
-        country: string
-        latitude: number
-        longitude: number
-        region: string
-    }
-    livemode: boolean
-    open: boolean
-    opened_reason: string
-    reason: string
-    session: {
-        browser: string
-        device: string
-        platform: string
-        version: string
-    }
-}
+import { ReviewsResponse } from '../../types'
 
 export namespace reviews {
     export let client: Function

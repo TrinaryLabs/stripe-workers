@@ -1,27 +1,5 @@
 import qs from 'qs'
-
-type ProductsResponse = {
-    id: string
-    active: boolean
-    description: string
-    metadata: object
-    name: string
-    object: string
-    created: number
-    images: [string]
-    livemode: boolean
-    package_dimensions: {
-        height: number
-        length: number
-        weight: number
-        width: number
-    }
-    shippable: boolean
-    statement_descriptor: string
-    unit_label: string
-    updated: number
-    url: string
-}
+import { ProductsResponse } from '../../types'
 
 export namespace products {
     export let client: Function

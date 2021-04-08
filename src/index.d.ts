@@ -1,3 +1,4 @@
+/*
 export * from '../dist/types/src/resources/billing/billingPortal'
 export * from '../dist/types/src/resources/billing/coupons'
 export * from '../dist/types/src/resources/billing/creditNotes'
@@ -63,3 +64,4 @@ export * from '../dist/types/src/client'
 export * from '../dist/types/src/index'
 
 //declare module 'stripe-workers'
+*/

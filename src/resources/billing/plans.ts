@@ -1,37 +1,5 @@
 import qs from 'qs'
-
-type PlansResponse = {
-    id: string
-    object: string
-    active: boolean
-    aggregate_usage: string
-    amount: number
-    amount_decimal: string
-    billing_scheme: string
-    created: number
-    currency: string
-    interval: string
-    interval_count: number
-    livemode: boolean
-    metadata: object
-    nickname: string
-    product: string
-    tiers_mode: [
-        {
-            flat_amount: number
-            flat_amount_decimal: string
-            unit_amount: number
-            unit_amount_decimal: string
-            up_to: number
-        }
-    ]
-    transform_usage: {
-        divide_by: number
-        round: string
-    }
-    trial_period_days: number
-    usage_type: string
-}
+import { PlansResponse } from '../../types'
 
 export namespace plans {
     export let client: Function
