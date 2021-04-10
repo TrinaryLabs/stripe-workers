@@ -1,21 +1,5 @@
 import qs from 'qs'
-
-type EventRetrieveResponse = {
-    id: string
-    object: string
-    api_version: string
-    created: number
-    data: object
-    expires_at: number
-    url: string
-    file: unknown
-    expired: boolean
-    livemode: boolean
-    pending_webhooks: number
-    request: object
-    type: string
-}
-
+import { EventRetrieveResponse } from '../../types'
 export namespace events {
     export let client: Function
 

@@ -1,27 +1,5 @@
 import qs from 'qs'
-
-type SourcesResponse = {
-    id: string
-    amount: unknown
-    currency: string
-    customer: string
-    metadata: object
-    owner: object
-    redirect: object
-    statement_descriptor: string
-    status: string
-    type: string
-    object: string
-    client_secret: string
-    code_verification: object
-    created: number
-    flow: string
-    livemode: boolean
-    receiver: object
-    source_order: object
-    usage: string
-    ach_credit_transfer: object
-}
+import { SourcesResponse } from '../../types'
 export namespace sources {
     export let client: Function
 

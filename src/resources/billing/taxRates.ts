@@ -1,20 +1,5 @@
 import qs from 'qs'
-
-type TaxRatesResponse = {
-    id: string
-    object: string
-    active: boolean
-    country: string
-    created: number
-    description: string
-    display_name: string
-    inclusive: boolean
-    jurisdiction: string
-    livemode: boolean
-    metadata: object
-    percentage: number
-    state: unknown
-}
+import { TaxRatesResponse } from '../../types'
 
 export namespace taxRates {
     export let client: Function

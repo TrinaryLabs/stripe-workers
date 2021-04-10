@@ -1,29 +1,5 @@
 import qs from 'qs'
-
-type SetupIntentsResponse = {
-    id: string
-    object: string
-    application: unknown
-    cancellation_reason: unknown
-    client_secret: string
-    created: number
-    customer: string
-    description: unknown
-    last_setup_error: unknown
-    latest_attempt: unknown
-    livemode: boolean
-    mandate: unknown
-    metadata: object
-    next_action: unknown
-    on_behalf_of: unknown
-    payment_method: unknown
-    payment_method_options: object
-    payment_method_types: [string]
-    single_use_mandate: unknown
-    status: string
-    usage: string
-}
-
+import { SetupIntentsResponse } from '../../types'
 export namespace setupIntents {
     export let client: Function
 

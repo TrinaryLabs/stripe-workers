@@ -1,42 +1,5 @@
 import qs from 'qs'
-
-type PaymentIntentsResponse = {
-    id: string
-    object: string
-    amount: number
-    amount_capturable: number
-    amount_received: number
-    application: unknown
-    application_fee_amount: unknown
-    canceled_at: unknown
-    cancellation_reason: unknown
-    capture_method: string
-    charges: object
-    client_secret: string
-    confirmation_method: string
-    created: number
-    currency: string
-    customer: unknown
-    description: string
-    invoice: unknown
-    last_payment_error: unknown
-    livemode: boolean
-    metadata: object
-    next_action: unknown
-    on_behalf_of: unknown
-    payment_method: unknown
-    payment_method_options: object
-    payment_method_types: [string]
-    receipt_email: unknown
-    review: unknown
-    setup_future_usage: unknown
-    shipping: unknown
-    statement_descriptor: unknown
-    statement_descriptor_suffix: unknown
-    status: string
-    transfer_data: unknown
-    transfer_group: unknown
-}
+import { PaymentIntentsResponse } from '../../types'
 
 export namespace paymentIntents {
     export let client: Function

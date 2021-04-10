@@ -1,21 +1,5 @@
 import qs from 'qs'
-
-type SKUResponse = {
-    id: string
-    object: string
-    active: boolean
-    attributes: object
-    created: number
-    currency: string
-    image: unknown
-    inventory: object
-    livemode: boolean
-    metadata: object
-    package_dimensions: unknown
-    price: number
-    product: string
-    updated: number
-}
+import { SKUResponse } from '../../types'
 
 export namespace skus {
     export let client: Function

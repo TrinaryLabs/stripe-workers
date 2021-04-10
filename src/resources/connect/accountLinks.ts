@@ -1,3 +1,5 @@
+import { AccountLinksResponse } from '../../types'
+
 export namespace accountLinks {
     export let client: Function
 
@@ -10,12 +12,7 @@ export namespace accountLinks {
             collect?: string
         },
         stripeAccount?: string,
-    ): Promise<{
-        object: string
-        created: number
-        expires_at: number
-        url: string
-    }> {
+    ): Promise<AccountLinksResponse> {
         return client('/account_links', params, 'POST', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
         })

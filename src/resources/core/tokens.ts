@@ -1,15 +1,4 @@
-type TokensResponse = {
-    id: string
-    object: string
-    bank_account: object
-    card: object
-    client_ip: string
-    created: number
-    livemode: boolean
-    type: string
-    used: boolean
-}
-
+import { TokensResponse } from '../../types'
 export namespace tokens {
     export let client: Function
 

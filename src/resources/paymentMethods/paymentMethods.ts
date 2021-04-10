@@ -1,33 +1,5 @@
 import qs from 'qs'
-
-type PaymentMethodsResponse = {
-    id: string
-    object: string
-    billing_details: object
-    card: object
-    afterpay_clearpay: object
-    alipay: object
-    au_becs_debit: object
-    bacs_debit: object
-    bancontact: object
-    card_present: object
-    eps: object
-    fpx: object
-    giropay: object
-    grabpay: object
-    ideal: object
-    interac_present: object
-    oxxo: object
-    p24: object
-    sepa_debit: object
-    sofort: object
-    created: number
-    customer: unknown
-    livemode: boolean
-    metadata: object
-    type: string
-}
-
+import { PaymentMethodsResponse } from '../../types'
 export namespace paymentMethods {
     export let client: Function
 

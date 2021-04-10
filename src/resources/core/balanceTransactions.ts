@@ -1,30 +1,5 @@
 import qs from 'qs'
-
-type BalanceTransactionsResponse = {
-    id: string
-    object: string
-    amount: number
-    available_on: number
-    created: number
-    currency: string
-    description: unknown
-    exchange_rate: number
-    fee: number
-    fee_details: [
-        {
-            amount: number
-            application: unknown
-            currency: string
-            description: string
-            type: string
-        },
-    ]
-    net: number
-    reporting_category: string
-    source: string
-    status: string
-    type: string
-}
+import { BalanceTransactionsResponse } from '../../types'
 
 export namespace balanceTransactions {
     export let client: Function
@@ -42,12 +17,22 @@ export namespace balanceTransactions {
         params: {
             payout?: string
             type?: string
-            available_on?: object
-            created?: object
+            available_on?: {
+                gt: string
+                gte: string
+                lt: string
+                lte: string
+            } | string
+            created?: {
+                gt: string
+                gte: string
+                lt: string
+                lte: string
+            } | string
             currency?: string
             ending_before?: string
             limit?: number
-            source?: unknown
+            source?: string
             starting_after?: string
         },
         stripeAccount?: string,

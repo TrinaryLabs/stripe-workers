@@ -1,27 +1,5 @@
 import qs from 'qs'
-
-type InvoiceItemsResponse = {
-    id: string
-    object: string
-    amount: number
-    currency: string
-    customer: string
-    date: number
-    description: string
-    discountable: boolean
-    discounts: [unknown]
-    invoice: unknown
-    livemode: boolean
-    metadata: object
-    period: object
-    price: object
-    proration: boolean
-    quantity: number
-    subscription: unknown
-    tax_rates: [unknown]
-    unit_amount: number
-    unit_amount_decimal: string
-}
+import { InvoiceItemsResponse } from '../../types'
 
 export namespace invoiceItems {
     export let client: Function

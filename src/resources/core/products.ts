@@ -1,19 +1,5 @@
 import qs from 'qs'
-
-type ProductsResponse = {
-    id: string
-    object: string
-    active: boolean
-    created: number
-    description: unknown
-    images: []
-    livemode: boolean
-    metadata: object
-    name: string
-    statement_descriptor: unknown
-    unit_label: unknown
-    updated: number
-}
+import { ProductsResponse } from '../../types'
 
 export namespace products {
     export let client: Function

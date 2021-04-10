@@ -1,43 +1,5 @@
 import qs from 'qs'
-
-type EarlyFraudWarningsResponse = {
-    id: string
-    object: string
-    actionable: boolean
-    charge: string
-    created: number
-    fraud_type: string
-    livemode: boolean
-}
-
-type ValueListResponse = {
-    id: string
-    object: string
-    alias: string
-    created: number
-    created_by: string
-    item_type: string
-    list_items: {
-        object: string
-        data: []
-        has_more: boolean
-        url: string
-    }
-    livemode: boolean
-    metadata: object
-    name: string
-}
-
-type ValueListItemsResponse = {
-    id: string
-    object: string
-    created: number
-    created_by: string
-    livemode: boolean
-    value: string
-    value_list: string
-}
-
+import { EarlyFraudWarningsResponse, ValueListResponse, ValueListItemsResponse } from '../../types'
 export namespace radar {
     export namespace earlyFraudWarnings {
         export let client: Function

@@ -1,19 +1,5 @@
 import qs from 'qs'
-
-type WebhookEndpointResponse = {
-    id: string
-    object: string
-    api_version: unknown
-    application: unknown
-    created: number
-    description: string
-    enabled_events: [string]
-    livemode: boolean
-    metadata: object
-    status: string
-    url: string
-    secret: string
-}
+import { WebhookEndpointResponse } from '../../types'
 
 export namespace webhookEndpoints {
     export let client: Function

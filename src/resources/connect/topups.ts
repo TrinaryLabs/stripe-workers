@@ -1,23 +1,6 @@
 import qs from 'qs'
+import { TopUpsResponse } from '../../types'
 
-type TopUpsResponse = {
-    id: string
-    object: string
-    amount: number
-    balance_transaction: unknown
-    created: number
-    currency: string
-    description: string
-    expected_availability_date: number
-    failure_code: unknown
-    failure_message: unknown
-    livemode: boolean
-    metadata: object
-    source: object
-    statement_descriptor: string | unknown
-    status: string
-    transfer_group: unknown
-}
 export namespace topups {
     export let client: Function
 

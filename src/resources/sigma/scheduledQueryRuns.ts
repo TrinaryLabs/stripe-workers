@@ -1,17 +1,5 @@
 import qs from 'qs'
-
-type SQRResponse = {
-    id: string
-    object: string
-    created: number
-    data_load_time: number
-    file: object
-    livemode: boolean
-    result_available_until: number
-    sql: string
-    status: string
-    title: string
-}
+import { SQRResponse } from '../../types'
 
 export namespace sigma {
     export namespace scheduledQueryRuns {

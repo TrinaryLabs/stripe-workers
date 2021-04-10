@@ -1,46 +1,5 @@
 import qs from 'qs'
-
-type SubscriptionResponse = {
-    id: string
-    object: string
-    application_fee_percent: unknown
-    billing_cycle_anchor: number
-    billing_thresholds: unknown
-    cancel_at: unknown
-    cancel_at_period_end: boolean
-    canceled_at: unknown
-    collection_method: string
-    created: number
-    current_period_end: number
-    current_period_start: number
-    customer: string
-    days_until_due: unknown
-    default_payment_method: unknown
-    default_source: unknown
-    default_tax_rates: [unknown]
-    discount: unknown
-    ended_at: unknown
-    items: {
-        object: string
-        data: [object]
-        has_more: boolean
-        url: string
-    }
-    latest_invoice: string
-    livemode: boolean
-    metadata: object
-    next_pending_invoice_item_invoice: unknown
-    pause_collection: object
-    pending_invoice_item_interval: unknown
-    pending_setup_intent: unknown
-    pending_update: unknown
-    schedule: unknown
-    start_date: number
-    status: string
-    transfer_data: unknown
-    trial_end: unknown
-    trial_start: unknown
-}
+import { SubscriptionResponse } from '../../types'
 
 export namespace subscriptions {
     export let client: Function

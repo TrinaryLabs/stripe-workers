@@ -1,20 +1,6 @@
 import qs from 'qs'
+import { PromotionCodesResponse } from '../../types'
 
-type PromotionCodesResponse = {
-    id: string
-    object: string
-    active: boolean
-    code: string
-    coupon: string | object
-    created: number
-    customer: unknown
-    expires_at: unknown
-    livemode: boolean
-    max_redemptions: unknown
-    metadata: object
-    restrictions: object
-    times_redeemed: number
-}
 
 export namespace promotionCodes {
     export let client: Function
