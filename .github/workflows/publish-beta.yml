@@ -1,10 +1,9 @@
-name: Publish Package
+name: Publish Beta Package
 
 on:
   push:
     tags: 
-      - 'v*'
-      - '!v*-beta'
+      - v*-beta
 
 jobs:
   build:
@@ -31,6 +30,6 @@ jobs:
       - run: yarn
       - run: yarn build
       - run: yarn build:types
-      - run: yarn publish
+      - run: yarn publish --tag beta
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
