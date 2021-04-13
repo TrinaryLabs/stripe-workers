@@ -1,8 +1,63 @@
 import { expect } from 'chai'
 import { stripe } from '../../_setup'
 
-/*
 describe('BillingPortal', async () => {
+    describe('Configurations Resource', async () => {
+        let lastConfigId = ''
+
+        describe('create', async () => {
+            it('Sends the correct request', async () => {
+                const params = {
+                    business_profile: {
+                        privacy_policy_url: 'https://example.com/privacy',
+                        terms_of_service_url: 'https://example.com/tos',
+                    },
+                    features: {
+                        customer_update: {
+                            allowed_updates: ['address'],
+                            enabled: true,
+                        },
+                    },
+                }
+                let data = await stripe.billingPortal.configurations.create(params)
+
+                lastConfigId = data.id
+
+                expect(data.object).to.equal("billing_portal.configuration")
+                
+            })
+        })
+        describe('update', async () => {
+            it('Sends the correct request', async () => {
+                const params = {
+                    active: false,
+                }
+                let data = await stripe.billingPortal.configurations.update(lastConfigId, params)
+                
+                expect(data.object).to.equal("billing_portal.configuration")
+                expect(data.id).to.equal(lastConfigId)
+
+            })
+        })
+        describe('retrieve', async () => {
+            it('Sends the correct request', async () => {
+                let data = await stripe.billingPortal.configurations.retrieve(lastConfigId)
+
+                expect(data.object).to.equal("billing_portal.configuration")
+                expect(data.id).to.equal(lastConfigId)
+
+            })
+        })
+        describe('list', async () => {
+            it('Sends the correct request', async () => {
+                let data = await stripe.billingPortal.configurations.list({})
+
+                expect(data.url).to.equal(`/v1/billing_portal/configurations`)
+
+            })
+        })
+    })
+    /*
     describe('Sessions Resource', async () => {
         describe('create', async () => {
             it('Sends the correct request', async () => {
@@ -22,73 +77,6 @@ describe('BillingPortal', async () => {
             })
         })
     })
+    */
 
 })
-*/
-/*
-describe('Configurations Resource', () => {
-    describe('create', () => {
-        it('Sends the correct request', () => {
-            const params = {
-                business_profile: {
-                    privacy_policy_url: 'https://example.com/privacy',
-                    terms_of_service_url: 'https://example.com/tos',
-                },
-                features: {
-                    customer_update: {
-                        allowed_updates: ['address'],
-                        enabled: true,
-                    },
-                },
-            }
-            stripe.billingPortal.configurations.create(params)
-            expect(stripe.LAST_REQUEST).to.deep.equal({
-                method: 'POST',
-                url: '/v1/billing_portal/configurations',
-                headers: {},
-                data: params,
-                settings: {},
-            })
-        })
-    })
-    describe('update', () => {
-        it('Sends the correct request', () => {
-            const params = {
-                active: false,
-            }
-            stripe.billingPortal.configurations.update('bpc_123', params)
-            expect(stripe.LAST_REQUEST).to.deep.equal({
-                method: 'POST',
-                url: '/v1/billing_portal/configurations/bpc_123',
-                headers: {},
-                data: params,
-                settings: {},
-            })
-        })
-    })
-    describe('retrieve', () => {
-        it('Sends the correct request', () => {
-            stripe.billingPortal.configurations.retrieve('bpc_123')
-            expect(stripe.LAST_REQUEST).to.deep.equal({
-                method: 'GET',
-                url: '/v1/billing_portal/configurations/bpc_123',
-                headers: {},
-                data: {},
-                settings: {},
-            })
-        })
-    })
-    describe('list', () => {
-        it('Sends the correct request', () => {
-            stripe.billingPortal.configurations.list()
-            expect(stripe.LAST_REQUEST).to.deep.equal({
-                method: 'GET',
-                url: '/v1/billing_portal/configurations',
-                headers: {},
-                data: {},
-                settings: {},
-            })
-        })
-    })
-})
-*/

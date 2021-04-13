@@ -34,15 +34,6 @@ describe('Checkout', async () => {
                 expect(data.object).to.equal("checkout.session")
                 expect(data.amount_total).to.equal(246)
                 expect(data.client_reference_id).to.equal("1234")
-
-                /*
-                expect(data).to.deep.equal({
-                    method: 'POST',
-                    url: '/v1/checkout/sessions',
-                    headers: {},
-                    data: params,
-                    settings: {},
-                })*/
             })
         })
 
