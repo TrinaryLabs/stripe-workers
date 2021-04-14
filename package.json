@@ -19,7 +19,8 @@
     "scripts": {
         "build": "webpack",
         "format": "prettier --write '**/*.{ts,js,css,json,md}'",
-        "build:types": "tsc -d --declarationDir ./dist/types --declarationMap --emitDeclarationOnly"
+        "build:types": "tsc -d --declarationDir ./dist/types --declarationMap --emitDeclarationOnly",
+        "test": "TS_NODE_PROJECT='./test/tsconfig.json' mocha -r ts-node/register test/**/*.ts"
     },
     "publishConfig": {
         "registry": "https://npm.pkg.github.com"
@@ -32,9 +33,11 @@
         "@types/mocha": "^8.2.2",
         "chai": "^4.3.4",
         "mocha": "^8.3.2",
+        "node-fetch": "^2.6.1",
         "prettier": "^2.2.1",
         "rimraf": "^3.0.2",
         "ts-loader": "^8.0.18",
+        "ts-node": "^9.1.1",
         "typescript": "^4.2.3",
         "webpack": "^5.27.2",
         "webpack-cli": "^4.5.0"

@@ -54,7 +54,12 @@ export namespace checkout {
                 starting_after?: string
             },
             stripeAccount?: string,
-        ): Promise<CheckoutSessionsResponse> {
+        ): Promise<{
+            object: string
+            url: string
+            has_more: boolean
+            data: [CheckoutSessionsResponse]
+        }> {
             return client(
                 `/checkout/sessions?${qs.stringify(params)}`,
                 {},
@@ -75,7 +80,12 @@ export namespace checkout {
                 starting_after?: string
             },
             stripeAccount?: string,
-        ): Promise<CheckoutSessionsResponse> {
+        ): Promise<{
+            object: string
+            url: string
+            has_more: boolean
+            data: [CheckoutSessionsResponse]
+        }> {
             return client(
                 `/checkout/sessions/${id}/line_items?${qs.stringify(params)}`,
                 {},

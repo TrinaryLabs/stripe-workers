@@ -17,10 +17,23 @@ jobs:
       - run: yarn
       - run: yarn build
       - run: yarn build:types
+  test:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 12.x
+      - run: yarn
+      - run: yarn build
+      - run: yarn build:types
+      - run: yarn test
 
   publish:
     runs-on: ubuntu-latest
     needs: build
+    needs: test
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
