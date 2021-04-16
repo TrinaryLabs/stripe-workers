@@ -80,7 +80,7 @@ export namespace customers {
     }
 
     export function list(
-        params: {
+        params?: {
             email?: string
             created?: object
             ending_before?: string
@@ -186,7 +186,7 @@ export namespace customers {
 
     export function listSource(
         cus_id: string,
-        params: {
+        params?: {
             object: string // bank_account or card
             ending_before?: string
             limit?: number
@@ -266,7 +266,7 @@ export namespace customers {
 
     export function listBalanceTransaction(
         id: string,
-        params: {
+        params?: {
             ending_before?: string
             limit?: number
             starting_after?: string
@@ -329,7 +329,7 @@ export namespace customers {
 
     export function listTaxId(
         id: string,
-        params: {
+        params?: {
             ending_before?: string
             limit?: number
             starting_after?: string

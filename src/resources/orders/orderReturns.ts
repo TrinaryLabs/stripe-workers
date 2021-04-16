@@ -14,7 +14,7 @@ export namespace orderReturns {
     }
 
     export function list(
-        params: {
+        params?: {
             order?: string
             created?: object
             ending_before?: string

@@ -14,7 +14,7 @@ export namespace balanceTransactions {
     }
 
     export function list(
-        params: {
+        params?: {
             payout?: string
             type?: string
             available_on?: {

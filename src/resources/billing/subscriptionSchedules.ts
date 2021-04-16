@@ -72,7 +72,7 @@ export namespace subscriptionSchedules {
     }
 
     export function list(
-        params: {
+        params?: {
             customer?: string
             canceled_at?: object
             completed_at?: object

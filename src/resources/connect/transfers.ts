@@ -44,7 +44,7 @@ export namespace transfers {
     }
 
     export function list(
-        params: {
+        params?: {
             destination?: string
             created?: object
             ending_before?: string
@@ -111,7 +111,7 @@ export namespace transfers {
 
     export function listReversals(
         id: string,
-        params: {
+        params?: {
             ending_before?: string
             limit?: number
             starting_after?: string

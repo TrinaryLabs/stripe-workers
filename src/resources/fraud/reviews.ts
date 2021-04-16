@@ -23,7 +23,7 @@ export namespace reviews {
     }
 
     export function list(
-        params: {
+        params?: {
             created?: object
             ending_before?: string
             limit?: number

@@ -62,7 +62,7 @@ export namespace products {
     }
 
     export function list(
-        params: {
+        params?: {
             active?: boolean
             created?: object
             ending_before?: string

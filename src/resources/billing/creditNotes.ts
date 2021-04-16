@@ -75,7 +75,7 @@ export namespace creditNotes {
 
     export function listLineItems(
         id: string,
-        params: {
+        params?: {
             ending_before?: string
             limit?: number
             starting_after?: string
@@ -100,7 +100,7 @@ export namespace creditNotes {
     }
 
     export function listPreviewLineItems(
-        params: {
+        params?: {
             invoice: string
             lines?: object
             memo?: string
@@ -144,7 +144,7 @@ export namespace creditNotes {
     }
 
     export function list(
-        params: {
+        params?: {
             customer?: string
             ending_before?: string
             limit?: number

@@ -46,7 +46,7 @@ export namespace checkout {
         }
 
         export async function list(
-            params: {
+            params?: {
                 payment_intent?: string
                 subscription?: string
                 limit?: number
@@ -74,7 +74,7 @@ export namespace checkout {
 
         export async function listLineItems(
             id: string,
-            params: {
+            params?: {
                 ending_before?: string
                 limit?: number
                 starting_after?: string

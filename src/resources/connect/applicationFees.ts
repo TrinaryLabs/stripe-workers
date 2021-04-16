@@ -14,7 +14,7 @@ export namespace applicationFees {
     }
 
     export function list(
-        params: {
+        params?: {
             limit?: number
             created?: object
             ending_before?: string
@@ -84,7 +84,7 @@ export namespace applicationFees {
 
     export function listRefunds(
         id: string,
-        params: {
+        params?: {
             limit?: number
             ending_before?: string
             starting_after?: string

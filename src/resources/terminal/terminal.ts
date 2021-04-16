@@ -83,7 +83,7 @@ export namespace terminal {
         }
 
         export function list(
-            params: {
+            params?: {
                 ending_before?: string
                 limit?: number
                 starting_after?: string
@@ -169,7 +169,7 @@ export namespace terminal {
         }
 
         export function list(
-            params: {
+            params?: {
                 device_type?: string
                 location?: string
                 status?: string

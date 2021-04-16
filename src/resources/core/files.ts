@@ -28,7 +28,7 @@ export namespace files {
     }
 
     export function list(
-        params: {
+        params?: {
             purpose?: string
             created?: object
             ending_before?: string

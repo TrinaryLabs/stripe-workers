@@ -16,7 +16,7 @@ export namespace radar {
         }
 
         export function list(
-            params: {
+            params?: {
                 charge?: string
                 ending_before?: string
                 limit?: number
@@ -104,7 +104,7 @@ export namespace radar {
         }
 
         export function list(
-            params: {
+            params?: {
                 alias?: string
                 contains?: string
                 created?: object

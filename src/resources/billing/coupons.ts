@@ -60,7 +60,7 @@ export namespace coupons {
     }
 
     export function list(
-        params: {
+        params?: {
             created?: string
             ending_before?: string
             limit?: number

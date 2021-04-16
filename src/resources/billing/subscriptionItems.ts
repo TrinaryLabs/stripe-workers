@@ -72,7 +72,7 @@ export namespace subscriptionItems {
     }
 
     export function list(
-        params: {
+        params?: {
             subscription?: string
             ending_before?: string
             limit?: number
@@ -120,7 +120,7 @@ export namespace subscriptionItems {
 
     export function listUsageRecordSummaries(
         id: string,
-        params: {
+        params?: {
             ending_before?: string
             limit?: number
             starting_after?: string

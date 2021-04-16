@@ -40,7 +40,7 @@ export namespace fileLinks {
     }
 
     export function list(
-        params: {
+        params?: {
             created?: object
             ending_before?: string
             expired?: boolean

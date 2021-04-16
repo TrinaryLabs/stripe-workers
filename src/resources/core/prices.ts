@@ -55,7 +55,7 @@ export namespace prices {
     }
 
     export function list(
-        params: {
+        params?: {
             active?: boolean
             currency?: string
             product?: string

@@ -44,7 +44,7 @@ export namespace payouts {
     }
 
     export function list(
-        params: {
+        params?: {
             status?: string
             arrival_date?: object
             created?: object

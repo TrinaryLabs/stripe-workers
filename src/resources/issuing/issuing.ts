@@ -69,7 +69,7 @@ export namespace issuing {
         }
 
         export function list(
-            params: {
+            params?: {
                 card?: string
                 cardholder?: string
                 status?: string
@@ -156,7 +156,7 @@ export namespace issuing {
         }
 
         export function list(
-            params: {
+            params?: {
                 created?: object
                 email?: string
                 ending_before?: string
@@ -239,7 +239,7 @@ export namespace issuing {
         }
 
         export function list(
-            params: {
+            params?: {
                 cardholder?: string
                 type?: string
                 created?: object
@@ -325,7 +325,7 @@ export namespace issuing {
         }
 
         export function list(
-            params: {
+            params?: {
                 transaction?: string
                 created?: object
                 ending_before?: string
@@ -382,7 +382,7 @@ export namespace issuing {
         }
 
         export function list(
-            params: {
+            params?: {
                 card?: string
                 cardholder?: string
                 created?: object

@@ -89,7 +89,7 @@ export namespace setupIntents {
     }
 
     export function list(
-        params: {
+        params?: {
             customer?: string
             payment_method?: string
             created?: object

@@ -75,7 +75,7 @@ export namespace invoiceItems {
     }
 
     export function list(
-        params: {
+        params?: {
             customer?: string
             created?: number
             ending_before?: string

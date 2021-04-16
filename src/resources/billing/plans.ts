@@ -70,7 +70,7 @@ export namespace plans {
     }
 
     export function list(
-        params: {
+        params?: {
             active?: boolean
             product?: string
             created?: object

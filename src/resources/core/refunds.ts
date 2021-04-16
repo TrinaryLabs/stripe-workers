@@ -42,7 +42,7 @@ export namespace refunds {
     }
 
     export function list(
-        params: {
+        params?: {
             charge?: string
             payment_intent?: string
             created?: object

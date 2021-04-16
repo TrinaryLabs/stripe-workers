@@ -140,7 +140,7 @@ export namespace invoices {
 
     export function listLineItems(
         id: string,
-        params: {
+        params?: {
             ending_before?: string
             limit?: number
             starting_after?: string
@@ -165,7 +165,7 @@ export namespace invoices {
     }
 
     export function retrieveUpcomming(
-        params: {
+        params?: {
             customer: string
             subscription?: string
             discounts?: string[]
@@ -191,7 +191,7 @@ export namespace invoices {
     }
 
     export function listUpcomingLineItems(
-        params: {
+        params?: {
             customer: string
             subscription?: string
             discounts?: string[]
@@ -232,7 +232,7 @@ export namespace invoices {
     }
 
     export function list(
-        params: {
+        params?: {
             customer?: string
             status?: string
             subscription?: string
