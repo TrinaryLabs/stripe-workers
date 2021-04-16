@@ -54,7 +54,7 @@ export namespace skus {
     }
 
     export function list(
-        params: {
+        params?: {
             active?: boolean
             product?: string
             attributes?: object

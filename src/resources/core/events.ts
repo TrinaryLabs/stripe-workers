@@ -13,7 +13,7 @@ export namespace events {
     }
 
     export function list(
-        params: {
+        params?: {
             types?: string[]
             created?: object
             delivery_success?: unknown

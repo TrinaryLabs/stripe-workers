@@ -88,7 +88,7 @@ export namespace accounts {
     }
 
     export function list(
-        params: {
+        params?: {
             created?: unknown
             limit?: number
             ending_before?: string
@@ -278,7 +278,7 @@ export namespace accounts {
 
     export function listPersons(
         user_id: string,
-        params: {
+        params?: {
             relationship?: object
             limit?: number
             ending_before?: string
@@ -389,7 +389,7 @@ export namespace accounts {
 
     export function listExternalAccounts(
         id: string,
-        params: {
+        params?: {
             object: string // bank_account or card
             ending_before?: string
             limit?: number

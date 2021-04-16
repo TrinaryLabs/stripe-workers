@@ -46,7 +46,7 @@ export namespace promotionCodes {
     }
 
     export function list(
-        params: {
+        params?: {
             active?: boolean
             code?: string
             coupon?: string

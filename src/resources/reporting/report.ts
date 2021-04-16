@@ -30,8 +30,13 @@ export namespace reporting {
         }
 
         export function list(
-            params: {
-                created?: object //how to send this???
+            params?: {
+                created?: {
+                    gt?: string
+                    gte?: string
+                    lt?: string
+                    lte?: string
+                }
                 ending_before?: string
                 limit?: number
                 starting_after?: string

@@ -75,7 +75,7 @@ export namespace charges {
     }
 
     export function list(
-        params: {
+        params?: {
             customer?: string
             created?: object
             ending_before?: string

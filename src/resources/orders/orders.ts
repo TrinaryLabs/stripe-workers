@@ -1,7 +1,6 @@
 import qs from 'qs'
 import { OrdersResponse } from '../../types'
 
-
 export namespace orders {
     export let client: Function
 
@@ -64,7 +63,7 @@ export namespace orders {
     }
 
     export function list(
-        params: {
+        params?: {
             customer?: string
             status?: string
             created?: number

@@ -26,8 +26,6 @@ jobs:
         with:
           node-version: 12.x
       - run: yarn
-      - run: yarn build
-      - run: yarn build:types
       - run: yarn test
 
   publish:

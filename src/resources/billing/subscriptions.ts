@@ -96,7 +96,7 @@ export namespace subscriptions {
     }
 
     export function list(
-        params: {
+        params?: {
             customer?: string
             price?: string
             status?: string

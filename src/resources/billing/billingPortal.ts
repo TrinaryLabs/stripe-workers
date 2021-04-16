@@ -5,13 +5,17 @@ export namespace billingPortal {
     export let client: Function
     export namespace sessions {
         export function create(
-            customer: string,
-            return_url?: string,
+            params: {
+                customer: string,
+                return_url?: string,
+                configuration?: string,
+                on_behalf_of?: unknown
+            },
             stripeAccount?: string,
         ): Promise<BillingPortalResponse> {
             return client(
                 '/billing_portal/sessions',
-                { customer, return_url },
+                params,
                 'POST',
                 {
                     headers: stripeAccount
@@ -140,7 +144,7 @@ export namespace billingPortal {
         }
 
         export function list(
-            params: {
+            params?: {
                 active?: boolean
                 is_default?: boolean
                 ending_before?: string

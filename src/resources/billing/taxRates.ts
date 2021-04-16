@@ -51,7 +51,7 @@ export namespace taxRates {
     }
 
     export function list(
-        params: {
+        params?: {
             active?: boolean
             created?: string
             ending_before?: string

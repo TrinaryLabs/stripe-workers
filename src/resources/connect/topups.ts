@@ -44,7 +44,7 @@ export namespace topups {
     }
 
     export function list(
-        params: {
+        params?: {
             status?: string
             amount?: object
             created?: object

@@ -46,7 +46,7 @@ export namespace webhookEndpoints {
     }
 
     export function list(
-        params: {
+        params?: {
             ending_before?: string
             limit?: number
             starting_after?: string

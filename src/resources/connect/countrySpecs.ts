@@ -5,7 +5,7 @@ export namespace countrySpecs {
     export let client: Function
 
     export function list(
-        params: {
+        params?: {
             limit?: number
             ending_before?: string
             starting_after?: string
