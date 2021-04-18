@@ -1,8 +1,8 @@
 import qs from 'qs'
 import { ReportRunResponse, ReportTypeResponse } from '../../types'
 export namespace reporting {
+    export let client: Function
     export namespace reportRuns {
-        export let client: Function
 
         export function create(
             params: {
@@ -62,7 +62,6 @@ export namespace reporting {
     }
 
     export namespace reportTypes {
-        export let client: Function
 
         export function retrieve(
             id: string,

@@ -2,8 +2,8 @@ import qs from 'qs'
 import { SQRResponse } from '../../types'
 
 export namespace sigma {
+    export let client: Function
     export namespace scheduledQueryRuns {
-        export let client: Function
 
         export function retrieve(
             id: string,

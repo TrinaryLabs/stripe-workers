@@ -1,8 +1,8 @@
 import qs from 'qs'
 import { CheckoutSessionsResponse } from '../../types'
 export namespace checkout {
+    export let client: Function
     export namespace sessions {
-        export let client: Function
 
         export async function create(
             params: {

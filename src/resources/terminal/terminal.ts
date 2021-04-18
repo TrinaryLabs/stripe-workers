@@ -2,8 +2,8 @@ import qs from 'qs'
 import { LocationsResponse, ReadersResponse } from '../../types'
 
 export namespace terminal {
+    export let client: Function
     export namespace connectionTokens {
-        export let client: Function
 
         export function create(
             params: {
@@ -23,7 +23,6 @@ export namespace terminal {
     }
 
     export namespace locations {
-        export let client: Function
 
         export function create(
             params: {
@@ -109,7 +108,6 @@ export namespace terminal {
     }
 
     export namespace readers {
-        export let client: Function
 
         export function create(
             params: {

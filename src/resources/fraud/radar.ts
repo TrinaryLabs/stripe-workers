@@ -1,8 +1,8 @@
 import qs from 'qs'
 import { EarlyFraudWarningsResponse, ValueListResponse, ValueListItemsResponse } from '../../types'
 export namespace radar {
+    export let client: Function
     export namespace earlyFraudWarnings {
-        export let client: Function
 
         export function retrieve(
             id: string,
@@ -43,7 +43,6 @@ export namespace radar {
     }
 
     export namespace valueList {
-        export let client: Function
 
         export function create(
             params: {
@@ -133,7 +132,6 @@ export namespace radar {
     }
 
     export namespace valueListItems {
-        export let client: Function
 
         export function create(
             params: {
