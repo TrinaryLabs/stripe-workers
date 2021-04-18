@@ -78,7 +78,7 @@ export class Stripe {
 
     constructor(
         stripe_secret: string,
-        params: {
+        params?: {
             apiVersion?: string
             fetch?: Function
             userAgent?: string
@@ -86,9 +86,9 @@ export class Stripe {
     ) {
         let client = new HTTPClient(
             stripe_secret,
-            params.apiVersion,
-            params.userAgent,
-            params.fetch,
+            params?.apiVersion,
+            params?.userAgent,
+            params?.fetch,
         )
 
         this.checkout = checkout

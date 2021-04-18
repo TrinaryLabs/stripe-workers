@@ -59,7 +59,7 @@ export namespace customers {
             source?: unknown
             tax_exempt?: string
         },
-        stripeAccount: string,
+        stripeAccount?: string,
     ): Promise<CustomersResponse> {
         return client(`/customers/${id}`, params, 'POST', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
@@ -264,7 +264,7 @@ export namespace customers {
         )
     }
 
-    export function listBalanceTransaction(
+    export function listBalanceTransactions(
         id: string,
         params?: {
             ending_before?: string
