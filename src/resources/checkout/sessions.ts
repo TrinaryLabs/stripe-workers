@@ -3,7 +3,6 @@ import { CheckoutSessionsResponse } from '../../types'
 export namespace checkout {
     export let client: Function
     export namespace sessions {
-
         export async function create(
             params: {
                 success_url: string

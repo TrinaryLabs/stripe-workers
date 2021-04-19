@@ -1,9 +1,14 @@
 import qs from 'qs'
-import { AuthorizationsResponse, CardholdersResponse, CardsResponse, DisputesResponse, TransactionsResponse } from '../../types'
+import {
+    AuthorizationsResponse,
+    CardholdersResponse,
+    CardsResponse,
+    DisputesResponse,
+    TransactionsResponse,
+} from '../../types'
 export namespace issuing {
     export let client: Function
     export namespace authorizations {
-
         export function retrieve(
             id: string,
             stripeAccount?: string,
@@ -99,7 +104,6 @@ export namespace issuing {
     }
 
     export namespace cardholders {
-
         export function create(
             params: {
                 billing: object
@@ -186,7 +190,6 @@ export namespace issuing {
     }
 
     export namespace cards {
-
         export function create(
             params: {
                 cardholder: string
@@ -265,7 +268,6 @@ export namespace issuing {
     }
 
     export namespace disputes {
-
         export function create(
             params: {
                 transaction: string
@@ -351,7 +353,6 @@ export namespace issuing {
     }
 
     export namespace transactions {
-
         export function retrieve(
             id: string,
             stripeAccount?: string,

@@ -3,7 +3,6 @@ import { ReportRunResponse, ReportTypeResponse } from '../../types'
 export namespace reporting {
     export let client: Function
     export namespace reportRuns {
-
         export function create(
             params: {
                 report_type: string
@@ -62,7 +61,6 @@ export namespace reporting {
     }
 
     export namespace reportTypes {
-
         export function retrieve(
             id: string,
             stripeAccount?: string,

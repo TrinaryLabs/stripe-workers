@@ -14,7 +14,9 @@ describe('Customers Resource', async () => {
 
     describe('create', async () => {
         it('Sends the correct request', async () => {
-            const response = await stripe.customers.create({ description: 'Some customer' })
+            const response = await stripe.customers.create({
+                description: 'Some customer',
+            })
 
             lastCusId = response.id
 

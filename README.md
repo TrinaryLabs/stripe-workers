@@ -10,7 +10,7 @@ This project is in beta, this SDK is built to follow the offical stripe-api & fo
 
 1: git clone `https://github.com/TrinaryLabs/stripe-workers.git`  
 2: run `yarn build`  
-2b: run `yarn build:types` 
+2b: run `yarn build:types`  
 3: Go to your workers.dev project  
 4: run `yarn add <path>` where path is the path to where you saved the stripe-js project.  
 5: add `import { Stripe } from 'stripe-workers'` to your code  
@@ -22,9 +22,9 @@ This project is in beta, this SDK is built to follow the offical stripe-api & fo
 import { Stripe } from 'stripe-workers'
 
 const stripe = new Stripe('Stripe-Secret-Key', {
-    apiVersion: '2020-08-27' //(optional: string)
-    fetch: CustomFetch //(optional: Function) window.fetch will be used
-    userAgent: 'stripe-workers/version' //(optional: string)
+    apiVersion: '2020-08-27', //(optional: string)
+    fetch: CustomFetch, //(optional: Function) window.fetch will be used
+    userAgent: 'stripe-workers/version', //(optional: string)
 })
 ```
 

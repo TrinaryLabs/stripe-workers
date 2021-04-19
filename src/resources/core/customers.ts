@@ -1,5 +1,12 @@
 import qs from 'qs'
-import { CustomersResponse, SourcesResponse, CardSourceResponse, BankAccountResponse, CustomerBalanceTransactionResponse, TaxIDsResponse } from '../../types'
+import {
+    CustomersResponse,
+    SourcesResponse,
+    CardSourceResponse,
+    BankAccountResponse,
+    CustomerBalanceTransactionResponse,
+    TaxIDsResponse,
+} from '../../types'
 export namespace customers {
     export let client: Function
 

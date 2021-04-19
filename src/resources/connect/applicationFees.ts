@@ -1,5 +1,8 @@
 import qs from 'qs'
-import { ApplicationFeesResponse, ApplicationFeesRefundResponse } from '../../types'
+import {
+    ApplicationFeesResponse,
+    ApplicationFeesRefundResponse,
+} from '../../types'
 
 export namespace applicationFees {
     export let client: Function

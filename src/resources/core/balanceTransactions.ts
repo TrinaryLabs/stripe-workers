@@ -17,18 +17,22 @@ export namespace balanceTransactions {
         params?: {
             payout?: string
             type?: string
-            available_on?: {
-                gt: string
-                gte: string
-                lt: string
-                lte: string
-            } | string
-            created?: {
-                gt: string
-                gte: string
-                lt: string
-                lte: string
-            } | string
+            available_on?:
+                | {
+                      gt: string
+                      gte: string
+                      lt: string
+                      lte: string
+                  }
+                | string
+            created?:
+                | {
+                      gt: string
+                      gte: string
+                      lt: string
+                      lte: string
+                  }
+                | string
             currency?: string
             ending_before?: string
             limit?: number

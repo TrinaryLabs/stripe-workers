@@ -1,7 +1,6 @@
 import qs from 'qs'
 import { PromotionCodesResponse } from '../../types'
 
-
 export namespace promotionCodes {
     export let client: Function
 

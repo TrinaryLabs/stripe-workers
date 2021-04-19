@@ -4,7 +4,6 @@ import { SQRResponse } from '../../types'
 export namespace sigma {
     export let client: Function
     export namespace scheduledQueryRuns {
-
         export function retrieve(
             id: string,
             stripeAccount?: string,

@@ -1,9 +1,12 @@
 import qs from 'qs'
-import { EarlyFraudWarningsResponse, ValueListResponse, ValueListItemsResponse } from '../../types'
+import {
+    EarlyFraudWarningsResponse,
+    ValueListResponse,
+    ValueListItemsResponse,
+} from '../../types'
 export namespace radar {
     export let client: Function
     export namespace earlyFraudWarnings {
-
         export function retrieve(
             id: string,
             stripeAccount?: string,
@@ -43,7 +46,6 @@ export namespace radar {
     }
 
     export namespace valueList {
-
         export function create(
             params: {
                 alias: string
@@ -132,7 +134,6 @@ export namespace radar {
     }
 
     export namespace valueListItems {
-
         export function create(
             params: {
                 value: string
