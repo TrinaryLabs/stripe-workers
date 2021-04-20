@@ -11,7 +11,7 @@ export namespace paymentIntents {
             confirm?: boolean
             customer?: string
             description?: string
-            metadata?: [string, unknown]
+            metadata?: object
             off_session?: boolean
             payment_method?: string
             payment_method_types?: string[]
@@ -43,7 +43,7 @@ export namespace paymentIntents {
 
     export function retrieve(
         id: string,
-        params: {
+        params?: {
             client_secret?: string
         },
         stripeAccount?: string,
@@ -68,7 +68,7 @@ export namespace paymentIntents {
             confirm?: boolean
             customer?: string
             description?: string
-            metadata?: [string, unknown]
+            metadata?: object
             off_session?: boolean
             payment_method?: string
             payment_method_types?: string[]
@@ -100,7 +100,7 @@ export namespace paymentIntents {
 
     export function confirm(
         id: string,
-        params: {
+        params?: {
             payment_method?: unknown
             receipt_email?: string
             setup_future_usage?: string
@@ -124,7 +124,7 @@ export namespace paymentIntents {
 
     export function capture(
         id: string,
-        params: {
+        params?: {
             amount_to_capture?: number
             application_fee_amount?: number
             statement_descriptor?: string
@@ -140,7 +140,7 @@ export namespace paymentIntents {
 
     export function cancel(
         id: string,
-        params: {
+        params?: {
             cancellation_reason?: string
         },
         stripeAccount?: string,

@@ -49,8 +49,8 @@ export namespace orders {
     export function pay(
         id: string,
         params: {
-            customer: string
-            source: unknown
+            customer?: string
+            source?: unknown
             email?: string
             metadata?: [string, unknown]
             application_fee?: number

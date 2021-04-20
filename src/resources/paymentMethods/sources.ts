@@ -29,7 +29,7 @@ export namespace sources {
     export function retrieve(
         id: string,
         params: {
-            client_secret: string // how should we use this????
+            client_secret: string
         },
         stripeAccount?: string,
     ): Promise<SourcesResponse> {

@@ -7,7 +7,7 @@ export namespace paymentMethods {
         params: {
             type: string
             billing_details?: object
-            metadata?: [string, unknown]
+            metadata?: object
             afterpay_clearpay?: object
             alipay?: object
             au_becs_debit?: object
@@ -45,7 +45,7 @@ export namespace paymentMethods {
         id: string,
         params: {
             billing_details?: object
-            metadata?: [string, unknown]
+            metadata?: object
             card?: object
         },
         stripeAccount?: string,
