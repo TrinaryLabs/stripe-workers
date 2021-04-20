@@ -13,7 +13,7 @@ export namespace taxRates {
             country?: string
             description?: string
             jurisdiction?: string
-            metadata?: [string, unknown]
+            metadata?: object
             state?: string
         },
         stripeAccount?: string,
@@ -40,7 +40,7 @@ export namespace taxRates {
             country?: string
             description?: string
             jurisdiction?: string
-            metadata?: [string, unknown]
+            metadata?: object
             state?: string
         },
         stripeAccount?: string,

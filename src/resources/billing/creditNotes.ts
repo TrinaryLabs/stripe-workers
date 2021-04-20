@@ -9,7 +9,7 @@ export namespace creditNotes {
             invoice: string
             lines?: object
             memo?: string
-            metadata?: [string, unknown]
+            metadata?: object
             reason?: string
             amount?: number
             credit_amount?: number
@@ -36,7 +36,7 @@ export namespace creditNotes {
             invoice: string
             lines?: object
             memo?: string
-            metadata?: [string, unknown]
+            metadata?: object
             reason?: string
             amount?: number
             credit_amount?: number
@@ -64,7 +64,7 @@ export namespace creditNotes {
         id: string,
         params: {
             memo?: string
-            metadata?: [string, unknown]
+            metadata?: object
         },
         stripeAccount?: string,
     ): Promise<CreditNotesResponse> {
@@ -104,7 +104,7 @@ export namespace creditNotes {
             invoice: string
             lines?: object
             memo?: string
-            metadata?: [string, unknown]
+            metadata?: object
             reason?: string
             amount?: number
             credit_amount?: number

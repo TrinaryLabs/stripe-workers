@@ -23,7 +23,7 @@ export namespace issuing {
         export function update(
             id: string,
             params: {
-                metadata?: [string, unknown]
+                metadata?: object
             },
             stripeAccount?: string,
         ): Promise<AuthorizationsResponse> {
@@ -38,7 +38,7 @@ export namespace issuing {
             id: string,
             params: {
                 amount?: number
-                metadata?: [string, unknown]
+                metadata?: object
             },
             stripeAccount?: string,
         ): Promise<AuthorizationsResponse> {
@@ -57,7 +57,7 @@ export namespace issuing {
         export function decline(
             id: string,
             params: {
-                metadata?: [string, unknown]
+                metadata?: object
             },
             stripeAccount?: string,
         ): Promise<AuthorizationsResponse> {
@@ -110,7 +110,7 @@ export namespace issuing {
                 name: string
                 type: string
                 email?: string
-                metadata?: [string, unknown]
+                metadata?: object
                 phone_number?: string
                 company?: object
                 individual?: object
@@ -142,7 +142,7 @@ export namespace issuing {
             params: {
                 billing: object
                 email?: string
-                metadata?: [string, unknown]
+                metadata?: object
                 phone_number?: string
                 company?: object
                 individual?: object
@@ -195,7 +195,7 @@ export namespace issuing {
                 cardholder: string
                 currency: string
                 type: string
-                metadata?: [string, unknown]
+                metadata?: object
                 status?: string
                 replacement_for?: unknown
                 replacement_reason?: string
@@ -226,7 +226,7 @@ export namespace issuing {
             id: string,
             params: {
                 cancellation_reason?: string
-                metadata?: [string, unknown]
+                metadata?: object
                 status?: string
                 spending_controls?: object
             },
@@ -272,7 +272,7 @@ export namespace issuing {
             params: {
                 transaction: string
                 evidence?: object
-                metadata?: [string, unknown]
+                metadata?: object
             },
             stripeAccount?: string,
         ): Promise<DisputesResponse> {
@@ -286,7 +286,7 @@ export namespace issuing {
         export function submit(
             id: string,
             params: {
-                metadata?: [string, unknown]
+                metadata?: object
             },
             stripeAccount?: string,
         ): Promise<DisputesResponse> {
@@ -312,7 +312,7 @@ export namespace issuing {
             id: string,
             params: {
                 evidence?: object
-                metadata?: [string, unknown]
+                metadata?: object
             },
             stripeAccount?: string,
         ): Promise<DisputesResponse> {
@@ -367,7 +367,7 @@ export namespace issuing {
         export function update(
             id: string,
             params: {
-                metadata?: [string, unknown]
+                metadata?: object
             },
             stripeAccount?: string,
         ): Promise<TransactionsResponse> {

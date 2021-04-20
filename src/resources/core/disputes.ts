@@ -16,7 +16,7 @@ export namespace disputes {
         id: string,
         params: {
             evidence?: object
-            metadata?: [string, unknown]
+            metadata?: object
             submit?: boolean
         },
         stripeAccount?: string,

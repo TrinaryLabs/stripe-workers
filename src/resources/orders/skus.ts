@@ -14,7 +14,7 @@ export namespace skus {
             active?: boolean
             attributes?: object
             image?: string
-            metadata?: [string, unknown]
+            metadata?: object
             package_dimensions?: object
         },
         stripeAccount?: string,
@@ -43,7 +43,7 @@ export namespace skus {
             active?: boolean
             attributes?: object
             image?: string
-            metadata?: [string, unknown]
+            metadata?: object
             package_dimensions?: object
         },
         stripeAccount?: string,

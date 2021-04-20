@@ -8,7 +8,7 @@ export namespace sources {
             type: string
             amount?: number
             currency?: string
-            metadata?: [string, unknown]
+            metadata?: object
             owner?: object
             redirect?: object
             statement_descriptor?: string
@@ -42,7 +42,7 @@ export namespace sources {
         id: string,
         params: {
             amount?: number
-            metadata?: [string, unknown]
+            metadata?: object
             owner?: object
             mandate?: object
             source_order?: object

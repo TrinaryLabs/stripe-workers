@@ -10,7 +10,7 @@ export namespace charges {
             currency: string
             customer?: string
             description?: string
-            metadata?: [string, unknown]
+            metadata?: object
             receipt_email?: string
             shipping?: object
             source?: unknown
@@ -43,7 +43,7 @@ export namespace charges {
         params: {
             customer?: string
             description?: string
-            metadata?: [string, unknown]
+            metadata?: object
             receipt_email?: string
             shipping?: object
             fraud_details?: object

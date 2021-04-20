@@ -51,7 +51,7 @@ export namespace radar {
                 alias: string
                 name: string
                 item_type?: string
-                metadata?: [string, unknown]
+                metadata?: object
             },
             stripeAccount?: string,
         ): Promise<ValueListResponse> {
@@ -78,7 +78,7 @@ export namespace radar {
             params: {
                 alias?: string
                 name?: string
-                metadata?: [string, unknown]
+                metadata?: object
             },
             stripeAccount?: string,
         ): Promise<ValueListResponse> {

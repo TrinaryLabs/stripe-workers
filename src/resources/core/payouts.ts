@@ -9,7 +9,7 @@ export namespace payouts {
             amount: number
             currency: string
             description?: string
-            metadata?: [string, unknown]
+            metadata?: object
             statement_descriptor?: string
             destination?: string
             method?: string
@@ -34,7 +34,7 @@ export namespace payouts {
     export function update(
         id: string,
         params: {
-            metadata?: [string, unknown]
+            metadata?: object
         },
         stripeAccount?: string,
     ): Promise<PayoutsResponse> {
@@ -77,7 +77,7 @@ export namespace payouts {
     export function reverse(
         id: string,
         params: {
-            metadata?: [string, unknown]
+            metadata?: object
         },
         stripeAccount?: string,
     ): Promise<PayoutsResponse> {

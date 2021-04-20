@@ -8,7 +8,7 @@ export namespace promotionCodes {
         params: {
             coupon: string
             code?: string
-            metadata?: [string, unknown]
+            metadata?: object
             active?: boolean
             customer?: string
             expires_at?: number
@@ -25,7 +25,7 @@ export namespace promotionCodes {
     export function update(
         id: string,
         params: {
-            metadata?: [string, unknown]
+            metadata?: object
             active?: boolean
         },
         stripeAccount?: string,

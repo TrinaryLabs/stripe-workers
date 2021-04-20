@@ -50,7 +50,7 @@ export namespace tokens {
                 last_name_kana?: string
                 last_name_kanji?: string
                 maiden_name?: string
-                metadata?: [string, unknown]
+                metadata?: object
                 nationality?: string
                 phone?: string
                 political_exposure?: boolean

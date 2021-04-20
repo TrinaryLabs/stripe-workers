@@ -9,7 +9,7 @@ export namespace transfers {
             currency: string
             destination: string
             description?: string
-            metadata?: [string, unknown]
+            metadata?: object
             source_transaction?: unknown
             source_type?: unknown
             transfer_group?: unknown
@@ -34,7 +34,7 @@ export namespace transfers {
         id: string,
         params: {
             description?: string
-            metadata?: [string, unknown]
+            metadata?: object
         },
         stripeAccount?: string,
     ): Promise<TransfersResponse> {
@@ -69,7 +69,7 @@ export namespace transfers {
         params: {
             amount: number
             description?: string
-            metadata?: [string, unknown]
+            metadata?: object
             refund_application_fee?: boolean
         },
         stripeAccount?: string,
@@ -93,7 +93,7 @@ export namespace transfers {
         id: string,
         rever_id: string,
         params: {
-            metadata?: [string, unknown]
+            metadata?: object
         },
         stripeAccount?: string,
     ): Promise<TransfersReversalResponse> {

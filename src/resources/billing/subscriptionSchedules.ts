@@ -6,7 +6,7 @@ export namespace subscriptionSchedules {
     export function create(
         params: {
             customer?: string
-            metadata?: [string, unknown]
+            metadata?: object
             phases?: object[]
             start_date?: number
             dafault_settings?: object
@@ -33,7 +33,7 @@ export namespace subscriptionSchedules {
         id: string,
         params: {
             customer?: string
-            metadata?: [string, unknown]
+            metadata?: object
             phases?: object[]
             dafault_settings?: object
             end_behavior?: unknown

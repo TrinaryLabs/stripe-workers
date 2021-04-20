@@ -8,7 +8,7 @@ export namespace setupIntents {
             confirm?: boolean
             customer?: string
             description?: string
-            metadata?: [string, unknown]
+            metadata?: object
             payment_method?: string
             payment_method_types?: string[]
             usage?: string
@@ -49,7 +49,7 @@ export namespace setupIntents {
         params: {
             customer?: string
             description?: string
-            metadata?: [string, unknown]
+            metadata?: object
             payment_method?: string
             payment_method_types?: string[]
             payment_method_options?: unknown

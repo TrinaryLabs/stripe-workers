@@ -19,7 +19,7 @@ export namespace accounts {
             business_type?: string
             company?: object
             individual?: object
-            metadata?: [string, unknown]
+            metadata?: object
             tos_acceptance?: object
             account_token?: unknown
             business_profile?: object
@@ -54,7 +54,7 @@ export namespace accounts {
             business_type?: string
             company?: object
             individual?: object
-            metadata?: [string, unknown]
+            metadata?: object
             tos_acceptance?: object
             account_token?: unknown
             business_profile?: object
@@ -186,7 +186,7 @@ export namespace accounts {
             first_name?: string
             id_number?: string
             last_name?: string
-            metadata?: [string, unknown]
+            metadata?: object
             phone?: string
             relationship?: object
             ssn_last_4?: number
@@ -230,7 +230,7 @@ export namespace accounts {
             first_name?: string
             id_number?: string
             last_name?: string
-            metadata?: [string, unknown]
+            metadata?: object
             phone?: string
             relationship?: object
             ssn_last_4?: number
@@ -313,7 +313,7 @@ export namespace accounts {
         id: string,
         params: {
             external_account: object | string
-            metadata?: [string, unknown]
+            metadata?: object
             default_for_currency?: string
         },
         stripeAccount?: string,
@@ -344,7 +344,7 @@ export namespace accounts {
         id: string,
         ext_id: string,
         params: {
-            metadata?: [string, unknown]
+            metadata?: object
             default_for_currency?: string
             account_holder_name?: string
             account_holder_type?: string

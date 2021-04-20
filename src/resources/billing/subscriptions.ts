@@ -10,7 +10,7 @@ export namespace subscriptions {
             items: object
             cancel_at_period_end?: boolean
             default_payment_method?: unknown
-            metadata?: [string, unknown]
+            metadata?: object
             add_invoice_items?: string[]
             application_fee_percent?: string
             backdate_start_date?: unknown
@@ -53,7 +53,7 @@ export namespace subscriptions {
         params: {
             items: object
             cancel_at_period_end?: boolean
-            metadata?: [string, unknown]
+            metadata?: object
             add_invoice_items?: string[]
             application_fee_percent?: string
             proration_behavior?: string

@@ -8,7 +8,7 @@ export namespace fileLinks {
         params: {
             file: string
             expires_at?: object
-            metadata?: [string, unknown]
+            metadata?: object
         },
         stripeAccount?: string,
     ): Promise<FileLinksResponse> {
@@ -30,7 +30,7 @@ export namespace fileLinks {
         id: string,
         params: {
             expires_at?: object
-            metadata?: [string, unknown]
+            metadata?: object
         },
         stripeAccount?: string,
     ): Promise<FileLinksResponse> {

@@ -9,7 +9,7 @@ export namespace topups {
             amount: number
             currency: string
             description?: string
-            metadata?: [string, unknown]
+            metadata?: object
             source?: unknown
             statement_descriptor?: string
             transfer_group?: unknown
@@ -34,7 +34,7 @@ export namespace topups {
         id: string,
         params: {
             description?: string
-            metadata?: [string, unknown]
+            metadata?: object
         },
         stripeAccount?: string,
     ): Promise<TopUpsResponse> {

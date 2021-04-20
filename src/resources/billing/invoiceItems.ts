@@ -10,7 +10,7 @@ export namespace invoiceItems {
             currency?: string
             amount?: number
             description?: string
-            metadata?: [string, unknown]
+            metadata?: object
             period?: object
             price?: string
             discountable?: boolean
@@ -43,7 +43,7 @@ export namespace invoiceItems {
         params: {
             amount?: number
             description?: string
-            metadata?: [string, unknown]
+            metadata?: object
             period?: object
             price?: string
             discountable?: boolean

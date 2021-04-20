@@ -10,7 +10,7 @@ export namespace products {
             name: string
             active?: boolean
             description?: string
-            metadata?: [string, unknown]
+            metadata?: object
             attributes?: string[]
             caption?: string
             deactivate_on?: string[]
@@ -42,7 +42,7 @@ export namespace products {
         params: {
             active?: boolean
             description?: string
-            metadata?: [string, unknown]
+            metadata?: object
             name?: string
             attributes?: string[]
             caption?: string

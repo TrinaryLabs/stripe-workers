@@ -10,7 +10,7 @@ export namespace prices {
             product?: string
             unit_amount?: number
             active?: boolean
-            metadata?: [string, unknown]
+            metadata?: object
             nickname?: string
             recurring?: object
             product_data?: object
@@ -42,7 +42,7 @@ export namespace prices {
         id: string,
         params: {
             active?: boolean
-            metadata?: [string, unknown]
+            metadata?: object
             nickname?: string
             lookup_key?: string
             transfer_lookup_key?: boolean

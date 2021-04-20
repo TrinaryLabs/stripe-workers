@@ -48,7 +48,7 @@ export namespace invoices {
             auto_advance?: boolean
             collection_method?: string
             description?: string
-            metadata?: [string, unknown]
+            metadata?: object
             account_tax_ids?: string
             application_fee_amount?: number
             custom_fields?: string[]

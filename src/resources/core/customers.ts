@@ -14,7 +14,7 @@ export namespace customers {
         params: {
             adress?: object
             description?: string
-            metadata?: [string, unknown]
+            metadata?: object
             name?: string
             payment_method?: string
             phone?: string
@@ -51,7 +51,7 @@ export namespace customers {
         params: {
             adress?: object
             description?: string
-            metadata?: [string, unknown]
+            metadata?: object
             name?: string
             payment_method?: string
             phone?: string
@@ -110,7 +110,7 @@ export namespace customers {
         cus_id: string,
         params: {
             source: unknown
-            metadata?: [string, unknown]
+            metadata?: object
         },
         stripeAccount?: string,
     ): Promise<SourcesResponse | CardSourceResponse | BankAccountResponse> {
@@ -143,7 +143,7 @@ export namespace customers {
             exp_month?: number
             exp_year?: number
             name?: string
-            metadata?: [string, unknown]
+            metadata?: object
         },
         stripeAccount?: string,
     ): Promise<CardSourceResponse | BankAccountResponse> {
@@ -158,7 +158,7 @@ export namespace customers {
         params: {
             account_holder_name?: string
             account_holder_type?: string
-            metadata?: [string, unknown]
+            metadata?: object
         },
         stripeAccount?: string,
     ): Promise<BankAccountResponse> {
@@ -224,7 +224,7 @@ export namespace customers {
             amount: number
             currency: string
             description?: string
-            metadata?: [string, unknown]
+            metadata?: object
         },
         stripeAccount?: string,
     ): Promise<CustomerBalanceTransactionResponse> {
@@ -255,7 +255,7 @@ export namespace customers {
         tra_id: string,
         params: {
             description?: string
-            metadata?: [string, unknown]
+            metadata?: object
         },
         stripeAccount?: string,
     ): Promise<CustomerBalanceTransactionResponse> {

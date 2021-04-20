@@ -7,7 +7,7 @@ export namespace refunds {
         params: {
             charge?: string
             amount?: number
-            metadata?: [string, unknown]
+            metadata?: object
             payment_intent?: string
             reason?: unknown // string or null,
             refund_application_fee?: boolean
@@ -32,7 +32,7 @@ export namespace refunds {
     export function update(
         id: string,
         params: {
-            metadata?: [string, unknown]
+            metadata?: object
         },
         stripeAccount?: string,
     ): Promise<RefundsResponse> {

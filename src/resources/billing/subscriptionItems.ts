@@ -7,7 +7,7 @@ export namespace subscriptionItems {
     export function create(
         params: {
             subscription: string
-            metadata?: [string, unknown]
+            metadata?: object
             price?: string
             proration_behavior?: unknown
             quantity?: number
@@ -36,7 +36,7 @@ export namespace subscriptionItems {
     export function update(
         id: string,
         params: {
-            metadata?: [string, unknown]
+            metadata?: object
             price?: string
             proration_behavior?: unknown
             quantity?: number

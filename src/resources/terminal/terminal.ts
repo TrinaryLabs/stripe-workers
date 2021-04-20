@@ -26,7 +26,7 @@ export namespace terminal {
             params: {
                 address: object
                 display_name: string
-                metadata?: [string, unknown]
+                metadata?: object
             },
             stripeAccount?: string,
         ): Promise<LocationsResponse> {
@@ -53,7 +53,7 @@ export namespace terminal {
             params: {
                 address?: object
                 display_name?: string
-                metadata?: [string, unknown]
+                metadata?: object
             },
             stripeAccount?: string,
         ): Promise<LocationsResponse> {
@@ -111,7 +111,7 @@ export namespace terminal {
                 registration_code?: string
                 label?: string
                 location?: string
-                metadata?: [string, unknown]
+                metadata?: object
             },
             stripeAccount?: string,
         ): Promise<ReadersResponse> {
@@ -137,7 +137,7 @@ export namespace terminal {
             id: string,
             params: {
                 label?: string
-                metadata?: [string, unknown]
+                metadata?: object
             },
             stripeAccount?: string,
         ): Promise<ReadersResponse> {

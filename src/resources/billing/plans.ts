@@ -11,7 +11,7 @@ export namespace plans {
             interval: string
             product: unknown // string or object
             active?: boolean
-            metadata?: [string, unknown]
+            metadata?: object
             nickname?: string
             id?: string
             tiers?: unknown
@@ -46,7 +46,7 @@ export namespace plans {
             nickname?: string
             product: unknown // string or object
             active?: boolean
-            metadata?: [string, unknown]
+            metadata?: object
             trial_period_days?: number
         },
         stripeAccount?: string,

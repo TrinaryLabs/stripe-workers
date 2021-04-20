@@ -39,7 +39,7 @@ export namespace applicationFees {
         id: string,
         params: {
             amount?: number
-            metadata?: [string, unknown]
+            metadata?: object
         },
         stripeAccount?: string,
     ): Promise<ApplicationFeesRefundResponse> {
@@ -69,7 +69,7 @@ export namespace applicationFees {
         fee_id: string,
         refund_id: string,
         params: {
-            metadata?: [string, unknown]
+            metadata?: object
         },
         stripeAccount?: string,
     ): Promise<ApplicationFeesRefundResponse> {

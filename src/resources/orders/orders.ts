@@ -10,7 +10,7 @@ export namespace orders {
             customer?: string
             email?: string
             items?: object
-            metadata?: [string, unknown]
+            metadata?: object
             shipping?: object
             coupon?: string
         },
@@ -33,7 +33,7 @@ export namespace orders {
     export function update(
         id: string,
         params: {
-            metadata?: [string, unknown]
+            metadata?: object
             shipping?: object
             status?: string
             coupon?: string
@@ -52,7 +52,7 @@ export namespace orders {
             customer?: string
             source?: unknown
             email?: string
-            metadata?: [string, unknown]
+            metadata?: object
             application_fee?: number
         },
         stripeAccount?: string,
