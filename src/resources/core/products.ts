@@ -15,7 +15,12 @@ export namespace products {
             caption?: string
             deactivate_on?: string[]
             images?: string[]
-            package_dimensions?: object
+            package_dimensions?: {
+                height: number
+                length: number
+                weight: number
+                width: number
+            }
             shippable?: boolean
             statement_descriptor?: string
             unit_label?: string
@@ -48,7 +53,12 @@ export namespace products {
             caption?: string
             deactivate_on?: string[]
             images?: string[]
-            package_dimensions?: object
+            package_dimensions?: {
+                height: number
+                length: number
+                weight: number
+                width: number
+            }
             shippable?: boolean
             statement_descriptor?: string
             unit_label?: string
@@ -64,7 +74,12 @@ export namespace products {
     export function list(
         params?: {
             active?: boolean
-            created?: object
+            created?: {
+                gt?: string
+                gte?: string
+                lt?: string
+                lte?: string
+            }
             ending_before?: string
             ids?: string[]
             limit?: number

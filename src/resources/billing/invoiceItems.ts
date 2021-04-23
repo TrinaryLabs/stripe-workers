@@ -11,12 +11,25 @@ export namespace invoiceItems {
             amount?: number
             description?: string
             metadata?: object
-            period?: object
+            period?: {
+                end: number
+                start: number
+            }
             price?: string
             discountable?: boolean
-            discounts?: string[]
+            discounts?: [
+                {
+                    coupon?: string
+                    discount?: string
+                }
+            ]
             invoice?: string
-            price_data?: object
+            price_data?: {
+                currency: string
+                product: string
+                unit_amount_decimal?: number
+                unit_amount?: number
+            }
             quantity?: number
             tax_rates?: string
             unit_amount?: number
@@ -44,11 +57,19 @@ export namespace invoiceItems {
             amount?: number
             description?: string
             metadata?: object
-            period?: object
+            period?: {
+                end: number
+                start: number
+            }
             price?: string
             discountable?: boolean
             discounts?: string[]
-            price_data?: object
+            price_data?: {
+                currency: string
+                product: string
+                unit_amount_decimal?: number
+                unit_amount?: number
+            }
             quantity?: number
             tax_rates?: string
             unit_amount?: number

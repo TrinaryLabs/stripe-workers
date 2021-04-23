@@ -6,7 +6,16 @@ export namespace reporting {
         export function create(
             params: {
                 report_type: string
-                parameters?: object
+                parameters?: {
+                    columns?: string
+                    connected_account?: string
+                    currency?: string
+                    interval_end?: number
+                    interval_start?: number
+                    payout?: string 
+                    reporting_category?: string
+                    timezone?: string
+                },
             },
             stripeAccount?: string,
         ): Promise<ReportRunResponse> {

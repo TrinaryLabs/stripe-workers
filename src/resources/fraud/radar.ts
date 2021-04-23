@@ -108,7 +108,12 @@ export namespace radar {
             params?: {
                 alias?: string
                 contains?: string
-                created?: object
+                created?: {
+                    gt?: string
+                    gte?: string
+                    lt?: string
+                    lte?: string
+                }
                 ending_before?: string
                 limit?: number
                 starting_after?: string
@@ -178,7 +183,12 @@ export namespace radar {
             params: {
                 value_list: string
                 value?: string
-                created?: object
+                created?: {
+                    gt?: string
+                    gte?: string
+                    lt?: string
+                    lte?: string
+                }
                 ending_before?: string
                 limit?: number
                 starting_after?: string

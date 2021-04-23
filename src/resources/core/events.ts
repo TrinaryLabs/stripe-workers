@@ -15,7 +15,12 @@ export namespace events {
     export function list(
         params?: {
             types?: string[]
-            created?: object
+            created?: {
+                gt?: string
+                gte?: string
+                lt?: string
+                lte?: string
+            }
             delivery_success?: unknown
             ending_before?: string
             limit?: number

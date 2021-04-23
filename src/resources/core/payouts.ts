@@ -46,8 +46,18 @@ export namespace payouts {
     export function list(
         params?: {
             status?: string
-            arrival_date?: object
-            created?: object
+            arrival_date?: {
+                gt?: string
+                gte?: string
+                lt?: string
+                lte?: string
+            }
+            created?: {
+                gt?: string
+                gte?: string
+                lt?: string
+                lte?: string
+            }
             destination?: string
             ending_before?: string
             limit?: number

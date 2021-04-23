@@ -19,7 +19,12 @@ export namespace applicationFees {
     export function list(
         params?: {
             limit?: number
-            created?: object
+            created?: {
+                gt?: string
+                gte?: string
+                lt?: string
+                lte?: string
+            }
             ending_before?: string
             starting_after?: string
         },

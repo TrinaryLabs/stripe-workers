@@ -13,7 +13,9 @@ export namespace coupons {
             name?: string
             percent_off?: number
             id?: string
-            applies_to?: object
+            applies_to?: {
+                products: [string]
+            }
             max_redemtions?: number
             redeem_by?: number
         },

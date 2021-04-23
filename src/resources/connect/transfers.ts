@@ -10,9 +10,9 @@ export namespace transfers {
             destination: string
             description?: string
             metadata?: object
-            source_transaction?: unknown
-            source_type?: unknown
-            transfer_group?: unknown
+            source_transaction?: string
+            source_type?: string
+            transfer_group?: string
         },
         stripeAccount?: string,
     ): Promise<TransfersResponse> {
@@ -46,11 +46,16 @@ export namespace transfers {
     export function list(
         params?: {
             destination?: string
-            created?: object
+            created?: {
+                gt?: string
+                gte?: string
+                lt?: string
+                lte?: string
+            }
             ending_before?: string
             limit?: number
             starting_after?: string
-            transfer_group?: unknown
+            transfer_group?: string
         },
         stripeAccount?: string,
     ): Promise<{

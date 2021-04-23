@@ -1,6 +1,6 @@
 {
     "name": "@trinarylabs/stripe-workers",
-    "version": "0.7.0-beta",
+    "version": "0.8.0-beta",
     "description": "An unofficial stripe-sdk for workers.dev and environments that use fetch",
     "keywords": [
         "stripe",

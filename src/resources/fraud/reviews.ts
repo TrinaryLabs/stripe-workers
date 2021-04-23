@@ -24,7 +24,12 @@ export namespace reviews {
 
     export function list(
         params?: {
-            created?: object
+            created?: {
+                gt?: string
+                gte?: string
+                lt?: string
+                lte?: string
+            }
             ending_before?: string
             limit?: number
             starting_after?: string

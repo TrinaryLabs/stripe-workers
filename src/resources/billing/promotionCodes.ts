@@ -13,7 +13,11 @@ export namespace promotionCodes {
             customer?: string
             expires_at?: number
             max_redemptions?: string
-            restrictions?: object
+            restrictions?: {
+                first_time_transaction?: boolean
+                minimum_amount?: number
+                minimum_amount_currency?: string
+            }
         },
         stripeAccount?: string,
     ): Promise<PromotionCodesResponse> {

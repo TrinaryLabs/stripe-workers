@@ -78,7 +78,12 @@ export namespace issuing {
                 card?: string
                 cardholder?: string
                 status?: string
-                created?: object
+                created?: {
+                    gt?: string
+                    gte?: string
+                    lt?: string
+                    lte?: string
+                }
                 ending_before?: string
                 limit?: number
                 starting_after?: string
@@ -106,15 +111,49 @@ export namespace issuing {
     export namespace cardholders {
         export function create(
             params: {
-                billing: object
+                billing: {
+                    address: {
+                        city: string
+                        country: string
+                        line1: string
+                        postal_code: string
+                        line2?: string
+                        state?: string
+                    }
+                }
                 name: string
                 type: string
                 email?: string
                 metadata?: object
                 phone_number?: string
-                company?: object
-                individual?: object
-                spending_controls?: object
+                company?: {
+                    tax_id?: string
+                }
+                individual?: {
+                    first_name: string
+                    last_name: string
+                    dob?: {
+                        day: number
+                        month: number
+                        year: number
+                    }
+                    verification?: {
+                        back?: string
+                        front?: string 
+                    }
+                }
+                spending_controls?: {
+                    allowed_categories?: [string]
+                    blocked_categories?: [string]
+                    spending_limits?: [
+                        {
+                            amount: number
+                            interval: string
+                            categories?: [string] 
+                        }
+                    ]
+                    spending_limits_currency?: string
+                }
                 status?: string
             },
             stripeAccount?: string,
@@ -140,13 +179,47 @@ export namespace issuing {
         export function update(
             id: string,
             params: {
-                billing: object
+                billing?: {
+                    address: {
+                        city: string
+                        country: string
+                        line1: string
+                        postal_code: string
+                        line2?: string
+                        state?: string
+                    }
+                }
                 email?: string
                 metadata?: object
                 phone_number?: string
-                company?: object
-                individual?: object
-                spending_controls?: object
+                company?: {
+                    tax_id?: string
+                }
+                individual?: {
+                    first_name: string
+                    last_name: string
+                    dob?: {
+                        day: number
+                        month: number
+                        year: number
+                    }
+                    verification?: {
+                        back?: string
+                        front?: string 
+                    }
+                }
+                spending_controls?: {
+                    allowed_categories?: [string]
+                    blocked_categories?: [string]
+                    spending_limits?: [
+                        {
+                            amount: number
+                            interval: string
+                            categories?: [string] 
+                        }
+                    ]
+                    spending_limits_currency?: string
+                }
                 status?: string
             },
             stripeAccount?: string,
@@ -160,7 +233,12 @@ export namespace issuing {
 
         export function list(
             params?: {
-                created?: object
+                created?: {
+                    gt?: string
+                    gte?: string
+                    lt?: string
+                    lte?: string
+                }
                 email?: string
                 ending_before?: string
                 limit?: number
@@ -199,8 +277,29 @@ export namespace issuing {
                 status?: string
                 replacement_for?: unknown
                 replacement_reason?: string
-                shipping?: object
-                spending_controls?: object
+                shipping?: {
+                    address: {
+                        city: string
+                        country: string
+                        line1: string
+                        postal_code: string
+                        line2?: string
+                        state?: string
+                    }
+                    name: string
+                    service?: string
+                }
+                spending_controls?: {
+                    allowed_categories?: [string]
+                    blocked_categories?: [string]
+                    spending_limits?: [
+                        {
+                            amount: number
+                            interval: string
+                            categories?: [string] 
+                        }
+                    ]
+                }
             },
             stripeAccount?: string,
         ): Promise<CardsResponse> {
@@ -228,7 +327,18 @@ export namespace issuing {
                 cancellation_reason?: string
                 metadata?: object
                 status?: string
-                spending_controls?: object
+                spending_controls?: {
+                    allowed_categories?: [string]
+                    blocked_categories?: [string]
+                    spending_limits?: [
+                        {
+                            amount: number
+                            interval: string
+                            categories?: [string] 
+                        }
+                    ]
+                    spending_limits_currency?: string
+                }
             },
             stripeAccount?: string,
         ): Promise<CardsResponse> {
@@ -243,7 +353,12 @@ export namespace issuing {
             params?: {
                 cardholder?: string
                 type?: string
-                created?: object
+                created?: {
+                    gt?: string
+                    gte?: string
+                    lt?: string
+                    lte?: string
+                }
                 ending_before?: string
                 exp_month?: number
                 exp_year?: number
@@ -271,7 +386,60 @@ export namespace issuing {
         export function create(
             params: {
                 transaction: string
-                evidence?: object
+                evidence?: {
+                    canceled?: {
+                        additional_documentation?: string
+                        canceled_at?: number
+                        cancellation_policy_provided?: string
+                        cancellation_reason?: string
+                        explanation?: string
+                        product_description?: string
+                        product_type?: string
+                        return_status?: string
+                        returned_at?: number
+                    }
+                    duplicate?: {
+                        additional_documentation?: string
+                        card_statement?: string
+                        cash_receipt?: string
+                        check_image?: string
+                        explanation?: string
+                        original_transaction?: string
+                    }
+                    fraudulent?: {
+                        additional_documentation?: string
+                        explanation?: string
+                    }
+                    merchandise_not_as_described?: {
+                        additional_documentation?: string
+                        explanation?: string
+                        received_at?: number
+                        return_description?: string
+                        return_status?: string
+                        returned_at?: number
+                    }
+                    not_received?: {
+                        additional_documentation?: string
+                        expected_at?: number
+                        explanation?: string
+                        product_description?: string
+                        product_type?: string
+                    }
+                    other?: {
+                        additional_documentation?: string
+                        explanation?: string
+                        product_description?: string
+                        product_type?: string
+                    }
+                    reason?: string
+                    service_not_as_described?: {
+                        additional_documentation?: string
+                        canceled_at?: number
+                        cancellation_reason?: string
+                        explanation?: string
+                        received_at?: number
+                    }
+                }
                 metadata?: object
             },
             stripeAccount?: string,
@@ -311,7 +479,60 @@ export namespace issuing {
         export function update(
             id: string,
             params: {
-                evidence?: object
+                evidence?: {
+                    canceled?: {
+                        additional_documentation?: string
+                        canceled_at?: number
+                        cancellation_policy_provided?: string
+                        cancellation_reason?: string
+                        explanation?: string
+                        product_description?: string
+                        product_type?: string
+                        return_status?: string
+                        returned_at?: number
+                    }
+                    duplicate?: {
+                        additional_documentation?: string
+                        card_statement?: string
+                        cash_receipt?: string
+                        check_image?: string
+                        explanation?: string
+                        original_transaction?: string
+                    }
+                    fraudulent?: {
+                        additional_documentation?: string
+                        explanation?: string
+                    }
+                    merchandise_not_as_described?: {
+                        additional_documentation?: string
+                        explanation?: string
+                        received_at?: number
+                        return_description?: string
+                        return_status?: string
+                        returned_at?: number
+                    }
+                    not_received?: {
+                        additional_documentation?: string
+                        expected_at?: number
+                        explanation?: string
+                        product_description?: string
+                        product_type?: string
+                    }
+                    other?: {
+                        additional_documentation?: string
+                        explanation?: string
+                        product_description?: string
+                        product_type?: string
+                    }
+                    reason?: string
+                    service_not_as_described?: {
+                        additional_documentation?: string
+                        canceled_at?: number
+                        cancellation_reason?: string
+                        explanation?: string
+                        received_at?: number
+                    }
+                }
                 metadata?: object
             },
             stripeAccount?: string,
@@ -326,7 +547,12 @@ export namespace issuing {
         export function list(
             params?: {
                 transaction?: string
-                created?: object
+                created?: {
+                    gt?: string
+                    gte?: string
+                    lt?: string
+                    lte?: string
+                }
                 ending_before?: string
                 limit?: number
                 starting_after?: string
@@ -382,7 +608,12 @@ export namespace issuing {
             params?: {
                 card?: string
                 cardholder?: string
-                created?: object
+                created?: {
+                    gt?: string
+                    gte?: string
+                    lt?: string
+                    lte?: string
+                }
                 ending_before?: string
                 limit?: number
                 starting_after?: string

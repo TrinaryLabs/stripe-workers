@@ -24,7 +24,14 @@ export namespace terminal {
     export namespace locations {
         export function create(
             params: {
-                address: object
+                address: {
+                    country: string,
+                    line1: string,
+                    city?: string,
+                    line2?: string
+                    postal_code?: string,
+                    state?: string
+                },
                 display_name: string
                 metadata?: object
             },
@@ -51,7 +58,14 @@ export namespace terminal {
         export function update(
             id: string,
             params: {
-                address?: object
+                address?: {
+                    country?: string,
+                    line1?: string,
+                    city?: string,
+                    line2?: string
+                    postal_code?: string,
+                    state?: string
+                },
                 display_name?: string
                 metadata?: object
             },

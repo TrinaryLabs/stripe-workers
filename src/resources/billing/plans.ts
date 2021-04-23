@@ -20,7 +20,10 @@ export namespace plans {
             amount_decimal?: number
             billing_scheme?: string
             interval_count?: number
-            transform_usage?: object
+            transform_usage?: {
+                divide_by: number
+                round: string
+            }
             trial_period_days?: number
             usage_type?: string
         },
@@ -73,7 +76,12 @@ export namespace plans {
         params?: {
             active?: boolean
             product?: string
-            created?: object
+            created?: {
+                gt?: string
+                gte?: string
+                lt?: string
+                lte?: string
+            }
             ending_before?: string
             limit?: number
             starting_after?: string

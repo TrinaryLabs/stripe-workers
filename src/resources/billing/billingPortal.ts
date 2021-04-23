@@ -12,7 +12,7 @@ export namespace billingPortal {
                 customer: string
                 return_url?: string
                 configuration?: string
-                on_behalf_of?: unknown
+                on_behalf_of?: string
             },
             stripeAccount?: string,
         ): Promise<BillingPortalResponse> {

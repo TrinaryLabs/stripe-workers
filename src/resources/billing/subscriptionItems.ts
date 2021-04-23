@@ -9,11 +9,22 @@ export namespace subscriptionItems {
             subscription: string
             metadata?: object
             price?: string
-            proration_behavior?: unknown
+            proration_behavior?: string
             quantity?: number
-            billing_thresholds?: object
+            billing_thresholds?: {
+                usage_gte: number
+            }
             payment_behavior?: string
-            price_data?: object
+            price_data?: {
+                currency: string
+                product: string
+                recurring: {
+                    interval: string
+                    interval_count?: number
+                }
+                unit_amount_decimal?: number
+                unit_amount?: number
+            }
             proration_date?: number
             tax_rates?: string[]
         },
@@ -38,12 +49,23 @@ export namespace subscriptionItems {
         params: {
             metadata?: object
             price?: string
-            proration_behavior?: unknown
+            proration_behavior?: string
             quantity?: number
-            billing_thresholds?: object
+            billing_thresholds?: {
+                usage_gte: number
+            }
             off_session?: unknown
             payment_behavior?: string
-            price_data?: object
+            price_data?: {
+                currency: string
+                product: string
+                recurring: {
+                    interval: string
+                    interval_count?: number
+                }
+                unit_amount_decimal?: number
+                unit_amount?: number
+            }
             proration_date?: number
             tax_rates?: string[]
         },

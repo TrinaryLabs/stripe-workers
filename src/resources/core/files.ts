@@ -8,7 +8,11 @@ export namespace files {
         params: {
             file: unknown
             purpose: string
-            file_link_data?: object
+            file_link_data?: {
+                create: boolean
+                expires_at?: number
+                metadata?: object
+            }
         },
         stripeAccount?: string,
     ): Promise<FilesResponse> {
@@ -30,7 +34,12 @@ export namespace files {
     export function list(
         params?: {
             purpose?: string
-            created?: object
+            created?: {
+                gt?: string
+                gte?: string
+                lt?: string
+                lte?: string
+            }
             ending_before?: string
             limit?: number
             starting_after?: string

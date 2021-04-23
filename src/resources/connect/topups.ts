@@ -10,9 +10,9 @@ export namespace topups {
             currency: string
             description?: string
             metadata?: object
-            source?: unknown
+            source?: string
             statement_descriptor?: string
-            transfer_group?: unknown
+            transfer_group?: string
         },
         stripeAccount?: string,
     ): Promise<TopUpsResponse> {
@@ -46,8 +46,18 @@ export namespace topups {
     export function list(
         params?: {
             status?: string
-            amount?: object
-            created?: object
+            amount?: {
+                gt?: string
+                gte?: string
+                lt?: string
+                lte?: string
+            }
+            created?: {
+                gt?: string
+                gte?: string
+                lt?: string
+                lte?: string
+            }
             ending_before?: string
             limit?: number
             starting_after?: string
