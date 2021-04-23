@@ -10,7 +10,7 @@ export namespace invoices {
             auto_advance?: boolean
             collection_method?: string
             description?: string
-            metdata?: [string, unknown]
+            metdata?: object
             subscription?: string
             account_tax_ids?: string
             application_fee_amount?: number
@@ -22,9 +22,22 @@ export namespace invoices {
             discounts?: string[]
             due_date?: number
             footer?: unknown
-            payment_settings?: object
+            payment_settings?: {
+                payment_method_options?: {
+                    bancontact?: {
+                        preferred_language?: string
+                    }
+                    card?: {
+                        request_three_d_secure?: string
+                    }
+                } 
+                payment_method_types?: string
+            }
             statment_desciptor?: string
-            transfer_data?: object
+            transfer_data?: {
+                destination: string
+                amount?: number
+            }
         },
         stripeAccount?: string,
     ): Promise<InvoicesResponse> {
@@ -59,9 +72,22 @@ export namespace invoices {
             discounts?: string[]
             due_date?: number
             footer?: unknown
-            payment_settings?: object
+            payment_settings?: {
+                payment_method_options?: {
+                    bancontact?: {
+                        preferred_language?: string
+                    }
+                    card?: {
+                        request_three_d_secure?: string
+                    }
+                } 
+                payment_method_types?: string
+            }
             statment_desciptor?: string
-            transfer_data?: object
+            transfer_data?: {
+                destination: string
+                amount?: number
+            }
         },
         stripeAccount?: string,
     ): Promise<InvoicesResponse> {
@@ -238,7 +264,12 @@ export namespace invoices {
             subscription?: string
             collection_method?: string
             created?: number
-            due_date?: object
+            due_date?: {
+                gt?: string
+                gte?: string
+                lt?: string
+                lte?: string
+            }
             ending_before?: string
             limit?: number
             starting_after?: string

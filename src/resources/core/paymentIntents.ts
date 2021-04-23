@@ -17,7 +17,20 @@ export namespace paymentIntents {
             payment_method_types?: string[]
             receipt_email?: string
             setup_future_usage?: string
-            shipping?: object
+            shipping?: {
+                address: {
+                    city?: string
+                    country?: string
+                    line1: string
+                    line2?: string
+                    postal_code?: string
+                    state?: string
+                }
+                name: string
+                carrier?: string
+                phone?: string
+                tracking_number?: string
+            }
             statement_descriptor?: string
             statement_descriptor_suffix?: string
             application_fee_amount?: number
@@ -74,7 +87,20 @@ export namespace paymentIntents {
             payment_method_types?: string[]
             receipt_email?: string
             setup_future_usage?: string
-            shipping?: object
+            shipping?: {
+                address: {
+                    city?: string
+                    country?: string
+                    line1: string
+                    line2?: string
+                    postal_code?: string
+                    state?: string
+                }
+                name: string
+                carrier?: string
+                phone?: string
+                tracking_number?: string
+            }
             statement_descriptor?: string
             statement_descriptor_suffix?: string
             application_fee_amount?: number
@@ -104,13 +130,129 @@ export namespace paymentIntents {
             payment_method?: unknown
             receipt_email?: string
             setup_future_usage?: string
-            shipping?: object
+            shipping?: {
+                address: {
+                    city?: string
+                    country?: string
+                    line1: string
+                    line2?: string
+                    postal_code?: string
+                    state?: string
+                }
+                name: string
+                carrier?: string
+                phone?: string
+                tracking_number?: string
+            }
             error_on_requires_action?: unknown
             mandate?: string
-            mandate_data?: object
+            mandate_data?: {
+                customer_acceptance: {
+                    type: string
+                    accepted_at?: number
+                    offline?: {}
+                    online?: {
+                        ip_address: string
+                        user_agent: string
+                    }
+                }
+            }
             off_session?: unknown
-            payment_method_data?: object
-            payment_method_options?: object
+            payment_method_data?: {
+                type: string
+                acss_debit?: {
+                    account_number: string
+                    institution_number: string
+                    transit_number: string
+                }
+                afterpay_clearpay?: {}
+                alipay?: {}
+                au_becs_debit?: {
+                    account_number: string
+                    bsb_number: string 
+                }
+                bacs_debit?: {
+                    account_number?: string
+                    sort_code?: string
+                }
+                bancontact?: {}
+                billing_details?: {
+                    address?: {
+                        city?: string
+                        country?: string
+                        line1?: string
+                        line2?: string
+                        postal_code?: string
+                        state?: string
+                    }
+                    email?: string
+                    name?: string
+                    phone?: string
+                }
+                eps?: {
+                    bank?: string
+                }
+                fpx?: {
+                    bank: string
+                }
+                giropay?: {}
+                grabpay?: {}
+                ideal?: {
+                    bank?: string
+                }
+                interac_present?: {}
+                metadata?: object
+                oxxo?: {}
+                p24?: {
+                    bank?: string
+                }
+                sepa_debit?: {
+                    iban: string
+                }
+                sofort?: {
+                    country: string
+                }
+            }
+            payment_method_options?: {
+                acss_debit?: {
+                    mandate_options?: {
+                        custom_mandate_url?: string
+                        interval_description?: number
+                        payment_schedule?: string
+                        transaction_type?: string
+                    }
+                    verification_method?: string
+                }
+                alipay?: {}
+                bancontact?: {
+                    preferred_language?: string
+                }
+                card?: {
+                    cvc_token?: string
+                    installments?: {
+                        enabled?: boolean
+                        plan?: {
+                            count: number
+                            interval: number
+                            type: string
+                        }
+                    }
+                    network?: string
+                    request_three_d_secure?: string
+                }
+                oxxo?: {
+                    expires_after_days?: number
+                }
+                p24?: {
+                    tos_shown_and_accepted?: string
+                }
+                sepa_debit?: {
+                    mandate_options?: {}
+                }
+                sofort?: {
+                    preferred_language?: string
+                }
+            }
             payment_method_types?: string[]
             return_url?: string
             use_stripe_sdk?: unknown
@@ -129,7 +271,9 @@ export namespace paymentIntents {
             application_fee_amount?: number
             statement_descriptor?: string
             statement_descriptor_suffix?: string
-            transfer_data?: object
+            transfer_data?: {
+                amount?: number
+            }
         },
         stripeAccount?: string,
     ): Promise<PaymentIntentsResponse> {
@@ -153,7 +297,12 @@ export namespace paymentIntents {
     export function list(
         params?: {
             customer?: string
-            created?: object
+            created?: {
+                gt?: string
+                gte?: string
+                lt?: string
+                lte?: string
+            }
             ending_before?: string
             limit?: number
             starting_after?: string

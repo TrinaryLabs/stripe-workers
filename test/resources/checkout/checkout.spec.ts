@@ -7,7 +7,7 @@ describe('Checkout', async () => {
 
         describe('create', async () => {
             it('Sends the correct request', async () => {
-                const params = {
+                let data = await stripe.checkout.sessions.create({
                     mode: 'payment',
                     cancel_url: 'https://stripe.com/cancel',
                     client_reference_id: '1234',
@@ -26,8 +26,7 @@ describe('Checkout', async () => {
                     },
                     payment_method_types: ['card'],
                     success_url: 'https://stripe.com/success',
-                }
-                let data = await stripe.checkout.sessions.create(params)
+                })
 
                 lastCheckoutId = data.id
 

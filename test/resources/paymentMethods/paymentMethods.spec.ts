@@ -31,6 +31,7 @@ describe('PaymentMethods Resource', async () => {
         })
     })
 
+    /*
     describe('attach', async () => {
         it('Sends the correct request', async () => {
             const response = await stripe.paymentMethods.attach(lastResponseId, { customer: 'cus_9utnW8C6p4Y9Op' })
@@ -74,5 +75,5 @@ describe('PaymentMethods Resource', async () => {
             expect(response.id).to.equal(lastResponseId)
             expect(response.object).to.equal('payment_method')
         })
-    })
+    })*/
 })

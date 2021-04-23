@@ -12,23 +12,55 @@ export namespace customers {
 
     export function create(
         params: {
-            adress?: object
+            adress?: {
+                city?: string
+                country?: string
+                line1?: string
+                line2?: string
+                postal_code?: string
+                state?: string
+            }
             description?: string
             metadata?: object
             name?: string
             payment_method?: string
             phone?: string
-            shipping?: object
+            shipping?: {
+                address: {
+                    city?: string
+                    country?: string
+                    line1: string
+                    line2?: string
+                    postal_code?: string
+                    state?: string
+                }
+                name: string
+                phone?: string
+            }
             balance?: number
             coupon?: unknown
             invoice_prefix?: string
-            invoice_settings?: object
+            invoice_settings?: {
+                custom_fields: [
+                    {
+                        name: string
+                        value: string
+                    }
+                ]
+                default_payment_method?: string
+                footer?: string
+            }
             next_invoice_sequence?: unknown
             preferred_locales?: unknown
             promotion_code?: string
             source?: unknown
             tax_exempt?: string
-            tax_id_data?: object
+            tax_id_data?: [
+                {
+                    type: string
+                    value: string
+                }
+            ]
         },
         stripeAccount?: string,
     ): Promise<CustomersResponse> {
@@ -49,17 +81,44 @@ export namespace customers {
     export function update(
         id: string,
         params: {
-            adress?: object
+            adress?: {
+                city?: string
+                country?: string
+                line1?: string
+                line2?: string
+                postal_code?: string
+                state?: string
+            }
             description?: string
             metadata?: object
             name?: string
             payment_method?: string
             phone?: string
-            shipping?: object
+            shipping?: {
+                address: {
+                    city?: string
+                    country?: string
+                    line1: string
+                    line2?: string
+                    postal_code?: string
+                    state?: string
+                }
+                name: string
+                phone?: string
+            }
             balance?: number
             coupon?: unknown
             invoice_prefix?: string
-            invoice_settings?: object
+            invoice_settings?: {
+                custom_fields: [
+                    {
+                        name: string
+                        value: string
+                    }
+                ]
+                default_payment_method?: string
+                footer?: string
+            }
             next_invoice_sequence?: unknown
             preferred_locales?: unknown
             promotion_code?: string
@@ -89,7 +148,12 @@ export namespace customers {
     export function list(
         params?: {
             email?: string
-            created?: object
+            created?: {
+                gt?: string
+                gte?: string
+                lt?: string
+                lte?: string
+            }
             ending_before?: string
             limit?: number
             starting_after?: string

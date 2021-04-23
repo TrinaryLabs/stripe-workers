@@ -12,14 +12,30 @@ export namespace charges {
             description?: string
             metadata?: object
             receipt_email?: string
-            shipping?: object
+            shipping?: {
+                address: {
+                    line1: string
+                    city?: string
+                    country?: string
+                    line2?: string
+                    postal_code?: string
+                    state?: string
+                }
+                name: string
+                carrier?: string
+                phone?: string
+                tracking_number?: string
+            }
             source?: unknown
             statement_descriptor?: string
             statement_descriptor_suffix?: string
             application_fee_amount?: number
             capture?: unknown
             on_behalf_of?: unknown
-            transfer_data?: object
+            transfer_data?: {
+                destination: string
+                amount?: number
+            }
             transfer_group?: string
         },
         stripeAccount?: string,
@@ -45,8 +61,23 @@ export namespace charges {
             description?: string
             metadata?: object
             receipt_email?: string
-            shipping?: object
-            fraud_details?: object
+            shipping?: {
+                address: {
+                    line1: string
+                    city?: string
+                    country?: string
+                    line2?: string
+                    postal_code?: string
+                    state?: string
+                }
+                name: string
+                carrier?: string
+                phone?: string
+                tracking_number?: string
+            }
+            fraud_details?: {
+                user_report: string
+            }
             transfer_group?: string
         },
         stripeAccount?: string,
@@ -64,7 +95,9 @@ export namespace charges {
             statement_descriptor?: string
             statement_descriptor_suffix?: string
             application_fee_amount?: number
-            transfer_data?: object
+            transfer_data?: {
+                amount?: number
+            }
             transfer_group?: string
         },
         stripeAccount?: string,
@@ -77,7 +110,12 @@ export namespace charges {
     export function list(
         params?: {
             customer?: string
-            created?: object
+            created?: {
+                gt?: string
+                gte?: string
+                lt?: string
+                lte?: string
+            }
             ending_before?: string
             limit?: number
             payment_intent?: unknown

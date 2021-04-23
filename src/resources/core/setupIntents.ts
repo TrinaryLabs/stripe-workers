@@ -16,7 +16,10 @@ export namespace setupIntents {
             on_behalf_of?: unknown
             payment_method_options?: unknown
             return_url?: string
-            single_use?: object
+            single_use?: {
+                amount: number
+                currency: string
+            }
         },
         stripeAccount?: string,
     ): Promise<SetupIntentsResponse> {
@@ -65,8 +68,35 @@ export namespace setupIntents {
         id: string,
         params: {
             payment_method?: unknown
-            mandate_data?: object
-            payment_method_options?: object
+            mandate_data?: {
+                customer_acceptance: {
+                    type: string
+                    accepted_at?: number
+                    offline?: {}
+                    online?: {
+                        ip_address: string
+                        user_agent: string
+                    }
+                }
+            }
+            payment_method_options?: {
+                acss_debit?: {
+                    currency?: string
+                    mandate_options?: {
+                        custom_mandate_url?: string
+                        interval_description?: string
+                        payment_schedule?: string
+                        transaction_type?: string
+                    }
+                    verification_method?: string
+                }
+                card?: {
+                    request_three_d_secure?: string
+                }
+                sepa_debit?: {
+                    mandate_options?: {}
+                }
+            }
             return_url?: string
         },
         stripeAccount?: string,
@@ -92,7 +122,12 @@ export namespace setupIntents {
         params?: {
             customer?: string
             payment_method?: string
-            created?: object
+            created?: {
+                gt?: string
+                gte?: string
+                lt?: string
+                lte?: string
+            }
             ending_before?: string
             limit?: number
             starting_after?: string

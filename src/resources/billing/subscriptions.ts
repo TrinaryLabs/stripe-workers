@@ -101,9 +101,24 @@ export namespace subscriptions {
             price?: string
             status?: string
             collection_method?: unknown
-            created?: object
-            current_period_end?: object
-            current_period_start?: object
+            created?: {
+                gt?: string
+                gte?: string
+                lt?: string
+                lte?: string
+            }
+            current_period_end?: {
+                gt?: number
+                gte?: number
+                lt?: number
+                lte?: number
+            }
+            current_period_start?: {
+                gt?: number
+                gte?: number
+                lt?: number
+                lte?: number
+            }
             ending_before?: string
             limit?: number
             starting_after?: string
