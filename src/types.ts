@@ -1,7 +1,7 @@
 export type BillingPortalResponse = {
     id: string
     object: string
-    configuration: string
+    configuration: string | BillingPortalConfigurationResponse
     created: number
     customer: string
     livemode: boolean
@@ -60,17 +60,20 @@ export type BillingPortalConfigurationResponse = {
 
 export type CouponsResponse = {
     id: string
-    object: string
     amount_off: number
-    created: number
     currency: string
     duration: string
     duration_in_months: number
-    livemode: boolean
-    max_redemptions: number
     metadata: object
     name: string
     percent_off: number
+    object: string
+    applies_to: {
+        products: [string]
+    }
+    created: number
+    livemode: boolean
+    max_redemptions: number
     redeem_by: number
     times_redeemed: number
     valid: boolean
@@ -122,19 +125,7 @@ export type CreditNotesLines = {
 
 export type CreditNotesResponse = {
     id: string
-    object: string
-    amount: number
-    created: number
     currency: string
-    customer: string
-    customer_balance_transaction: string
-    discount_amount: number
-    discount_amounts: [
-        {
-            amount: number
-            discount: string
-        },
-    ]
     invoice: string
     lines: {
         object: string
@@ -142,18 +133,36 @@ export type CreditNotesResponse = {
         has_more: boolean
         url: string
     }
-    livemode: boolean
     memo: string
     metadata: object
+    reason: string
+    status: string
+    subtotal: number
+    total: number
+    object: string
+    amount: number
+    created: number
+    customer: string | CustomersResponse
+    customer_balance_transaction: string | CustomerBalanceTransactionResponse
+    discount_amount: number
+    discount_amounts: [
+        {
+            amount: number
+            discount: string
+        },
+    ]
+    livemode: boolean
     number: string
     out_of_band_amount: number
     pdf: string
-    reason: string
-    refund: string
-    status: string
-    subtotal: number
-    tax_amounts: [object]
-    total: number
+    refund: string | RefundsResponse
+    tax_amounts: [
+        {
+            amount: number
+            inclusive: boolean
+            tax_rate: string | TaxRatesResponse
+        }
+    ]
     type: string
     voided_at: number
 }
@@ -751,18 +760,93 @@ export type AccountsCapabilityResponse = {
 
 export type PersonResponse = {
     id: string
-    object: string
     account: string
-    created: number
-    dob: object
+    address: {
+        city: string
+        country: string
+        line1: string
+        line2: string
+        postal_code: string
+        state: string
+    }
+    dob: {
+        day: number
+        month: number
+        year: number
+    }
+    email: string
     first_name: string
-    id_number_provided: boolean
     last_name: string
     metadata: object
-    relationship: object
-    requirements: object
+    phone: string
+    relationship: {
+        director: boolean
+        executive: boolean
+        owner: boolean
+        percent_ownership: number
+        representative: boolean
+        title: string
+    }
+    requirements: {
+        currently_due: [string]
+        errors: [
+            {
+                code: string
+                reason: string
+                requirement: string
+            }
+        ]
+        eventually_due: [string]
+        past_due: [string]
+        pending_verification: [string]
+    }
+    object: string
+    address_kana: {
+        city: string
+        country: string
+        line1: string
+        line2: string
+        postal_code: string
+        state: string
+        town: string
+    }
+    address_kanji: {
+        city: string
+        country: string
+        line1: string
+        line2: string
+        postal_code: string
+        state: string
+        town: string
+    }
+    created: number
+    first_name_kana: string
+    first_name_kanji: string
+    gender: string
+    id_number_provided: boolean
+    last_name_kana: string
+    last_name_kanji: string
+    maiden_name: string
+    nationality: string
+    political_exposure: string
     ssn_last_4_provided: boolean
-    verification: object
+    verification: {
+        additional_document: {
+            back: string | FilesResponse
+            details: string
+            details_code: string
+            front: string | FilesResponse
+        }
+        details: string
+        details_code: string
+        document: {
+            back: string | FilesResponse
+            details: string
+            details_code: string
+            front: string | FilesResponse
+        }
+        status: string
+    }
 }
 
 export type AccountBankAccountResponse = {
@@ -2929,28 +3013,22 @@ export type CustomerBalanceTransactionResponse = {
     id: string
     amount: number
     currency: string
-    customer: string
+    customer: string | CustomersResponse
     description: string
     ending_balance: number
     metadata: object
     type: string
     object: string
     created: number
-    credit_note: string
-    invoice: string
+    credit_note: string | CreditNotesLines
+    invoice: string | InvoicesResponse
     livemode: boolean
 }
 
 export type ChargesResponse = {
     id: string
-    object: string
     amount: number
-    amount_captured: number
-    amount_refunded: number
-    application: string
-    application_fee: string
-    application_fee_amount: number
-    balance_transaction: string
+    balance_transaction: string | BalanceTransactionsResponse
     billing_details: {
         address: {
             city: string
@@ -2964,40 +3042,16 @@ export type ChargesResponse = {
         name: string
         phone: string
     }
-    calculated_statement_descriptor: string
-    captured: boolean
-    created: number
     currency: string
-    customer: string
+    customer: string | CustomersResponse
     description: string
     disputed: boolean
-    failure_code: string
-    failure_message: string
-    fraud_details: object
-    invoice: string
-    livemode: boolean
+    invoice: string | InvoicesResponse
     metadata: object
-    on_behalf_of: string
-    order: string
-    outcome: {
-        network_status: string
-        reason: string
-        risk_level: string
-        risk_score: number
-        rule: string
-        seller_message: string
-        type: string
-    }
-    paid: boolean
-    payment_intent: string
-    payment_method: string
-    payment_method_details: object
+    payment_intent: string | PaymentIntentsResponse
+    payment_method_details: object //TODO
     receipt_email: string
-    receipt_number: string
-    receipt_url: string
     refunded: boolean
-    refunds: object
-    review: string
     shipping: {
         address: {
             city: string
@@ -3012,10 +3066,48 @@ export type ChargesResponse = {
         phone: string
         tracking_number: string
     }
-    source_transfer: string
     statement_descriptor: string
     statement_descriptor_suffix: string
     status: string
+    object: string
+    amount_captured: number
+    amount_refunded: number
+    application: string
+    application_fee: string
+    application_fee_amount: number
+    calculated_statement_descriptor: string
+    captured: boolean
+    created: number
+    failure_code: string
+    failure_message: string
+    fraud_details: {
+        stripe_report: string
+        user_report: string
+    }
+    livemode: boolean
+    on_behalf_of: string
+    order: string | OrdersResponse
+    outcome: {
+        network_status: string
+        reason: string
+        risk_level: string
+        risk_score: number
+        rule: string
+        seller_message: string
+        type: string
+    }
+    paid: boolean
+    payment_method: string
+    receipt_number: string
+    receipt_url: string
+    refunds: {
+        object: string
+        data: [RefundsResponse]
+        has_more: boolean
+        url: string
+    }
+    review: string
+    source_transfer: string
     transfer_data: {
         amount: number
         destination: string
