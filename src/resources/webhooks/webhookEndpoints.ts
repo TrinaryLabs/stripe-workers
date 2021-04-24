@@ -10,7 +10,7 @@ export namespace webhookEndpoints {
             url: string
             api_version?: string
             description?: string
-            metadata?: [string, unknown]
+            metadata?: object
             connect?: boolean
         },
         stripeAccount?: string,
@@ -35,7 +35,7 @@ export namespace webhookEndpoints {
             enabled_events: string[]
             url: string
             description?: string
-            metadata?: [string, unknown]
+            metadata?: object
             disabled?: boolean
         },
         stripeAccount?: string,

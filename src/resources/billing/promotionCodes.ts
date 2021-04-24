@@ -1,7 +1,6 @@
 import qs from 'qs'
 import { PromotionCodesResponse } from '../../types'
 
-
 export namespace promotionCodes {
     export let client: Function
 
@@ -9,12 +8,16 @@ export namespace promotionCodes {
         params: {
             coupon: string
             code?: string
-            metadata?: [string, unknown]
+            metadata?: object
             active?: boolean
             customer?: string
             expires_at?: number
             max_redemptions?: string
-            restrictions?: object
+            restrictions?: {
+                first_time_transaction?: boolean
+                minimum_amount?: number
+                minimum_amount_currency?: string
+            }
         },
         stripeAccount?: string,
     ): Promise<PromotionCodesResponse> {
@@ -26,7 +29,7 @@ export namespace promotionCodes {
     export function update(
         id: string,
         params: {
-            metadata?: [string, unknown]
+            metadata?: object
             active?: boolean
         },
         stripeAccount?: string,

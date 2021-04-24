@@ -7,9 +7,18 @@ export namespace creditNotes {
     export function preview(
         params: {
             invoice: string
-            lines?: object
+            lines?: {
+                type: string
+                amount?: number
+                description?: string
+                invoice_line_item?: string
+                quantity?: number
+                tax_rates?: [string]
+                unit_amount?: number
+                unit_amount_decimal?: number
+            }
             memo?: string
-            metadata?: [string, unknown]
+            metadata?: object
             reason?: string
             amount?: number
             credit_amount?: number
@@ -34,9 +43,18 @@ export namespace creditNotes {
     export function create(
         params: {
             invoice: string
-            lines?: object
+            lines?: {
+                type: string
+                amount?: number
+                description?: string
+                invoice_line_item?: string
+                quantity?: number
+                tax_rates?: [string]
+                unit_amount?: number
+                unit_amount_decimal?: number
+            }
             memo?: string
-            metadata?: [string, unknown]
+            metadata?: object
             reason?: string
             amount?: number
             credit_amount?: number
@@ -64,7 +82,7 @@ export namespace creditNotes {
         id: string,
         params: {
             memo?: string
-            metadata?: [string, unknown]
+            metadata?: object
         },
         stripeAccount?: string,
     ): Promise<CreditNotesResponse> {
@@ -102,9 +120,18 @@ export namespace creditNotes {
     export function listPreviewLineItems(
         params?: {
             invoice: string
-            lines?: object
+            lines?: {
+                type: string
+                amount?: number
+                description?: string
+                invoice_line_item?: string
+                quantity?: number
+                tax_rates?: [string]
+                unit_amount?: number
+                unit_amount_decimal?: number
+            }
             memo?: string
-            metadata?: [string, unknown]
+            metadata?: object
             reason?: string
             amount?: number
             credit_amount?: number

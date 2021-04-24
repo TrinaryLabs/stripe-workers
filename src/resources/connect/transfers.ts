@@ -9,10 +9,10 @@ export namespace transfers {
             currency: string
             destination: string
             description?: string
-            metadata?: [string, unknown]
-            source_transaction?: unknown
-            source_type?: unknown
-            transfer_group?: unknown
+            metadata?: object
+            source_transaction?: string
+            source_type?: string
+            transfer_group?: string
         },
         stripeAccount?: string,
     ): Promise<TransfersResponse> {
@@ -34,7 +34,7 @@ export namespace transfers {
         id: string,
         params: {
             description?: string
-            metadata?: [string, unknown]
+            metadata?: object
         },
         stripeAccount?: string,
     ): Promise<TransfersResponse> {
@@ -46,11 +46,16 @@ export namespace transfers {
     export function list(
         params?: {
             destination?: string
-            created?: object
+            created?: {
+                gt?: string
+                gte?: string
+                lt?: string
+                lte?: string
+            }
             ending_before?: string
             limit?: number
             starting_after?: string
-            transfer_group?: unknown
+            transfer_group?: string
         },
         stripeAccount?: string,
     ): Promise<{
@@ -69,7 +74,7 @@ export namespace transfers {
         params: {
             amount: number
             description?: string
-            metadata?: [string, unknown]
+            metadata?: object
             refund_application_fee?: boolean
         },
         stripeAccount?: string,
@@ -93,7 +98,7 @@ export namespace transfers {
         id: string,
         rever_id: string,
         params: {
-            metadata?: [string, unknown]
+            metadata?: object
         },
         stripeAccount?: string,
     ): Promise<TransfersReversalResponse> {

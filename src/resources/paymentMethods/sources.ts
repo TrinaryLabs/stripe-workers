@@ -8,14 +8,75 @@ export namespace sources {
             type: string
             amount?: number
             currency?: string
-            metadata?: [string, unknown]
-            owner?: object
-            redirect?: object
+            metadata?: object
+            owner?: {
+                address?: {
+                    city?: string
+                    country?: string
+                    line1?: string
+                    line2?: string
+                    postal_code?: string
+                    state?: string
+                }
+                email?: string
+                name?: string
+                phone?: string
+            }
+            redirect?: {
+                return_url: string
+            }
             statement_descriptor?: string
             flow?: string
-            mandate?: object
-            receiver?: object
-            source_order?: object
+            mandate?: {
+                acceptance?: {
+                    date: number
+                    status: string
+                    ip?: string
+                    offline?: {
+                        contact_email: string
+                    }
+                    online?: {
+                        date: number
+                        ip: string
+                        user_agent: string
+                    }
+                    type?: string
+                    user_agent?: string
+                }
+                amount?: number
+                currency?: string
+                interval?: string
+                notification_method?: string
+            }
+            receiver?: {
+                refund_attributes_method?: string
+            }
+            source_order?: {
+                items?: [
+                    {
+                        amount?: number
+                        currency?: string
+                        description?: string
+                        parent?: string
+                        quantity?: number
+                        type?: string
+                    }
+                ]
+                shipping?: {
+                    address: {
+                        line1: string
+                        city?: string
+                        country?: string
+                        line2?: string
+                        postal_code?: string
+                        state?: string
+                    }
+                    carrier?: string
+                    name?: string
+                    phone?: string
+                    tracking_number?: string
+                }
+            }
             token?: string
             usage?: string
         },
@@ -29,7 +90,7 @@ export namespace sources {
     export function retrieve(
         id: string,
         params: {
-            client_secret: string // how should we use this????
+            client_secret: string
         },
         stripeAccount?: string,
     ): Promise<SourcesResponse> {
@@ -42,10 +103,67 @@ export namespace sources {
         id: string,
         params: {
             amount?: number
-            metadata?: [string, unknown]
-            owner?: object
-            mandate?: object
-            source_order?: object
+            metadata?: object
+            owner?: {
+                address?: {
+                    city?: string
+                    country?: string
+                    line1?: string
+                    line2?: string
+                    postal_code?: string
+                    state?: string
+                }
+                email?: string
+                name?: string
+                phone?: string
+            }
+            mandate?: {
+                acceptance?: {
+                    date: number
+                    status: string
+                    ip?: string
+                    offline?: {
+                        contact_email: string
+                    }
+                    online?: {
+                        date: number
+                        ip: string
+                        user_agent: string
+                    }
+                    type?: string
+                    user_agent?: string
+                }
+                amount?: number
+                currency?: string
+                interval?: string
+                notification_method?: string
+            }
+            source_order?: {
+                items?: [
+                    {
+                        amount?: number
+                        currency?: string
+                        description?: string
+                        parent?: string
+                        quantity?: number
+                        type?: string
+                    }
+                ]
+                shipping?: {
+                    address: {
+                        line1: string
+                        city?: string
+                        country?: string
+                        line2?: string
+                        postal_code?: string
+                        state?: string
+                    }
+                    carrier?: string
+                    name?: string
+                    phone?: string
+                    tracking_number?: string
+                }
+            }
         },
         stripeAccount?: string,
     ): Promise<SourcesResponse> {

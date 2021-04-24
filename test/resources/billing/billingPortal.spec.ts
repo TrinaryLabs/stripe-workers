@@ -19,12 +19,13 @@ describe('BillingPortal', async () => {
                         },
                     },
                 }
-                let data = await stripe.billingPortal.configurations.create(params)
+                let data = await stripe.billingPortal.configurations.create(
+                    params,
+                )
 
                 lastConfigId = data.id
 
-                expect(data.object).to.equal("billing_portal.configuration")
-                
+                expect(data.object).to.equal('billing_portal.configuration')
             })
         })
         describe('update', async () => {
@@ -32,20 +33,23 @@ describe('BillingPortal', async () => {
                 const params = {
                     active: false,
                 }
-                let data = await stripe.billingPortal.configurations.update(lastConfigId, params)
-                
-                expect(data.object).to.equal("billing_portal.configuration")
-                expect(data.id).to.equal(lastConfigId)
+                let data = await stripe.billingPortal.configurations.update(
+                    lastConfigId,
+                    params,
+                )
 
+                expect(data.object).to.equal('billing_portal.configuration')
+                expect(data.id).to.equal(lastConfigId)
             })
         })
         describe('retrieve', async () => {
             it('Sends the correct request', async () => {
-                let data = await stripe.billingPortal.configurations.retrieve(lastConfigId)
+                let data = await stripe.billingPortal.configurations.retrieve(
+                    lastConfigId,
+                )
 
-                expect(data.object).to.equal("billing_portal.configuration")
+                expect(data.object).to.equal('billing_portal.configuration')
                 expect(data.id).to.equal(lastConfigId)
-
             })
         })
         describe('list', async () => {
@@ -53,7 +57,6 @@ describe('BillingPortal', async () => {
                 let data = await stripe.billingPortal.configurations.list({})
 
                 expect(data.url).to.equal(`/v1/billing_portal/configurations`)
-
             })
         })
     })
@@ -78,5 +81,4 @@ describe('BillingPortal', async () => {
         })
     })
     */
-
 })

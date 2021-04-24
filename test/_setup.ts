@@ -1,6 +1,6 @@
 import { Stripe } from '../src/index'
-import fetch from 'node-fetch'; 
+import fetch from 'node-fetch'
 
-export const stripe = new Stripe('tGN0bIwXnHdwOa85VABjPdSn8nWY7G7I', {
-    fetch: fetch
+export const stripe = new Stripe('sk_test_4eC39HqLyjWDarjtT1zdp7dc', {
+    fetch: fetch,
 })

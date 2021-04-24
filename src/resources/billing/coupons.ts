@@ -9,11 +9,13 @@ export namespace coupons {
             amount_off?: number
             currency?: string
             duration_in_months?: number
-            metadata?: [string, unknown]
+            metadata?: object
             name?: string
             percent_off?: number
             id?: string
-            applies_to?: object
+            applies_to?: {
+                products: [string]
+            }
             max_redemtions?: number
             redeem_by?: number
         },
@@ -36,7 +38,7 @@ export namespace coupons {
     export function update(
         id: string,
         params: {
-            metadata?: [string, unknown]
+            metadata?: object
             name?: string
         },
         stripeAccount?: string,

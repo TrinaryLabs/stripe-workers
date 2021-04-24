@@ -1,9 +1,12 @@
 import qs from 'qs'
-import { EarlyFraudWarningsResponse, ValueListResponse, ValueListItemsResponse } from '../../types'
+import {
+    EarlyFraudWarningsResponse,
+    ValueListResponse,
+    ValueListItemsResponse,
+} from '../../types'
 export namespace radar {
+    export let client: Function
     export namespace earlyFraudWarnings {
-        export let client: Function
-
         export function retrieve(
             id: string,
             stripeAccount?: string,
@@ -43,14 +46,12 @@ export namespace radar {
     }
 
     export namespace valueList {
-        export let client: Function
-
         export function create(
             params: {
                 alias: string
                 name: string
                 item_type?: string
-                metadata?: [string, unknown]
+                metadata?: object
             },
             stripeAccount?: string,
         ): Promise<ValueListResponse> {
@@ -77,7 +78,7 @@ export namespace radar {
             params: {
                 alias?: string
                 name?: string
-                metadata?: [string, unknown]
+                metadata?: object
             },
             stripeAccount?: string,
         ): Promise<ValueListResponse> {
@@ -107,7 +108,12 @@ export namespace radar {
             params?: {
                 alias?: string
                 contains?: string
-                created?: object
+                created?: {
+                    gt?: string
+                    gte?: string
+                    lt?: string
+                    lte?: string
+                }
                 ending_before?: string
                 limit?: number
                 starting_after?: string
@@ -133,8 +139,6 @@ export namespace radar {
     }
 
     export namespace valueListItems {
-        export let client: Function
-
         export function create(
             params: {
                 value: string
@@ -179,7 +183,12 @@ export namespace radar {
             params: {
                 value_list: string
                 value?: string
-                created?: object
+                created?: {
+                    gt?: string
+                    gte?: string
+                    lt?: string
+                    lte?: string
+                }
                 ending_before?: string
                 limit?: number
                 starting_after?: string

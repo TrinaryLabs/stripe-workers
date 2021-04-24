@@ -1,5 +1,8 @@
 import qs from 'qs'
-import { ApplicationFeesResponse, ApplicationFeesRefundResponse } from '../../types'
+import {
+    ApplicationFeesResponse,
+    ApplicationFeesRefundResponse,
+} from '../../types'
 
 export namespace applicationFees {
     export let client: Function
@@ -16,7 +19,12 @@ export namespace applicationFees {
     export function list(
         params?: {
             limit?: number
-            created?: object
+            created?: {
+                gt?: string
+                gte?: string
+                lt?: string
+                lte?: string
+            }
             ending_before?: string
             starting_after?: string
         },
@@ -36,7 +44,7 @@ export namespace applicationFees {
         id: string,
         params: {
             amount?: number
-            metadata?: [string, unknown]
+            metadata?: object
         },
         stripeAccount?: string,
     ): Promise<ApplicationFeesRefundResponse> {
@@ -66,7 +74,7 @@ export namespace applicationFees {
         fee_id: string,
         refund_id: string,
         params: {
-            metadata?: [string, unknown]
+            metadata?: object
         },
         stripeAccount?: string,
     ): Promise<ApplicationFeesRefundResponse> {

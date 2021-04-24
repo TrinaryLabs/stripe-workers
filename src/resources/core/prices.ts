@@ -10,16 +10,36 @@ export namespace prices {
             product?: string
             unit_amount?: number
             active?: boolean
-            metadata?: [string, unknown]
+            metadata?: object
             nickname?: string
-            recurring?: object
-            product_data?: object
-            tiers?: object
+            recurring?: {
+                interval: string
+                aggregate_usage?: string
+                interval_count?: number
+                usage_type?: string
+            }
+            product_data?: {
+                name: string
+                active?: boolean
+                metadata?: object
+                statement_descriptor?: string
+                unit_label?: string
+            }
+            tiers?: {
+                up_to: string
+                flat_amount?: number
+                flat_amount_decimal?: number
+                unit_amount?: number
+                unit_amount_decimal?: number
+            }
             tiers_mode?: string
             billing_scheme?: string
             lookup_key?: string
             transfer_lookup_key?: boolean
-            transform_quantity?: object
+            transform_quantity?: {
+                divide_by: number
+                round: string
+            }
             unit_amount_decimal?: number
         },
         stripeAccount?: string,
@@ -42,7 +62,7 @@ export namespace prices {
         id: string,
         params: {
             active?: boolean
-            metadata?: [string, unknown]
+            metadata?: object
             nickname?: string
             lookup_key?: string
             transfer_lookup_key?: boolean
@@ -60,12 +80,20 @@ export namespace prices {
             currency?: string
             product?: string
             type?: string
-            created?: object
+            created?: {
+                gt?: string
+                gte?: string
+                lt?: string
+                lte?: string 
+            }
             ending_before?: string
             limit?: number
             starting_after?: string
             lookup_keys?: string[]
-            recurring?: object
+            recurring?: {
+                interval?: string
+                usage_type?: string 
+            }
         },
         stripeAccount?: string,
     ): Promise<{

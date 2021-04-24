@@ -1,13 +1,21 @@
 import qs from 'qs'
 import { ReportRunResponse, ReportTypeResponse } from '../../types'
 export namespace reporting {
+    export let client: Function
     export namespace reportRuns {
-        export let client: Function
-
         export function create(
             params: {
                 report_type: string
-                parameters?: object
+                parameters?: {
+                    columns?: string
+                    connected_account?: string
+                    currency?: string
+                    interval_end?: number
+                    interval_start?: number
+                    payout?: string 
+                    reporting_category?: string
+                    timezone?: string
+                },
             },
             stripeAccount?: string,
         ): Promise<ReportRunResponse> {
@@ -62,8 +70,6 @@ export namespace reporting {
     }
 
     export namespace reportTypes {
-        export let client: Function
-
         export function retrieve(
             id: string,
             stripeAccount?: string,

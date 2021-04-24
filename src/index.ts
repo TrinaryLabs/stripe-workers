@@ -35,6 +35,8 @@ import { setupIntents } from './resources/core/setupIntents'
 import { tokens } from './resources/core/tokens'
 import { files } from './resources/core/files'
 import { subscriptionItems } from './resources/billing/subscriptionItems'
+import { paymentMethods } from './resources/paymentMethods/paymentMethods'
+import { sources } from './resources/paymentMethods/sources'
 
 import { HTTPClient } from './client'
 export class Stripe {
@@ -75,10 +77,12 @@ export class Stripe {
     tokens: typeof tokens
     files: typeof files
     subscriptionItems: typeof subscriptionItems
+    paymentMethods: typeof paymentMethods
+    sources: typeof sources
 
     constructor(
         stripe_secret: string,
-        params: {
+        params?: {
             apiVersion?: string
             fetch?: Function
             userAgent?: string
@@ -86,9 +90,9 @@ export class Stripe {
     ) {
         let client = new HTTPClient(
             stripe_secret,
-            params.apiVersion,
-            params.userAgent,
-            params.fetch,
+            params?.apiVersion,
+            params?.userAgent,
+            params?.fetch,
         )
 
         this.checkout = checkout
@@ -128,8 +132,10 @@ export class Stripe {
         this.tokens = tokens
         this.files = files
         this.subscriptionItems = subscriptionItems
+        this.paymentMethods = paymentMethods
+        this.sources = sources
 
-        this.checkout.sessions.client = client.request
+        this.checkout.client = client.request
         this.billingPortal.client = client.request
         this.accounts.client = client.request
         this.customers.client = client.request
@@ -139,23 +145,14 @@ export class Stripe {
         this.topups.client = client.request
         this.transfers.client = client.request
         this.webhookEndpoints.client = client.request
-        this.sigma.scheduledQueryRuns.client = client.request
-        this.reporting.reportRuns.client = client.request
-        this.reporting.reportTypes.client = client.request
+        this.sigma.client = client.request
+        this.reporting.client = client.request
         this.orders.client = client.request
         this.orderReturns.client = client.request
         this.skus.client = client.request
-        this.issuing.authorizations.client = client.request
-        this.issuing.cardholders.client = client.request
-        this.issuing.cards.client = client.request
-        this.issuing.disputes.client = client.request
-        this.issuing.transactions.client = client.request
-        this.terminal.connectionTokens.client = client.request
-        this.terminal.locations.client = client.request
-        this.terminal.readers.client = client.request
-        this.radar.earlyFraudWarnings.client = client.request
-        this.radar.valueList.client = client.request
-        this.radar.valueListItems.client = client.request
+        this.issuing.client = client.request
+        this.terminal.client = client.request
+        this.radar.client = client.request
         this.reviews.client = client.request
         this.balance.client = client.request
         this.topups.client = client.request
@@ -175,5 +172,8 @@ export class Stripe {
         this.tokens.client = client.request
         this.files.client = client.request
         this.subscriptionItems.client = client.request
+        this.paymentMethods.client = client.request
+        this.sources.client = client.request
+        this.paymentIntents.client = client.request
     }
 }

@@ -10,21 +10,34 @@ export namespace invoices {
             auto_advance?: boolean
             collection_method?: string
             description?: string
-            metdata?: [string, unknown]
+            metadata?: object
             subscription?: string
             account_tax_ids?: string
             application_fee_amount?: number
             custom_fields?: string[]
             days_until_due?: number
-            dafault_payment_method?: unknown
-            dafault_source?: unknown
-            dafault_tax_rates?: string
+            dafault_payment_method?: string
+            dafault_source?: string
+            dafault_tax_rates?: [string]
             discounts?: string[]
             due_date?: number
-            footer?: unknown
-            payment_settings?: object
+            footer?: string
+            payment_settings?: {
+                payment_method_options?: {
+                    bancontact?: {
+                        preferred_language?: string
+                    }
+                    card?: {
+                        request_three_d_secure?: string
+                    }
+                } 
+                payment_method_types?: string
+            }
             statment_desciptor?: string
-            transfer_data?: object
+            transfer_data?: {
+                destination: string
+                amount?: number
+            }
         },
         stripeAccount?: string,
     ): Promise<InvoicesResponse> {
@@ -48,20 +61,33 @@ export namespace invoices {
             auto_advance?: boolean
             collection_method?: string
             description?: string
-            metadata?: [string, unknown]
+            metadata?: object
             account_tax_ids?: string
             application_fee_amount?: number
             custom_fields?: string[]
             days_until_due?: number
-            dafault_payment_method?: unknown
-            dafault_source?: unknown
-            dafault_tax_rates?: string
-            discounts?: string[]
+            dafault_payment_method?: string
+            dafault_source?: string
+            dafault_tax_rates?: [string]
+            discounts?: [string]
             due_date?: number
-            footer?: unknown
-            payment_settings?: object
+            footer?: string
+            payment_settings?: {
+                payment_method_options?: {
+                    bancontact?: {
+                        preferred_language?: string
+                    }
+                    card?: {
+                        request_three_d_secure?: string
+                    }
+                } 
+                payment_method_types?: string
+            }
             statment_desciptor?: string
-            transfer_data?: object
+            transfer_data?: {
+                destination: string
+                amount?: number
+            }
         },
         stripeAccount?: string,
     ): Promise<InvoicesResponse> {
@@ -101,8 +127,8 @@ export namespace invoices {
             forgive?: boolean
             off_session?: boolean
             paid_out_of_band?: boolean
-            payment_method?: unknown
-            source?: unknown
+            payment_method?: string
+            source?: string
         },
         stripeAccount?: string,
     ): Promise<InvoicesResponse> {
@@ -169,19 +195,71 @@ export namespace invoices {
             customer: string
             subscription?: string
             discounts?: string[]
-            invoice_items?: string[]
-            schedule?: unknown
-            subscription_billing_cycle_anchor?: unknown
-            subscription_cancel_at?: unknown
-            subscription_cancel_at_period_end?: unknown
-            subscription_cancel_now?: unknown
-            subscription_default_tax_rates?: unknown
-            subscription_items?: string[]
-            subscription_proration_behavior: unknown
-            subscription_proration_date?: unknown
+            invoice_items?: [
+                {
+                    amount?: number
+                    currency?: string
+                    description?: string
+                    discountable?: boolean
+                    discounts?: [
+                        {
+                            coupon?: string
+                            discount?: string
+                        }
+                    ]
+                    invoiceitem?: string
+                    metadata?: object
+                    period?: {
+                        end: number
+                        start: number
+                    }
+                    price?: string
+                    price_data?: {
+                        currency: string
+                        product: string
+                        unit_amount_decimal?: number
+                        unit_amount?: number
+                    }
+                    quantity?: number
+                    tax_rates?: [string]
+                    unit_amount?: number
+                    unit_amount_decimal?: number
+                }
+            ]
+            schedule?: string
+            subscription_billing_cycle_anchor?: string
+            subscription_cancel_at?: number
+            subscription_cancel_at_period_end?: boolean
+            subscription_cancel_now?: boolean
+            subscription_default_tax_rates?: [string]
+            subscription_items?: [
+                {
+                    id?: string
+                    billing_thresholds?: {
+                        usage_gte: number
+                    }
+                    clear_usages?: boolean
+                    deleted?: boolean
+                    metadata?: object
+                    price?: string
+                    price_data?: {
+                        currency: string
+                        product: string
+                        recurring: {
+                            interval: string
+                            interval_count?: number
+                        }
+                        unit_amount_decimal?: number
+                        unit_amount?: number
+                    }
+                    tax_rates?: [string]
+                }
+            ]
+            subscription_proration_behavior: string
+            subscription_proration_date?: number
             subscription_start_date?: number
             subscription_trial_end?: number
-            subscription_trial_from_plan?: unknown
+            subscription_trial_from_plan?: boolean
         },
         stripeAccount?: string,
     ): Promise<InvoicesResponse> {
@@ -196,21 +274,73 @@ export namespace invoices {
             subscription?: string
             discounts?: string[]
             ending_before?: string
-            invoice_items?: string[]
+            invoice_items?: [
+                {
+                    amount?: number
+                    currency?: string
+                    description?: string
+                    discountable?: boolean
+                    discounts?: [
+                        {
+                            coupon?: string
+                            discount?: string
+                        }
+                    ]
+                    invoiceitem?: string
+                    metadata?: object
+                    period?: {
+                        end: number
+                        start: number
+                    }
+                    price?: string
+                    price_data?: {
+                        currency: string
+                        product: string
+                        unit_amount_decimal?: number
+                        unit_amount?: number
+                    }
+                    quantity?: number
+                    tax_rates?: [string]
+                    unit_amount?: number
+                    unit_amount_decimal?: number
+                }
+            ]
             limit?: number
-            schedule?: unknown
+            schedule?: string
             starting_after?: string
-            subscription_billing_cycle_anchor?: unknown
+            subscription_billing_cycle_anchor?: string
             subscription_cancel_at?: number
             subscription_cancel_at_period_end?: boolean
             subscription_cancel_now?: boolean
             subscription_default_tax_rates?: string
-            subscription_items?: string[]
-            subscription_proration_behavior?: unknown
-            subscription_proration_date?: unknown
-            subscription_start_date?: unknown
-            subscription_trial_end?: unknown
-            subscription_trial_from_plan?: unknown
+            subscription_items?: [
+                {
+                    id?: string
+                    billing_thresholds?: {
+                        usage_gte: number
+                    }
+                    clear_usages?: boolean
+                    deleted?: boolean
+                    metadata?: object
+                    price?: string
+                    price_data?: {
+                        currency: string
+                        product: string
+                        recurring: {
+                            interval: string
+                            interval_count?: number
+                        }
+                        unit_amount_decimal?: number
+                        unit_amount?: number
+                    }
+                    tax_rates?: [string]
+                }
+            ]
+            subscription_proration_behavior?: string
+            subscription_proration_date?: number
+            subscription_start_date?: number
+            subscription_trial_end?: number
+            subscription_trial_from_plan?: boolean
         },
         stripeAccount?: string,
     ): Promise<{
@@ -238,7 +368,12 @@ export namespace invoices {
             subscription?: string
             collection_method?: string
             created?: number
-            due_date?: object
+            due_date?: {
+                gt?: string
+                gte?: string
+                lt?: string
+                lte?: string
+            }
             ending_before?: string
             limit?: number
             starting_after?: string

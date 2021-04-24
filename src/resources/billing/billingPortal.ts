@@ -1,28 +1,26 @@
 import qs from 'qs'
-import { BillingPortalResponse, BillingPortalConfigurationResponse } from '../../types'
+import {
+    BillingPortalResponse,
+    BillingPortalConfigurationResponse,
+} from '../../types'
 
 export namespace billingPortal {
     export let client: Function
     export namespace sessions {
         export function create(
             params: {
-                customer: string,
-                return_url?: string,
-                configuration?: string,
-                on_behalf_of?: unknown
+                customer: string
+                return_url?: string
+                configuration?: string
+                on_behalf_of?: string
             },
             stripeAccount?: string,
         ): Promise<BillingPortalResponse> {
-            return client(
-                '/billing_portal/sessions',
-                params,
-                'POST',
-                {
-                    headers: stripeAccount
-                        ? { 'Stripe-Account': stripeAccount }
-                        : {},
-                },
-            )
+            return client('/billing_portal/sessions', params, 'POST', {
+                headers: stripeAccount
+                    ? { 'Stripe-Account': stripeAccount }
+                    : {},
+            })
         }
     }
 

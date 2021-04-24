@@ -7,13 +7,24 @@ export namespace subscriptionItems {
     export function create(
         params: {
             subscription: string
-            metadata?: [string, unknown]
+            metadata?: object
             price?: string
-            proration_behavior?: unknown
+            proration_behavior?: string
             quantity?: number
-            billing_thresholds?: object
+            billing_thresholds?: {
+                usage_gte: number
+            }
             payment_behavior?: string
-            price_data?: object
+            price_data?: {
+                currency: string
+                product: string
+                recurring: {
+                    interval: string
+                    interval_count?: number
+                }
+                unit_amount_decimal?: number
+                unit_amount?: number
+            }
             proration_date?: number
             tax_rates?: string[]
         },
@@ -36,14 +47,25 @@ export namespace subscriptionItems {
     export function update(
         id: string,
         params: {
-            metadata?: [string, unknown]
+            metadata?: object
             price?: string
-            proration_behavior?: unknown
+            proration_behavior?: string
             quantity?: number
-            billing_thresholds?: object
-            off_session?: unknown
+            billing_thresholds?: {
+                usage_gte: number
+            }
+            off_session?: boolean
             payment_behavior?: string
-            price_data?: object
+            price_data?: {
+                currency: string
+                product: string
+                recurring: {
+                    interval: string
+                    interval_count?: number
+                }
+                unit_amount_decimal?: number
+                unit_amount?: number
+            }
             proration_date?: number
             tax_rates?: string[]
         },
@@ -57,8 +79,8 @@ export namespace subscriptionItems {
     export function del(
         id: string,
         params: {
-            clear_usage?: unknown
-            proration_date?: unknown
+            clear_usage?: boolean
+            proration_date?: number
         },
         stripeAccount?: string,
     ): Promise<{

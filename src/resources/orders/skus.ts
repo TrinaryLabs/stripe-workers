@@ -8,14 +8,23 @@ export namespace skus {
         params: {
             id?: string
             currency: string
-            inventory: object
+            inventory: {
+                type: string
+                quantity?: number
+                value?: string
+            }
             price: number
             product: string
             active?: boolean
             attributes?: object
             image?: string
-            metadata?: [string, unknown]
-            package_dimensions?: object
+            metadata?: object
+            package_dimensions?: {
+                height: number
+                length: number
+                weight: number
+                width: number
+            }
         },
         stripeAccount?: string,
     ): Promise<SKUResponse> {
@@ -36,15 +45,24 @@ export namespace skus {
     export function update(
         id: string,
         params: {
-            currency: string
-            inventory: object
-            price: number
-            product: string
+            currency?: string
+            inventory?: {
+                type: string
+                quantity?: number
+                value?: string
+            }
+            price?: number
+            product?: string
             active?: boolean
             attributes?: object
             image?: string
-            metadata?: [string, unknown]
-            package_dimensions?: object
+            metadata?: object
+            package_dimensions?: {
+                height: number
+                length: number
+                weight: number
+                width: number
+            }
         },
         stripeAccount?: string,
     ): Promise<SKUResponse> {

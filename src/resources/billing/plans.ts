@@ -9,18 +9,33 @@ export namespace plans {
             amount?: number
             currency: string
             interval: string
-            product: unknown // string or object
+            product: {
+                name: string
+                active?: boolean
+                metadata?: object
+                statement_descriptor?: string
+                unit_label?: string
+            } | string
             active?: boolean
-            metadata?: [string, unknown]
+            metadata?: object
             nickname?: string
             id?: string
-            tiers?: unknown
+            tiers?: {
+                up_to: number
+                flat_amount?: number
+                flat_amount_decimal?: number
+                unit_amount?: number
+                unit_amount_decimal?: number
+            }
             tiers_mode?: string
             aggregate_usage?: string
             amount_decimal?: number
             billing_scheme?: string
             interval_count?: number
-            transform_usage?: object
+            transform_usage?: {
+                divide_by: number
+                round: string
+            }
             trial_period_days?: number
             usage_type?: string
         },
@@ -44,9 +59,15 @@ export namespace plans {
         id: string,
         params: {
             nickname?: string
-            product: unknown // string or object
+            product: {
+                name: string
+                active?: boolean
+                metadata?: object
+                statement_descriptor?: string
+                unit_label?: string
+            } | string
             active?: boolean
-            metadata?: [string, unknown]
+            metadata?: object
             trial_period_days?: number
         },
         stripeAccount?: string,
@@ -73,7 +94,12 @@ export namespace plans {
         params?: {
             active?: boolean
             product?: string
-            created?: object
+            created?: {
+                gt?: string
+                gte?: string
+                lt?: string
+                lte?: string
+            }
             ending_before?: string
             limit?: number
             starting_after?: string

@@ -31,15 +31,143 @@ export namespace tokens {
             }
             account?: {
                 business_type?: string
-                company?: object
-                individual?: object
+                company?: {
+                    address?: {
+                        city?: string
+                        country?: string
+                        line1?: string
+                        line2?: string
+                        postal_code?: string
+                        state?: string
+                    }
+                    address_kana?: {
+                        city?: string
+                        country?: string
+                        line1?: string
+                        line2?: string
+                        postal_code?: string
+                        state?: string
+                        town?: string
+                    }
+                    address_kanji?: {
+                        city?: string
+                        country?: string
+                        line1?: string
+                        line2?: string
+                        postal_code?: string
+                        state?: string
+                        town?: string
+                    }
+                    directors_provided?: boolean
+                    executives_provided?: boolean
+                    name?: string
+                    name_kana?: string
+                    name_kanji?: string
+                    owners_provided?: boolean
+                    phone?: string
+                    registration_number?: string
+                    structure?: string
+                    tax_id?: string
+                    tax_id_registrar?: string
+                    vat_id?: string
+                    verification?: {
+                        document?: {
+                            back?: string
+                            front?: string
+                        }
+                    } 
+                }
+                individual?: {
+                    address?: {
+                        city?: string
+                        country?: string
+                        line1?: string
+                        line2?: string
+                        postal_code?: string
+                        state?: string
+                    }
+                    address_kana?: {
+                        city?: string
+                        country?: string
+                        line1?: string
+                        line2?: string
+                        postal_code?: string
+                        state?: string
+                        town?: string
+                    }
+                    address_kanji?: {
+                        city?: string
+                        country?: string
+                        line1?: string
+                        line2?: string
+                        postal_code?: string
+                        state?: string
+                        town?: string
+                    }
+                    dob?: {
+                        day: number
+                        month: number
+                        year: number
+                    }
+                    email?: string
+                    first_name?: string
+                    last_name?: string
+                    first_name_kana?: string
+                    first_name_kanji?: string
+                    gender?: string
+                    id_number?: string
+                    last_name_kana?: string
+                    last_name_kanji?: string
+                    maiden_name?: string
+                    metadata?: object
+                    phone?: string
+                    political_exposure?: string
+                    ssn_last_4?: number
+                    verification?: {
+                        additional_document?: {
+                            back?: string
+                            front?: string
+                        }
+                        document?: {
+                            back?: string
+                            front?: string
+                        }
+                    }
+                }
                 tos_shown_and_accepted?: boolean
             }
             person?: {
-                address?: object
-                address_kana?: object
-                address_kanji?: object
-                dob?: object
+                address?: {
+                    city?: string
+                    country?: string
+                    line1?: string
+                    line2?: string
+                    postal_code?: string
+                    state?: string
+                }
+                address_kana?: {
+                    city?: string
+                    country?: string
+                    line1?: string
+                    line2?: string
+                    postal_code?: string
+                    state?: string
+                    town?: string
+                }
+                address_kanji?: {
+                    city?: string
+                    country?: string
+                    line1?: string
+                    line2?: string
+                    postal_code?: string
+                    state?: string
+                    town?: string
+                }
+                dob?: {
+                    day: number
+                    month: number
+                    year: number
+                }
                 email?: string
                 first_name?: string
                 first_name_kana?: string
@@ -50,13 +178,29 @@ export namespace tokens {
                 last_name_kana?: string
                 last_name_kanji?: string
                 maiden_name?: string
-                metadata?: [string, unknown]
+                metadata?: object
                 nationality?: string
                 phone?: string
                 political_exposure?: boolean
-                relationship?: object
+                relationship?: {
+                    director?: boolean
+                    executive?: boolean
+                    owner?: boolean
+                    percent_ownership?: number
+                    representative?: boolean
+                    title?: string
+                }
                 ssn_last_4?: number
-                verification?: object
+                verification?: {
+                    additional_document?: {
+                        back?: string
+                        front?: string
+                    }
+                    document?: {
+                        back?: string
+                        front?: string
+                    }
+                }
             }
             cvc_update?: {
                 cvc?: string

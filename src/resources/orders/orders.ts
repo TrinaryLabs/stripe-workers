@@ -9,9 +9,29 @@ export namespace orders {
             currency: string
             customer?: string
             email?: string
-            items?: object
-            metadata?: [string, unknown]
-            shipping?: object
+            items?: [
+                {
+                    amount?: number
+                    currency?: string
+                    description?: string
+                    parent?: string
+                    quantity?: number
+                    type?: string
+                }
+            ]
+            metadata?: object
+            shipping?: {
+                address: {
+                    line1: string
+                    line2?: string
+                    city?: string
+                    country?: string
+                    postal_code?: string
+                    state?: string
+                }
+                name: string
+                phone?: string
+            }
             coupon?: string
         },
         stripeAccount?: string,
@@ -33,11 +53,14 @@ export namespace orders {
     export function update(
         id: string,
         params: {
-            metadata?: [string, unknown]
-            shipping?: object
+            metadata?: object
+            shipping?: {
+                carrier: string
+                tracking_number: string
+            }
             status?: string
             coupon?: string
-            selected_shipping_method?: unknown
+            selected_shipping_method?: string
         },
         stripeAccount?: string,
     ): Promise<OrdersResponse> {
@@ -49,10 +72,10 @@ export namespace orders {
     export function pay(
         id: string,
         params: {
-            customer: string
-            source: unknown
+            customer?: string
+            source?: string
             email?: string
-            metadata?: [string, unknown]
+            metadata?: object
             application_fee?: number
         },
         stripeAccount?: string,
@@ -66,12 +89,42 @@ export namespace orders {
         params?: {
             customer?: string
             status?: string
-            created?: number
+            created?: {
+                gt?: string
+                gte?: string
+                lt?: string
+                lte?: string
+            }
             ending_before?: string
             ids?: string[]
             limit?: number
             starting_after?: string
-            status_transitions?: object
+            status_transitions?: {
+                canceled?: {
+                    gt?: string
+                    gte?: string
+                    lt?: string
+                    lte?: string
+                }
+                fulfilled?: {
+                    gt?: string
+                    gte?: string
+                    lt?: string
+                    lte?: string
+                }
+                paid?: {
+                    gt?: string
+                    gte?: string
+                    lt?: string
+                    lte?: string
+                }
+                returned?: {
+                    gt?: string
+                    gte?: string
+                    lt?: string
+                    lte?: string
+                }
+            }
             upstream_ids?: string[]
         },
         stripeAccount?: string,
@@ -89,7 +142,16 @@ export namespace orders {
     export function returnOrder(
         id: string,
         params: {
-            items?: object
+            items?: [
+                {
+                    amount?: number
+                    currency?: string
+                    description?: string
+                    parent?: string
+                    quantity?: number
+                    type?: string
+                }
+            ]
         },
         stripeAccount?: string,
     ): Promise<{
@@ -98,7 +160,16 @@ export namespace orders {
         amount: number
         created: number
         currency: string
-        items: [object]
+        items: [
+            {
+                amount?: number
+                currency?: string
+                description?: string
+                parent?: string
+                quantity?: number
+                type?: string
+            }
+        ]
         livemode: boolean
         order: string
         refund: string

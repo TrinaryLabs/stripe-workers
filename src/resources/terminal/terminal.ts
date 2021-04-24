@@ -2,11 +2,10 @@ import qs from 'qs'
 import { LocationsResponse, ReadersResponse } from '../../types'
 
 export namespace terminal {
+    export let client: Function
     export namespace connectionTokens {
-        export let client: Function
-
         export function create(
-            params: {
+            params?: {
                 location?: string
             },
             stripeAccount?: string,
@@ -23,17 +22,22 @@ export namespace terminal {
     }
 
     export namespace locations {
-        export let client: Function
-
         export function create(
             params: {
-                address: object
+                address: {
+                    country: string,
+                    line1: string,
+                    city?: string,
+                    line2?: string
+                    postal_code?: string,
+                    state?: string
+                },
                 display_name: string
-                metadata?: [string, unknown]
+                metadata?: object
             },
             stripeAccount?: string,
         ): Promise<LocationsResponse> {
-            return client('/terminal/locactions', params, 'POST', {
+            return client('/terminal/locations', params, 'POST', {
                 headers: stripeAccount
                     ? { 'Stripe-Account': stripeAccount }
                     : {},
@@ -44,7 +48,7 @@ export namespace terminal {
             id: string,
             stripeAccount?: string,
         ): Promise<LocationsResponse> {
-            return client(`/terminal/locactions/${id}`, {}, 'GET', {
+            return client(`/terminal/locations/${id}`, {}, 'GET', {
                 headers: stripeAccount
                     ? { 'Stripe-Account': stripeAccount }
                     : {},
@@ -54,13 +58,20 @@ export namespace terminal {
         export function update(
             id: string,
             params: {
-                address?: object
+                address?: {
+                    country?: string,
+                    line1?: string,
+                    city?: string,
+                    line2?: string
+                    postal_code?: string,
+                    state?: string
+                },
                 display_name?: string
-                metadata?: [string, unknown]
+                metadata?: object
             },
             stripeAccount?: string,
         ): Promise<LocationsResponse> {
-            return client(`/terminal/locactions/${id}`, params, 'POST', {
+            return client(`/terminal/locations/${id}`, params, 'POST', {
                 headers: stripeAccount
                     ? { 'Stripe-Account': stripeAccount }
                     : {},
@@ -75,7 +86,7 @@ export namespace terminal {
             object: string
             deleted: boolean
         }> {
-            return client(`/terminal/locactions/${id}`, {}, 'DELETE', {
+            return client(`/terminal/locations/${id}`, {}, 'DELETE', {
                 headers: stripeAccount
                     ? { 'Stripe-Account': stripeAccount }
                     : {},
@@ -96,7 +107,7 @@ export namespace terminal {
             data: [LocationsResponse]
         }> {
             return client(
-                `/terminal/locactions?${qs.stringify(params)}`,
+                `/terminal/locations?${qs.stringify(params)}`,
                 {},
                 'GET',
                 {
@@ -109,14 +120,12 @@ export namespace terminal {
     }
 
     export namespace readers {
-        export let client: Function
-
         export function create(
             params: {
                 registration_code?: string
                 label?: string
                 location?: string
-                metadata?: [string, unknown]
+                metadata?: object
             },
             stripeAccount?: string,
         ): Promise<ReadersResponse> {
@@ -142,7 +151,7 @@ export namespace terminal {
             id: string,
             params: {
                 label?: string
-                metadata?: [string, unknown]
+                metadata?: object
             },
             stripeAccount?: string,
         ): Promise<ReadersResponse> {

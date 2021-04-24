@@ -6,12 +6,90 @@ export namespace subscriptionSchedules {
     export function create(
         params: {
             customer?: string
-            metadata?: [string, unknown]
-            phases?: object[]
+            metadata?: object
+            phases?: [
+                {
+                    items: [
+                        {
+                            billing_thresholds?: {
+                                usage_gte: number
+                            }
+                            price?: string
+                            price_data?: {
+                                currency: string
+                                product: string
+                                recurring: {
+                                    interval: string
+                                    interval_count?: number
+                                }
+                                unit_amount_decimal?: number
+                                unit_amount?: number
+                            }
+                            quantity?: number
+                            tax_rates?: [string]
+                        }
+                    ]
+                    add_invoice_items?: [
+                        {
+                            price?: string
+                            price_data?: {
+                                currency: string
+                                product: string
+                                recurring: {
+                                    interval: string
+                                    interval_count?: number
+                                }
+                                unit_amount_decimal?: number
+                                unit_amount?: number
+                            }
+                            quantity?: number
+                            tax_rates?: [string]
+                        }
+                    ]
+                    application_fee_percent?: number
+                    billing_cycle_anchor?: string
+                    billing_thresholds?: {
+                        amount_gte?: number
+                        reset_billing_cycle_anchor?: string
+                    }
+                    collection_method?: string
+                    coupon?: string
+                    default_payment_method?: string
+                    default_tax_rates?: [string]
+                    end_date?: number
+                    invoice_settings?: {
+                        days_until_due?: number
+                    }
+                    iterations?: number
+                    proration_behavior?: string
+                    transfer_data?: {
+                        destination: string
+                        amount_percent?: number
+                    }
+                    trial?: boolean
+                    trial_end?: number
+                }
+            ]
             start_date?: number
-            dafault_settings?: object
-            end_behavior?: unknown
-            from_subscriptions?: unknown
+            dafault_settings?: {
+                application_fee_percent?: number
+                billing_cycle_anchor?: string
+                billing_thresholds?: {
+                    amount_gte?: string
+                    reset_billing_cycle_anchor?: string
+                }
+                collection_method?: string
+                default_payment_method?: string
+                invoice_settings?: {
+                    days_until_due?: number
+                }
+                transfer_data?: {
+                    destination: string
+                    amount_percent?: number
+                }
+            }
+            end_behavior?: string
+            from_subscriptions?: string
         },
         stripeAccount?: string,
     ): Promise<SubscriptionSchedulesResponse> {
@@ -33,11 +111,87 @@ export namespace subscriptionSchedules {
         id: string,
         params: {
             customer?: string
-            metadata?: [string, unknown]
-            phases?: object[]
-            dafault_settings?: object
-            end_behavior?: unknown
-            proration_behavior?: unknown
+            metadata?: object
+            phases?: [
+                {
+                    items: {
+                        billing_thresholds?: {
+                            usage_gte: number
+                        }
+                        price?: string
+                        price_data?: {
+                            currency: string
+                            product: string
+                            recurring: {
+                                interval: string
+                                interval_count?: number
+                            }
+                            unit_amount_decimal?: number
+                            unit_amount?: number
+                        }
+                        quantity?: number
+                        tax_rates?: [string]
+                    }
+                    add_invoice_items?: [
+                        {
+                            price?: string
+                            price_data?: {
+                                currency: string
+                                product: string
+                                recurring: {
+                                    interval: string
+                                    interval_count?: number
+                                }
+                                unit_amount_decimal?: number
+                                unit_amount?: number
+                            }
+                            quantity?: number
+                            tax_rates?: [string]
+                        }
+                    ]
+                    application_fee_percent?: number
+                    billing_cycle_anchor?: string
+                    billing_thresholds?: {
+                        amount_gte?: number
+                        reset_billing_cycle_anchor?: string
+                    }
+                    collection_method?: string
+                    coupon?: string
+                    default_payment_method?: string
+                    default_tax_rates?: [string]
+                    end_date?: number
+                    invoice_settings?: {
+                        days_until_due?: number
+                    }
+                    iterations?: number
+                    proration_behavior?: string
+                    transfer_data?: {
+                        destination: string
+                        amount_percent?: number
+                    }
+                    trial?: boolean
+                    trial_end?: number
+                }
+            ]
+            dafault_settings?: {
+                application_fee_percent?: number
+                billing_cycle_anchor?: string
+                billing_thresholds?: {
+                    amount_gte?: string
+                    reset_billing_cycle_anchor?: string
+                }
+                collection_method?: string
+                default_payment_method?: string
+                invoice_settings?: {
+                    days_until_due?: number
+                }
+                transfer_data?: {
+                    destination: string
+                    amount_percent?: number
+                }
+            }
+            end_behavior?: string
+            proration_behavior?: string
         },
         stripeAccount?: string,
     ): Promise<SubscriptionSchedulesResponse> {
@@ -49,8 +203,8 @@ export namespace subscriptionSchedules {
     export function cancel(
         id: string,
         params: {
-            invoice_now?: unknown
-            prorate?: unknown
+            invoice_now?: boolean
+            prorate?: boolean
         },
         stripeAccount?: string,
     ): Promise<SubscriptionSchedulesResponse> {
@@ -61,8 +215,8 @@ export namespace subscriptionSchedules {
 
     export function release(
         id: string,
-        params: {
-            preserve_cancel_date?: unknown
+        params?: {
+            preserve_cancel_date?: boolean
         },
         stripeAccount?: string,
     ): Promise<SubscriptionSchedulesResponse> {
@@ -74,13 +228,33 @@ export namespace subscriptionSchedules {
     export function list(
         params?: {
             customer?: string
-            canceled_at?: object
-            completed_at?: object
-            created?: object
-            ending_before?: unknown
+            canceled_at?: {
+                gt?: string
+                gte?: string
+                lt?: string
+                lte?: string
+            }
+            completed_at?: {
+                gt?: string
+                gte?: string
+                lt?: string
+                lte?: string
+            }
+            created?: {
+                gt?: string
+                gte?: string
+                lt?: string
+                lte?: string
+            }
+            ending_before?: string
             limit?: number
-            released_at?: object
-            scheduled?: unknown
+            released_at?: {
+                gt?: string
+                gte?: string
+                lt?: string
+                lte?: string
+            }
+            scheduled?: boolean
             starting_after?: string
         },
         stripeAccount?: string,

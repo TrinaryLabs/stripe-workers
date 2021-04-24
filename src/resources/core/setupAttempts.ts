@@ -7,7 +7,12 @@ export namespace setupAttempts {
     export function list(
         params: {
             setup_intent: string
-            created?: object
+            created?: {
+                gt?: string
+                gte?: string
+                lt?: string
+                lte?: string
+            }
             ending_before?: string
             limit?: number
             starting_after?: string

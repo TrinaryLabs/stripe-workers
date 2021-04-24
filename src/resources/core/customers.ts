@@ -1,27 +1,66 @@
 import qs from 'qs'
-import { CustomersResponse, SourcesResponse, CardSourceResponse, BankAccountResponse, CustomerBalanceTransactionResponse, TaxIDsResponse } from '../../types'
+import {
+    CustomersResponse,
+    SourcesResponse,
+    CardSourceResponse,
+    BankAccountResponse,
+    CustomerBalanceTransactionResponse,
+    TaxIDsResponse,
+} from '../../types'
 export namespace customers {
     export let client: Function
 
     export function create(
         params: {
-            adress?: object
+            adress?: {
+                city?: string
+                country?: string
+                line1?: string
+                line2?: string
+                postal_code?: string
+                state?: string
+            }
             description?: string
-            metadata?: [string, unknown]
+            metadata?: object
             name?: string
             payment_method?: string
             phone?: string
-            shipping?: object
+            shipping?: {
+                address: {
+                    city?: string
+                    country?: string
+                    line1: string
+                    line2?: string
+                    postal_code?: string
+                    state?: string
+                }
+                name: string
+                phone?: string
+            }
             balance?: number
-            coupon?: unknown
+            coupon?: string
             invoice_prefix?: string
-            invoice_settings?: object
-            next_invoice_sequence?: unknown
-            preferred_locales?: unknown
+            invoice_settings?: {
+                custom_fields: [
+                    {
+                        name: string
+                        value: string
+                    }
+                ]
+                default_payment_method?: string
+                footer?: string
+            }
+            next_invoice_sequence?: number
+            preferred_locales?: [string]
             promotion_code?: string
-            source?: unknown
+            source?: any
             tax_exempt?: string
-            tax_id_data?: object
+            tax_id_data?: [
+                {
+                    type: string
+                    value: string
+                }
+            ]
         },
         stripeAccount?: string,
     ): Promise<CustomersResponse> {
@@ -42,24 +81,51 @@ export namespace customers {
     export function update(
         id: string,
         params: {
-            adress?: object
+            adress?: {
+                city?: string
+                country?: string
+                line1?: string
+                line2?: string
+                postal_code?: string
+                state?: string
+            }
             description?: string
-            metadata?: [string, unknown]
+            metadata?: object
             name?: string
             payment_method?: string
             phone?: string
-            shipping?: object
+            shipping?: {
+                address: {
+                    city?: string
+                    country?: string
+                    line1: string
+                    line2?: string
+                    postal_code?: string
+                    state?: string
+                }
+                name: string
+                phone?: string
+            }
             balance?: number
-            coupon?: unknown
+            coupon?: string
             invoice_prefix?: string
-            invoice_settings?: object
-            next_invoice_sequence?: unknown
-            preferred_locales?: unknown
+            invoice_settings?: {
+                custom_fields: [
+                    {
+                        name: string
+                        value: string
+                    }
+                ]
+                default_payment_method?: string
+                footer?: string
+            }
+            next_invoice_sequence?: number
+            preferred_locales?: [string]
             promotion_code?: string
-            source?: unknown
+            source?: any
             tax_exempt?: string
         },
-        stripeAccount: string,
+        stripeAccount?: string,
     ): Promise<CustomersResponse> {
         return client(`/customers/${id}`, params, 'POST', {
             headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
@@ -82,7 +148,12 @@ export namespace customers {
     export function list(
         params?: {
             email?: string
-            created?: object
+            created?: {
+                gt?: string
+                gte?: string
+                lt?: string
+                lte?: string
+            }
             ending_before?: string
             limit?: number
             starting_after?: string
@@ -102,8 +173,8 @@ export namespace customers {
     export function createSource(
         cus_id: string,
         params: {
-            source: unknown
-            metadata?: [string, unknown]
+            source: any
+            metadata?: object
         },
         stripeAccount?: string,
     ): Promise<SourcesResponse | CardSourceResponse | BankAccountResponse> {
@@ -136,7 +207,7 @@ export namespace customers {
             exp_month?: number
             exp_year?: number
             name?: string
-            metadata?: [string, unknown]
+            metadata?: object
         },
         stripeAccount?: string,
     ): Promise<CardSourceResponse | BankAccountResponse> {
@@ -151,7 +222,7 @@ export namespace customers {
         params: {
             account_holder_name?: string
             account_holder_type?: string
-            metadata?: [string, unknown]
+            metadata?: object
         },
         stripeAccount?: string,
     ): Promise<BankAccountResponse> {
@@ -217,7 +288,7 @@ export namespace customers {
             amount: number
             currency: string
             description?: string
-            metadata?: [string, unknown]
+            metadata?: object
         },
         stripeAccount?: string,
     ): Promise<CustomerBalanceTransactionResponse> {
@@ -248,7 +319,7 @@ export namespace customers {
         tra_id: string,
         params: {
             description?: string
-            metadata?: [string, unknown]
+            metadata?: object
         },
         stripeAccount?: string,
     ): Promise<CustomerBalanceTransactionResponse> {
@@ -264,7 +335,7 @@ export namespace customers {
         )
     }
 
-    export function listBalanceTransaction(
+    export function listBalanceTransactions(
         id: string,
         params?: {
             ending_before?: string
