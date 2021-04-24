@@ -73,7 +73,7 @@ export namespace orders {
         id: string,
         params: {
             customer?: string
-            source?: unknown
+            source?: string
             email?: string
             metadata?: object
             application_fee?: number

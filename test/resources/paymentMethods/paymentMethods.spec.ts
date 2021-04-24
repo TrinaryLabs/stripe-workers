@@ -6,7 +6,7 @@ describe('PaymentMethods Resource', async () => {
 
     describe('create', async () => {
         it('Sends the correct request', async () => {
-            const data = {
+            const response = await stripe.paymentMethods.create({
                 type: 'card',
                 card: {
                     number: '4242424242424242',
@@ -14,8 +14,7 @@ describe('PaymentMethods Resource', async () => {
                     exp_year: 2022,
                     cvc: '314',
                 },
-            }
-            const response = await stripe.paymentMethods.create(data)
+            })
             lastResponseId = response.id
 
             expect(response.object).to.equal('payment_method')

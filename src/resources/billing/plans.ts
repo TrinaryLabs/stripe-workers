@@ -9,12 +9,24 @@ export namespace plans {
             amount?: number
             currency: string
             interval: string
-            product: unknown // string or object
+            product: {
+                name: string
+                active?: boolean
+                metadata?: object
+                statement_descriptor?: string
+                unit_label?: string
+            } | string
             active?: boolean
             metadata?: object
             nickname?: string
             id?: string
-            tiers?: unknown
+            tiers?: {
+                up_to: number
+                flat_amount?: number
+                flat_amount_decimal?: number
+                unit_amount?: number
+                unit_amount_decimal?: number
+            }
             tiers_mode?: string
             aggregate_usage?: string
             amount_decimal?: number
@@ -47,7 +59,13 @@ export namespace plans {
         id: string,
         params: {
             nickname?: string
-            product: unknown // string or object
+            product: {
+                name: string
+                active?: boolean
+                metadata?: object
+                statement_descriptor?: string
+                unit_label?: string
+            } | string
             active?: boolean
             metadata?: object
             trial_period_days?: number

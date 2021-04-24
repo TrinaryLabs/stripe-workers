@@ -6,24 +6,64 @@ export namespace paymentMethods {
     export function create(
         params: {
             type: string
-            billing_details?: object
+            billing_details?: {
+                address?: {
+                    city?: string
+                    country?: string
+                    line1?: string
+                    line2?: string
+                    postal_code?: string
+                    state?: string
+                }
+                email?: string
+                name?: string
+                phone?: string
+            }
             metadata?: object
-            afterpay_clearpay?: object
-            alipay?: object
-            au_becs_debit?: object
-            bacs_debit?: object
-            bancontact?: object
-            card?: object
-            eps?: object
-            fpx?: object
-            giropay?: object
-            grabpay?: object
-            ideal?: object
-            interac_present?: object
-            oxxo?: object
-            p24?: object
-            sepa_debit?: object
-            sofort?: object
+            acss_debit?: {
+                account_number: string
+                institution_number: string
+                transit_number: string
+            }
+            afterpay_clearpay?: {}
+            alipay?: {}
+            au_becs_debit?: {
+                account_number: string
+                bsb_number: string
+            }
+            bacs_debit?: {
+                account_number?: string
+                sort_code?: string
+            }
+            bancontact?: {}
+            card?: {
+                exp_month: number
+                exp_year: number
+                number: string
+                cvc: string
+            }
+            eps?: {
+                bank?: string
+            }
+            fpx?: {
+                bank: string
+            }
+            giropay?: {}
+            grabpay?: {}
+            ideal?: {
+                bank?: string
+            }
+            interac_present?: {}
+            oxxo?: {}
+            p24?: {
+                bank?: string
+            }
+            sepa_debit?: {
+                iban: string
+            }
+            sofort?: {
+                country: string
+            }
         },
         stripeAccount?: string,
     ): Promise<PaymentMethodsResponse> {
@@ -44,9 +84,24 @@ export namespace paymentMethods {
     export function update(
         id: string,
         params: {
-            billing_details?: object
+            billing_details?: {
+                address?: {
+                    city?: string
+                    country?: string
+                    line1?: string
+                    line2?: string
+                    postal_code?: string
+                    state?: string
+                }
+                email?: string
+                name?: string
+                phone?: string
+            }
             metadata?: object
-            card?: object
+            card?: {
+                exp_month?: number
+                exp_year?: number
+            }
         },
         stripeAccount?: string,
     ): Promise<PaymentMethodsResponse> {

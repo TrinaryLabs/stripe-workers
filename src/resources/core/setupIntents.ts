@@ -12,9 +12,36 @@ export namespace setupIntents {
             payment_method?: string
             payment_method_types?: string[]
             usage?: string
-            mandate_data?: unknown
-            on_behalf_of?: unknown
-            payment_method_options?: unknown
+            mandate_data?: {
+                customer_acceptance: {
+                    type: string
+                    accepted_at?: number
+                    offline?: {}
+                    online?: {
+                        ip_address: string
+                        user_agent: string
+                    }
+                }
+            }
+            on_behalf_of?: string
+            payment_method_options?: {
+                acss_debit?: {
+                    currency?: string
+                    mandate_options?: {
+                        custom_mandate_url?: string
+                        interval_description?: string
+                        payment_schedule?: string
+                        transaction_type?: string
+                    }
+                    verification_method?: string
+                }
+                card?: {
+                    request_three_d_secure?: string
+                }
+                sepa_debit?: {
+                    mandate_options?: {}
+                }
+            }
             return_url?: string
             single_use?: {
                 amount: number
@@ -55,7 +82,24 @@ export namespace setupIntents {
             metadata?: object
             payment_method?: string
             payment_method_types?: string[]
-            payment_method_options?: unknown
+            payment_method_options?: {
+                acss_debit?: {
+                    currency?: string
+                    mandate_options?: {
+                        custom_mandate_url?: string
+                        interval_description?: string
+                        payment_schedule?: string
+                        transaction_type?: string
+                    }
+                    verification_method?: string
+                }
+                card?: {
+                    request_three_d_secure?: string
+                }
+                sepa_debit?: {
+                    mandate_options?: {}
+                }
+            }
         },
         stripeAccount?: string,
     ): Promise<SetupIntentsResponse> {
@@ -67,7 +111,7 @@ export namespace setupIntents {
     export function confirm(
         id: string,
         params: {
-            payment_method?: unknown
+            payment_method?: string
             mandate_data?: {
                 customer_acceptance: {
                     type: string

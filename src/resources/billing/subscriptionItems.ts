@@ -54,7 +54,7 @@ export namespace subscriptionItems {
             billing_thresholds?: {
                 usage_gte: number
             }
-            off_session?: unknown
+            off_session?: boolean
             payment_behavior?: string
             price_data?: {
                 currency: string
@@ -79,8 +79,8 @@ export namespace subscriptionItems {
     export function del(
         id: string,
         params: {
-            clear_usage?: unknown
-            proration_date?: unknown
+            clear_usage?: boolean
+            proration_date?: number
         },
         stripeAccount?: string,
     ): Promise<{

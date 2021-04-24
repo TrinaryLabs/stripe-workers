@@ -21,7 +21,7 @@ export namespace events {
                 lt?: string
                 lte?: string
             }
-            delivery_success?: unknown
+            delivery_success?: boolean
             ending_before?: string
             limit?: number
             starting_after?: string

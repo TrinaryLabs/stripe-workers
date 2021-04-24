@@ -34,18 +34,124 @@ export namespace paymentIntents {
             statement_descriptor?: string
             statement_descriptor_suffix?: string
             application_fee_amount?: number
-            capture_method?: unknown
-            confirmation_method?: unknown
-            error_on_requires_action?: unknown
-            mandate?: unknown
-            mandate_data?: unknown
-            on_behalf_of?: unknown
-            payment_method_data?: unknown
-            payment_method_options?: unknown
+            capture_method?: string
+            confirmation_method?: string
+            error_on_requires_action?: boolean
+            mandate?: string
+            mandate_data?: {
+                customer_acceptance: {
+                    type: string
+                    accepted_at?: number
+                    offline?: {}
+                    online?: {
+                        ip_address: string
+                        user_agent: string
+                    }
+                }
+            }
+            on_behalf_of?: string
+            payment_method_data?: {
+                type: string
+                acss_debit?: {
+                    account_number: string
+                    institution_number: string
+                    transit_number: string
+                }
+                afterpay_clearpay?: {}
+                alipay?: {}
+                au_becs_debit?: {
+                    account_number: string
+                    bsb_number: string
+                }
+                bacs_debit?: {
+                    account_number?: string
+                    sort_code?: string
+                }
+                bancontact?: {}
+                billing_details?: {
+                    address?: {
+                        city?: string
+                        country?: string
+                        line1?: string
+                        line2?: string
+                        postal_code?: string
+                        state?: string
+                    }
+                    email?: string
+                    name?: string
+                    phone?: string
+                }
+                eps?: {
+                    bank?: string
+                }
+                fpx?: {
+                    bank: string
+                }
+                giropay?: {}
+                grabpay?: {}
+                ideal?: {
+                    bank?: string
+                }
+                interac_present?: {}
+                metadata?: object
+                oxxo?: {}
+                p24?: {
+                    bank?: string
+                }
+                sepa_debit?: {
+                    iban: string
+                }
+                sofort?: {
+                    country: string
+                }
+            }
+            payment_method_options?: {
+                acss_debit?: {
+                    mandate_options?: {
+                        custom_mandate_url?: string
+                        interval_description?: number
+                        payment_schedule?: string
+                        transaction_type?: string
+                    }
+                    verification_method?: string
+                }
+                alipay?: {}
+                bancontact?: {
+                    preferred_language?: string
+                }
+                card?: {
+                    cvc_token?: string
+                    installments?: {
+                        enabled?: boolean
+                        plan?: {
+                            count: number
+                            interval: number
+                            type: string
+                        }
+                    }
+                    network?: string
+                    request_three_d_secure?: string
+                }
+                oxxo?: {
+                    expires_after_days?: number
+                }
+                p24?: {
+                    tos_shown_and_accepted?: string
+                }
+                sepa_debit?: {
+                    mandate_options?: {}
+                }
+                sofort?: {
+                    preferred_language?: string
+                }
+            }
             return_url?: string
-            transfer_data?: unknown
-            transfer_group?: unknown
-            use_stripe_sdk?: unknown
+            transfer_data?: {
+                destination: string
+                amount?: number
+            }
+            transfer_group?: string
+            use_stripe_sdk?: boolean
         },
         stripeAccount?: string,
     ): Promise<PaymentIntentsResponse> {
@@ -104,18 +210,124 @@ export namespace paymentIntents {
             statement_descriptor?: string
             statement_descriptor_suffix?: string
             application_fee_amount?: number
-            capture_method?: unknown
-            confirmation_method?: unknown
-            error_on_requires_action?: unknown
-            mandate?: unknown
-            mandate_data?: unknown
-            on_behalf_of?: unknown
-            payment_method_data?: unknown
-            payment_method_options?: unknown
+            capture_method?: string
+            confirmation_method?: string
+            error_on_requires_action?: boolean
+            mandate?: string
+            mandate_data?: {
+                customer_acceptance: {
+                    type: string
+                    accepted_at?: number
+                    offline?: {}
+                    online?: {
+                        ip_address: string
+                        user_agent: string
+                    }
+                }
+            }
+            on_behalf_of?: string
+            payment_method_data?: {
+                type: string
+                acss_debit?: {
+                    account_number: string
+                    institution_number: string
+                    transit_number: string
+                }
+                afterpay_clearpay?: {}
+                alipay?: {}
+                au_becs_debit?: {
+                    account_number: string
+                    bsb_number: string
+                }
+                bacs_debit?: {
+                    account_number?: string
+                    sort_code?: string
+                }
+                bancontact?: {}
+                billing_details?: {
+                    address?: {
+                        city?: string
+                        country?: string
+                        line1?: string
+                        line2?: string
+                        postal_code?: string
+                        state?: string
+                    }
+                    email?: string
+                    name?: string
+                    phone?: string
+                }
+                eps?: {
+                    bank?: string
+                }
+                fpx?: {
+                    bank: string
+                }
+                giropay?: {}
+                grabpay?: {}
+                ideal?: {
+                    bank?: string
+                }
+                interac_present?: {}
+                metadata?: object
+                oxxo?: {}
+                p24?: {
+                    bank?: string
+                }
+                sepa_debit?: {
+                    iban: string
+                }
+                sofort?: {
+                    country: string
+                }
+            }
+            payment_method_options?: {
+                acss_debit?: {
+                    mandate_options?: {
+                        custom_mandate_url?: string
+                        interval_description?: number
+                        payment_schedule?: string
+                        transaction_type?: string
+                    }
+                    verification_method?: string
+                }
+                alipay?: {}
+                bancontact?: {
+                    preferred_language?: string
+                }
+                card?: {
+                    cvc_token?: string
+                    installments?: {
+                        enabled?: boolean
+                        plan?: {
+                            count: number
+                            interval: number
+                            type: string
+                        }
+                    }
+                    network?: string
+                    request_three_d_secure?: string
+                }
+                oxxo?: {
+                    expires_after_days?: number
+                }
+                p24?: {
+                    tos_shown_and_accepted?: string
+                }
+                sepa_debit?: {
+                    mandate_options?: {}
+                }
+                sofort?: {
+                    preferred_language?: string
+                }
+            }
             return_url?: string
-            transfer_data?: unknown
-            transfer_group?: unknown
-            use_stripe_sdk?: unknown
+            transfer_data?: {
+                destination: string
+                amount?: number
+            }
+            transfer_group?: string
+            use_stripe_sdk?: boolean
         },
         stripeAccount?: string,
     ): Promise<PaymentIntentsResponse> {
@@ -127,7 +339,7 @@ export namespace paymentIntents {
     export function confirm(
         id: string,
         params?: {
-            payment_method?: unknown
+            payment_method?: string
             receipt_email?: string
             setup_future_usage?: string
             shipping?: {
@@ -144,7 +356,7 @@ export namespace paymentIntents {
                 phone?: string
                 tracking_number?: string
             }
-            error_on_requires_action?: unknown
+            error_on_requires_action?: boolean
             mandate?: string
             mandate_data?: {
                 customer_acceptance: {
@@ -157,7 +369,7 @@ export namespace paymentIntents {
                     }
                 }
             }
-            off_session?: unknown
+            off_session?: boolean
             payment_method_data?: {
                 type: string
                 acss_debit?: {
@@ -255,7 +467,7 @@ export namespace paymentIntents {
             }
             payment_method_types?: string[]
             return_url?: string
-            use_stripe_sdk?: unknown
+            use_stripe_sdk?: boolean
         },
         stripeAccount?: string,
     ): Promise<PaymentIntentsResponse> {

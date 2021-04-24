@@ -16,7 +16,7 @@ export namespace skus {
             price: number
             product: string
             active?: boolean
-            attributes?: unknown
+            attributes?: object
             image?: string
             metadata?: object
             package_dimensions?: {
@@ -54,7 +54,7 @@ export namespace skus {
             price?: number
             product?: string
             active?: boolean
-            attributes?: unknown
+            attributes?: object
             image?: string
             metadata?: object
             package_dimensions?: {
@@ -75,7 +75,7 @@ export namespace skus {
         params?: {
             active?: boolean
             product?: string
-            attributes?: unknown
+            attributes?: object
             ending_before?: string
             ids?: string[]
             in_stock?: boolean

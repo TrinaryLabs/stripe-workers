@@ -75,7 +75,10 @@ export namespace checkout {
                     }
                     statement_descriptor?: string
                     statement_descriptor_suffix?: string
-                    transfer_data?: any
+                    transfer_data?: {
+                        destination: string
+                        amount?: number
+                    }
                     transfer_group?: string
                 }
                 payment_method_options?: {
@@ -101,7 +104,13 @@ export namespace checkout {
                 subscription_data?: {
                     application_fee_percent?: number
                     default_tax_rates?: string
-                    items?: unknown
+                    items?: [
+                        {
+                            plan: string
+                            quantity?: number
+                            tax_rates?: [string]
+                        }
+                    ]
                     metadata?: object
                     transfer_data?: {
                         destination: string

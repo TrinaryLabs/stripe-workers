@@ -657,7 +657,14 @@ export type CheckoutSessionsResponse = {
     }
     livemode: boolean
     locale: string | undefined
-    payment_method_options: object
+    payment_method_options: {
+        acss_debit: {
+            currency: string
+            mandate_options: {
+                verification_method: string
+            }
+        }
+    }
     setup_intent: string | undefined
     shipping: {
         address: {
@@ -748,9 +755,9 @@ export type PersonResponse = {
     account: string
     created: number
     dob: object
-    first_name: unknown
+    first_name: string
     id_number_provided: boolean
-    last_name: unknown
+    last_name: string
     metadata: object
     relationship: object
     requirements: object
@@ -777,26 +784,26 @@ export type AccountBankAccountResponse = {
 export type AccountCardResponse = {
     id: string
     object: string
-    address_city: unknown
-    address_country: unknown
-    address_line1: unknown
-    address_line1_check: unknown
-    address_line2: unknown
-    address_state: unknown
-    address_zip: unknown
-    address_zip_check: unknown
+    address_city: string
+    address_country: string
+    address_line1: string
+    address_line1_check: string
+    address_line2: string
+    address_state: string
+    address_zip: string
+    address_zip_check: string
     brand: string
     country: string
     cvc_check: string
-    dynamic_last4: unknown
+    dynamic_last4: string
     exp_month: number
     exp_year: number
     fingerprint: string
     funding: string
     last4: string
     metadata: object
-    name: unknown
-    tokenization_method: unknown
+    name: string
+    tokenization_method: string
     account: string
 }
 
@@ -988,13 +995,13 @@ export type BalanceTransactionsResponse = {
     available_on: number
     created: number
     currency: string
-    description: unknown
+    description: string
     exchange_rate: number
     fee: number
     fee_details: [
         {
             amount: number
-            application: unknown
+            application: string
             currency: string
             description: string
             type: string
@@ -1710,7 +1717,7 @@ export type ReportRunResponse = {
     id: string
     object: string
     created: number
-    error: unknown
+    error: string
     livemode: boolean
     parameters: object
     report_type: string
@@ -2750,21 +2757,21 @@ export type FileLinksResponse = {
 
 export type EventRetrieveResponse = {
     id: string
-    object: string
     api_version: string
-    created: number
     data: {
         object: object
         previous_attributes: object
     }
-    expires_at: number
-    url: string
-    file: unknown
-    expired: boolean
+    request: {
+        id: string
+        idempotency_key: string
+    }
+    type: string
+    object: string
+    account: string
+    created: number
     livemode: boolean
     pending_webhooks: number
-    request: object
-    type: string
 }
 
 /*type DisputesResponse = { check this tomorrow

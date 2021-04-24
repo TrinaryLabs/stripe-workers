@@ -6,7 +6,7 @@ export namespace files {
 
     export function create(
         params: {
-            file: unknown
+            file: any
             purpose: string
             file_link_data?: {
                 create: boolean

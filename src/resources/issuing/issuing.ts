@@ -275,7 +275,7 @@ export namespace issuing {
                 type: string
                 metadata?: object
                 status?: string
-                replacement_for?: unknown
+                replacement_for?: string
                 replacement_reason?: string
                 shipping?: {
                     address: {

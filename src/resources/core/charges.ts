@@ -26,12 +26,12 @@ export namespace charges {
                 phone?: string
                 tracking_number?: string
             }
-            source?: unknown
+            source?: string
             statement_descriptor?: string
             statement_descriptor_suffix?: string
             application_fee_amount?: number
-            capture?: unknown
-            on_behalf_of?: unknown
+            capture?: boolean
+            on_behalf_of?: string
             transfer_data?: {
                 destination: string
                 amount?: number
@@ -118,9 +118,9 @@ export namespace charges {
             }
             ending_before?: string
             limit?: number
-            payment_intent?: unknown
+            payment_intent?: string
             starting_after?: string
-            transfer_group?: unknown
+            transfer_group?: string
         },
         stripeAccount?: string,
     ): Promise<{

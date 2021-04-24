@@ -9,7 +9,7 @@ export namespace refunds {
             amount?: number
             metadata?: object
             payment_intent?: string
-            reason?: unknown // string or null,
+            reason?: string
             refund_application_fee?: boolean
             reverse_transfer?: boolean
         },

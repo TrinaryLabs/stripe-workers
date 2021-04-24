@@ -7,27 +7,56 @@ export namespace subscriptions {
     export function create(
         params: {
             customer: string
-            items: object
+            items: [
+                {
+                    billing_thresholds?: {
+                        usage_gte: number
+                    }
+                    metadata?: object
+                    price?: string
+                    price_data?: {
+                        currency: string
+                        product: string
+                        recurring: {
+                            interval: string
+                            interval_count?: number
+                        }
+                        unit_amount_decimal?: number
+                        unit_amount?: number
+                    }
+                    quantity?: number
+                    tax_rates?: [string]
+                }
+            ]
             cancel_at_period_end?: boolean
-            default_payment_method?: unknown
+            default_payment_method?: string
             metadata?: object
             add_invoice_items?: string[]
             application_fee_percent?: string
-            backdate_start_date?: unknown
-            billing_cycle_anchor?: unknown
-            billing_thresholds?: object
-            cancel_at?: unknown
-            collection_method?: unknown
+            backdate_start_date?: number
+            billing_cycle_anchor?: number
+            billing_thresholds?: {
+                amount_gte?: number
+                reset_billing_cycle_anchor?: string
+            }
+            cancel_at?: number
+            collection_method?: string
             coupon?: string
             days_until_due?: number
-            default_source?: unknown
+            default_source?: string
             default_tax_rates?: string
-            off_session?: unknown
+            off_session?: boolean
             payment_behavior?: string
-            pending_invoice_item_inteval?: object
+            pending_invoice_item_inteval?: {
+                interval: string
+                interval_count?: number
+            }
             promotion_code?: string
-            proration_behavior?: unknown
-            transfer_data?: object
+            proration_behavior?: string
+            transfer_data?: {
+                destination: string
+                amount_percent?: number
+            }
             trial_end?: number
             trial_from_plan?: boolean
             trial_period_days?: number
@@ -51,29 +80,61 @@ export namespace subscriptions {
     export function update(
         id: string,
         params: {
-            items: object
+            items: [
+                {
+                    billing_thresholds?: {
+                        usage_gte: number
+                    }
+                    metadata?: object
+                    price?: string
+                    price_data?: {
+                        currency: string
+                        product: string
+                        recurring: {
+                            interval: string
+                            interval_count?: number
+                        }
+                        unit_amount_decimal?: number
+                        unit_amount?: number
+                    }
+                    quantity?: number
+                    tax_rates?: [string]
+                }
+            ]
             cancel_at_period_end?: boolean
             metadata?: object
             add_invoice_items?: string[]
             application_fee_percent?: string
             proration_behavior?: string
             billing_cycle_anchor?: string
-            billing_thresholds?: object
+            billing_thresholds?: {
+                amount_gte?: number
+                reset_billing_cycle_anchor?: string
+            }
             cancel_at?: number
-            collection_method?: unknown
+            collection_method?: string
             coupon?: string
             days_until_due?: number
-            default_source?: unknown
+            default_source?: string
             dafault_tax_rates?: string
-            off_session?: unknown
-            pause_collection?: unknown
+            off_session?: boolean
+            pause_collection?: {
+                behavior: string
+                resumes_at?: number
+            }
             payment_behavior?: string
-            pending_invoice_item_interval?: object
+            pending_invoice_item_inteval?: {
+                interval: string
+                interval_count?: number
+            }
             promotion_code?: string
-            proration_date?: unknown
-            transfer_data?: object
+            proration_date?: number
+            transfer_data?: {
+                destination: string
+                amount_percent?: number
+            }
             trial_end?: number
-            trial_from_plan?: unknown
+            trial_from_plan?: boolean
         },
         stripeAccount?: string,
     ): Promise<SubscriptionResponse> {
@@ -84,9 +145,9 @@ export namespace subscriptions {
 
     export function del(
         id: string,
-        params: {
-            invoice_now?: unknown
-            prorate?: unknown
+        params?: {
+            invoice_now?: boolean
+            prorate?: boolean
         },
         stripeAccount?: string,
     ): Promise<SubscriptionResponse> {
@@ -100,7 +161,7 @@ export namespace subscriptions {
             customer?: string
             price?: string
             status?: string
-            collection_method?: unknown
+            collection_method?: string
             created?: {
                 gt?: string
                 gte?: string

@@ -38,7 +38,7 @@ export namespace customers {
                 phone?: string
             }
             balance?: number
-            coupon?: unknown
+            coupon?: string
             invoice_prefix?: string
             invoice_settings?: {
                 custom_fields: [
@@ -50,10 +50,10 @@ export namespace customers {
                 default_payment_method?: string
                 footer?: string
             }
-            next_invoice_sequence?: unknown
-            preferred_locales?: unknown
+            next_invoice_sequence?: number
+            preferred_locales?: [string]
             promotion_code?: string
-            source?: unknown
+            source?: any
             tax_exempt?: string
             tax_id_data?: [
                 {
@@ -107,7 +107,7 @@ export namespace customers {
                 phone?: string
             }
             balance?: number
-            coupon?: unknown
+            coupon?: string
             invoice_prefix?: string
             invoice_settings?: {
                 custom_fields: [
@@ -119,10 +119,10 @@ export namespace customers {
                 default_payment_method?: string
                 footer?: string
             }
-            next_invoice_sequence?: unknown
-            preferred_locales?: unknown
+            next_invoice_sequence?: number
+            preferred_locales?: [string]
             promotion_code?: string
-            source?: unknown
+            source?: any
             tax_exempt?: string
         },
         stripeAccount?: string,
@@ -173,7 +173,7 @@ export namespace customers {
     export function createSource(
         cus_id: string,
         params: {
-            source: unknown
+            source: any
             metadata?: object
         },
         stripeAccount?: string,

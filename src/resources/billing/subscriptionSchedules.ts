@@ -9,33 +9,63 @@ export namespace subscriptionSchedules {
             metadata?: object
             phases?: [
                 {
-                    items: {
-                        billing_thresholds?: object
-                        price?: string
-                        price_data?: object
-                        quantity?: number
-                        tax_rates?: [string]
-                    }
+                    items: [
+                        {
+                            billing_thresholds?: {
+                                usage_gte: number
+                            }
+                            price?: string
+                            price_data?: {
+                                currency: string
+                                product: string
+                                recurring: {
+                                    interval: string
+                                    interval_count?: number
+                                }
+                                unit_amount_decimal?: number
+                                unit_amount?: number
+                            }
+                            quantity?: number
+                            tax_rates?: [string]
+                        }
+                    ]
                     add_invoice_items?: [
                         {
                             price?: string
-                            price_data?: object
+                            price_data?: {
+                                currency: string
+                                product: string
+                                recurring: {
+                                    interval: string
+                                    interval_count?: number
+                                }
+                                unit_amount_decimal?: number
+                                unit_amount?: number
+                            }
                             quantity?: number
                             tax_rates?: [string]
                         }
                     ]
                     application_fee_percent?: number
                     billing_cycle_anchor?: string
-                    billing_thresholds?: object
+                    billing_thresholds?: {
+                        amount_gte?: number
+                        reset_billing_cycle_anchor?: string
+                    }
                     collection_method?: string
                     coupon?: string
                     default_payment_method?: string
                     default_tax_rates?: [string]
                     end_date?: number
-                    invoice_settings?: object
+                    invoice_settings?: {
+                        days_until_due?: number
+                    }
                     iterations?: number
                     proration_behavior?: string
-                    transfer_data?: object
+                    transfer_data?: {
+                        destination: string
+                        amount_percent?: number
+                    }
                     trial?: boolean
                     trial_end?: number
                 }
@@ -58,8 +88,8 @@ export namespace subscriptionSchedules {
                     amount_percent?: number
                 }
             }
-            end_behavior?: unknown
-            from_subscriptions?: unknown
+            end_behavior?: string
+            from_subscriptions?: string
         },
         stripeAccount?: string,
     ): Promise<SubscriptionSchedulesResponse> {
@@ -85,37 +115,81 @@ export namespace subscriptionSchedules {
             phases?: [
                 {
                     items: {
-                        billing_thresholds?: object
+                        billing_thresholds?: {
+                            usage_gte: number
+                        }
                         price?: string
-                        price_data?: object
+                        price_data?: {
+                            currency: string
+                            product: string
+                            recurring: {
+                                interval: string
+                                interval_count?: number
+                            }
+                            unit_amount_decimal?: number
+                            unit_amount?: number
+                        }
                         quantity?: number
                         tax_rates?: [string]
                     }
                     add_invoice_items?: [
                         {
                             price?: string
-                            price_data?: object
+                            price_data?: {
+                                currency: string
+                                product: string
+                                recurring: {
+                                    interval: string
+                                    interval_count?: number
+                                }
+                                unit_amount_decimal?: number
+                                unit_amount?: number
+                            }
                             quantity?: number
                             tax_rates?: [string]
                         }
                     ]
                     application_fee_percent?: number
                     billing_cycle_anchor?: string
-                    billing_thresholds?: object
+                    billing_thresholds?: {
+                        amount_gte?: number
+                        reset_billing_cycle_anchor?: string
+                    }
                     collection_method?: string
                     coupon?: string
                     default_payment_method?: string
                     default_tax_rates?: [string]
                     end_date?: number
-                    invoice_settings?: object
+                    invoice_settings?: {
+                        days_until_due?: number
+                    }
                     iterations?: number
                     proration_behavior?: string
-                    transfer_data?: object
+                    transfer_data?: {
+                        destination: string
+                        amount_percent?: number
+                    }
                     trial?: boolean
                     trial_end?: number
                 }
             ]
-            dafault_settings?: object
+            dafault_settings?: {
+                application_fee_percent?: number
+                billing_cycle_anchor?: string
+                billing_thresholds?: {
+                    amount_gte?: string
+                    reset_billing_cycle_anchor?: string
+                }
+                collection_method?: string
+                default_payment_method?: string
+                invoice_settings?: {
+                    days_until_due?: number
+                }
+                transfer_data?: {
+                    destination: string
+                    amount_percent?: number
+                }
+            }
             end_behavior?: string
             proration_behavior?: string
         },
@@ -141,8 +215,8 @@ export namespace subscriptionSchedules {
 
     export function release(
         id: string,
-        params: {
-            preserve_cancel_date?: unknown
+        params?: {
+            preserve_cancel_date?: boolean
         },
         stripeAccount?: string,
     ): Promise<SubscriptionSchedulesResponse> {
