@@ -36,11 +36,11 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: 12.x
-          registry-url: 'https://npm.pkg.github.com'
+          registry-url: 'https://registry.npmjs.org'
           always-auth: true
       - run: yarn
       - run: yarn build
       - run: yarn build:types
       - run: yarn publish
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

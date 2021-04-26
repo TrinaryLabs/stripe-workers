@@ -1,5 +1,5 @@
 {
-    "name": "@trinarylabs/stripe-workers",
+    "name": "stripe-workers",
     "version": "0.8.0-beta",
     "description": "An unofficial stripe-sdk for workers.dev and environments that use fetch",
     "keywords": [
@@ -23,7 +23,7 @@
         "test": "TS_NODE_PROJECT='./test/tsconfig.json' mocha -r ts-node/register test/**/*.ts"
     },
     "publishConfig": {
-        "registry": "https://npm.pkg.github.com"
+        "registry": "https://registry.npmjs.org"
     },
     "types": "./dist/types/src/index.d.ts",
     "author": "EduM22 <38257387+EduM22@users.noreply.github.com> (https://to.rnqvist.com)",
