@@ -21,7 +21,7 @@ export class HTTPClient {
         this.STRIPE_SECRET_KEY = key
         this.FETCH = customFetch ? customFetch : fetch.bind(globalThis)
         this.API_VERSION = apiVersion ? apiVersion : '2020-08-27'
-        this.UA = userAgent ? userAgent : 'stripe/workers.dev (SDK-0.7.0-beta)'
+        this.UA = userAgent ? userAgent : 'stripe/workers.dev (SDK-0.9.0-beta)'
     }
 
     request = async (

@@ -1,6 +1,6 @@
 {
     "name": "stripe-workers",
-    "version": "0.8.0-beta",
+    "version": "0.9.0-beta",
     "description": "An unofficial stripe-sdk for workers.dev and environments that use fetch",
     "keywords": [
         "stripe",
@@ -25,7 +25,7 @@
     "publishConfig": {
         "registry": "https://registry.npmjs.org"
     },
-    "types": "./dist/types/src/index.d.ts",
+    "types": "./dist/types/index.d.ts",
     "author": "EduM22 <38257387+EduM22@users.noreply.github.com> (https://to.rnqvist.com)",
     "license": "Apache-2.0",
     "devDependencies": {

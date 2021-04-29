@@ -366,7 +366,12 @@ export type InvoicesResponse = {
     starting_balance: number
     statement_descriptor: string
     status: string
-    status_transitions: object
+    status_transitions: {
+        finalized_at: number
+        marked_uncollectible_at: number
+        paid_at: number
+        voided_at: number
+    }
     subscription: string
     subtotal: number
     tax: number
@@ -566,7 +571,10 @@ export type SubscriptionResponse = {
     livemode: boolean
     metadata: object
     next_pending_invoice_item_invoice: number
-    pause_collection: object
+    pause_collection: {
+        behavior: string
+        resumes_at: number
+    }
     pending_invoice_item_interval: {
         interval: string
         interval_count: number
@@ -601,7 +609,23 @@ export type SubscriptionSchedulesResponse = {
         start_date: number
     }
     customer: string
-    default_settings: object
+    default_settings: {
+        application_fee_percent: number
+        billing_cycle_anchor: string
+        billing_thresholds: {
+            amount_gte: number
+            reset_billing_cycle_anchor: boolean
+        }
+        collection_method: string
+        default_payment_method: string
+        invoice_settings: {
+            days_until_due: number
+        }
+        transfer_data: {
+            amount_percent: number
+            destination: string
+        }
+    }
     end_behavior: string
     livemode: boolean
     metadata: object
@@ -726,36 +750,181 @@ export type CheckoutSessionsResponse = {
     }
 }
 
-//TODO
 export type AccountsResponse = {
     id: string
-    object: string
-    business_profile: object
     business_type: string
-    capabilities: object
-    charges_enabled: boolean
+    capabilities: {
+        acss_debit_payments: string
+        afterpay_clearpay_payments: string
+        au_becs_debit_payments: string
+        bacs_debit_payments: string
+        bancontact_payments: string
+        card_issuing: string
+        card_payments: string
+        cartes_bancaires_payments: string
+        eps_payments: string
+        fpx_payments: string
+        giropay_payments: string
+        grabpay_payments: string
+        ideal_payments: string
+        jcb_payments: string
+        legacy_payments: string
+        oxxo_payments: string
+        p24_payments: string
+        sepa_debit_payments: string
+        sofort_payments: string
+        tax_reporting_us_1099_k: string
+        tax_reporting_us_1099_misc: string
+        transfers: string
+    }
+    company: {}
     country: string
+    email: string
+    individual: {}
+    metadata: object
+    requirements: object
+    tos_acceptance: {
+        date: number
+        ip: string
+        service_agreement: string
+        user_agent: string
+    }
+    type: string
+    object: string
+    business_profile: {
+        mcc: string
+        name: string
+        product_description: string
+        support_address: {
+            city: string
+            country: string
+            line1: string
+            line2: string
+            postal_code: string
+            state: string
+        }
+        support_email: string
+        support_phone: string
+        support_url: string
+        terms_of_service_url: string
+        url: string
+    }
+    charges_enabled: boolean
     created: number
     default_currency: string
     details_submitted: boolean
-    email: string
-    external_accounts: object
-    metadata: object
+    external_accounts: {
+        object: string
+        data: [
+            {
+                id: string
+                object: string
+                account: string
+                address_city: string
+                address_country: string
+                address_line1: string
+                address_line1_check: string
+                address_line2: string
+                address_state: string
+                address_zip: string
+                address_zip_check: string
+                available_payout_methods: []
+                brand: string
+                country: string
+                currency: string
+                customer: string
+                cvc_check: string
+                default_for_currency: boolean
+                dynamic_last4: string
+                exp_month: number
+                exp_year: number
+                fingerprint: string
+                funding: string
+                last4: string
+                metadata: object
+                name: string
+                recipient: string
+                tokenization_method: string
+                account_holder_name: string
+                account_holder_type: string
+                bank_name: string
+                routing_number: string
+                status: string
+            }
+        ]
+        has_more: boolean
+        url: string
+    }
     payouts_enabled: boolean
-    requirements: object
-    settings: object
-    tos_acceptance: object
-    type: string
+    settings: {
+        bacs_debit_payments: {
+            display_name: string
+        }
+        branding: {
+            icon: string
+            logo: string
+            primary_color: string
+            secondary_color: string
+        }
+        card_issuing: {
+            tos_acceptance: {
+                date: number
+                ip: string
+                user_agent: string
+            }
+        }
+        card_payments: {
+            decline_on: {
+                avs_failure: boolean
+                cvc_failure: boolean
+            }
+            statement_descriptor_prefix: string
+        }
+        dashboard: {
+            display_name: string
+            timezone: string
+        }
+        payments: {
+            statement_descriptor: string
+            statement_descriptor_kana: string
+            statement_descriptor_kanji: string
+        }
+        payouts: {
+            debit_negative_balances: boolean
+            schedule: {
+                delay_days: number
+                interval: string
+                monthly_anchor: number
+                weekly_anchor: string
+            }
+            statement_descriptor: string
+        }
+        sepa_debit_payments: {
+            creditor_id: string
+        }
+    }
 }
 
 export type AccountsCapabilityResponse = {
     id: string
-    object: string
     account: string
     requested: boolean
-    requested_at: number
-    requirements: object
+    requirements: {
+        current_deadline: number
+        currently_due: [string]
+        disabled_reason: string
+        errors: [
+            {
+                code: string
+            }
+        ]
+        eventually_due: [string]
+        past_due: [string]
+        pending_verification: [string]
+    }
     status: string
+    object: string
+    requested_at: number
 }
 
 export type PersonResponse = {
@@ -1561,8 +1730,8 @@ export type PaymentMethodsResponse = {
     metadata: object
     type: string
     object: string
-    afterpay_clearpay: object
-    alipay: object
+    afterpay_clearpay: {}
+    alipay: {}
     au_becs_debit: {
         bsb_number: string
         fingerprint: string
@@ -1573,7 +1742,7 @@ export type PaymentMethodsResponse = {
         last4: string
         sort_code: string
     }
-    bancontact: object
+    bancontact: {}
     card: {
         brand: string
         checks: {
@@ -1625,10 +1794,10 @@ export type PaymentMethodsResponse = {
             supported: boolean
         }
         wallet: {
-            amex_express_checkout: object
-            apple_pay: object
+            amex_express_checkout: {}
+            apple_pay: {}
             dynamic_last4: string
-            google_pay: object
+            google_pay: {}
             masterpass: {
                 billing_address: {
                     city: string
@@ -1649,7 +1818,7 @@ export type PaymentMethodsResponse = {
                     state: string
                 }
             }
-            samsung_pay: object
+            samsung_pay: {}
             type: string
             visa_checkout: {
                 billing_address: {
@@ -1673,7 +1842,7 @@ export type PaymentMethodsResponse = {
             }
         }
     }
-    card_present: object
+    card_present: {}
     created: number
     eps: {
         bank: string
@@ -1681,15 +1850,15 @@ export type PaymentMethodsResponse = {
     fpx: {
         bank: string
     }
-    giropay: object
-    grabpay: object
+    giropay: {}
+    grabpay: {}
     ideal: {
         bank: string
         bic: string
     }
-    interac_present: object
+    interac_present: {}
     livemode: boolean
-    oxxo: object
+    oxxo: {}
     p24: {
         bank: string
     }
@@ -1803,9 +1972,50 @@ export type ReportRunResponse = {
     created: number
     error: string
     livemode: boolean
-    parameters: object
+    parameters: {
+        columns: [string]
+        connected_account: string
+        currency: string
+        interval_end: number
+        interval_start: number
+        payout: string
+        reporting_category: string
+        timezone: string
+    }
     report_type: string
-    result: object
+    result: {
+        id: string
+        object: string
+        created: number
+        expires_at: number
+        filename: string
+        links: [
+            {
+                object: string
+                data: [
+                    {
+                        id: string
+                        object: string
+                        created: number
+                        expired: boolean
+                        expires_at: number
+                        file: string,
+                        livemode: boolean
+                        metadata: object
+                        url: string
+                    }
+
+                ]
+                has_more: boolean
+                url: string
+            }
+        ]
+        purpose: string
+        size: number
+        title: string
+        type: string
+        url: string
+    }
     status: string
     succeeded_at: number
 }
@@ -1826,7 +2036,39 @@ export type SQRResponse = {
     object: string
     created: number
     data_load_time: number
-    file: object
+    file: {
+        id: string
+        object: string
+        created: number
+        expires_at: number
+        filename: string
+        links: [
+            {
+                object: string
+                data: [
+                    {
+                        id: string
+                        object: string
+                        created: number
+                        expired: boolean
+                        expires_at: number
+                        file: string,
+                        livemode: boolean
+                        metadata: object
+                        url: string
+                    }
+
+                ]
+                has_more: boolean
+                url: string
+            }
+        ]
+        purpose: string
+        size: number
+        title: string
+        type: string
+        url: string
+    }
     livemode: boolean
     result_available_until: number
     sql: string
@@ -1941,8 +2183,15 @@ export type SetupIntentsResponse = {
         payment_method: {
             id: string
             object: string
-            afterpay_clearpay: object
-            alipay: object
+            acss_debit: {
+                bank_name: string
+                fingerprint: string
+                institution_number: string
+                last4: string
+                transit_number: string
+            }
+            afterpay_clearpay: {}
+            alipay: {}
             au_becs_debit: {
                 bsb_number: string
                 fingerprint: string
@@ -1953,7 +2202,7 @@ export type SetupIntentsResponse = {
                 last4: string
                 sort_code: string
             }
-            bancontact: object
+            bancontact: {}
             billing_details: {
                 address: {
                     city: string
@@ -2018,10 +2267,10 @@ export type SetupIntentsResponse = {
                     supported: boolean
                 }
                 wallet: {
-                    amex_express_checkout: object
-                    apple_pay: object
+                    amex_express_checkout: {}
+                    apple_pay: {}
                     dynamic_last4: string
-                    google_pay: object
+                    google_pay: {}
                     masterpass: {
                         billing_address: {
                             city: string
@@ -2042,7 +2291,7 @@ export type SetupIntentsResponse = {
                             state: string
                         }
                     }
-                    samsung_pay: object
+                    samsung_pay: {}
                     type: string
                     visa_checkout: {
                         billing_address: {
@@ -2066,7 +2315,7 @@ export type SetupIntentsResponse = {
                     }
                 }
             }
-            card_present: object
+            card_present: {}
             created: number
             customer: string
             eps: {
@@ -2075,16 +2324,16 @@ export type SetupIntentsResponse = {
             fps: {
                 bank: string
             }
-            giropay: object
-            grabpay: object
+            giropay: {}
+            grabpay: {}
             ideal: {
                 bank: string
                 bic: string
             }
-            interac_present: object
+            interac_present: {}
             livemode: boolean
             metadata: object
-            oxxo: object
+            oxxo: {}
             p24: {
                 bank: string
             }
@@ -2129,11 +2378,21 @@ export type SetupIntentsResponse = {
     mandate: string
     on_behalf_of: string
     payment_method_options: {
+        acss_debit: {
+            currency: string
+            mandate_options: {
+                custom_mandate_url: string
+                interval_description: string
+                payment_schedule: string
+                transaction_type: string
+            }
+            verification_method: string
+        }
         card: {
             request_three_d_secure: string
         }
         sepa_debit: {
-            mandate_options: object
+            mandate_options: {}
         }
     }
     single_use_mandate: string
@@ -2149,8 +2408,8 @@ export type SetupAttenptsResponse = {
     on_behalf_of: string
     payment_method: string
     payment_method_details: {
-        au_becs_debit: object
-        bacs_debit: object
+        au_becs_debit: {}
+        bacs_debit: {}
         bancontact: {
             bank_code: string
             bank_name: string
@@ -2180,7 +2439,7 @@ export type SetupAttenptsResponse = {
             iban_last4: string
             verified_name: string
         }
-        sepa_debit: object
+        sepa_debit: {}
         sofort: {
             bank_code: string
             bank_name: string
@@ -2202,8 +2461,15 @@ export type SetupAttenptsResponse = {
         payment_method: {
             id: string
             object: string
-            afterpay_clearpay: object
-            alipay: object
+            acss_debit: {
+                bank_name: string
+                fingerprint: string
+                institution_number: string
+                last4: string
+                transit_number: string
+            }
+            afterpay_clearpay: {}
+            alipay: {}
             au_becs_debit: {
                 bsb_number: string
                 fingerprint: string
@@ -2214,7 +2480,7 @@ export type SetupAttenptsResponse = {
                 last4: string
                 sort_code: string
             }
-            bancontact: object
+            bancontact: {}
             billing_details: {
                 address: {
                     city: string
@@ -2279,10 +2545,10 @@ export type SetupAttenptsResponse = {
                     supported: boolean
                 }
                 wallet: {
-                    amex_express_checkout: object
-                    apple_pay: object
+                    amex_express_checkout: {}
+                    apple_pay: {}
                     dynamic_last4: string
-                    google_pay: object
+                    google_pay: {}
                     masterpass: {
                         billing_address: {
                             city: string
@@ -2303,7 +2569,7 @@ export type SetupAttenptsResponse = {
                             state: string
                         }
                     }
-                    samsung_pay: object
+                    samsung_pay: {}
                     type: string
                     visa_checkout: {
                         billing_address: {
@@ -2327,7 +2593,7 @@ export type SetupAttenptsResponse = {
                     }
                 }
             }
-            card_present: object
+            card_present: {}
             created: number
             customer: string
             eps: {
@@ -2336,16 +2602,16 @@ export type SetupAttenptsResponse = {
             fpx: {
                 bank: string
             }
-            giropay: object
-            grabpay: object
+            giropay: {}
+            grabpay: {}
             ideal: {
                 bank: string
                 bic: string
             }
-            interac_present: object
+            interac_present: {}
             livemode: boolean
             metadata: object
-            oxxo: object
+            oxxo: {}
             p24: {
                 bank: string
             }
@@ -2481,7 +2747,7 @@ export type PaymentIntentsResponse = {
     amount: number
     charges: {
         object: string
-        data: [object] // charge object
+        data: [ChargesResponse]
         has_more: boolean
         url: string
     }
@@ -2499,8 +2765,15 @@ export type PaymentIntentsResponse = {
         payment_method: {
             id: string
             object: string
-            afterpay_clearpay: object
-            alipay: object
+            acss_debit: {
+                bank_name: string
+                fingerprint: string
+                institution_number: string
+                last4: string
+                transit_number: string
+            }
+            afterpay_clearpay: {}
+            alipay: {}
             au_becs_debit: {
                 number: string
                 fingerprint: string
@@ -2511,7 +2784,7 @@ export type PaymentIntentsResponse = {
                 last4: string
                 sort_code: string
             }
-            bancontact: object
+            bancontact: {}
             billing_details: {
                 address: {
                     city: string
@@ -2576,10 +2849,10 @@ export type PaymentIntentsResponse = {
                     supported: boolean
                 }
                 wallet: {
-                    amex_express_checkout: object
-                    apple_pay: object
+                    amex_express_checkout: {}
+                    apple_pay: {}
                     dynamic_last4: string
-                    google_pay: object
+                    google_pay: {}
                     masterpass: {
                         billing_address: {
                             city: string
@@ -2600,7 +2873,7 @@ export type PaymentIntentsResponse = {
                             state: string
                         }
                     }
-                    samsung_pay: object
+                    samsung_pay: {}
                     type: string
                     visa_checkout: {
                         billing_address: {
@@ -2624,7 +2897,7 @@ export type PaymentIntentsResponse = {
                     }
                 }
             }
-            card_present: object
+            card_present: {}
             created: number
             customer: string
             eps: {
@@ -2633,16 +2906,16 @@ export type PaymentIntentsResponse = {
             fps: {
                 bank: string
             }
-            giropay: object
-            grabpay: object
+            giropay: {}
+            grabpay: {}
             ideal: {
                 bank: string
                 bic: string
             }
-            interac_present: object
+            interac_present: {}
             livemode: boolean
             metadata: object
-            oxxo: object
+            oxxo: {}
             p24: {
                 bank: string
             }
@@ -2683,7 +2956,7 @@ export type PaymentIntentsResponse = {
             url: string
         }
         type: string
-        use_stripe_sdk: object //stripe specific we do not know the format
+        use_stripe_sdk: object
     }
     payment_method: string
     payment_method_types: [string]
@@ -2720,7 +2993,16 @@ export type PaymentIntentsResponse = {
     livemode: boolean
     on_behalf_of: string
     payment_method_options: {
-        alipay: object
+        acss_debit: {
+            mandate_options: {
+                custom_mandate_url: string
+                interval_description: string
+                payment_schedule: string
+                transaction_type: string
+            },
+            verification_method: string
+        }
+        alipay: {}
         bancontact: {
             preferred_language: string
         }
@@ -2741,12 +3023,13 @@ export type PaymentIntentsResponse = {
                 request_three_d_secure: string
             }
         }
+        card_present: {}
         oxxo: {
             expires_after_days: number
         }
-        p24: object
+        p24: {}
         sepa_debit: {
-            mandate_options: object
+            mandate_options: {}
         }
         sofort: {
             preferred_language: string
@@ -2764,7 +3047,7 @@ export type MandatesReponse = {
     id: string
     customer_acceptance: {
         accepted_at: number
-        offline: object
+        offline: {}
         online: {
             ip_address: string
             user_agent: string
@@ -2773,6 +3056,11 @@ export type MandatesReponse = {
     }
     payment_method: string
     payment_method_details: {
+        acss_debit: {
+            interval_description: string
+            payment_schedule: string
+            transaction_type: string
+        }
         au_becs_debit: {
             url: string
         }
@@ -2781,7 +3069,7 @@ export type MandatesReponse = {
             reference: string
             url: string
         }
-        card: object
+        card: {}
         sepa_debit: {
             reference: string
             url: string
@@ -2792,8 +3080,11 @@ export type MandatesReponse = {
     type: string
     object: string
     livemode: boolean
-    multi_use: object
-    single_use: object
+    multi_use: {}
+    single_use: {
+        amount: number
+        currency: string
+    }
 }
 
 export type FilesResponse = {
@@ -2901,7 +3192,16 @@ export type CustomersResponse = {
     discount: object
     email: string
     invoice_prefix: string
-    invoice_settings: object
+    invoice_settings: {
+        custom_fields: [
+            {
+                name: string
+                value: string
+            }
+        ]
+        default_payment_method: string
+        footer: string
+    }
     livemode: boolean
     metadata: object
     name: string
@@ -3049,7 +3349,245 @@ export type ChargesResponse = {
     invoice: string | InvoicesResponse
     metadata: object
     payment_intent: string | PaymentIntentsResponse
-    payment_method_details: object //TODO
+    payment_method_details: {
+        ach_credit_transfer: {
+            account_number: string
+            bank_name: string
+            routing_number: string
+            swift_code: string
+        }
+        ach_debit: {
+            account_holder_type: string
+            bank_name: string
+            country: string
+            fingerprint: string
+            last4: string
+            routing_number: string
+        }
+        acss_debit: {
+            bank_name: string
+            fingerprint: string
+            institution_number: string
+            last4: string
+            mandate: string
+            transit_number: string
+
+        }
+        afterpay_clearpay: {}
+        alipay: {
+            fingerprint: string
+            transaction_id: string
+        }
+        au_becs_debit: {
+            bsb_number: string
+            fingerprint: string
+            last4: string
+            mandate: string
+        }
+        bacs_debit: {
+            fingerprint: string
+            last4: string
+            mandate: string
+            sort_code: string
+        }
+        bancontact: {
+            bank_code: string
+            bank_name: string
+            bic: string
+            generated_sepa_debit: string
+            generated_sepa_debit_mandate: string
+            iban_last4: string
+            preferred_language: string
+            verified_name: string
+        }
+        card: {
+            brand: string
+            checks: {
+                address_line1_check: string
+                address_postal_code_check: string
+                cvc_check: string
+            }
+            country: string
+            exp_month: number
+            exp_year: number
+            fingerprint: string
+            funding: string
+            installments: {
+                plan: {
+                    count: number
+                    interval: string
+                    type: string
+                }
+            }
+            last4: string
+            network: string
+            three_d_secure: {
+                authentication_flow: string
+                result: string
+                result_reason: string
+                version: string
+            }
+            wallet: {
+                amex_express_checkout: {}
+                apple_pay: {}
+                dynamic_last4: string
+                google_pay: {}
+                masterpass: {
+                    billing_address: {
+                        city: string
+                        country: string
+                        line1: string
+                        line2: string
+                        postal_code: string
+                        state: string
+                    }
+                    email: string
+                    name: string
+                    shipping_address: {
+                        city: string
+                        country: string
+                        line1: string
+                        line2: string
+                        postal_code: string
+                        state: string
+                    }
+                }
+                samsung_pay: {}
+                type: string
+                visa_checkout: {
+                    billing_address: {
+                        city: string
+                        country: string
+                        line1: string
+                        line2: string
+                        postal_code: string
+                        state: string
+                    }
+                    email: string
+                    name: string
+                    shipping_address: {
+                        city: string
+                        country: string
+                        line1: string
+                        line2: string
+                        postal_code: string
+                        state: string
+                    }
+                }
+            }
+        }
+        card_present: {
+            brand: string
+            cardholder_name: string
+            country: string
+            emv_auth_data: string
+            exp_month: number
+            exp_year: number
+            fingerprint: string
+            funding: string
+            generated_card: string
+            last4: string
+            network: string
+            preferred_locales: [string]
+            read_method: string
+            receipt: {
+                account_type: string
+                application_cryptogram: string
+                application_preferred_name: string
+                authorization_code: string
+                authorization_response_code: string
+                cardholder_verification_method: string
+                dedicated_file_name: string
+                terminal_verification_results: string
+                transaction_status_information: string
+            }
+        }
+        eps: {
+            bank: string
+            verified_name: string
+        }
+        fpx: {
+            bank: string
+            transaction_id: string
+        }
+        giropay: {
+            bank_code: string
+            bank_name: string
+            bic: string
+            verified_name: string
+        }
+        grabpay: {
+            transaction_id: string
+        }
+        ideal: {
+            bank: string
+            bic: string
+            generated_sepa_debit: string
+            generated_sepa_debit_mandate: string
+            iban_last4: string
+            verified_name: string
+        }
+        interac_present: {
+            brand: string
+            cardholder_name: string
+            country: string
+            emv_auth_data: string
+            exp_month: number
+            exp_year: number
+            fingerprint: string
+            funding: string
+            generated_card: string
+            last4: string
+            network: string
+            preferred_locales: [string]
+            read_method: string
+            receipt: {
+                account_type: string
+                application_cryptogram: string
+                application_preferred_name: string
+                authorization_code: string
+                authorization_response_code: string
+                cardholder_verification_method: string
+                dedicated_file_name: string
+                terminal_verification_results: string
+                transaction_status_information: string
+            }
+        }
+        klarna: {}
+        multibanco: {
+            entity: string
+            reference: string
+        }
+        oxxo: {
+            number: string
+        }
+        p24: {
+            bank: string
+            reference: string
+            verified_name: string
+        }
+        sepa_debit: {
+            bank_code: string
+            branch_code: string
+            country: string
+            fingerprint: string
+            last4: string
+            mandate: string   
+        }
+        sofort: {
+            bank_code: string
+            bank_name: string
+            bic: string
+            country: string
+            generated_sepa_debit: string
+            generated_sepa_debit_mandate: string
+            iban_last4: string
+            preferred_language: string
+        }
+        stripe_account: {}
+        type: string
+        wechat: {}
+    }
     receipt_email: string
     refunded: boolean
     shipping: {
