@@ -1,0 +1,11 @@
+name = "workers"
+type = "javascript"
+account_id = ""
+workers_dev = true
+route = ""
+zone_id = ""
+
+[build]
+command = "npm install && npm run build"
+[build.upload]
+format = "service-worker"
