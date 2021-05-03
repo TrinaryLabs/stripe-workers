@@ -1,5 +1,6 @@
 import qs from 'qs'
 import { CheckoutSessionsResponse } from '../../types'
+import { returnToHeaders } from '../../util'
 export namespace checkout {
     export let client: Function
     export namespace sessions {
@@ -120,12 +121,13 @@ export namespace checkout {
                     trial_period_days?: number
                 }
             },
-            stripeAccount?: string,
+            settings?: {
+                stripeAccount?: string,
+                idempotencyKey?: string 
+            },
         ): Promise<CheckoutSessionsResponse> {
             return client('/checkout/sessions', params, 'POST', {
-                headers: stripeAccount
-                    ? { 'Stripe-Account': stripeAccount }
-                    : {},
+                headers: returnToHeaders(settings)
             })
         }
 
@@ -134,9 +136,7 @@ export namespace checkout {
             stripeAccount?: string,
         ): Promise<CheckoutSessionsResponse> {
             return client(`/checkout/sessions/${id}`, {}, 'GET', {
-                headers: stripeAccount
-                    ? { 'Stripe-Account': stripeAccount }
-                    : {},
+                headers: returnToHeaders({stripeAccount})
             })
         }
 
@@ -160,9 +160,7 @@ export namespace checkout {
                 {},
                 'GET',
                 {
-                    headers: stripeAccount
-                        ? { 'Stripe-Account': stripeAccount }
-                        : {},
+                    headers: returnToHeaders({stripeAccount})
                 },
             )
         }
@@ -186,9 +184,7 @@ export namespace checkout {
                 {},
                 'GET',
                 {
-                    headers: stripeAccount
-                        ? { 'Stripe-Account': stripeAccount }
-                        : {},
+                    headers: returnToHeaders({stripeAccount})
                 },
             )
         }

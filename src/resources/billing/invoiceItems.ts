@@ -1,5 +1,6 @@
 import qs from 'qs'
 import { InvoiceItemsResponse } from '../../types'
+import { returnToHeaders } from '../../util'
 
 export namespace invoiceItems {
     export let client: Function
@@ -35,10 +36,13 @@ export namespace invoiceItems {
             unit_amount?: number
             unit_amount_decimal?: number
         },
-        stripeAccount?: string,
+        settings?: {
+            stripeAccount?: string,
+            idempotencyKey?: string 
+        },
     ): Promise<InvoiceItemsResponse> {
         return client(`/invoiceitems`, params, 'POST', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders(settings),
         })
     }
 
@@ -47,7 +51,7 @@ export namespace invoiceItems {
         stripeAccount?: string,
     ): Promise<InvoiceItemsResponse> {
         return client(`/invoiceitems/${id}`, {}, 'GET', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders({stripeAccount}),
         })
     }
 
@@ -75,10 +79,13 @@ export namespace invoiceItems {
             unit_amount?: number
             unit_amount_decimal?: number
         },
-        stripeAccount?: string,
+        settings?: {
+            stripeAccount?: string,
+            idempotencyKey?: string 
+        },
     ): Promise<InvoiceItemsResponse> {
         return client(`/invoiceitems/${id}`, params, 'POST', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders(settings),
         })
     }
 
@@ -91,7 +98,7 @@ export namespace invoiceItems {
         deleted: boolean
     }> {
         return client(`/invoiceitems/${id}`, {}, 'DELETE', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders({stripeAccount}),
         })
     }
 
@@ -113,7 +120,7 @@ export namespace invoiceItems {
         data: [InvoiceItemsResponse]
     }> {
         return client(`/invoiceitems?${qs.stringify(params)}`, {}, 'GET', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders({stripeAccount}),
         })
     }
 }

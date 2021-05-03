@@ -1,5 +1,6 @@
 import qs from 'qs'
 import { TransfersResponse, TransfersReversalResponse } from '../../types'
+import { returnToHeaders } from '../../util'
 export namespace transfers {
     export let client: Function
 
@@ -14,10 +15,13 @@ export namespace transfers {
             source_type?: string
             transfer_group?: string
         },
-        stripeAccount?: string,
+        settings?: {
+            stripeAccount?: string,
+            idempotencyKey?: string 
+        },
     ): Promise<TransfersResponse> {
         return client(`/transfers`, params, 'POST', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders(settings),
         })
     }
 
@@ -26,7 +30,7 @@ export namespace transfers {
         stripeAccount?: string,
     ): Promise<TransfersResponse> {
         return client(`/transfers/${id}`, {}, 'GET', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders({stripeAccount}),
         })
     }
 
@@ -36,10 +40,13 @@ export namespace transfers {
             description?: string
             metadata?: object
         },
-        stripeAccount?: string,
+        settings?: {
+            stripeAccount?: string,
+            idempotencyKey?: string 
+        },
     ): Promise<TransfersResponse> {
         return client(`/transfers/${id}`, params, 'POST', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders(settings),
         })
     }
 
@@ -65,7 +72,7 @@ export namespace transfers {
         data: [TransfersResponse]
     }> {
         return client(`/topups?${qs.stringify(params)}`, {}, 'GET', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders({stripeAccount}),
         })
     }
 
@@ -77,10 +84,13 @@ export namespace transfers {
             metadata?: object
             refund_application_fee?: boolean
         },
-        stripeAccount?: string,
+        settings?: {
+            stripeAccount?: string,
+            idempotencyKey?: string 
+        },
     ): Promise<TransfersReversalResponse> {
         return client(`/transfers/${id}/reversals`, params, 'POST', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders(settings),
         })
     }
 
@@ -90,7 +100,7 @@ export namespace transfers {
         stripeAccount?: string,
     ): Promise<TransfersReversalResponse> {
         return client(`/transfers/${id}/reversals/${rever_id}`, {}, 'GET', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders({stripeAccount}),
         })
     }
 
@@ -100,16 +110,17 @@ export namespace transfers {
         params: {
             metadata?: object
         },
-        stripeAccount?: string,
+        settings?: {
+            stripeAccount?: string,
+            idempotencyKey?: string 
+        },
     ): Promise<TransfersReversalResponse> {
         return client(
             `/transfers/${id}/reversals/${rever_id}`,
             params,
             'POST',
             {
-                headers: stripeAccount
-                    ? { 'Stripe-Account': stripeAccount }
-                    : {},
+                headers: returnToHeaders(settings),
             },
         )
     }
@@ -133,9 +144,7 @@ export namespace transfers {
             {},
             'GET',
             {
-                headers: stripeAccount
-                    ? { 'Stripe-Account': stripeAccount }
-                    : {},
+                headers: returnToHeaders({stripeAccount}),
             },
         )
     }

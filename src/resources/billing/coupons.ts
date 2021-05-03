@@ -1,5 +1,6 @@
 import qs from 'qs'
 import { CouponsResponse } from '../../types'
+import { returnToHeaders } from '../../util'
 export namespace coupons {
     export let client: Function
 
@@ -19,10 +20,13 @@ export namespace coupons {
             max_redemtions?: number
             redeem_by?: number
         },
-        stripeAccount?: string,
+        settings?: {
+            stripeAccount?: string,
+            idempotencyKey?: string 
+        },
     ): Promise<CouponsResponse> {
         return client('/coupons', params, 'POST', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders(settings),
         })
     }
 
@@ -31,7 +35,7 @@ export namespace coupons {
         stripeAccount?: string,
     ): Promise<CouponsResponse> {
         return client(`/coupons/${id}`, {}, 'GET', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders({stripeAccount}),
         })
     }
 
@@ -41,10 +45,13 @@ export namespace coupons {
             metadata?: object
             name?: string
         },
-        stripeAccount?: string,
+        settings?: {
+            stripeAccount?: string,
+            idempotencyKey?: string 
+        },
     ): Promise<CouponsResponse> {
         return client(`/coupons/${id}`, params, 'POST', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders(settings),
         })
     }
 
@@ -57,7 +64,7 @@ export namespace coupons {
         deleted: boolean
     }> {
         return client(`/coupons/${id}`, {}, 'DELETE', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders({stripeAccount}),
         })
     }
 
@@ -76,7 +83,7 @@ export namespace coupons {
         data: [CouponsResponse]
     }> {
         return client(`/coupons?${qs.stringify(params)}`, {}, 'GET', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders({stripeAccount}),
         })
     }
 }

@@ -1,5 +1,6 @@
 import qs from 'qs'
 import { SubscriptionResponse } from '../../types'
+import { returnToHeaders } from '../../util'
 
 export namespace subscriptions {
     export let client: Function
@@ -61,10 +62,13 @@ export namespace subscriptions {
             trial_from_plan?: boolean
             trial_period_days?: number
         },
-        stripeAccount?: string,
+        settings?: {
+            stripeAccount?: string,
+            idempotencyKey?: string 
+        },
     ): Promise<SubscriptionResponse> {
         return client(`/subscriptions`, params, 'POST', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders(settings),
         })
     }
 
@@ -73,7 +77,7 @@ export namespace subscriptions {
         stripeAccount?: string,
     ): Promise<SubscriptionResponse> {
         return client(`/subscriptions/${id}`, {}, 'GET', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders({stripeAccount}),
         })
     }
 
@@ -136,10 +140,13 @@ export namespace subscriptions {
             trial_end?: number
             trial_from_plan?: boolean
         },
-        stripeAccount?: string,
+        settings?: {
+            stripeAccount?: string,
+            idempotencyKey?: string 
+        },
     ): Promise<SubscriptionResponse> {
         return client(`/subscriptions/${id}`, params, 'POST', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders(settings),
         })
     }
 
@@ -152,7 +159,7 @@ export namespace subscriptions {
         stripeAccount?: string,
     ): Promise<SubscriptionResponse> {
         return client(`/subscriptions/${id}`, params, 'DELETE', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders({stripeAccount}),
         })
     }
 
@@ -192,7 +199,7 @@ export namespace subscriptions {
         data: [SubscriptionResponse]
     }> {
         return client(`/subscriptions?${qs.stringify(params)}`, params, 'GET', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders({stripeAccount}),
         })
     }
 
@@ -204,7 +211,7 @@ export namespace subscriptions {
         deleted: boolean
     }> {
         return client(`/subscriptions/${id}/discount`, {}, 'DELETE', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders({stripeAccount}),
         })
     }
 }

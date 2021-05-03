@@ -1,5 +1,6 @@
 import qs from 'qs'
 import { PlansResponse } from '../../types'
+import { returnToHeaders } from '../../util'
 
 export namespace plans {
     export let client: Function
@@ -39,10 +40,13 @@ export namespace plans {
             trial_period_days?: number
             usage_type?: string
         },
-        stripeAccount?: string,
+        settings?: {
+            stripeAccount?: string,
+            idempotencyKey?: string 
+        },
     ): Promise<PlansResponse> {
         return client(`/plans`, params, 'POST', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders(settings),
         })
     }
 
@@ -51,7 +55,7 @@ export namespace plans {
         stripeAccount?: string,
     ): Promise<PlansResponse> {
         return client(`/plans/${id}`, {}, 'GET', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders({stripeAccount}),
         })
     }
 
@@ -70,10 +74,13 @@ export namespace plans {
             metadata?: object
             trial_period_days?: number
         },
-        stripeAccount?: string,
+        settings?: {
+            stripeAccount?: string,
+            idempotencyKey?: string 
+        },
     ): Promise<PlansResponse> {
         return client(`/plans/${id}`, params, 'POST', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders(settings),
         })
     }
 
@@ -86,7 +93,7 @@ export namespace plans {
         deleted: boolean
     }> {
         return client(`/plans/${id}`, {}, 'DELETE', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders({stripeAccount}),
         })
     }
 
@@ -112,7 +119,7 @@ export namespace plans {
         data: [PlansResponse]
     }> {
         return client(`/plans?${qs.stringify(params)}`, {}, 'GET', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders({stripeAccount}),
         })
     }
 }

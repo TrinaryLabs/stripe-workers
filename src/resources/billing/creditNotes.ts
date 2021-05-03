@@ -1,5 +1,6 @@
 import qs from 'qs'
 import { CreditNotesLines, CreditNotesResponse } from '../../types'
+import { returnToHeaders } from '../../util'
 
 export namespace creditNotes {
     export let client: Function
@@ -33,9 +34,7 @@ export namespace creditNotes {
             {},
             'GET',
             {
-                headers: stripeAccount
-                    ? { 'Stripe-Account': stripeAccount }
-                    : {},
+                headers: returnToHeaders({stripeAccount}),
             },
         )
     }
@@ -62,10 +61,13 @@ export namespace creditNotes {
             refund?: string
             refund_amount?: number
         },
-        stripeAccount?: string,
+        settings?: {
+            stripeAccount?: string,
+            idempotencyKey?: string 
+        },
     ): Promise<CreditNotesResponse> {
         return client(`/credit_notes`, params, 'POST', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders(settings),
         })
     }
 
@@ -74,7 +76,7 @@ export namespace creditNotes {
         stripeAccount?: string,
     ): Promise<CreditNotesResponse> {
         return client(`/credit_notes/${id}`, {}, 'GET', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders({stripeAccount}),
         })
     }
 
@@ -84,10 +86,13 @@ export namespace creditNotes {
             memo?: string
             metadata?: object
         },
-        stripeAccount?: string,
+        settings?: {
+            stripeAccount?: string,
+            idempotencyKey?: string 
+        },
     ): Promise<CreditNotesResponse> {
         return client(`/credit_notes/${id}`, params, 'POST', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders(settings),
         })
     }
 
@@ -110,9 +115,7 @@ export namespace creditNotes {
             {},
             'GET',
             {
-                headers: stripeAccount
-                    ? { 'Stripe-Account': stripeAccount }
-                    : {},
+                headers: returnToHeaders({stripeAccount}),
             },
         )
     }
@@ -154,19 +157,20 @@ export namespace creditNotes {
             {},
             'GET',
             {
-                headers: stripeAccount
-                    ? { 'Stripe-Account': stripeAccount }
-                    : {},
+                headers: returnToHeaders({stripeAccount}),
             },
         )
     }
 
     export function voidCreditNote(
         id: string,
-        stripeAccount?: string,
+        settings?: {
+            stripeAccount?: string,
+            idempotencyKey?: string 
+        },
     ): Promise<CreditNotesResponse> {
         return client(`/credit_notes/${id}/void`, {}, 'POST', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders(settings),
         })
     }
 
@@ -185,7 +189,7 @@ export namespace creditNotes {
         data: [CreditNotesResponse]
     }> {
         return client(`/credit_notes?${qs.stringify(params)}`, {}, 'GET', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders({stripeAccount}),
         })
     }
 }

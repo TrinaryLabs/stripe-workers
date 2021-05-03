@@ -1,5 +1,6 @@
 import qs from 'qs'
 import { SubscriptionItemsResponse, UsageRecordsResponse } from '../../types'
+import { returnToHeaders } from '../../util'
 
 export namespace subscriptionItems {
     export let client: Function
@@ -28,10 +29,13 @@ export namespace subscriptionItems {
             proration_date?: number
             tax_rates?: string[]
         },
-        stripeAccount?: string,
+        settings?: {
+            stripeAccount?: string,
+            idempotencyKey?: string 
+        },
     ): Promise<SubscriptionItemsResponse> {
         return client(`/subscription_items`, params, 'POST', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders(settings),
         })
     }
 
@@ -40,7 +44,7 @@ export namespace subscriptionItems {
         stripeAccount?: string,
     ): Promise<SubscriptionItemsResponse> {
         return client(`/subscription_items/${id}`, {}, 'GET', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders({stripeAccount}),
         })
     }
 
@@ -69,10 +73,13 @@ export namespace subscriptionItems {
             proration_date?: number
             tax_rates?: string[]
         },
-        stripeAccount?: string,
+        settings?: {
+            stripeAccount?: string,
+            idempotencyKey?: string 
+        },
     ): Promise<SubscriptionItemsResponse> {
         return client(`/subscription_items/${id}`, params, 'POST', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders(settings),
         })
     }
 
@@ -89,7 +96,7 @@ export namespace subscriptionItems {
         deleted: boolean
     }> {
         return client(`/subscription_items/${id}`, params, 'DELETE', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders({stripeAccount}),
         })
     }
 
@@ -112,9 +119,7 @@ export namespace subscriptionItems {
             {},
             'GET',
             {
-                headers: stripeAccount
-                    ? { 'Stripe-Account': stripeAccount }
-                    : {},
+                headers: returnToHeaders({stripeAccount}),
             },
         )
     }
@@ -126,16 +131,17 @@ export namespace subscriptionItems {
             timestmap: number
             action?: string
         },
-        stripeAccount?: string,
+        settings?: {
+            stripeAccount?: string,
+            idempotencyKey?: string 
+        },
     ): Promise<UsageRecordsResponse> {
         return client(
             `/subscription_items/${id}/usage_records`,
             params,
             'POST',
             {
-                headers: stripeAccount
-                    ? { 'Stripe-Account': stripeAccount }
-                    : {},
+                headers: returnToHeaders(settings),
             },
         )
     }
@@ -161,9 +167,7 @@ export namespace subscriptionItems {
             {},
             'GET',
             {
-                headers: stripeAccount
-                    ? { 'Stripe-Account': stripeAccount }
-                    : {},
+                headers: returnToHeaders({stripeAccount}),
             },
         )
     }

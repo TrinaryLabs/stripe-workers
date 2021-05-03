@@ -1,5 +1,6 @@
 import qs from 'qs'
 import { WebhookEndpointResponse } from '../../types'
+import { returnToHeaders } from '../../util'
 
 export namespace webhookEndpoints {
     export let client: Function
@@ -13,10 +14,13 @@ export namespace webhookEndpoints {
             metadata?: object
             connect?: boolean
         },
-        stripeAccount?: string,
+        settings?: {
+            stripeAccount?: string,
+            idempotencyKey?: string 
+        },
     ): Promise<WebhookEndpointResponse> {
         return client('/webhook_endpoints', params, 'POST', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders(settings),
         })
     }
 
@@ -25,7 +29,7 @@ export namespace webhookEndpoints {
         stripeAccount?: string,
     ): Promise<WebhookEndpointResponse> {
         return client(`/webhook_endpoints/${id}`, {}, 'GET', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders({stripeAccount}),
         })
     }
 
@@ -38,10 +42,13 @@ export namespace webhookEndpoints {
             metadata?: object
             disabled?: boolean
         },
-        stripeAccount?: string,
+        settings?: {
+            stripeAccount?: string,
+            idempotencyKey?: string 
+        },
     ): Promise<WebhookEndpointResponse> {
         return client(`/webhook_endpoints/${id}`, params, 'POST', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders(settings),
         })
     }
 
@@ -59,7 +66,7 @@ export namespace webhookEndpoints {
         data: [WebhookEndpointResponse]
     }> {
         return client(`/webhook_endpoints?${qs.stringify(params)}`, {}, 'GET', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders({stripeAccount}),
         })
     }
 
@@ -72,7 +79,7 @@ export namespace webhookEndpoints {
         deleted: boolean
     }> {
         return client(`/webhook_endpoints/${id}`, {}, 'DELETE', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders({stripeAccount}),
         })
     }
 }
