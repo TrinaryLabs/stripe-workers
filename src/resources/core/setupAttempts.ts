@@ -1,5 +1,6 @@
 import qs from 'qs'
 import { SetupAttenptsResponse } from '../../types'
+import { returnToHeaders } from '../../util'
 
 export namespace setupAttempts {
     export let client: Function
@@ -25,7 +26,7 @@ export namespace setupAttempts {
         data: [SetupAttenptsResponse]
     }> {
         return client(`/setup_attempts?${qs.stringify(params)}`, {}, 'GET', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders({stripeAccount}),
         })
     }
 }

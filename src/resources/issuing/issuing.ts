@@ -6,6 +6,7 @@ import {
     DisputesResponse,
     TransactionsResponse,
 } from '../../types'
+import { returnToHeaders } from '../../util'
 export namespace issuing {
     export let client: Function
     export namespace authorizations {
@@ -14,9 +15,7 @@ export namespace issuing {
             stripeAccount?: string,
         ): Promise<AuthorizationsResponse> {
             return client(`/issuing/authorizations/${id}`, {}, 'GET', {
-                headers: stripeAccount
-                    ? { 'Stripe-Account': stripeAccount }
-                    : {},
+                headers: returnToHeaders({stripeAccount}),
             })
         }
 
@@ -25,12 +24,13 @@ export namespace issuing {
             params: {
                 metadata?: object
             },
-            stripeAccount?: string,
+            settings?: {
+                stripeAccount?: string,
+                idempotencyKey?: string 
+            },
         ): Promise<AuthorizationsResponse> {
             return client(`/issuing/authorizations/${id}`, params, 'POST', {
-                headers: stripeAccount
-                    ? { 'Stripe-Account': stripeAccount }
-                    : {},
+                headers: returnToHeaders(settings),
             })
         }
 
@@ -40,16 +40,17 @@ export namespace issuing {
                 amount?: number
                 metadata?: object
             },
-            stripeAccount?: string,
+            settings?: {
+                stripeAccount?: string,
+                idempotencyKey?: string 
+            },
         ): Promise<AuthorizationsResponse> {
             return client(
                 `/issuing/authorizations/${id}/approve`,
                 params,
                 'POST',
                 {
-                    headers: stripeAccount
-                        ? { 'Stripe-Account': stripeAccount }
-                        : {},
+                    headers: returnToHeaders(settings),
                 },
             )
         }
@@ -59,16 +60,17 @@ export namespace issuing {
             params: {
                 metadata?: object
             },
-            stripeAccount?: string,
+            settings?: {
+                stripeAccount?: string,
+                idempotencyKey?: string 
+            },
         ): Promise<AuthorizationsResponse> {
             return client(
                 `/issuing/authorizations/${id}/decline`,
                 params,
                 'POST',
                 {
-                    headers: stripeAccount
-                        ? { 'Stripe-Account': stripeAccount }
-                        : {},
+                    headers: returnToHeaders(settings),
                 },
             )
         }
@@ -100,9 +102,7 @@ export namespace issuing {
                 {},
                 'GET',
                 {
-                    headers: stripeAccount
-                        ? { 'Stripe-Account': stripeAccount }
-                        : {},
+                    headers: returnToHeaders({stripeAccount}),
                 },
             )
         }
@@ -156,12 +156,13 @@ export namespace issuing {
                 }
                 status?: string
             },
-            stripeAccount?: string,
+            settings?: {
+                stripeAccount?: string,
+                idempotencyKey?: string 
+            },
         ): Promise<CardholdersResponse> {
             return client('/issuing/cardholders', params, 'POST', {
-                headers: stripeAccount
-                    ? { 'Stripe-Account': stripeAccount }
-                    : {},
+                headers: returnToHeaders(settings),
             })
         }
 
@@ -170,9 +171,7 @@ export namespace issuing {
             stripeAccount?: string,
         ): Promise<CardholdersResponse> {
             return client(`/issuing/cardholders/${id}`, {}, 'GET', {
-                headers: stripeAccount
-                    ? { 'Stripe-Account': stripeAccount }
-                    : {},
+                headers: returnToHeaders({stripeAccount}),
             })
         }
 
@@ -222,12 +221,13 @@ export namespace issuing {
                 }
                 status?: string
             },
-            stripeAccount?: string,
+            settings?: {
+                stripeAccount?: string,
+                idempotencyKey?: string 
+            },
         ): Promise<CardholdersResponse> {
             return client(`/issuing/cardholders/${id}`, params, 'POST', {
-                headers: stripeAccount
-                    ? { 'Stripe-Account': stripeAccount }
-                    : {},
+                headers: returnToHeaders(settings),
             })
         }
 
@@ -259,9 +259,7 @@ export namespace issuing {
                 {},
                 'GET',
                 {
-                    headers: stripeAccount
-                        ? { 'Stripe-Account': stripeAccount }
-                        : {},
+                    headers: returnToHeaders({stripeAccount}),
                 },
             )
         }
@@ -301,12 +299,13 @@ export namespace issuing {
                     ]
                 }
             },
-            stripeAccount?: string,
+            settings?: {
+                stripeAccount?: string,
+                idempotencyKey?: string 
+            },
         ): Promise<CardsResponse> {
             return client('/issuing/cards', params, 'POST', {
-                headers: stripeAccount
-                    ? { 'Stripe-Account': stripeAccount }
-                    : {},
+                headers: returnToHeaders(settings),
             })
         }
 
@@ -315,9 +314,7 @@ export namespace issuing {
             stripeAccount?: string,
         ): Promise<CardsResponse> {
             return client(`/issuing/cards/${id}`, {}, 'GET', {
-                headers: stripeAccount
-                    ? { 'Stripe-Account': stripeAccount }
-                    : {},
+                headers: returnToHeaders({stripeAccount}),
             })
         }
 
@@ -340,12 +337,13 @@ export namespace issuing {
                     spending_limits_currency?: string
                 }
             },
-            stripeAccount?: string,
+            settings?: {
+                stripeAccount?: string,
+                idempotencyKey?: string 
+            },
         ): Promise<CardsResponse> {
             return client(`/issuing/cards/${id}`, params, 'POST', {
-                headers: stripeAccount
-                    ? { 'Stripe-Account': stripeAccount }
-                    : {},
+                headers: returnToHeaders(settings),
             })
         }
 
@@ -375,9 +373,7 @@ export namespace issuing {
             data: [CardsResponse]
         }> {
             return client(`/issuing/cards?${qs.stringify(params)}`, {}, 'GET', {
-                headers: stripeAccount
-                    ? { 'Stripe-Account': stripeAccount }
-                    : {},
+                headers: returnToHeaders({stripeAccount}),
             })
         }
     }
@@ -442,12 +438,13 @@ export namespace issuing {
                 }
                 metadata?: object
             },
-            stripeAccount?: string,
+            settings?: {
+                stripeAccount?: string,
+                idempotencyKey?: string 
+            },
         ): Promise<DisputesResponse> {
             return client('/issuing/disputes', params, 'POST', {
-                headers: stripeAccount
-                    ? { 'Stripe-Account': stripeAccount }
-                    : {},
+                headers: returnToHeaders(settings),
             })
         }
 
@@ -456,12 +453,13 @@ export namespace issuing {
             params: {
                 metadata?: object
             },
-            stripeAccount?: string,
+            settings?: {
+                stripeAccount?: string,
+                idempotencyKey?: string 
+            },
         ): Promise<DisputesResponse> {
             return client(`/issuing/disputes/${id}/submit`, params, 'POST', {
-                headers: stripeAccount
-                    ? { 'Stripe-Account': stripeAccount }
-                    : {},
+                headers: returnToHeaders(settings),
             })
         }
 
@@ -470,9 +468,7 @@ export namespace issuing {
             stripeAccount?: string,
         ): Promise<DisputesResponse> {
             return client(`/issuing/disputes/${id}`, {}, 'GET', {
-                headers: stripeAccount
-                    ? { 'Stripe-Account': stripeAccount }
-                    : {},
+                headers: returnToHeaders({stripeAccount}),
             })
         }
 
@@ -535,12 +531,13 @@ export namespace issuing {
                 }
                 metadata?: object
             },
-            stripeAccount?: string,
+            settings?: {
+                stripeAccount?: string,
+                idempotencyKey?: string 
+            },
         ): Promise<DisputesResponse> {
             return client(`/issuing/disputes/${id}`, params, 'POST', {
-                headers: stripeAccount
-                    ? { 'Stripe-Account': stripeAccount }
-                    : {},
+                headers: returnToHeaders(settings),
             })
         }
 
@@ -570,9 +567,7 @@ export namespace issuing {
                 {},
                 'GET',
                 {
-                    headers: stripeAccount
-                        ? { 'Stripe-Account': stripeAccount }
-                        : {},
+                    headers: returnToHeaders({stripeAccount}),
                 },
             )
         }
@@ -584,9 +579,7 @@ export namespace issuing {
             stripeAccount?: string,
         ): Promise<TransactionsResponse> {
             return client(`/issuing/transactions/${id}`, {}, 'GET', {
-                headers: stripeAccount
-                    ? { 'Stripe-Account': stripeAccount }
-                    : {},
+                headers: returnToHeaders({stripeAccount}),
             })
         }
 
@@ -595,12 +588,13 @@ export namespace issuing {
             params: {
                 metadata?: object
             },
-            stripeAccount?: string,
+            settings?: {
+                stripeAccount?: string,
+                idempotencyKey?: string 
+            },
         ): Promise<TransactionsResponse> {
             return client(`/issuing/transactions/${id}`, params, 'POST', {
-                headers: stripeAccount
-                    ? { 'Stripe-Account': stripeAccount }
-                    : {},
+                headers: returnToHeaders(settings),
             })
         }
 
@@ -631,9 +625,7 @@ export namespace issuing {
                 {},
                 'GET',
                 {
-                    headers: stripeAccount
-                        ? { 'Stripe-Account': stripeAccount }
-                        : {},
+                    headers: returnToHeaders({stripeAccount}),
                 },
             )
         }

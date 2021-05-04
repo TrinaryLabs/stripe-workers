@@ -1,5 +1,6 @@
 import qs from 'qs'
 import { PayoutsResponse } from '../../types'
+import { returnToHeaders } from '../../util'
 
 export namespace payouts {
     export let client: Function
@@ -15,10 +16,13 @@ export namespace payouts {
             method?: string
             source_type?: string
         },
-        stripeAccount?: string,
+        settings?: {
+            stripeAccount?: string,
+            idempotencyKey?: string 
+        },
     ): Promise<PayoutsResponse> {
         return client('/payouts', params, 'POST', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders(settings),
         })
     }
 
@@ -27,7 +31,7 @@ export namespace payouts {
         stripeAccount?: string,
     ): Promise<PayoutsResponse> {
         return client(`/payouts/${id}`, {}, 'GET', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders({stripeAccount}),
         })
     }
 
@@ -36,10 +40,13 @@ export namespace payouts {
         params: {
             metadata?: object
         },
-        stripeAccount?: string,
+        settings?: {
+            stripeAccount?: string,
+            idempotencyKey?: string 
+        },
     ): Promise<PayoutsResponse> {
         return client(`/payouts/${id}`, params, 'POST', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders(settings),
         })
     }
 
@@ -71,16 +78,19 @@ export namespace payouts {
         data: [PayoutsResponse]
     }> {
         return client(`/payouts?${qs.stringify(params)}`, {}, 'GET', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders({stripeAccount}),
         })
     }
 
     export function cancel(
         id: string,
-        stripeAccount?: string,
+        settings?: {
+            stripeAccount?: string,
+            idempotencyKey?: string 
+        },
     ): Promise<PayoutsResponse> {
         return client(`/payouts/${id}/cancel`, {}, 'POST', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders(settings),
         })
     }
 
@@ -89,10 +99,13 @@ export namespace payouts {
         params: {
             metadata?: object
         },
-        stripeAccount?: string,
+        settings?: {
+            stripeAccount?: string,
+            idempotencyKey?: string 
+        },
     ): Promise<PayoutsResponse> {
         return client(`/payouts/${id}/reverse`, params, 'POST', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders(settings),
         })
     }
 }

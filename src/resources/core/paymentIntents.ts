@@ -1,5 +1,6 @@
 import qs from 'qs'
 import { PaymentIntentsResponse } from '../../types'
+import { returnToHeaders } from '../../util'
 
 export namespace paymentIntents {
     export let client: Function
@@ -153,10 +154,13 @@ export namespace paymentIntents {
             transfer_group?: string
             use_stripe_sdk?: boolean
         },
-        stripeAccount?: string,
+        settings?: {
+            stripeAccount?: string,
+            idempotencyKey?: string 
+        },
     ): Promise<PaymentIntentsResponse> {
         return client('/payment_intents', params, 'POST', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders(settings),
         })
     }
 
@@ -172,9 +176,7 @@ export namespace paymentIntents {
             {},
             'GET',
             {
-                headers: stripeAccount
-                    ? { 'Stripe-Account': stripeAccount }
-                    : {},
+                headers: returnToHeaders({stripeAccount}),
             },
         )
     }
@@ -329,10 +331,13 @@ export namespace paymentIntents {
             transfer_group?: string
             use_stripe_sdk?: boolean
         },
-        stripeAccount?: string,
+        settings?: {
+            stripeAccount?: string,
+            idempotencyKey?: string 
+        },
     ): Promise<PaymentIntentsResponse> {
         return client(`/payment_intents/${id}`, params, 'POST', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders(settings),
         })
     }
 
@@ -469,10 +474,13 @@ export namespace paymentIntents {
             return_url?: string
             use_stripe_sdk?: boolean
         },
-        stripeAccount?: string,
+        settings?: {
+            stripeAccount?: string,
+            idempotencyKey?: string 
+        },
     ): Promise<PaymentIntentsResponse> {
         return client(`/payment_intents/${id}/confirm`, params, 'POST', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders(settings),
         })
     }
 
@@ -487,10 +495,13 @@ export namespace paymentIntents {
                 amount?: number
             }
         },
-        stripeAccount?: string,
+        settings?: {
+            stripeAccount?: string,
+            idempotencyKey?: string 
+        },
     ): Promise<PaymentIntentsResponse> {
         return client(`/payment_intents/${id}/capture`, params, 'POST', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders(settings),
         })
     }
 
@@ -499,10 +510,13 @@ export namespace paymentIntents {
         params?: {
             cancellation_reason?: string
         },
-        stripeAccount?: string,
+        settings?: {
+            stripeAccount?: string,
+            idempotencyKey?: string 
+        },
     ): Promise<PaymentIntentsResponse> {
         return client(`/payment_intents/${id}/confirm`, params, 'POST', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders(settings),
         })
     }
 
@@ -531,9 +545,7 @@ export namespace paymentIntents {
             params,
             'GET',
             {
-                headers: stripeAccount
-                    ? { 'Stripe-Account': stripeAccount }
-                    : {},
+                headers: returnToHeaders({stripeAccount}),
             },
         )
     }

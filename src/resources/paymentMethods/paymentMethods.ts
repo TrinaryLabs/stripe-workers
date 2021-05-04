@@ -1,5 +1,6 @@
 import qs from 'qs'
 import { PaymentMethodsResponse } from '../../types'
+import { returnToHeaders } from '../../util'
 export namespace paymentMethods {
     export let client: Function
 
@@ -65,10 +66,13 @@ export namespace paymentMethods {
                 country: string
             }
         },
-        stripeAccount?: string,
+        settings?: {
+            stripeAccount?: string,
+            idempotencyKey?: string 
+        },
     ): Promise<PaymentMethodsResponse> {
         return client('/payment_methods', params, 'POST', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders(settings),
         })
     }
 
@@ -77,7 +81,7 @@ export namespace paymentMethods {
         stripeAccount?: string,
     ): Promise<PaymentMethodsResponse> {
         return client(`/payment_methods/${id}`, {}, 'GET', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders({stripeAccount}),
         })
     }
 
@@ -103,10 +107,13 @@ export namespace paymentMethods {
                 exp_year?: number
             }
         },
-        stripeAccount?: string,
+        settings?: {
+            stripeAccount?: string,
+            idempotencyKey?: string 
+        },
     ): Promise<PaymentMethodsResponse> {
         return client(`/payment_methods/${id}`, params, 'POST', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders(settings),
         })
     }
 
@@ -126,7 +133,7 @@ export namespace paymentMethods {
         data: [PaymentMethodsResponse]
     }> {
         return client(`/payment_methods?${qs.stringify(params)}`, {}, 'GET', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders({stripeAccount}),
         })
     }
 
@@ -135,19 +142,25 @@ export namespace paymentMethods {
         params: {
             customer: string
         },
-        stripeAccount?: string,
+        settings?: {
+            stripeAccount?: string,
+            idempotencyKey?: string 
+        },
     ): Promise<PaymentMethodsResponse> {
         return client(`/payment_methods/${id}/attach`, params, 'POST', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders(settings),
         })
     }
 
     export function detach(
         id: string,
-        stripeAccount?: string,
+        settings?: {
+            stripeAccount?: string,
+            idempotencyKey?: string 
+        },
     ): Promise<PaymentMethodsResponse> {
         return client(`/payment_methods/${id}/detach`, {}, 'POST', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders(settings),
         })
     }
 }

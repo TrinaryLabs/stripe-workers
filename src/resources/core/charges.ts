@@ -1,5 +1,6 @@
 import qs from 'qs'
 import { ChargesResponse } from '../../types'
+import { returnToHeaders } from '../../util'
 
 export namespace charges {
     export let client: Function
@@ -38,10 +39,13 @@ export namespace charges {
             }
             transfer_group?: string
         },
-        stripeAccount?: string,
+        settings?: {
+            stripeAccount?: string,
+            idempotencyKey?: string 
+        },
     ): Promise<ChargesResponse> {
         return client(`/charges`, params, 'POST', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders(settings),
         })
     }
 
@@ -50,7 +54,7 @@ export namespace charges {
         stripeAccount?: string,
     ): Promise<ChargesResponse> {
         return client(`/charges/${id}`, {}, 'GET', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders({stripeAccount}),
         })
     }
 
@@ -80,10 +84,13 @@ export namespace charges {
             }
             transfer_group?: string
         },
-        stripeAccount?: string,
+        settings?: {
+            stripeAccount?: string,
+            idempotencyKey?: string 
+        },
     ): Promise<ChargesResponse> {
         return client(`/charges/${id}`, params, 'POST', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders(settings),
         })
     }
 
@@ -100,10 +107,13 @@ export namespace charges {
             }
             transfer_group?: string
         },
-        stripeAccount?: string,
+        settings?: {
+            stripeAccount?: string,
+            idempotencyKey?: string 
+        },
     ): Promise<ChargesResponse> {
         return client(`/charges/${id}/capture`, params, 'POST', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders(settings),
         })
     }
 
@@ -130,7 +140,7 @@ export namespace charges {
         data: [ChargesResponse]
     }> {
         return client(`/charges?${qs.stringify(params)}`, {}, 'GET', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders({stripeAccount}),
         })
     }
 }

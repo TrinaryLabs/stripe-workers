@@ -1,5 +1,6 @@
 import qs from 'qs'
 import { LocationsResponse, ReadersResponse } from '../../types'
+import { returnToHeaders } from '../../util'
 
 export namespace terminal {
     export let client: Function
@@ -8,15 +9,16 @@ export namespace terminal {
             params?: {
                 location?: string
             },
-            stripeAccount?: string,
+            settings?: {
+                stripeAccount?: string,
+                idempotencyKey?: string 
+            },
         ): Promise<{
             object: string
             secret: string
         }> {
             return client('/terminal/connection_tokens', params, 'POST', {
-                headers: stripeAccount
-                    ? { 'Stripe-Account': stripeAccount }
-                    : {},
+                headers: returnToHeaders(settings),
             })
         }
     }
@@ -35,12 +37,13 @@ export namespace terminal {
                 display_name: string
                 metadata?: object
             },
-            stripeAccount?: string,
+            settings?: {
+                stripeAccount?: string,
+                idempotencyKey?: string 
+            },
         ): Promise<LocationsResponse> {
             return client('/terminal/locations', params, 'POST', {
-                headers: stripeAccount
-                    ? { 'Stripe-Account': stripeAccount }
-                    : {},
+                headers: returnToHeaders(settings),
             })
         }
 
@@ -49,9 +52,7 @@ export namespace terminal {
             stripeAccount?: string,
         ): Promise<LocationsResponse> {
             return client(`/terminal/locations/${id}`, {}, 'GET', {
-                headers: stripeAccount
-                    ? { 'Stripe-Account': stripeAccount }
-                    : {},
+                headers: returnToHeaders({stripeAccount}),
             })
         }
 
@@ -69,12 +70,13 @@ export namespace terminal {
                 display_name?: string
                 metadata?: object
             },
-            stripeAccount?: string,
+            settings?: {
+                stripeAccount?: string,
+                idempotencyKey?: string 
+            },
         ): Promise<LocationsResponse> {
             return client(`/terminal/locations/${id}`, params, 'POST', {
-                headers: stripeAccount
-                    ? { 'Stripe-Account': stripeAccount }
-                    : {},
+                headers: returnToHeaders(settings),
             })
         }
 
@@ -87,9 +89,7 @@ export namespace terminal {
             deleted: boolean
         }> {
             return client(`/terminal/locations/${id}`, {}, 'DELETE', {
-                headers: stripeAccount
-                    ? { 'Stripe-Account': stripeAccount }
-                    : {},
+                headers: returnToHeaders({stripeAccount}),
             })
         }
 
@@ -111,9 +111,7 @@ export namespace terminal {
                 {},
                 'GET',
                 {
-                    headers: stripeAccount
-                        ? { 'Stripe-Account': stripeAccount }
-                        : {},
+                    headers: returnToHeaders({stripeAccount}),
                 },
             )
         }
@@ -127,12 +125,13 @@ export namespace terminal {
                 location?: string
                 metadata?: object
             },
-            stripeAccount?: string,
+            settings?: {
+                stripeAccount?: string,
+                idempotencyKey?: string 
+            },
         ): Promise<ReadersResponse> {
             return client('/terminal/readers', params, 'POST', {
-                headers: stripeAccount
-                    ? { 'Stripe-Account': stripeAccount }
-                    : {},
+                headers: returnToHeaders(settings),
             })
         }
 
@@ -141,9 +140,7 @@ export namespace terminal {
             stripeAccount?: string,
         ): Promise<ReadersResponse> {
             return client(`/terminal/readers/${id}`, {}, 'GET', {
-                headers: stripeAccount
-                    ? { 'Stripe-Account': stripeAccount }
-                    : {},
+                headers: returnToHeaders({stripeAccount}),
             })
         }
 
@@ -153,12 +150,13 @@ export namespace terminal {
                 label?: string
                 metadata?: object
             },
-            stripeAccount?: string,
+            settings?: {
+                stripeAccount?: string,
+                idempotencyKey?: string 
+            },
         ): Promise<ReadersResponse> {
             return client(`/terminal/readers/${id}`, params, 'POST', {
-                headers: stripeAccount
-                    ? { 'Stripe-Account': stripeAccount }
-                    : {},
+                headers: returnToHeaders(settings),
             })
         }
 
@@ -171,9 +169,7 @@ export namespace terminal {
             deleted: boolean
         }> {
             return client(`/terminal/readers/${id}`, {}, 'DELETE', {
-                headers: stripeAccount
-                    ? { 'Stripe-Account': stripeAccount }
-                    : {},
+                headers: returnToHeaders({stripeAccount}),
             })
         }
 
@@ -198,9 +194,7 @@ export namespace terminal {
                 {},
                 'GET',
                 {
-                    headers: stripeAccount
-                        ? { 'Stripe-Account': stripeAccount }
-                        : {},
+                    headers: returnToHeaders({stripeAccount}),
                 },
             )
         }

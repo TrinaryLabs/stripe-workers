@@ -1,5 +1,6 @@
 import qs from 'qs'
 import { ProductsResponse } from '../../types'
+import { returnToHeaders } from '../../util'
 
 export namespace products {
     export let client: Function
@@ -26,10 +27,13 @@ export namespace products {
             unit_label?: string
             url?: string
         },
-        stripeAccount?: string,
+        settings?: {
+            stripeAccount?: string,
+            idempotencyKey?: string 
+        },
     ): Promise<ProductsResponse> {
         return client('/products', params, 'POST', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders(settings),
         })
     }
 
@@ -38,7 +42,7 @@ export namespace products {
         stripeAccount?: string,
     ): Promise<ProductsResponse> {
         return client(`/products/${id}`, {}, 'GET', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders({stripeAccount}),
         })
     }
 
@@ -64,10 +68,13 @@ export namespace products {
             unit_label?: string
             url?: string
         },
-        stripeAccount?: string,
+        settings?: {
+            stripeAccount?: string,
+            idempotencyKey?: string 
+        },
     ): Promise<ProductsResponse> {
         return client(`/products/${id}`, params, 'POST', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders(settings),
         })
     }
 
@@ -95,7 +102,7 @@ export namespace products {
         data: [ProductsResponse]
     }> {
         return client(`/products?${qs.stringify(params)}`, {}, 'GET', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders({stripeAccount}),
         })
     }
 
@@ -104,7 +111,7 @@ export namespace products {
         stripeAccount?: string,
     ): Promise<ProductsResponse> {
         return client(`/products/${id}`, {}, 'DELETE', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders({stripeAccount}),
         })
     }
 }

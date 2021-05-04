@@ -1,5 +1,6 @@
 import qs from 'qs'
 import { DisputesResponse } from '../../types'
+import { returnToHeaders } from '../../util'
 export namespace disputes {
     export let client: Function
 
@@ -47,19 +48,25 @@ export namespace disputes {
             metadata?: object
             submit?: boolean
         },
-        stripeAccount?: string,
+        settings?: {
+            stripeAccount?: string,
+            idempotencyKey?: string 
+        },
     ): Promise<DisputesResponse> {
         return client(`/disputes/${id}`, params, 'POST', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders(settings),
         })
     }
 
     export function close(
         id: string,
-        stripeAccount?: string,
+        settings?: {
+            stripeAccount?: string,
+            idempotencyKey?: string 
+        },
     ): Promise<DisputesResponse> {
         return client(`/disputes/${id}/close`, {}, 'POST', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders(settings),
         })
     }
 
@@ -85,7 +92,7 @@ export namespace disputes {
         data: [DisputesResponse]
     }> {
         return client(`/disputes?${qs.stringify(params)}`, params, 'GET', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders({stripeAccount}),
         })
     }
 }

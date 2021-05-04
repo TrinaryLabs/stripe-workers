@@ -1,5 +1,6 @@
 import qs from 'qs'
 import { EventRetrieveResponse } from '../../types'
+import { returnToHeaders } from '../../util'
 export namespace events {
     export let client: Function
 
@@ -8,7 +9,7 @@ export namespace events {
         stripeAccount?: string,
     ): Promise<EventRetrieveResponse> {
         return client(`/events/${id}`, {}, 'GET', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders({stripeAccount}),
         })
     }
 
@@ -35,7 +36,7 @@ export namespace events {
         data: [EventRetrieveResponse]
     }> {
         return client(`/events?${qs.stringify(params)}`, params, 'GET', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders({stripeAccount}),
         })
     }
 }

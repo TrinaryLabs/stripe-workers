@@ -7,6 +7,7 @@ import {
     CustomerBalanceTransactionResponse,
     TaxIDsResponse,
 } from '../../types'
+import { returnToHeaders } from '../../util'
 export namespace customers {
     export let client: Function
 
@@ -62,10 +63,13 @@ export namespace customers {
                 }
             ]
         },
-        stripeAccount?: string,
+        settings?: {
+            stripeAccount?: string,
+            idempotencyKey?: string 
+        },
     ): Promise<CustomersResponse> {
         return client('/customers', params, 'POST', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders(settings),
         })
     }
 
@@ -74,7 +78,7 @@ export namespace customers {
         stripeAccount?: string,
     ): Promise<CustomersResponse> {
         return client(`/customers/${id}`, {}, 'GET', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders({stripeAccount}),
         })
     }
 
@@ -125,10 +129,13 @@ export namespace customers {
             source?: any
             tax_exempt?: string
         },
-        stripeAccount?: string,
+        settings?: {
+            stripeAccount?: string,
+            idempotencyKey?: string 
+        },
     ): Promise<CustomersResponse> {
         return client(`/customers/${id}`, params, 'POST', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders(settings),
         })
     }
 
@@ -141,7 +148,7 @@ export namespace customers {
         deleted: boolean
     }> {
         return client(`/customers/${id}`, {}, 'DELETE', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders({stripeAccount}),
         })
     }
 
@@ -166,7 +173,7 @@ export namespace customers {
         data: [CustomersResponse]
     }> {
         return client(`/customers?${qs.stringify(params)}`, {}, 'GET', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders({stripeAccount}),
         })
     }
 
@@ -176,10 +183,13 @@ export namespace customers {
             source: any
             metadata?: object
         },
-        stripeAccount?: string,
+        settings?: {
+            stripeAccount?: string,
+            idempotencyKey?: string 
+        },
     ): Promise<SourcesResponse | CardSourceResponse | BankAccountResponse> {
         return client(`/customers/${cus_id}/sources`, params, 'POST', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders(settings),
         })
     }
 
@@ -189,7 +199,7 @@ export namespace customers {
         stripeAccount?: string,
     ): Promise<CardSourceResponse | BankAccountResponse> {
         return client(`/customers/${cus_id}/sources/${id}`, {}, 'GET', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders({stripeAccount}),
         })
     }
 
@@ -209,10 +219,13 @@ export namespace customers {
             name?: string
             metadata?: object
         },
-        stripeAccount?: string,
+        settings?: {
+            stripeAccount?: string,
+            idempotencyKey?: string 
+        },
     ): Promise<CardSourceResponse | BankAccountResponse> {
         return client(`/customers/${cus_id}/sources/${id}`, params, 'POST', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders(settings),
         })
     }
 
@@ -224,16 +237,17 @@ export namespace customers {
             account_holder_type?: string
             metadata?: object
         },
-        stripeAccount?: string,
+        settings?: {
+            stripeAccount?: string,
+            idempotencyKey?: string 
+        },
     ): Promise<BankAccountResponse> {
         return client(
             `/customers/${cus_id}/sources/${ba_id}/verify`,
             params,
             'POST',
             {
-                headers: stripeAccount
-                    ? { 'Stripe-Account': stripeAccount }
-                    : {},
+                headers: returnToHeaders(settings),
             },
         )
     }
@@ -251,14 +265,14 @@ export namespace customers {
           }
     > {
         return client(`/customers/${cus_id}/sources/${id}`, {}, 'DELETE', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders({stripeAccount}),
         })
     }
 
     export function listSource(
         cus_id: string,
         params?: {
-            object: string // bank_account or card
+            object: string
             ending_before?: string
             limit?: number
             starting_after?: string
@@ -275,9 +289,7 @@ export namespace customers {
             {},
             'GET',
             {
-                headers: stripeAccount
-                    ? { 'Stripe-Account': stripeAccount }
-                    : {},
+                headers: returnToHeaders({stripeAccount}),
             },
         )
     }
@@ -290,10 +302,13 @@ export namespace customers {
             description?: string
             metadata?: object
         },
-        stripeAccount?: string,
+        settings?: {
+            stripeAccount?: string,
+            idempotencyKey?: string 
+        },
     ): Promise<CustomerBalanceTransactionResponse> {
         return client(`/customers/${id}/balance_transactions`, params, 'POST', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders(settings),
         })
     }
 
@@ -307,9 +322,7 @@ export namespace customers {
             {},
             'GET',
             {
-                headers: stripeAccount
-                    ? { 'Stripe-Account': stripeAccount }
-                    : {},
+                headers: returnToHeaders({stripeAccount}),
             },
         )
     }
@@ -321,16 +334,17 @@ export namespace customers {
             description?: string
             metadata?: object
         },
-        stripeAccount?: string,
+        settings?: {
+            stripeAccount?: string,
+            idempotencyKey?: string 
+        },
     ): Promise<CustomerBalanceTransactionResponse> {
         return client(
             `/customers/${id}/balance_transactions/${tra_id}`,
             params,
             'POST',
             {
-                headers: stripeAccount
-                    ? { 'Stripe-Account': stripeAccount }
-                    : {},
+                headers: returnToHeaders(settings),
             },
         )
     }
@@ -354,9 +368,7 @@ export namespace customers {
             {},
             'GET',
             {
-                headers: stripeAccount
-                    ? { 'Stripe-Account': stripeAccount }
-                    : {},
+                headers: returnToHeaders({stripeAccount}),
             },
         )
     }
@@ -367,10 +379,13 @@ export namespace customers {
             type: string
             value: string
         },
-        stripeAccount?: string,
+        settings?: {
+            stripeAccount?: string,
+            idempotencyKey?: string 
+        },
     ): Promise<TaxIDsResponse> {
         return client(`/customers/${id}/tax_ids`, params, 'POST', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders(settings),
         })
     }
 
@@ -380,7 +395,7 @@ export namespace customers {
         stripeAccount?: string,
     ): Promise<TaxIDsResponse> {
         return client(`/customers/${cus_id}/tax_ids/${tax_id}`, {}, 'GET', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders({stripeAccount}),
         })
     }
 
@@ -394,7 +409,7 @@ export namespace customers {
         deleted: boolean
     }> {
         return client(`/customers/${cus_id}/tax_ids/${tax_id}`, {}, 'DELETE', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders({stripeAccount}),
         })
     }
 
@@ -417,9 +432,7 @@ export namespace customers {
             {},
             'GET',
             {
-                headers: stripeAccount
-                    ? { 'Stripe-Account': stripeAccount }
-                    : {},
+                headers: returnToHeaders({stripeAccount}),
             },
         )
     }
@@ -432,7 +445,7 @@ export namespace customers {
         deleted: boolean
     }> {
         return client(`/customers/${cus_id}/discount`, {}, 'DELETE', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders({stripeAccount}),
         })
     }
 }

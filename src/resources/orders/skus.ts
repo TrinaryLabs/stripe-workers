@@ -1,5 +1,6 @@
 import qs from 'qs'
 import { SKUResponse } from '../../types'
+import { returnToHeaders } from '../../util'
 
 export namespace skus {
     export let client: Function
@@ -26,10 +27,13 @@ export namespace skus {
                 width: number
             }
         },
-        stripeAccount?: string,
+        settings?: {
+            stripeAccount?: string,
+            idempotencyKey?: string 
+        },
     ): Promise<SKUResponse> {
         return client('/skus', params, 'POST', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders(settings),
         })
     }
 
@@ -38,7 +42,7 @@ export namespace skus {
         stripeAccount?: string,
     ): Promise<SKUResponse> {
         return client(`/skus/${id}`, {}, 'GET', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders({stripeAccount}),
         })
     }
 
@@ -64,10 +68,13 @@ export namespace skus {
                 width: number
             }
         },
-        stripeAccount?: string,
+        settings?: {
+            stripeAccount?: string,
+            idempotencyKey?: string 
+        },
     ): Promise<SKUResponse> {
         return client(`/skus/${id}`, params, 'POST', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders(settings),
         })
     }
 
@@ -90,7 +97,7 @@ export namespace skus {
         data: [SKUResponse]
     }> {
         return client(`/skus?${qs.stringify(params)}`, {}, 'GET', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders({stripeAccount}),
         })
     }
 
@@ -103,7 +110,7 @@ export namespace skus {
         deleted: boolean
     }> {
         return client(`/skus/${id}`, {}, 'DELETE', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders({stripeAccount}),
         })
     }
 }

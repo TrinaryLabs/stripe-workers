@@ -1,5 +1,6 @@
 import qs from 'qs'
 import { OrderReturnsResponse } from '../../types'
+import { returnToHeaders } from '../../util'
 
 export namespace orderReturns {
     export let client: Function
@@ -9,7 +10,7 @@ export namespace orderReturns {
         stripeAccount?: string,
     ): Promise<OrderReturnsResponse> {
         return client(`/order_returns/${id}`, {}, 'GET', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders({stripeAccount}),
         })
     }
 
@@ -34,7 +35,7 @@ export namespace orderReturns {
         data: [OrderReturnsResponse]
     }> {
         return client(`/order_returns?${qs.stringify(params)}`, {}, 'GET', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders({stripeAccount}),
         })
     }
 }

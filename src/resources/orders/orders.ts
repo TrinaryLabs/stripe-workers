@@ -1,5 +1,6 @@
 import qs from 'qs'
 import { OrdersResponse } from '../../types'
+import { returnToHeaders } from '../../util'
 
 export namespace orders {
     export let client: Function
@@ -34,10 +35,13 @@ export namespace orders {
             }
             coupon?: string
         },
-        stripeAccount?: string,
+        settings?: {
+            stripeAccount?: string,
+            idempotencyKey?: string 
+        },
     ): Promise<OrdersResponse> {
         return client('/orders', params, 'POST', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders(settings),
         })
     }
 
@@ -46,7 +50,7 @@ export namespace orders {
         stripeAccount?: string,
     ): Promise<OrdersResponse> {
         return client(`/orders/${id}`, {}, 'GET', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders({stripeAccount}),
         })
     }
 
@@ -62,10 +66,13 @@ export namespace orders {
             coupon?: string
             selected_shipping_method?: string
         },
-        stripeAccount?: string,
+        settings?: {
+            stripeAccount?: string,
+            idempotencyKey?: string 
+        },
     ): Promise<OrdersResponse> {
         return client(`/orders/${id}`, params, 'POST', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders(settings),
         })
     }
 
@@ -78,10 +85,13 @@ export namespace orders {
             metadata?: object
             application_fee?: number
         },
-        stripeAccount?: string,
+        settings?: {
+            stripeAccount?: string,
+            idempotencyKey?: string 
+        },
     ): Promise<OrdersResponse> {
         return client(`/orders/${id}`, params, 'POST', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders(settings),
         })
     }
 
@@ -135,7 +145,7 @@ export namespace orders {
         data: [OrdersResponse]
     }> {
         return client(`/orders?${qs.stringify(params)}`, {}, 'GET', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders({stripeAccount}),
         })
     }
 
@@ -153,7 +163,10 @@ export namespace orders {
                 }
             ]
         },
-        stripeAccount?: string,
+        settings?: {
+            stripeAccount?: string,
+            idempotencyKey?: string 
+        },
     ): Promise<{
         id: string
         object: string
@@ -175,7 +188,7 @@ export namespace orders {
         refund: string
     }> {
         return client(`/orders/${id}/returns`, params, 'POST', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders(settings),
         })
     }
 }

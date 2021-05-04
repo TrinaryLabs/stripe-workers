@@ -1,5 +1,6 @@
 import qs from 'qs'
 import { SQRResponse } from '../../types'
+import { returnToHeaders } from '../../util'
 
 export namespace sigma {
     export let client: Function
@@ -9,9 +10,7 @@ export namespace sigma {
             stripeAccount?: string,
         ): Promise<SQRResponse> {
             return client(`/sigma/scheduled_query_runs/${id}`, {}, 'GET', {
-                headers: stripeAccount
-                    ? { 'Stripe-Account': stripeAccount }
-                    : {},
+                headers: returnToHeaders({stripeAccount}),
             })
         }
 
@@ -33,9 +32,7 @@ export namespace sigma {
                 {},
                 'GET',
                 {
-                    headers: stripeAccount
-                        ? { 'Stripe-Account': stripeAccount }
-                        : {},
+                    headers: returnToHeaders({stripeAccount}),
                 },
             )
         }

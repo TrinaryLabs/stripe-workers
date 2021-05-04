@@ -4,6 +4,7 @@ import {
     ValueListResponse,
     ValueListItemsResponse,
 } from '../../types'
+import { returnToHeaders } from '../../util'
 export namespace radar {
     export let client: Function
     export namespace earlyFraudWarnings {
@@ -12,9 +13,7 @@ export namespace radar {
             stripeAccount?: string,
         ): Promise<EarlyFraudWarningsResponse> {
             return client(`/radar/early_fraud_warnings/${id}`, {}, 'GET', {
-                headers: stripeAccount
-                    ? { 'Stripe-Account': stripeAccount }
-                    : {},
+                headers: returnToHeaders({stripeAccount}),
             })
         }
 
@@ -37,9 +36,7 @@ export namespace radar {
                 {},
                 'GET',
                 {
-                    headers: stripeAccount
-                        ? { 'Stripe-Account': stripeAccount }
-                        : {},
+                    headers: returnToHeaders({stripeAccount}),
                 },
             )
         }
@@ -53,12 +50,13 @@ export namespace radar {
                 item_type?: string
                 metadata?: object
             },
-            stripeAccount?: string,
+            settings?: {
+                stripeAccount?: string,
+                idempotencyKey?: string 
+            },
         ): Promise<ValueListResponse> {
             return client(`/radar/value_lists`, params, 'POST', {
-                headers: stripeAccount
-                    ? { 'Stripe-Account': stripeAccount }
-                    : {},
+                headers: returnToHeaders(settings),
             })
         }
 
@@ -67,9 +65,7 @@ export namespace radar {
             stripeAccount?: string,
         ): Promise<ValueListResponse> {
             return client(`/radar/value_lists/${id}`, {}, 'GET', {
-                headers: stripeAccount
-                    ? { 'Stripe-Account': stripeAccount }
-                    : {},
+                headers: returnToHeaders({stripeAccount}),
             })
         }
 
@@ -80,12 +76,13 @@ export namespace radar {
                 name?: string
                 metadata?: object
             },
-            stripeAccount?: string,
+            settings?: {
+                stripeAccount?: string,
+                idempotencyKey?: string 
+            },
         ): Promise<ValueListResponse> {
             return client(`/radar/value_lists/${id}`, params, 'POST', {
-                headers: stripeAccount
-                    ? { 'Stripe-Account': stripeAccount }
-                    : {},
+                headers: returnToHeaders(settings),
             })
         }
 
@@ -98,9 +95,7 @@ export namespace radar {
             deleted: boolean
         }> {
             return client(`/radar/value_lists/${id}`, {}, 'DELETE', {
-                headers: stripeAccount
-                    ? { 'Stripe-Account': stripeAccount }
-                    : {},
+                headers: returnToHeaders({stripeAccount}),
             })
         }
 
@@ -130,9 +125,7 @@ export namespace radar {
                 {},
                 'GET',
                 {
-                    headers: stripeAccount
-                        ? { 'Stripe-Account': stripeAccount }
-                        : {},
+                    headers: returnToHeaders({stripeAccount}),
                 },
             )
         }
@@ -144,12 +137,13 @@ export namespace radar {
                 value: string
                 value_list: string
             },
-            stripeAccount?: string,
+            settings?: {
+                stripeAccount?: string,
+                idempotencyKey?: string 
+            },
         ): Promise<ValueListItemsResponse> {
             return client(`/radar/value_list_items`, params, 'POST', {
-                headers: stripeAccount
-                    ? { 'Stripe-Account': stripeAccount }
-                    : {},
+                headers: returnToHeaders(settings),
             })
         }
 
@@ -158,9 +152,7 @@ export namespace radar {
             stripeAccount?: string,
         ): Promise<ValueListItemsResponse> {
             return client(`/radar/value_list_items/${id}`, {}, 'GET', {
-                headers: stripeAccount
-                    ? { 'Stripe-Account': stripeAccount }
-                    : {},
+                headers: returnToHeaders({stripeAccount}),
             })
         }
 
@@ -173,9 +165,7 @@ export namespace radar {
             deleted: boolean
         }> {
             return client(`/radar/value_list_items/${id}`, {}, 'DELETE', {
-                headers: stripeAccount
-                    ? { 'Stripe-Account': stripeAccount }
-                    : {},
+                headers: returnToHeaders({stripeAccount}),
             })
         }
 
@@ -205,9 +195,7 @@ export namespace radar {
                 {},
                 'GET',
                 {
-                    headers: stripeAccount
-                        ? { 'Stripe-Account': stripeAccount }
-                        : {},
+                    headers: returnToHeaders({stripeAccount}),
                 },
             )
         }

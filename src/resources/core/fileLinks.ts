@@ -1,5 +1,6 @@
 import qs from 'qs'
 import { FileLinksResponse } from '../../types'
+import { returnToHeaders } from '../../util'
 
 export namespace fileLinks {
     export let client: Function
@@ -10,10 +11,13 @@ export namespace fileLinks {
             expires_at?: number
             metadata?: object
         },
-        stripeAccount?: string,
+        settings?: {
+            stripeAccount?: string,
+            idempotencyKey?: string 
+        },
     ): Promise<FileLinksResponse> {
         return client(`/file_links`, params, 'POST', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders(settings),
         })
     }
 
@@ -22,7 +26,7 @@ export namespace fileLinks {
         stripeAccount?: string,
     ): Promise<FileLinksResponse> {
         return client(`/file_links/${id}`, {}, 'GET', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders({stripeAccount}),
         })
     }
 
@@ -32,10 +36,13 @@ export namespace fileLinks {
             expires_at?: number
             metadata?: object
         },
-        stripeAccount?: string,
+        settings?: {
+            stripeAccount?: string,
+            idempotencyKey?: string 
+        },
     ): Promise<FileLinksResponse> {
         return client(`/file_links/${id}`, params, 'POST', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders(settings),
         })
     }
 
@@ -62,7 +69,7 @@ export namespace fileLinks {
         data: [FileLinksResponse]
     }> {
         return client(`/file_links?${qs.stringify(params)}`, params, 'GET', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders({stripeAccount}),
         })
     }
 }

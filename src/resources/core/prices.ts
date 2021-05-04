@@ -1,5 +1,6 @@
 import qs from 'qs'
 import { PricesResponse } from '../../types'
+import { returnToHeaders } from '../../util'
 
 export namespace prices {
     export let client: Function
@@ -42,10 +43,13 @@ export namespace prices {
             }
             unit_amount_decimal?: number
         },
-        stripeAccount?: string,
+        settings?: {
+            stripeAccount?: string,
+            idempotencyKey?: string 
+        },
     ): Promise<PricesResponse> {
         return client('/prices', params, 'POST', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders(settings),
         })
     }
 
@@ -54,7 +58,7 @@ export namespace prices {
         stripeAccount?: string,
     ): Promise<PricesResponse> {
         return client(`/prices/${id}`, {}, 'GET', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders({stripeAccount}),
         })
     }
 
@@ -67,10 +71,13 @@ export namespace prices {
             lookup_key?: string
             transfer_lookup_key?: boolean
         },
-        stripeAccount?: string,
+        settings?: {
+            stripeAccount?: string,
+            idempotencyKey?: string 
+        },
     ): Promise<PricesResponse> {
         return client(`/prices/${id}`, params, 'POST', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders(settings),
         })
     }
 
@@ -103,7 +110,7 @@ export namespace prices {
         data: [PricesResponse]
     }> {
         return client(`/prices?${qs.stringify(params)}`, {}, 'GET', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders({stripeAccount}),
         })
     }
 }

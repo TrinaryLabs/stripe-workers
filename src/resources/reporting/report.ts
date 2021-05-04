@@ -1,5 +1,6 @@
 import qs from 'qs'
 import { ReportRunResponse, ReportTypeResponse } from '../../types'
+import { returnToHeaders } from '../../util'
 export namespace reporting {
     export let client: Function
     export namespace reportRuns {
@@ -17,12 +18,13 @@ export namespace reporting {
                     timezone?: string
                 },
             },
-            stripeAccount?: string,
+            settings?: {
+                stripeAccount?: string,
+                idempotencyKey?: string 
+            },
         ): Promise<ReportRunResponse> {
             return client(`/reporting/report_runs`, params, 'POST', {
-                headers: stripeAccount
-                    ? { 'Stripe-Account': stripeAccount }
-                    : {},
+                headers: returnToHeaders(settings),
             })
         }
 
@@ -31,9 +33,7 @@ export namespace reporting {
             stripeAccount?: string,
         ): Promise<ReportRunResponse> {
             return client(`/reporting/report_runs/${id}`, {}, 'GET', {
-                headers: stripeAccount
-                    ? { 'Stripe-Account': stripeAccount }
-                    : {},
+                headers: returnToHeaders({stripeAccount}),
             })
         }
 
@@ -61,9 +61,7 @@ export namespace reporting {
                 {},
                 'GET',
                 {
-                    headers: stripeAccount
-                        ? { 'Stripe-Account': stripeAccount }
-                        : {},
+                    headers: returnToHeaders({stripeAccount}),
                 },
             )
         }
@@ -75,9 +73,7 @@ export namespace reporting {
             stripeAccount?: string,
         ): Promise<ReportTypeResponse> {
             return client(`/reporting/report_types/${id}`, {}, 'GET', {
-                headers: stripeAccount
-                    ? { 'Stripe-Account': stripeAccount }
-                    : {},
+                headers: returnToHeaders({stripeAccount}),
             })
         }
 
@@ -90,9 +86,7 @@ export namespace reporting {
             data: [ReportTypeResponse]
         }> {
             return client(`/reporting/report_types`, {}, 'GET', {
-                headers: stripeAccount
-                    ? { 'Stripe-Account': stripeAccount }
-                    : {},
+                headers: returnToHeaders({stripeAccount}),
             })
         }
     }

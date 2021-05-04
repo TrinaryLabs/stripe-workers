@@ -1,4 +1,5 @@
 import { MandatesReponse } from '../../types'
+import { returnToHeaders } from '../../util'
 
 export namespace mandates {
     export let client: Function
@@ -8,7 +9,7 @@ export namespace mandates {
         stripeAccount?: string,
     ): Promise<MandatesReponse> {
         return client(`/mandates/${id}`, {}, 'GET', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders({stripeAccount}),
         })
     }
 }
