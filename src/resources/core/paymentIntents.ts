@@ -155,8 +155,8 @@ export namespace paymentIntents {
             use_stripe_sdk?: boolean
         },
         settings?: {
-            stripeAccount?: string,
-            idempotencyKey?: string 
+            stripeAccount?: string
+            idempotencyKey?: string
         },
     ): Promise<PaymentIntentsResponse> {
         return client('/payment_intents', params, 'POST', {
@@ -169,14 +169,14 @@ export namespace paymentIntents {
         params?: {
             client_secret?: string
         },
-        stripeAccount?: string,
+        settings?: { stripeAccount?: string },
     ): Promise<PaymentIntentsResponse> {
         return client(
             `/payment_intents/${id}?${qs.stringify(params)}`,
             {},
             'GET',
             {
-                headers: returnToHeaders({stripeAccount}),
+                headers: returnToHeaders(settings),
             },
         )
     }
@@ -332,8 +332,8 @@ export namespace paymentIntents {
             use_stripe_sdk?: boolean
         },
         settings?: {
-            stripeAccount?: string,
-            idempotencyKey?: string 
+            stripeAccount?: string
+            idempotencyKey?: string
         },
     ): Promise<PaymentIntentsResponse> {
         return client(`/payment_intents/${id}`, params, 'POST', {
@@ -386,7 +386,7 @@ export namespace paymentIntents {
                 alipay?: {}
                 au_becs_debit?: {
                     account_number: string
-                    bsb_number: string 
+                    bsb_number: string
                 }
                 bacs_debit?: {
                     account_number?: string
@@ -475,8 +475,8 @@ export namespace paymentIntents {
             use_stripe_sdk?: boolean
         },
         settings?: {
-            stripeAccount?: string,
-            idempotencyKey?: string 
+            stripeAccount?: string
+            idempotencyKey?: string
         },
     ): Promise<PaymentIntentsResponse> {
         return client(`/payment_intents/${id}/confirm`, params, 'POST', {
@@ -496,8 +496,8 @@ export namespace paymentIntents {
             }
         },
         settings?: {
-            stripeAccount?: string,
-            idempotencyKey?: string 
+            stripeAccount?: string
+            idempotencyKey?: string
         },
     ): Promise<PaymentIntentsResponse> {
         return client(`/payment_intents/${id}/capture`, params, 'POST', {
@@ -511,8 +511,8 @@ export namespace paymentIntents {
             cancellation_reason?: string
         },
         settings?: {
-            stripeAccount?: string,
-            idempotencyKey?: string 
+            stripeAccount?: string
+            idempotencyKey?: string
         },
     ): Promise<PaymentIntentsResponse> {
         return client(`/payment_intents/${id}/confirm`, params, 'POST', {
@@ -533,7 +533,7 @@ export namespace paymentIntents {
             limit?: number
             starting_after?: string
         },
-        stripeAccount?: string,
+        settings?: { stripeAccount?: string },
     ): Promise<{
         object: string
         url: string
@@ -545,7 +545,7 @@ export namespace paymentIntents {
             params,
             'GET',
             {
-                headers: returnToHeaders({stripeAccount}),
+                headers: returnToHeaders(settings),
             },
         )
     }

@@ -17,40 +17,40 @@ export namespace disputes {
         id: string,
         params: {
             evidence?: {
-                access_activity_log: string,
-                zilling_address: string,
-                cancellation_policy: string,
-                cancellation_policy_disclosure: string,
-                cancellation_rebuttal: string,
-                customer_communication: string,
-                customer_email_address: string,
-                customer_name: string,
-                customer_purchase_ip: string,
-                customer_signature: string,
-                duplicate_charge_documentation: string,
-                duplicate_charge_explanation: string,
-                duplicate_charge_id: string,
-                product_description: string,
-                receipt: string,
-                refund_policy: string,
-                refund_policy_disclosure: string,
-                refund_refusal_explanation: string,
-                service_date: string,
-                service_documentation: string,
-                shipping_address: string,
-                shipping_carrier: string,
-                shipping_date: string,
-                shipping_documentation: string,
-                shipping_tracking_number: string,
-                uncategorized_file: string,
+                access_activity_log: string
+                zilling_address: string
+                cancellation_policy: string
+                cancellation_policy_disclosure: string
+                cancellation_rebuttal: string
+                customer_communication: string
+                customer_email_address: string
+                customer_name: string
+                customer_purchase_ip: string
+                customer_signature: string
+                duplicate_charge_documentation: string
+                duplicate_charge_explanation: string
+                duplicate_charge_id: string
+                product_description: string
+                receipt: string
+                refund_policy: string
+                refund_policy_disclosure: string
+                refund_refusal_explanation: string
+                service_date: string
+                service_documentation: string
+                shipping_address: string
+                shipping_carrier: string
+                shipping_date: string
+                shipping_documentation: string
+                shipping_tracking_number: string
+                uncategorized_file: string
                 uncategorized_text: string
-            },
+            }
             metadata?: object
             submit?: boolean
         },
         settings?: {
-            stripeAccount?: string,
-            idempotencyKey?: string 
+            stripeAccount?: string
+            idempotencyKey?: string
         },
     ): Promise<DisputesResponse> {
         return client(`/disputes/${id}`, params, 'POST', {
@@ -61,8 +61,8 @@ export namespace disputes {
     export function close(
         id: string,
         settings?: {
-            stripeAccount?: string,
-            idempotencyKey?: string 
+            stripeAccount?: string
+            idempotencyKey?: string
         },
     ): Promise<DisputesResponse> {
         return client(`/disputes/${id}/close`, {}, 'POST', {
@@ -84,7 +84,7 @@ export namespace disputes {
             limit?: number
             starting_after?: string
         },
-        stripeAccount?: string,
+        settings?: { stripeAccount?: string },
     ): Promise<{
         object: string
         url: string
@@ -92,7 +92,7 @@ export namespace disputes {
         data: [DisputesResponse]
     }> {
         return client(`/disputes?${qs.stringify(params)}`, params, 'GET', {
-            headers: returnToHeaders({stripeAccount}),
+            headers: returnToHeaders(settings),
         })
     }
 }

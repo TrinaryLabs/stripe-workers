@@ -7,10 +7,10 @@ export namespace sigma {
     export namespace scheduledQueryRuns {
         export function retrieve(
             id: string,
-            stripeAccount?: string,
+            settings?: { stripeAccount?: string },
         ): Promise<SQRResponse> {
             return client(`/sigma/scheduled_query_runs/${id}`, {}, 'GET', {
-                headers: returnToHeaders({stripeAccount}),
+                headers: returnToHeaders(settings),
             })
         }
 
@@ -20,7 +20,7 @@ export namespace sigma {
                 limit?: number
                 starting_after?: string
             },
-            stripeAccount?: string,
+            settings?: { stripeAccount?: string },
         ): Promise<{
             object: string
             url: string
@@ -32,7 +32,7 @@ export namespace sigma {
                 {},
                 'GET',
                 {
-                    headers: returnToHeaders({stripeAccount}),
+                    headers: returnToHeaders(settings),
                 },
             )
         }

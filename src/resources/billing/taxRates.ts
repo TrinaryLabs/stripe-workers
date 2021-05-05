@@ -18,8 +18,8 @@ export namespace taxRates {
             state?: string
         },
         settings?: {
-            stripeAccount?: string,
-            idempotencyKey?: string 
+            stripeAccount?: string
+            idempotencyKey?: string
         },
     ): Promise<TaxRatesResponse> {
         return client('/tax_rates', params, 'POST', {
@@ -29,10 +29,10 @@ export namespace taxRates {
 
     export function retrieve(
         id: string,
-        stripeAccount?: string,
+        settings?: { stripeAccount?: string },
     ): Promise<TaxRatesResponse> {
         return client(`/tax_rates/${id}`, {}, 'GET', {
-            headers: returnToHeaders({stripeAccount}),
+            headers: returnToHeaders(settings),
         })
     }
 
@@ -48,8 +48,8 @@ export namespace taxRates {
             state?: string
         },
         settings?: {
-            stripeAccount?: string,
-            idempotencyKey?: string 
+            stripeAccount?: string
+            idempotencyKey?: string
         },
     ): Promise<TaxRatesResponse> {
         return client(`/tax_rates/${id}`, params, 'POST', {
@@ -66,7 +66,7 @@ export namespace taxRates {
             limit?: number
             starting_after?: string
         },
-        stripeAccount?: string,
+        settings?: { stripeAccount?: string },
     ): Promise<{
         object: string
         url: string
@@ -74,7 +74,7 @@ export namespace taxRates {
         data: [TaxRatesResponse]
     }> {
         return client(`/tax_rates?${qs.stringify(params)}`, {}, 'GET', {
-            headers: returnToHeaders({stripeAccount}),
+            headers: returnToHeaders(settings),
         })
     }
 }

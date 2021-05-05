@@ -44,8 +44,8 @@ export namespace prices {
             unit_amount_decimal?: number
         },
         settings?: {
-            stripeAccount?: string,
-            idempotencyKey?: string 
+            stripeAccount?: string
+            idempotencyKey?: string
         },
     ): Promise<PricesResponse> {
         return client('/prices', params, 'POST', {
@@ -55,10 +55,10 @@ export namespace prices {
 
     export function retrieve(
         id: string,
-        stripeAccount?: string,
+        settings?: { stripeAccount?: string },
     ): Promise<PricesResponse> {
         return client(`/prices/${id}`, {}, 'GET', {
-            headers: returnToHeaders({stripeAccount}),
+            headers: returnToHeaders(settings),
         })
     }
 
@@ -72,8 +72,8 @@ export namespace prices {
             transfer_lookup_key?: boolean
         },
         settings?: {
-            stripeAccount?: string,
-            idempotencyKey?: string 
+            stripeAccount?: string
+            idempotencyKey?: string
         },
     ): Promise<PricesResponse> {
         return client(`/prices/${id}`, params, 'POST', {
@@ -91,7 +91,7 @@ export namespace prices {
                 gt?: string
                 gte?: string
                 lt?: string
-                lte?: string 
+                lte?: string
             }
             ending_before?: string
             limit?: number
@@ -99,10 +99,10 @@ export namespace prices {
             lookup_keys?: string[]
             recurring?: {
                 interval?: string
-                usage_type?: string 
+                usage_type?: string
             }
         },
-        stripeAccount?: string,
+        settings?: { stripeAccount?: string },
     ): Promise<{
         object: string
         url: string
@@ -110,7 +110,7 @@ export namespace prices {
         data: [PricesResponse]
     }> {
         return client(`/prices?${qs.stringify(params)}`, {}, 'GET', {
-            headers: returnToHeaders({stripeAccount}),
+            headers: returnToHeaders(settings),
         })
     }
 }

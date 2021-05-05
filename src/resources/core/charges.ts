@@ -40,8 +40,8 @@ export namespace charges {
             transfer_group?: string
         },
         settings?: {
-            stripeAccount?: string,
-            idempotencyKey?: string 
+            stripeAccount?: string
+            idempotencyKey?: string
         },
     ): Promise<ChargesResponse> {
         return client(`/charges`, params, 'POST', {
@@ -51,10 +51,10 @@ export namespace charges {
 
     export function retrieve(
         id: string,
-        stripeAccount?: string,
+        settings?: { stripeAccount?: string },
     ): Promise<ChargesResponse> {
         return client(`/charges/${id}`, {}, 'GET', {
-            headers: returnToHeaders({stripeAccount}),
+            headers: returnToHeaders(settings),
         })
     }
 
@@ -85,8 +85,8 @@ export namespace charges {
             transfer_group?: string
         },
         settings?: {
-            stripeAccount?: string,
-            idempotencyKey?: string 
+            stripeAccount?: string
+            idempotencyKey?: string
         },
     ): Promise<ChargesResponse> {
         return client(`/charges/${id}`, params, 'POST', {
@@ -108,8 +108,8 @@ export namespace charges {
             transfer_group?: string
         },
         settings?: {
-            stripeAccount?: string,
-            idempotencyKey?: string 
+            stripeAccount?: string
+            idempotencyKey?: string
         },
     ): Promise<ChargesResponse> {
         return client(`/charges/${id}/capture`, params, 'POST', {
@@ -132,7 +132,7 @@ export namespace charges {
             starting_after?: string
             transfer_group?: string
         },
-        stripeAccount?: string,
+        settings?: { stripeAccount?: string },
     ): Promise<{
         object: string
         url: string
@@ -140,7 +140,7 @@ export namespace charges {
         data: [ChargesResponse]
     }> {
         return client(`/charges?${qs.stringify(params)}`, {}, 'GET', {
-            headers: returnToHeaders({stripeAccount}),
+            headers: returnToHeaders(settings),
         })
     }
 }

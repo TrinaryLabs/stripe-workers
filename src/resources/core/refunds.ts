@@ -15,8 +15,8 @@ export namespace refunds {
             reverse_transfer?: boolean
         },
         settings?: {
-            stripeAccount?: string,
-            idempotencyKey?: string 
+            stripeAccount?: string
+            idempotencyKey?: string
         },
     ): Promise<RefundsResponse> {
         return client('/refunds', params, 'POST', {
@@ -26,10 +26,10 @@ export namespace refunds {
 
     export function retrieve(
         id: string,
-        stripeAccount?: string,
+        settings?: { stripeAccount?: string },
     ): Promise<RefundsResponse> {
         return client(`/refunds/${id}`, {}, 'GET', {
-            headers: returnToHeaders({stripeAccount}),
+            headers: returnToHeaders(settings),
         })
     }
 
@@ -39,8 +39,8 @@ export namespace refunds {
             metadata?: object
         },
         settings?: {
-            stripeAccount?: string,
-            idempotencyKey?: string 
+            stripeAccount?: string
+            idempotencyKey?: string
         },
     ): Promise<RefundsResponse> {
         return client(`/refunds/${id}`, params, 'POST', {
@@ -62,7 +62,7 @@ export namespace refunds {
             limit?: number
             starting_after?: string
         },
-        stripeAccount?: string,
+        settings?: { stripeAccount?: string },
     ): Promise<{
         object: string
         url: string
@@ -70,7 +70,7 @@ export namespace refunds {
         data: [RefundsResponse]
     }> {
         return client(`/refunds?${qs.stringify(params)}`, {}, 'GET', {
-            headers: returnToHeaders({stripeAccount}),
+            headers: returnToHeaders(settings),
         })
     }
 }

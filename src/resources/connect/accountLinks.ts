@@ -13,8 +13,8 @@ export namespace accountLinks {
             collect?: string
         },
         settings?: {
-            stripeAccount?: string,
-            idempotencyKey?: string 
+            stripeAccount?: string
+            idempotencyKey?: string
         },
     ): Promise<AccountLinksResponse> {
         return client('/account_links', params, 'POST', {

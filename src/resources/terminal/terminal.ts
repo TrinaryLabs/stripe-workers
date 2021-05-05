@@ -10,8 +10,8 @@ export namespace terminal {
                 location?: string
             },
             settings?: {
-                stripeAccount?: string,
-                idempotencyKey?: string 
+                stripeAccount?: string
+                idempotencyKey?: string
             },
         ): Promise<{
             object: string
@@ -27,19 +27,19 @@ export namespace terminal {
         export function create(
             params: {
                 address: {
-                    country: string,
-                    line1: string,
-                    city?: string,
+                    country: string
+                    line1: string
+                    city?: string
                     line2?: string
-                    postal_code?: string,
+                    postal_code?: string
                     state?: string
-                },
+                }
                 display_name: string
                 metadata?: object
             },
             settings?: {
-                stripeAccount?: string,
-                idempotencyKey?: string 
+                stripeAccount?: string
+                idempotencyKey?: string
             },
         ): Promise<LocationsResponse> {
             return client('/terminal/locations', params, 'POST', {
@@ -49,10 +49,10 @@ export namespace terminal {
 
         export function retrieve(
             id: string,
-            stripeAccount?: string,
+            settings?: { stripeAccount?: string },
         ): Promise<LocationsResponse> {
             return client(`/terminal/locations/${id}`, {}, 'GET', {
-                headers: returnToHeaders({stripeAccount}),
+                headers: returnToHeaders(settings),
             })
         }
 
@@ -60,19 +60,19 @@ export namespace terminal {
             id: string,
             params: {
                 address?: {
-                    country?: string,
-                    line1?: string,
-                    city?: string,
+                    country?: string
+                    line1?: string
+                    city?: string
                     line2?: string
-                    postal_code?: string,
+                    postal_code?: string
                     state?: string
-                },
+                }
                 display_name?: string
                 metadata?: object
             },
             settings?: {
-                stripeAccount?: string,
-                idempotencyKey?: string 
+                stripeAccount?: string
+                idempotencyKey?: string
             },
         ): Promise<LocationsResponse> {
             return client(`/terminal/locations/${id}`, params, 'POST', {
@@ -82,14 +82,14 @@ export namespace terminal {
 
         export function del(
             id: string,
-            stripeAccount?: string,
+            settings?: { stripeAccount?: string },
         ): Promise<{
             id: string
             object: string
             deleted: boolean
         }> {
             return client(`/terminal/locations/${id}`, {}, 'DELETE', {
-                headers: returnToHeaders({stripeAccount}),
+                headers: returnToHeaders(settings),
             })
         }
 
@@ -99,7 +99,7 @@ export namespace terminal {
                 limit?: number
                 starting_after?: string
             },
-            stripeAccount?: string,
+            settings?: { stripeAccount?: string },
         ): Promise<{
             object: string
             url: string
@@ -111,7 +111,7 @@ export namespace terminal {
                 {},
                 'GET',
                 {
-                    headers: returnToHeaders({stripeAccount}),
+                    headers: returnToHeaders(settings),
                 },
             )
         }
@@ -126,8 +126,8 @@ export namespace terminal {
                 metadata?: object
             },
             settings?: {
-                stripeAccount?: string,
-                idempotencyKey?: string 
+                stripeAccount?: string
+                idempotencyKey?: string
             },
         ): Promise<ReadersResponse> {
             return client('/terminal/readers', params, 'POST', {
@@ -137,10 +137,10 @@ export namespace terminal {
 
         export function retrieve(
             id: string,
-            stripeAccount?: string,
+            settings?: { stripeAccount?: string },
         ): Promise<ReadersResponse> {
             return client(`/terminal/readers/${id}`, {}, 'GET', {
-                headers: returnToHeaders({stripeAccount}),
+                headers: returnToHeaders(settings),
             })
         }
 
@@ -151,8 +151,8 @@ export namespace terminal {
                 metadata?: object
             },
             settings?: {
-                stripeAccount?: string,
-                idempotencyKey?: string 
+                stripeAccount?: string
+                idempotencyKey?: string
             },
         ): Promise<ReadersResponse> {
             return client(`/terminal/readers/${id}`, params, 'POST', {
@@ -162,14 +162,14 @@ export namespace terminal {
 
         export function del(
             id: string,
-            stripeAccount?: string,
+            settings?: { stripeAccount?: string },
         ): Promise<{
             id: string
             object: string
             deleted: boolean
         }> {
             return client(`/terminal/readers/${id}`, {}, 'DELETE', {
-                headers: returnToHeaders({stripeAccount}),
+                headers: returnToHeaders(settings),
             })
         }
 
@@ -182,7 +182,7 @@ export namespace terminal {
                 limit?: number
                 starting_after?: string
             },
-            stripeAccount?: string,
+            settings?: { stripeAccount?: string },
         ): Promise<{
             object: string
             url: string
@@ -194,7 +194,7 @@ export namespace terminal {
                 {},
                 'GET',
                 {
-                    headers: returnToHeaders({stripeAccount}),
+                    headers: returnToHeaders(settings),
                 },
             )
         }

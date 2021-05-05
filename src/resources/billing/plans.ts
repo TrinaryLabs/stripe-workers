@@ -10,13 +10,15 @@ export namespace plans {
             amount?: number
             currency: string
             interval: string
-            product: {
-                name: string
-                active?: boolean
-                metadata?: object
-                statement_descriptor?: string
-                unit_label?: string
-            } | string
+            product:
+                | {
+                      name: string
+                      active?: boolean
+                      metadata?: object
+                      statement_descriptor?: string
+                      unit_label?: string
+                  }
+                | string
             active?: boolean
             metadata?: object
             nickname?: string
@@ -41,8 +43,8 @@ export namespace plans {
             usage_type?: string
         },
         settings?: {
-            stripeAccount?: string,
-            idempotencyKey?: string 
+            stripeAccount?: string
+            idempotencyKey?: string
         },
     ): Promise<PlansResponse> {
         return client(`/plans`, params, 'POST', {
@@ -52,10 +54,10 @@ export namespace plans {
 
     export function retrieve(
         id: string,
-        stripeAccount?: string,
+        settings?: { stripeAccount?: string },
     ): Promise<PlansResponse> {
         return client(`/plans/${id}`, {}, 'GET', {
-            headers: returnToHeaders({stripeAccount}),
+            headers: returnToHeaders(settings),
         })
     }
 
@@ -63,20 +65,22 @@ export namespace plans {
         id: string,
         params: {
             nickname?: string
-            product: {
-                name: string
-                active?: boolean
-                metadata?: object
-                statement_descriptor?: string
-                unit_label?: string
-            } | string
+            product:
+                | {
+                      name: string
+                      active?: boolean
+                      metadata?: object
+                      statement_descriptor?: string
+                      unit_label?: string
+                  }
+                | string
             active?: boolean
             metadata?: object
             trial_period_days?: number
         },
         settings?: {
-            stripeAccount?: string,
-            idempotencyKey?: string 
+            stripeAccount?: string
+            idempotencyKey?: string
         },
     ): Promise<PlansResponse> {
         return client(`/plans/${id}`, params, 'POST', {
@@ -86,14 +90,14 @@ export namespace plans {
 
     export function del(
         id: string,
-        stripeAccount?: string,
+        settings?: { stripeAccount?: string },
     ): Promise<{
         id: string
         object: string
         deleted: boolean
     }> {
         return client(`/plans/${id}`, {}, 'DELETE', {
-            headers: returnToHeaders({stripeAccount}),
+            headers: returnToHeaders(settings),
         })
     }
 
@@ -111,7 +115,7 @@ export namespace plans {
             limit?: number
             starting_after?: string
         },
-        stripeAccount?: string,
+        settings?: { stripeAccount?: string },
     ): Promise<{
         object: string
         url: string
@@ -119,7 +123,7 @@ export namespace plans {
         data: [PlansResponse]
     }> {
         return client(`/plans?${qs.stringify(params)}`, {}, 'GET', {
-            headers: returnToHeaders({stripeAccount}),
+            headers: returnToHeaders(settings),
         })
     }
 }

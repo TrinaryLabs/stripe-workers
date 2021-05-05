@@ -16,8 +16,8 @@ export namespace billingPortal {
                 on_behalf_of?: string
             },
             settings?: {
-                stripeAccount?: string,
-                idempotencyKey?: string 
+                stripeAccount?: string
+                idempotencyKey?: string
             },
         ): Promise<BillingPortalResponse> {
             return client('/billing_portal/sessions', params, 'POST', {
@@ -68,8 +68,8 @@ export namespace billingPortal {
                 default_return_url?: string
             },
             settings?: {
-                stripeAccount?: string,
-                idempotencyKey?: string 
+                stripeAccount?: string
+                idempotencyKey?: string
             },
         ): Promise<BillingPortalConfigurationResponse> {
             return client('/billing_portal/configurations', params, 'POST', {
@@ -120,8 +120,8 @@ export namespace billingPortal {
                 default_return_url?: string
             },
             settings?: {
-                stripeAccount?: string,
-                idempotencyKey?: string 
+                stripeAccount?: string
+                idempotencyKey?: string
             },
         ): Promise<BillingPortalConfigurationResponse> {
             return client(
@@ -136,10 +136,10 @@ export namespace billingPortal {
 
         export function retrieve(
             id: string,
-            stripeAccount?: string,
+            settings?: { stripeAccount?: string },
         ): Promise<BillingPortalConfigurationResponse> {
             return client(`/billing_portal/configurations/${id}`, {}, 'GET', {
-                headers: returnToHeaders({stripeAccount}),
+                headers: returnToHeaders(settings),
             })
         }
 
@@ -151,7 +151,7 @@ export namespace billingPortal {
                 limit?: number
                 starting_after?: string
             },
-            stripeAccount?: string,
+            settings?: { stripeAccount?: string },
         ): Promise<{
             object: string
             url: string
@@ -163,7 +163,7 @@ export namespace billingPortal {
                 {},
                 'GET',
                 {
-                    headers: returnToHeaders({stripeAccount}),
+                    headers: returnToHeaders(settings),
                 },
             )
         }

@@ -8,8 +8,8 @@ export namespace reviews {
     export function approve(
         id: string,
         settings?: {
-            stripeAccount?: string,
-            idempotencyKey?: string 
+            stripeAccount?: string
+            idempotencyKey?: string
         },
     ): Promise<ReviewsResponse> {
         return client(`/reviews/${id}/approve`, {}, 'POST', {
@@ -19,10 +19,10 @@ export namespace reviews {
 
     export function retrieve(
         id: string,
-        stripeAccount?: string,
+        settings?: { stripeAccount?: string },
     ): Promise<ReviewsResponse> {
         return client(`/reviews/${id}`, {}, 'GET', {
-            headers: returnToHeaders({stripeAccount}),
+            headers: returnToHeaders(settings),
         })
     }
 
@@ -38,7 +38,7 @@ export namespace reviews {
             limit?: number
             starting_after?: string
         },
-        stripeAccount?: string,
+        settings?: { stripeAccount?: string },
     ): Promise<{
         object: string
         url: string
@@ -46,7 +46,7 @@ export namespace reviews {
         data: [ReviewsResponse]
     }> {
         return client(`/reviews?${qs.stringify(params)}`, {}, 'GET', {
-            headers: returnToHeaders({stripeAccount}),
+            headers: returnToHeaders(settings),
         })
     }
 }

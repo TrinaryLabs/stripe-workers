@@ -15,8 +15,8 @@ export namespace webhookEndpoints {
             connect?: boolean
         },
         settings?: {
-            stripeAccount?: string,
-            idempotencyKey?: string 
+            stripeAccount?: string
+            idempotencyKey?: string
         },
     ): Promise<WebhookEndpointResponse> {
         return client('/webhook_endpoints', params, 'POST', {
@@ -26,10 +26,10 @@ export namespace webhookEndpoints {
 
     export function retrieve(
         id: string,
-        stripeAccount?: string,
+        settings?: { stripeAccount?: string },
     ): Promise<WebhookEndpointResponse> {
         return client(`/webhook_endpoints/${id}`, {}, 'GET', {
-            headers: returnToHeaders({stripeAccount}),
+            headers: returnToHeaders(settings),
         })
     }
 
@@ -43,8 +43,8 @@ export namespace webhookEndpoints {
             disabled?: boolean
         },
         settings?: {
-            stripeAccount?: string,
-            idempotencyKey?: string 
+            stripeAccount?: string
+            idempotencyKey?: string
         },
     ): Promise<WebhookEndpointResponse> {
         return client(`/webhook_endpoints/${id}`, params, 'POST', {
@@ -58,7 +58,7 @@ export namespace webhookEndpoints {
             limit?: number
             starting_after?: string
         },
-        stripeAccount?: string,
+        settings?: { stripeAccount?: string },
     ): Promise<{
         object: string
         url: string
@@ -66,20 +66,20 @@ export namespace webhookEndpoints {
         data: [WebhookEndpointResponse]
     }> {
         return client(`/webhook_endpoints?${qs.stringify(params)}`, {}, 'GET', {
-            headers: returnToHeaders({stripeAccount}),
+            headers: returnToHeaders(settings),
         })
     }
 
     export function del(
         id: string,
-        stripeAccount?: string,
+        settings?: { stripeAccount?: string },
     ): Promise<{
         id: string
         object: string
         deleted: boolean
     }> {
         return client(`/webhook_endpoints/${id}`, {}, 'DELETE', {
-            headers: returnToHeaders({stripeAccount}),
+            headers: returnToHeaders(settings),
         })
     }
 }

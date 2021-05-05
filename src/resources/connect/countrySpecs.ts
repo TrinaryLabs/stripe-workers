@@ -11,7 +11,7 @@ export namespace countrySpecs {
             ending_before?: string
             starting_after?: string
         },
-        stripeAccount?: string,
+        settings?: { stripeAccount?: string },
     ): Promise<{
         object: string
         url: string
@@ -19,16 +19,16 @@ export namespace countrySpecs {
         data: [CountrySpecsResponse]
     }> {
         return client(`/country_specs?${qs.stringify(params)}`, {}, 'GET', {
-            headers: returnToHeaders({stripeAccount}),
+            headers: returnToHeaders(settings),
         })
     }
 
     export function retrieve(
         id: string,
-        stripeAccount?: string,
+        settings?: { stripeAccount?: string },
     ): Promise<CountrySpecsResponse> {
         return client(`/country_specs/${id}`, {}, 'GET', {
-            headers: returnToHeaders({stripeAccount}),
+            headers: returnToHeaders(settings),
         })
     }
 }

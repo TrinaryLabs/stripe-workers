@@ -11,6 +11,10 @@
     "bugs": {
         "url": "https://github.com/TrinaryLabs/stripe-workers/issues"
     },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/TrinaryLabs/stripe-workers"
+    },
     "homepage": "https://github.com/TrinaryLabs/stripe-workers",
     "main": "./dist/index.js",
     "files": [
@@ -44,6 +48,5 @@
         "@types/qs": "^6.9.6",
         "qs": "^6.10.1"
     },
-    "dependencies": { 
-    }
+    "dependencies": {}
 }

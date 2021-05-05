@@ -10,10 +10,10 @@ export namespace applicationFees {
 
     export function retrieve(
         id: string,
-        stripeAccount?: string,
+        settings?: { stripeAccount?: string },
     ): Promise<ApplicationFeesResponse> {
         return client(`/application_fees/${id}`, {}, 'GET', {
-            headers: returnToHeaders({stripeAccount}),
+            headers: returnToHeaders(settings),
         })
     }
 
@@ -29,7 +29,7 @@ export namespace applicationFees {
             ending_before?: string
             starting_after?: string
         },
-        stripeAccount?: string,
+        settings?: { stripeAccount?: string },
     ): Promise<{
         object: string
         url: string
@@ -37,7 +37,7 @@ export namespace applicationFees {
         data: [ApplicationFeesResponse]
     }> {
         return client(`/application_fees?${qs.stringify(params)}`, {}, 'GET', {
-            headers: returnToHeaders({stripeAccount}),
+            headers: returnToHeaders(settings),
         })
     }
 
@@ -48,8 +48,8 @@ export namespace applicationFees {
             metadata?: object
         },
         settings?: {
-            stripeAccount?: string,
-            idempotencyKey?: string 
+            stripeAccount?: string
+            idempotencyKey?: string
         },
     ): Promise<ApplicationFeesRefundResponse> {
         return client(`/application_fees/${id}/refunds`, params, 'POST', {
@@ -60,14 +60,14 @@ export namespace applicationFees {
     export function retrieveRefund(
         fee_id: string,
         refund_id: string,
-        stripeAccount?: string,
+        settings?: { stripeAccount?: string },
     ): Promise<ApplicationFeesRefundResponse> {
         return client(
             `/application_fees/${fee_id}/refunds/${refund_id}`,
             {},
             'GET',
             {
-                headers: returnToHeaders({stripeAccount}),
+                headers: returnToHeaders(settings),
             },
         )
     }
@@ -79,8 +79,8 @@ export namespace applicationFees {
             metadata?: object
         },
         settings?: {
-            stripeAccount?: string,
-            idempotencyKey?: string 
+            stripeAccount?: string
+            idempotencyKey?: string
         },
     ): Promise<ApplicationFeesRefundResponse> {
         return client(
@@ -100,7 +100,7 @@ export namespace applicationFees {
             ending_before?: string
             starting_after?: string
         },
-        stripeAccount?: string,
+        settings?: { stripeAccount?: string },
     ): Promise<{
         object: string
         url: string
@@ -112,7 +112,7 @@ export namespace applicationFees {
             {},
             'GET',
             {
-                headers: returnToHeaders({stripeAccount}),
+                headers: returnToHeaders(settings),
             },
         )
     }

@@ -13,14 +13,14 @@ export namespace reporting {
                     currency?: string
                     interval_end?: number
                     interval_start?: number
-                    payout?: string 
+                    payout?: string
                     reporting_category?: string
                     timezone?: string
-                },
+                }
             },
             settings?: {
-                stripeAccount?: string,
-                idempotencyKey?: string 
+                stripeAccount?: string
+                idempotencyKey?: string
             },
         ): Promise<ReportRunResponse> {
             return client(`/reporting/report_runs`, params, 'POST', {
@@ -30,10 +30,10 @@ export namespace reporting {
 
         export function retrieve(
             id: string,
-            stripeAccount?: string,
+            settings?: { stripeAccount?: string },
         ): Promise<ReportRunResponse> {
             return client(`/reporting/report_runs/${id}`, {}, 'GET', {
-                headers: returnToHeaders({stripeAccount}),
+                headers: returnToHeaders(settings),
             })
         }
 
@@ -49,7 +49,7 @@ export namespace reporting {
                 limit?: number
                 starting_after?: string
             },
-            stripeAccount?: string,
+            settings?: { stripeAccount?: string },
         ): Promise<{
             object: string
             url: string
@@ -61,7 +61,7 @@ export namespace reporting {
                 {},
                 'GET',
                 {
-                    headers: returnToHeaders({stripeAccount}),
+                    headers: returnToHeaders(settings),
                 },
             )
         }
@@ -70,23 +70,23 @@ export namespace reporting {
     export namespace reportTypes {
         export function retrieve(
             id: string,
-            stripeAccount?: string,
+            settings?: { stripeAccount?: string },
         ): Promise<ReportTypeResponse> {
             return client(`/reporting/report_types/${id}`, {}, 'GET', {
-                headers: returnToHeaders({stripeAccount}),
+                headers: returnToHeaders(settings),
             })
         }
 
-        export function list(
-            stripeAccount?: string,
-        ): Promise<{
+        export function list(settings?: {
+            stripeAccount?: string
+        }): Promise<{
             object: string
             url: string
             has_more: boolean
             data: [ReportTypeResponse]
         }> {
             return client(`/reporting/report_types`, {}, 'GET', {
-                headers: returnToHeaders({stripeAccount}),
+                headers: returnToHeaders(settings),
             })
         }
     }

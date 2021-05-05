@@ -16,8 +16,8 @@ export namespace topups {
             transfer_group?: string
         },
         settings?: {
-            stripeAccount?: string,
-            idempotencyKey?: string 
+            stripeAccount?: string
+            idempotencyKey?: string
         },
     ): Promise<TopUpsResponse> {
         return client('/topups', params, 'POST', {
@@ -27,10 +27,10 @@ export namespace topups {
 
     export function retrieve(
         id: string,
-        stripeAccount?: string,
+        settings?: { stripeAccount?: string },
     ): Promise<TopUpsResponse> {
         return client(`/topups/${id}`, {}, 'GET', {
-            headers: returnToHeaders({stripeAccount}),
+            headers: returnToHeaders(settings),
         })
     }
 
@@ -41,8 +41,8 @@ export namespace topups {
             metadata?: object
         },
         settings?: {
-            stripeAccount?: string,
-            idempotencyKey?: string 
+            stripeAccount?: string
+            idempotencyKey?: string
         },
     ): Promise<TopUpsResponse> {
         return client(`/topups/${id}`, params, 'POST', {
@@ -69,7 +69,7 @@ export namespace topups {
             limit?: number
             starting_after?: string
         },
-        stripeAccount?: string,
+        settings?: { stripeAccount?: string },
     ): Promise<{
         object: string
         url: string
@@ -77,15 +77,15 @@ export namespace topups {
         data: [TopUpsResponse]
     }> {
         return client(`/topups?${qs.stringify(params)}`, {}, 'GET', {
-            headers: returnToHeaders({stripeAccount}),
+            headers: returnToHeaders(settings),
         })
     }
 
     export function cancel(
         id: string,
         settings?: {
-            stripeAccount?: string,
-            idempotencyKey?: string 
+            stripeAccount?: string
+            idempotencyKey?: string
         },
     ): Promise<TopUpsResponse> {
         return client(`/topups/${id}/cancel`, {}, 'POST', {

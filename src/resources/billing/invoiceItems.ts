@@ -22,7 +22,7 @@ export namespace invoiceItems {
                 {
                     coupon?: string
                     discount?: string
-                }
+                },
             ]
             invoice?: string
             price_data?: {
@@ -37,8 +37,8 @@ export namespace invoiceItems {
             unit_amount_decimal?: number
         },
         settings?: {
-            stripeAccount?: string,
-            idempotencyKey?: string 
+            stripeAccount?: string
+            idempotencyKey?: string
         },
     ): Promise<InvoiceItemsResponse> {
         return client(`/invoiceitems`, params, 'POST', {
@@ -48,10 +48,10 @@ export namespace invoiceItems {
 
     export function retrieve(
         id: string,
-        stripeAccount?: string,
+        settings?: { stripeAccount?: string },
     ): Promise<InvoiceItemsResponse> {
         return client(`/invoiceitems/${id}`, {}, 'GET', {
-            headers: returnToHeaders({stripeAccount}),
+            headers: returnToHeaders(settings),
         })
     }
 
@@ -80,8 +80,8 @@ export namespace invoiceItems {
             unit_amount_decimal?: number
         },
         settings?: {
-            stripeAccount?: string,
-            idempotencyKey?: string 
+            stripeAccount?: string
+            idempotencyKey?: string
         },
     ): Promise<InvoiceItemsResponse> {
         return client(`/invoiceitems/${id}`, params, 'POST', {
@@ -91,14 +91,14 @@ export namespace invoiceItems {
 
     export function del(
         id: string,
-        stripeAccount?: string,
+        settings?: { stripeAccount?: string },
     ): Promise<{
         id: string
         object: string
         deleted: boolean
     }> {
         return client(`/invoiceitems/${id}`, {}, 'DELETE', {
-            headers: returnToHeaders({stripeAccount}),
+            headers: returnToHeaders(settings),
         })
     }
 
@@ -112,7 +112,7 @@ export namespace invoiceItems {
             pending?: boolean
             starting_after?: string
         },
-        stripeAccount?: string,
+        settings?: { stripeAccount?: string },
     ): Promise<{
         object: string
         url: string
@@ -120,7 +120,7 @@ export namespace invoiceItems {
         data: [InvoiceItemsResponse]
     }> {
         return client(`/invoiceitems?${qs.stringify(params)}`, {}, 'GET', {
-            headers: returnToHeaders({stripeAccount}),
+            headers: returnToHeaders(settings),
         })
     }
 }

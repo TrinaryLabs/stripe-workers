@@ -17,8 +17,8 @@ export namespace payouts {
             source_type?: string
         },
         settings?: {
-            stripeAccount?: string,
-            idempotencyKey?: string 
+            stripeAccount?: string
+            idempotencyKey?: string
         },
     ): Promise<PayoutsResponse> {
         return client('/payouts', params, 'POST', {
@@ -28,10 +28,10 @@ export namespace payouts {
 
     export function retrieve(
         id: string,
-        stripeAccount?: string,
+        settings?: { stripeAccount?: string },
     ): Promise<PayoutsResponse> {
         return client(`/payouts/${id}`, {}, 'GET', {
-            headers: returnToHeaders({stripeAccount}),
+            headers: returnToHeaders(settings),
         })
     }
 
@@ -41,8 +41,8 @@ export namespace payouts {
             metadata?: object
         },
         settings?: {
-            stripeAccount?: string,
-            idempotencyKey?: string 
+            stripeAccount?: string
+            idempotencyKey?: string
         },
     ): Promise<PayoutsResponse> {
         return client(`/payouts/${id}`, params, 'POST', {
@@ -70,7 +70,7 @@ export namespace payouts {
             limit?: number
             starting_after?: string
         },
-        stripeAccount?: string,
+        settings?: { stripeAccount?: string },
     ): Promise<{
         object: string
         url: string
@@ -78,15 +78,15 @@ export namespace payouts {
         data: [PayoutsResponse]
     }> {
         return client(`/payouts?${qs.stringify(params)}`, {}, 'GET', {
-            headers: returnToHeaders({stripeAccount}),
+            headers: returnToHeaders(settings),
         })
     }
 
     export function cancel(
         id: string,
         settings?: {
-            stripeAccount?: string,
-            idempotencyKey?: string 
+            stripeAccount?: string
+            idempotencyKey?: string
         },
     ): Promise<PayoutsResponse> {
         return client(`/payouts/${id}/cancel`, {}, 'POST', {
@@ -100,8 +100,8 @@ export namespace payouts {
             metadata?: object
         },
         settings?: {
-            stripeAccount?: string,
-            idempotencyKey?: string 
+            stripeAccount?: string
+            idempotencyKey?: string
         },
     ): Promise<PayoutsResponse> {
         return client(`/payouts/${id}/reverse`, params, 'POST', {

@@ -1,4 +1,4 @@
-import Stripe from 'https://cdn.skypack.dev/stripe-workers@0.9.0-beta?dts';
+import Stripe from 'https://cdn.skypack.dev/stripe-workers@0.9.0-beta?dts'
 import { Router } from 'https://cdn.skypack.dev/itty-router?dts'
 
 const stripe = new Stripe.Stripe('sk_test_4eC39HqLyjWDarjtT1zdp7dc')
@@ -61,44 +61,44 @@ const router = Router()
 
 // @ts-ignore The method is not defined in types
 router.get(
-  '*',
-  () =>
-    new Response(html, {
-      headers: {
-        'content-type': 'text/html;charset=UTF-8',
-      },
-    }),
+    '*',
+    () =>
+        new Response(html, {
+            headers: {
+                'content-type': 'text/html;charset=UTF-8',
+            },
+        }),
 )
 
 // @ts-ignore The method is not defined in types
 router.post('/create-checkout-session', async (_) => {
-  try {
-    const session = await stripe.checkout.sessions.create({
-      payment_method_types: ['card'],
-      line_items: [
-        {
-          price_data: {
-            currency: 'usd',
-            product_data: {
-              name: 'Stubborn Attachments',
-              images: ['https://i.imgur.com/EHyR2nP.png'],
-            },
-            unit_amount: 2000,
-          },
-          quantity: 1,
-        },
-      ],
-      mode: 'payment',
-      success_url: `https://example.com/success.html`,
-      cancel_url: `https://example.com/cancel.html`,
-    })
+    try {
+        const session = await stripe.checkout.sessions.create({
+            payment_method_types: ['card'],
+            line_items: [
+                {
+                    price_data: {
+                        currency: 'usd',
+                        product_data: {
+                            name: 'Stubborn Attachments',
+                            images: ['https://i.imgur.com/EHyR2nP.png'],
+                        },
+                        unit_amount: 2000,
+                    },
+                    quantity: 1,
+                },
+            ],
+            mode: 'payment',
+            success_url: `https://example.com/success.html`,
+            cancel_url: `https://example.com/cancel.html`,
+        })
 
-    return new Response(JSON.stringify({ id: session.id }))
-  } catch (error) {
-    return new Response(JSON.stringify({ error: error }), {
-      status: 500,
-    })
-  }
+        return new Response(JSON.stringify({ id: session.id }))
+    } catch (error) {
+        return new Response(JSON.stringify({ error: error }), {
+            status: 500,
+        })
+    }
 })
 
 // @ts-ignore The method is not defined in types
@@ -106,6 +106,6 @@ router.all('*', () => new Response('Not Found.', { status: 404 }))
 
 // @ts-ignore The method is not defined in types
 addEventListener('fetch', (event) => {
-  // @ts-ignore The method is not defined in types
-  return event.respondWith(router.handle(event.request));
+    // @ts-ignore The method is not defined in types
+    return event.respondWith(router.handle(event.request))
 })

@@ -18,7 +18,7 @@ export namespace orders {
                     parent?: string
                     quantity?: number
                     type?: string
-                }
+                },
             ]
             metadata?: object
             shipping?: {
@@ -36,8 +36,8 @@ export namespace orders {
             coupon?: string
         },
         settings?: {
-            stripeAccount?: string,
-            idempotencyKey?: string 
+            stripeAccount?: string
+            idempotencyKey?: string
         },
     ): Promise<OrdersResponse> {
         return client('/orders', params, 'POST', {
@@ -47,10 +47,10 @@ export namespace orders {
 
     export function retrieve(
         id: string,
-        stripeAccount?: string,
+        settings?: { stripeAccount?: string },
     ): Promise<OrdersResponse> {
         return client(`/orders/${id}`, {}, 'GET', {
-            headers: returnToHeaders({stripeAccount}),
+            headers: returnToHeaders(settings),
         })
     }
 
@@ -67,8 +67,8 @@ export namespace orders {
             selected_shipping_method?: string
         },
         settings?: {
-            stripeAccount?: string,
-            idempotencyKey?: string 
+            stripeAccount?: string
+            idempotencyKey?: string
         },
     ): Promise<OrdersResponse> {
         return client(`/orders/${id}`, params, 'POST', {
@@ -86,8 +86,8 @@ export namespace orders {
             application_fee?: number
         },
         settings?: {
-            stripeAccount?: string,
-            idempotencyKey?: string 
+            stripeAccount?: string
+            idempotencyKey?: string
         },
     ): Promise<OrdersResponse> {
         return client(`/orders/${id}`, params, 'POST', {
@@ -137,7 +137,7 @@ export namespace orders {
             }
             upstream_ids?: string[]
         },
-        stripeAccount?: string,
+        settings?: { stripeAccount?: string },
     ): Promise<{
         object: string
         url: string
@@ -145,7 +145,7 @@ export namespace orders {
         data: [OrdersResponse]
     }> {
         return client(`/orders?${qs.stringify(params)}`, {}, 'GET', {
-            headers: returnToHeaders({stripeAccount}),
+            headers: returnToHeaders(settings),
         })
     }
 
@@ -160,12 +160,12 @@ export namespace orders {
                     parent?: string
                     quantity?: number
                     type?: string
-                }
+                },
             ]
         },
         settings?: {
-            stripeAccount?: string,
-            idempotencyKey?: string 
+            stripeAccount?: string
+            idempotencyKey?: string
         },
     ): Promise<{
         id: string
@@ -181,7 +181,7 @@ export namespace orders {
                 parent?: string
                 quantity?: number
                 type?: string
-            }
+            },
         ]
         livemode: boolean
         order: string

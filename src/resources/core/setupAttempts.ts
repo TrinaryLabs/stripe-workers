@@ -18,7 +18,7 @@ export namespace setupAttempts {
             limit?: number
             starting_after?: string
         },
-        stripeAccount?: string,
+        settings?: { stripeAccount?: string },
     ): Promise<{
         object: string
         url: string
@@ -26,7 +26,7 @@ export namespace setupAttempts {
         data: [SetupAttenptsResponse]
     }> {
         return client(`/setup_attempts?${qs.stringify(params)}`, {}, 'GET', {
-            headers: returnToHeaders({stripeAccount}),
+            headers: returnToHeaders(settings),
         })
     }
 }

@@ -16,8 +16,8 @@ export namespace files {
             }
         },
         settings?: {
-            stripeAccount?: string,
-            idempotencyKey?: string 
+            stripeAccount?: string
+            idempotencyKey?: string
         },
     ): Promise<FilesResponse> {
         return client('/files', params, 'POST', {
@@ -28,10 +28,10 @@ export namespace files {
 
     export function retrieve(
         id: string,
-        stripeAccount?: string,
+        settings?: { stripeAccount?: string },
     ): Promise<FilesResponse> {
         return client(`/files/${id}`, {}, 'GET', {
-            headers: returnToHeaders({stripeAccount}),
+            headers: returnToHeaders(settings),
         })
     }
 
@@ -48,7 +48,7 @@ export namespace files {
             limit?: number
             starting_after?: string
         },
-        stripeAccount?: string,
+        settings?: { stripeAccount?: string },
     ): Promise<{
         object: string
         url: string
@@ -56,7 +56,7 @@ export namespace files {
         data: [FilesResponse]
     }> {
         return client(`/files?${qs.stringify(params)}`, {}, 'GET', {
-            headers: returnToHeaders({stripeAccount}),
+            headers: returnToHeaders(settings),
         })
     }
 }

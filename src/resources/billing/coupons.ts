@@ -21,8 +21,8 @@ export namespace coupons {
             redeem_by?: number
         },
         settings?: {
-            stripeAccount?: string,
-            idempotencyKey?: string 
+            stripeAccount?: string
+            idempotencyKey?: string
         },
     ): Promise<CouponsResponse> {
         return client('/coupons', params, 'POST', {
@@ -32,10 +32,10 @@ export namespace coupons {
 
     export function retrieve(
         id: string,
-        stripeAccount?: string,
+        settings?: { stripeAccount?: string },
     ): Promise<CouponsResponse> {
         return client(`/coupons/${id}`, {}, 'GET', {
-            headers: returnToHeaders({stripeAccount}),
+            headers: returnToHeaders(settings),
         })
     }
 
@@ -46,8 +46,8 @@ export namespace coupons {
             name?: string
         },
         settings?: {
-            stripeAccount?: string,
-            idempotencyKey?: string 
+            stripeAccount?: string
+            idempotencyKey?: string
         },
     ): Promise<CouponsResponse> {
         return client(`/coupons/${id}`, params, 'POST', {
@@ -57,14 +57,14 @@ export namespace coupons {
 
     export function del(
         id: string,
-        stripeAccount?: string,
+        settings?: { stripeAccount?: string },
     ): Promise<{
         id: string
         object: string
         deleted: boolean
     }> {
         return client(`/coupons/${id}`, {}, 'DELETE', {
-            headers: returnToHeaders({stripeAccount}),
+            headers: returnToHeaders(settings),
         })
     }
 
@@ -75,7 +75,7 @@ export namespace coupons {
             limit?: number
             starting_after?: string
         },
-        stripeAccount?: string,
+        settings?: { stripeAccount?: string },
     ): Promise<{
         object: string
         url: string
@@ -83,7 +83,7 @@ export namespace coupons {
         data: [CouponsResponse]
     }> {
         return client(`/coupons?${qs.stringify(params)}`, {}, 'GET', {
-            headers: returnToHeaders({stripeAccount}),
+            headers: returnToHeaders(settings),
         })
     }
 }

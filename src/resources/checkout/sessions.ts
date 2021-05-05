@@ -30,7 +30,7 @@ export namespace checkout {
                             recurring?: {
                                 interval: string
                                 interval_count?: number
-                            } 
+                            }
                         }
                         adjustable_quantity?: {
                             enabled: boolean
@@ -41,11 +41,11 @@ export namespace checkout {
                         currency?: string
                         description?: string
                         dynamic_tax_rates?: [string]
-                        images?: [string] 
+                        images?: [string]
                         name?: string
                         quantity?: number
                         tax_rates?: [string]
-                    }
+                    },
                 ]
                 metadata?: object
                 allow_promotion_codes?: boolean
@@ -110,7 +110,7 @@ export namespace checkout {
                             plan: string
                             quantity?: number
                             tax_rates?: [string]
-                        }
+                        },
                     ]
                     metadata?: object
                     transfer_data?: {
@@ -122,21 +122,21 @@ export namespace checkout {
                 }
             },
             settings?: {
-                stripeAccount?: string,
-                idempotencyKey?: string 
+                stripeAccount?: string
+                idempotencyKey?: string
             },
         ): Promise<CheckoutSessionsResponse> {
             return client('/checkout/sessions', params, 'POST', {
-                headers: returnToHeaders(settings)
+                headers: returnToHeaders(settings),
             })
         }
 
         export async function retrieve(
             id: string,
-            stripeAccount?: string,
+            settings?: { stripeAccount?: string },
         ): Promise<CheckoutSessionsResponse> {
             return client(`/checkout/sessions/${id}`, {}, 'GET', {
-                headers: returnToHeaders({stripeAccount})
+                headers: returnToHeaders(settings),
             })
         }
 
@@ -148,7 +148,7 @@ export namespace checkout {
                 ending_before?: string
                 starting_after?: string
             },
-            stripeAccount?: string,
+            settings?: { stripeAccount?: string },
         ): Promise<{
             object: string
             url: string
@@ -160,7 +160,7 @@ export namespace checkout {
                 {},
                 'GET',
                 {
-                    headers: returnToHeaders({stripeAccount})
+                    headers: returnToHeaders(settings),
                 },
             )
         }
@@ -172,7 +172,7 @@ export namespace checkout {
                 limit?: number
                 starting_after?: string
             },
-            stripeAccount?: string,
+            settings?: { stripeAccount?: string },
         ): Promise<{
             object: string
             url: string
@@ -184,7 +184,7 @@ export namespace checkout {
                 {},
                 'GET',
                 {
-                    headers: returnToHeaders({stripeAccount})
+                    headers: returnToHeaders(settings),
                 },
             )
         }

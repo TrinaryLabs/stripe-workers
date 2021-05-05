@@ -28,8 +28,8 @@ export namespace products {
             url?: string
         },
         settings?: {
-            stripeAccount?: string,
-            idempotencyKey?: string 
+            stripeAccount?: string
+            idempotencyKey?: string
         },
     ): Promise<ProductsResponse> {
         return client('/products', params, 'POST', {
@@ -39,10 +39,10 @@ export namespace products {
 
     export function retrieve(
         id: string,
-        stripeAccount?: string,
+        settings?: { stripeAccount?: string },
     ): Promise<ProductsResponse> {
         return client(`/products/${id}`, {}, 'GET', {
-            headers: returnToHeaders({stripeAccount}),
+            headers: returnToHeaders(settings),
         })
     }
 
@@ -69,8 +69,8 @@ export namespace products {
             url?: string
         },
         settings?: {
-            stripeAccount?: string,
-            idempotencyKey?: string 
+            stripeAccount?: string
+            idempotencyKey?: string
         },
     ): Promise<ProductsResponse> {
         return client(`/products/${id}`, params, 'POST', {
@@ -94,7 +94,7 @@ export namespace products {
             starting_after?: string
             url?: string
         },
-        stripeAccount?: string,
+        settings?: { stripeAccount?: string },
     ): Promise<{
         object: string
         url: string
@@ -102,16 +102,16 @@ export namespace products {
         data: [ProductsResponse]
     }> {
         return client(`/products?${qs.stringify(params)}`, {}, 'GET', {
-            headers: returnToHeaders({stripeAccount}),
+            headers: returnToHeaders(settings),
         })
     }
 
     export function del(
         id: string,
-        stripeAccount?: string,
+        settings?: { stripeAccount?: string },
     ): Promise<ProductsResponse> {
         return client(`/products/${id}`, {}, 'DELETE', {
-            headers: returnToHeaders({stripeAccount}),
+            headers: returnToHeaders(settings),
         })
     }
 }

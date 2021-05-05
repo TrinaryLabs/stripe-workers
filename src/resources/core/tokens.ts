@@ -76,7 +76,7 @@ export namespace tokens {
                             back?: string
                             front?: string
                         }
-                    } 
+                    }
                 }
                 individual?: {
                     address?: {
@@ -208,8 +208,8 @@ export namespace tokens {
             }
         },
         settings?: {
-            stripeAccount?: string,
-            idempotencyKey?: string 
+            stripeAccount?: string
+            idempotencyKey?: string
         },
     ): Promise<TokensResponse> {
         return client('/tokens', params, 'POST', {
@@ -219,10 +219,10 @@ export namespace tokens {
 
     export function retrieve(
         id: string,
-        stripeAccount?: string,
+        settings?: { stripeAccount?: string },
     ): Promise<TokensResponse> {
         return client(`/tokens/${id}`, {}, 'GET', {
-            headers: returnToHeaders({stripeAccount}),
+            headers: returnToHeaders(settings),
         })
     }
 }

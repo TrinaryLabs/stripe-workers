@@ -61,7 +61,7 @@ export namespace sources {
                         parent?: string
                         quantity?: number
                         type?: string
-                    }
+                    },
                 ]
                 shipping?: {
                     address: {
@@ -82,8 +82,8 @@ export namespace sources {
             usage?: string
         },
         settings?: {
-            stripeAccount?: string,
-            idempotencyKey?: string 
+            stripeAccount?: string
+            idempotencyKey?: string
         },
     ): Promise<SourcesResponse> {
         return client('/sources', params, 'POST', {
@@ -96,10 +96,10 @@ export namespace sources {
         params: {
             client_secret: string
         },
-        stripeAccount?: string,
+        settings?: { stripeAccount?: string },
     ): Promise<SourcesResponse> {
         return client(`/sources/${id}?${qs.stringify(params)}`, {}, 'GET', {
-            headers: returnToHeaders({stripeAccount}),
+            headers: returnToHeaders(settings),
         })
     }
 
@@ -151,7 +151,7 @@ export namespace sources {
                         parent?: string
                         quantity?: number
                         type?: string
-                    }
+                    },
                 ]
                 shipping?: {
                     address: {
@@ -170,8 +170,8 @@ export namespace sources {
             }
         },
         settings?: {
-            stripeAccount?: string,
-            idempotencyKey?: string 
+            stripeAccount?: string
+            idempotencyKey?: string
         },
     ): Promise<SourcesResponse> {
         return client(`/sources/${id}`, params, 'POST', {

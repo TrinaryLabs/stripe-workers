@@ -3,11 +3,13 @@
 An example of stripe-workers with cloudflare workers script
 
 ## start
+
 ```bash
 wrangler dev
 ```
 
-## info 
+## info
+
 This package needs the new way of publishing and developing with wrangler 1.16.
 
 ```bash
@@ -25,6 +27,7 @@ format = "service-worker"
 ```
 
 ## setup
+
 ```js
 import { Stripe } from 'stripe-workers'
 

@@ -10,10 +10,10 @@ export namespace radar {
     export namespace earlyFraudWarnings {
         export function retrieve(
             id: string,
-            stripeAccount?: string,
+            settings?: { stripeAccount?: string },
         ): Promise<EarlyFraudWarningsResponse> {
             return client(`/radar/early_fraud_warnings/${id}`, {}, 'GET', {
-                headers: returnToHeaders({stripeAccount}),
+                headers: returnToHeaders(settings),
             })
         }
 
@@ -24,7 +24,7 @@ export namespace radar {
                 limit?: number
                 starting_after?: string
             },
-            stripeAccount?: string,
+            settings?: { stripeAccount?: string },
         ): Promise<{
             object: string
             url: string
@@ -36,7 +36,7 @@ export namespace radar {
                 {},
                 'GET',
                 {
-                    headers: returnToHeaders({stripeAccount}),
+                    headers: returnToHeaders(settings),
                 },
             )
         }
@@ -51,8 +51,8 @@ export namespace radar {
                 metadata?: object
             },
             settings?: {
-                stripeAccount?: string,
-                idempotencyKey?: string 
+                stripeAccount?: string
+                idempotencyKey?: string
             },
         ): Promise<ValueListResponse> {
             return client(`/radar/value_lists`, params, 'POST', {
@@ -62,10 +62,10 @@ export namespace radar {
 
         export function retrieve(
             id: string,
-            stripeAccount?: string,
+            settings?: { stripeAccount?: string },
         ): Promise<ValueListResponse> {
             return client(`/radar/value_lists/${id}`, {}, 'GET', {
-                headers: returnToHeaders({stripeAccount}),
+                headers: returnToHeaders(settings),
             })
         }
 
@@ -77,8 +77,8 @@ export namespace radar {
                 metadata?: object
             },
             settings?: {
-                stripeAccount?: string,
-                idempotencyKey?: string 
+                stripeAccount?: string
+                idempotencyKey?: string
             },
         ): Promise<ValueListResponse> {
             return client(`/radar/value_lists/${id}`, params, 'POST', {
@@ -88,14 +88,14 @@ export namespace radar {
 
         export function del(
             id: string,
-            stripeAccount?: string,
+            settings?: { stripeAccount?: string },
         ): Promise<{
             id: string
             object: string
             deleted: boolean
         }> {
             return client(`/radar/value_lists/${id}`, {}, 'DELETE', {
-                headers: returnToHeaders({stripeAccount}),
+                headers: returnToHeaders(settings),
             })
         }
 
@@ -113,7 +113,7 @@ export namespace radar {
                 limit?: number
                 starting_after?: string
             },
-            stripeAccount?: string,
+            settings?: { stripeAccount?: string },
         ): Promise<{
             object: string
             url: string
@@ -125,7 +125,7 @@ export namespace radar {
                 {},
                 'GET',
                 {
-                    headers: returnToHeaders({stripeAccount}),
+                    headers: returnToHeaders(settings),
                 },
             )
         }
@@ -138,8 +138,8 @@ export namespace radar {
                 value_list: string
             },
             settings?: {
-                stripeAccount?: string,
-                idempotencyKey?: string 
+                stripeAccount?: string
+                idempotencyKey?: string
             },
         ): Promise<ValueListItemsResponse> {
             return client(`/radar/value_list_items`, params, 'POST', {
@@ -149,23 +149,23 @@ export namespace radar {
 
         export function retrieve(
             id: string,
-            stripeAccount?: string,
+            settings?: { stripeAccount?: string },
         ): Promise<ValueListItemsResponse> {
             return client(`/radar/value_list_items/${id}`, {}, 'GET', {
-                headers: returnToHeaders({stripeAccount}),
+                headers: returnToHeaders(settings),
             })
         }
 
         export function del(
             id: string,
-            stripeAccount?: string,
+            settings?: { stripeAccount?: string },
         ): Promise<{
             id: string
             object: string
             deleted: boolean
         }> {
             return client(`/radar/value_list_items/${id}`, {}, 'DELETE', {
-                headers: returnToHeaders({stripeAccount}),
+                headers: returnToHeaders(settings),
             })
         }
 
@@ -183,7 +183,7 @@ export namespace radar {
                 limit?: number
                 starting_after?: string
             },
-            stripeAccount?: string,
+            settings?: { stripeAccount?: string },
         ): Promise<{
             object: string
             url: string
@@ -195,7 +195,7 @@ export namespace radar {
                 {},
                 'GET',
                 {
-                    headers: returnToHeaders({stripeAccount}),
+                    headers: returnToHeaders(settings),
                 },
             )
         }

@@ -30,8 +30,8 @@ export namespace subscriptionItems {
             tax_rates?: string[]
         },
         settings?: {
-            stripeAccount?: string,
-            idempotencyKey?: string 
+            stripeAccount?: string
+            idempotencyKey?: string
         },
     ): Promise<SubscriptionItemsResponse> {
         return client(`/subscription_items`, params, 'POST', {
@@ -41,10 +41,10 @@ export namespace subscriptionItems {
 
     export function retrieve(
         id: string,
-        stripeAccount?: string,
+        settings?: { stripeAccount?: string },
     ): Promise<SubscriptionItemsResponse> {
         return client(`/subscription_items/${id}`, {}, 'GET', {
-            headers: returnToHeaders({stripeAccount}),
+            headers: returnToHeaders(settings),
         })
     }
 
@@ -74,8 +74,8 @@ export namespace subscriptionItems {
             tax_rates?: string[]
         },
         settings?: {
-            stripeAccount?: string,
-            idempotencyKey?: string 
+            stripeAccount?: string
+            idempotencyKey?: string
         },
     ): Promise<SubscriptionItemsResponse> {
         return client(`/subscription_items/${id}`, params, 'POST', {
@@ -89,14 +89,14 @@ export namespace subscriptionItems {
             clear_usage?: boolean
             proration_date?: number
         },
-        stripeAccount?: string,
+        settings?: { stripeAccount?: string },
     ): Promise<{
         id: string
         object: string
         deleted: boolean
     }> {
         return client(`/subscription_items/${id}`, params, 'DELETE', {
-            headers: returnToHeaders({stripeAccount}),
+            headers: returnToHeaders(settings),
         })
     }
 
@@ -107,7 +107,7 @@ export namespace subscriptionItems {
             limit?: number
             starting_after?: string
         },
-        stripeAccount?: string,
+        settings?: { stripeAccount?: string },
     ): Promise<{
         object: string
         url: string
@@ -119,7 +119,7 @@ export namespace subscriptionItems {
             {},
             'GET',
             {
-                headers: returnToHeaders({stripeAccount}),
+                headers: returnToHeaders(settings),
             },
         )
     }
@@ -132,8 +132,8 @@ export namespace subscriptionItems {
             action?: string
         },
         settings?: {
-            stripeAccount?: string,
-            idempotencyKey?: string 
+            stripeAccount?: string
+            idempotencyKey?: string
         },
     ): Promise<UsageRecordsResponse> {
         return client(
@@ -153,7 +153,7 @@ export namespace subscriptionItems {
             limit?: number
             starting_after?: string
         },
-        stripeAccount?: string,
+        settings?: { stripeAccount?: string },
     ): Promise<{
         object: string
         url: string
@@ -167,7 +167,7 @@ export namespace subscriptionItems {
             {},
             'GET',
             {
-                headers: returnToHeaders({stripeAccount}),
+                headers: returnToHeaders(settings),
             },
         )
     }

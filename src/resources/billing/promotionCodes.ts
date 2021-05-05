@@ -21,8 +21,8 @@ export namespace promotionCodes {
             }
         },
         settings?: {
-            stripeAccount?: string,
-            idempotencyKey?: string 
+            stripeAccount?: string
+            idempotencyKey?: string
         },
     ): Promise<PromotionCodesResponse> {
         return client('/promotion_codes', params, 'POST', {
@@ -37,8 +37,8 @@ export namespace promotionCodes {
             active?: boolean
         },
         settings?: {
-            stripeAccount?: string,
-            idempotencyKey?: string 
+            stripeAccount?: string
+            idempotencyKey?: string
         },
     ): Promise<PromotionCodesResponse> {
         return client(`/promotion_codes/${id}`, params, 'POST', {
@@ -48,10 +48,10 @@ export namespace promotionCodes {
 
     export function retrieve(
         id: string,
-        stripeAccount?: string,
+        settings?: { stripeAccount?: string },
     ): Promise<PromotionCodesResponse> {
         return client(`/promotion_codes/${id}`, {}, 'GET', {
-            headers: returnToHeaders({stripeAccount}),
+            headers: returnToHeaders(settings),
         })
     }
 
@@ -65,7 +65,7 @@ export namespace promotionCodes {
             limit?: number
             starting_after?: string
         },
-        stripeAccount?: string,
+        settings?: { stripeAccount?: string },
     ): Promise<{
         object: string
         url: string
@@ -73,7 +73,7 @@ export namespace promotionCodes {
         data: [PromotionCodesResponse]
     }> {
         return client(`/promotion_codes?${qs.stringify(params)}`, {}, 'GET', {
-            headers: returnToHeaders({stripeAccount}),
+            headers: returnToHeaders(settings),
         })
     }
 }

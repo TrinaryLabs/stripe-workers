@@ -6,10 +6,10 @@ export namespace events {
 
     export function retrieve(
         id: string,
-        stripeAccount?: string,
+        settings?: { stripeAccount?: string },
     ): Promise<EventRetrieveResponse> {
         return client(`/events/${id}`, {}, 'GET', {
-            headers: returnToHeaders({stripeAccount}),
+            headers: returnToHeaders(settings),
         })
     }
 
@@ -28,7 +28,7 @@ export namespace events {
             starting_after?: string
             type?: string
         },
-        stripeAccount?: string,
+        settings?: { stripeAccount?: string },
     ): Promise<{
         object: string
         url: string
@@ -36,7 +36,7 @@ export namespace events {
         data: [EventRetrieveResponse]
     }> {
         return client(`/events?${qs.stringify(params)}`, params, 'GET', {
-            headers: returnToHeaders({stripeAccount}),
+            headers: returnToHeaders(settings),
         })
     }
 }

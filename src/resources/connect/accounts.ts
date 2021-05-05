@@ -130,7 +130,7 @@ export namespace accounts {
                         back?: string
                         front?: string
                     }
-                } 
+                }
             }
             individual?: {
                 address?: {
@@ -284,8 +284,8 @@ export namespace accounts {
             }
         },
         settings?: {
-            stripeAccount?: string,
-            idempotencyKey?: string 
+            stripeAccount?: string
+            idempotencyKey?: string
         },
     ): Promise<AccountsResponse> {
         return client('/accounts', params, 'POST', {
@@ -295,10 +295,10 @@ export namespace accounts {
 
     export function retrieve(
         id: string,
-        stripeAccount?: string,
+        settings?: { stripeAccount?: string },
     ): Promise<AccountsResponse> {
         return client(`/accounts/${id}`, {}, 'GET', {
-            headers: returnToHeaders({stripeAccount}),
+            headers: returnToHeaders(settings),
         })
     }
 
@@ -421,7 +421,7 @@ export namespace accounts {
                         back?: string
                         front?: string
                     }
-                } 
+                }
             }
             individual?: {
                 address?: {
@@ -575,8 +575,8 @@ export namespace accounts {
             }
         },
         settings?: {
-            stripeAccount?: string,
-            idempotencyKey?: string 
+            stripeAccount?: string
+            idempotencyKey?: string
         },
     ): Promise<AccountsResponse> {
         return client(`/accounts/${id}`, params, 'POST', {
@@ -586,24 +586,24 @@ export namespace accounts {
 
     export function del(
         id: string,
-        stripeAccount?: string,
+        settings?: { stripeAccount?: string },
     ): Promise<{
         id: string
         object: string
         deleted: boolean
     }> {
         return client(`/accounts/${id}`, {}, 'DELETE', {
-            headers: returnToHeaders({stripeAccount}),
+            headers: returnToHeaders(settings),
         })
     }
 
     export function reject(
         id: string,
         params: { reason: string },
-        stripeAccount?: string,
+        settings?: { stripeAccount?: string },
     ): Promise<AccountsResponse> {
         return client(`/accounts/${id}/reject`, params, 'POST', {
-            headers: returnToHeaders({stripeAccount}),
+            headers: returnToHeaders(settings),
         })
     }
 
@@ -619,7 +619,7 @@ export namespace accounts {
             ending_before?: string
             starting_after?: string
         },
-        stripeAccount?: string,
+        settings?: { stripeAccount?: string },
     ): Promise<{
         object: string
         url: string
@@ -627,13 +627,13 @@ export namespace accounts {
         data: [AccountsResponse]
     }> {
         return client(`/accounts`, params, 'GET', {
-            headers: returnToHeaders({stripeAccount}),
+            headers: returnToHeaders(settings),
         })
     }
 
     export function createLoginLink(
         id: string,
-        stripeAccount?: string,
+        settings?: { stripeAccount?: string },
     ): Promise<{
         object: string
         created: number
@@ -641,21 +641,21 @@ export namespace accounts {
         id: string
     }> {
         return client(`/accounts/${id}/login_links`, {}, 'POST', {
-            headers: returnToHeaders({stripeAccount}),
+            headers: returnToHeaders(settings),
         })
     }
 
     export function retrieveCapability(
         user_id: string,
         cap_id: string,
-        stripeAccount?: string,
+        settings?: { stripeAccount?: string },
     ): Promise<AccountsCapabilityResponse> {
         return client(
             `/accounts/${user_id}/capabilities/${cap_id}`,
             {},
             'GET',
             {
-                headers: returnToHeaders({stripeAccount}),
+                headers: returnToHeaders(settings),
             },
         )
     }
@@ -667,8 +667,8 @@ export namespace accounts {
             requested?: boolean
         },
         settings?: {
-            stripeAccount?: string,
-            idempotencyKey?: string 
+            stripeAccount?: string
+            idempotencyKey?: string
         },
     ): Promise<AccountsCapabilityResponse> {
         return client(
@@ -683,7 +683,7 @@ export namespace accounts {
 
     export function listCapabilities(
         user_id: string,
-        stripeAccount?: string,
+        settings?: { stripeAccount?: string },
     ): Promise<{
         object: string
         url: string
@@ -691,7 +691,7 @@ export namespace accounts {
         data: [AccountsCapabilityResponse]
     }> {
         return client(`/accounts/${user_id}/capabilities`, {}, 'GET', {
-            headers: returnToHeaders({stripeAccount}),
+            headers: returnToHeaders(settings),
         })
     }
 
@@ -765,8 +765,8 @@ export namespace accounts {
             }
         },
         settings?: {
-            stripeAccount?: string,
-            idempotencyKey?: string 
+            stripeAccount?: string
+            idempotencyKey?: string
         },
     ): Promise<PersonResponse> {
         return client(`/accounts/${user_id}/persons`, params, 'POST', {
@@ -777,10 +777,10 @@ export namespace accounts {
     export function retrievePerson(
         user_id: string,
         person_id: string,
-        stripeAccount?: string,
+        settings?: { stripeAccount?: string },
     ): Promise<PersonResponse> {
         return client(`/accounts/${user_id}/persons/${person_id}`, {}, 'GET', {
-            headers: returnToHeaders({stripeAccount}),
+            headers: returnToHeaders(settings),
         })
     }
 
@@ -855,8 +855,8 @@ export namespace accounts {
             }
         },
         settings?: {
-            stripeAccount?: string,
-            idempotencyKey?: string 
+            stripeAccount?: string
+            idempotencyKey?: string
         },
     ): Promise<PersonResponse> {
         return client(
@@ -872,7 +872,7 @@ export namespace accounts {
     export function deletePerson(
         user_id: string,
         person_id: string,
-        stripeAccount?: string,
+        settings?: { stripeAccount?: string },
     ): Promise<{
         id: string
         object: string
@@ -883,7 +883,7 @@ export namespace accounts {
             {},
             'DELETE',
             {
-                headers: returnToHeaders({stripeAccount}),
+                headers: returnToHeaders(settings),
             },
         )
     }
@@ -901,7 +901,7 @@ export namespace accounts {
             ending_before?: string
             starting_after?: string
         },
-        stripeAccount?: string,
+        settings?: { stripeAccount?: string },
     ): Promise<{
         object: string
         url: string
@@ -913,7 +913,7 @@ export namespace accounts {
             {},
             'GET',
             {
-                headers: returnToHeaders({stripeAccount}),
+                headers: returnToHeaders(settings),
             },
         )
     }
@@ -921,34 +921,36 @@ export namespace accounts {
     export function createExternalAccount(
         id: string,
         params: {
-            external_account: {
-                object: string
-                country?: string
-                currency?: string
-                account_holder_name?: string
-                account_holder_type?: string
-                routing_number?: string
-                account_number: string
-                number?: string
-                exp_month?: number
-                exp_year?: number
-                cvc?: number
-                name?: string
-                metadata?: object
-                default_for_currency?: string
-                address_line1?: string
-                address_line2?: string
-                address_city?: string
-                address_state?: string
-                address_zip?: string
-                address_country?: string
-            } | string
+            external_account:
+                | {
+                      object: string
+                      country?: string
+                      currency?: string
+                      account_holder_name?: string
+                      account_holder_type?: string
+                      routing_number?: string
+                      account_number: string
+                      number?: string
+                      exp_month?: number
+                      exp_year?: number
+                      cvc?: number
+                      name?: string
+                      metadata?: object
+                      default_for_currency?: string
+                      address_line1?: string
+                      address_line2?: string
+                      address_city?: string
+                      address_state?: string
+                      address_zip?: string
+                      address_country?: string
+                  }
+                | string
             metadata?: object
             default_for_currency?: string
         },
         settings?: {
-            stripeAccount?: string,
-            idempotencyKey?: string 
+            stripeAccount?: string
+            idempotencyKey?: string
         },
     ): Promise<AccountBankAccountResponse | AccountCardResponse> {
         return client(`/accounts/${id}/external_accounts`, params, 'POST', {
@@ -959,14 +961,14 @@ export namespace accounts {
     export function retrieveExternalAccount(
         id: string,
         ext_id: string,
-        stripeAccount?: string,
+        settings?: { stripeAccount?: string },
     ): Promise<AccountBankAccountResponse | AccountCardResponse> {
         return client(
             `/accounts/${id}/external_accounts/${ext_id}`,
             {},
             'GET',
             {
-                headers: returnToHeaders({stripeAccount}),
+                headers: returnToHeaders(settings),
             },
         )
     }
@@ -990,8 +992,8 @@ export namespace accounts {
             name?: string
         },
         settings?: {
-            stripeAccount?: string,
-            idempotencyKey?: string 
+            stripeAccount?: string
+            idempotencyKey?: string
         },
     ): Promise<AccountBankAccountResponse | AccountCardResponse> {
         return client(
@@ -1007,7 +1009,7 @@ export namespace accounts {
     export function deleteExternalAccount(
         id: string,
         ext_id: string,
-        stripeAccount?: string,
+        settings?: { stripeAccount?: string },
     ): Promise<{
         id: string
         object: string
@@ -1018,7 +1020,7 @@ export namespace accounts {
             {},
             'DELETE',
             {
-                headers: returnToHeaders({stripeAccount}),
+                headers: returnToHeaders(settings),
             },
         )
     }
@@ -1031,7 +1033,7 @@ export namespace accounts {
             limit?: number
             starting_after?: string
         },
-        stripeAccount?: string,
+        settings?: { stripeAccount?: string },
     ): Promise<{
         object: string
         url: string
@@ -1043,7 +1045,7 @@ export namespace accounts {
             {},
             'GET',
             {
-                headers: returnToHeaders({stripeAccount}),
+                headers: returnToHeaders(settings),
             },
         )
     }

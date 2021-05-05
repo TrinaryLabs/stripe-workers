@@ -27,7 +27,7 @@ export namespace subscriptions {
                     }
                     quantity?: number
                     tax_rates?: [string]
-                }
+                },
             ]
             cancel_at_period_end?: boolean
             default_payment_method?: string
@@ -63,8 +63,8 @@ export namespace subscriptions {
             trial_period_days?: number
         },
         settings?: {
-            stripeAccount?: string,
-            idempotencyKey?: string 
+            stripeAccount?: string
+            idempotencyKey?: string
         },
     ): Promise<SubscriptionResponse> {
         return client(`/subscriptions`, params, 'POST', {
@@ -74,10 +74,10 @@ export namespace subscriptions {
 
     export function retrieve(
         id: string,
-        stripeAccount?: string,
+        settings?: { stripeAccount?: string },
     ): Promise<SubscriptionResponse> {
         return client(`/subscriptions/${id}`, {}, 'GET', {
-            headers: returnToHeaders({stripeAccount}),
+            headers: returnToHeaders(settings),
         })
     }
 
@@ -103,7 +103,7 @@ export namespace subscriptions {
                     }
                     quantity?: number
                     tax_rates?: [string]
-                }
+                },
             ]
             cancel_at_period_end?: boolean
             metadata?: object
@@ -141,8 +141,8 @@ export namespace subscriptions {
             trial_from_plan?: boolean
         },
         settings?: {
-            stripeAccount?: string,
-            idempotencyKey?: string 
+            stripeAccount?: string
+            idempotencyKey?: string
         },
     ): Promise<SubscriptionResponse> {
         return client(`/subscriptions/${id}`, params, 'POST', {
@@ -156,10 +156,10 @@ export namespace subscriptions {
             invoice_now?: boolean
             prorate?: boolean
         },
-        stripeAccount?: string,
+        settings?: { stripeAccount?: string },
     ): Promise<SubscriptionResponse> {
         return client(`/subscriptions/${id}`, params, 'DELETE', {
-            headers: returnToHeaders({stripeAccount}),
+            headers: returnToHeaders(settings),
         })
     }
 
@@ -191,7 +191,7 @@ export namespace subscriptions {
             limit?: number
             starting_after?: string
         },
-        stripeAccount?: string,
+        settings?: { stripeAccount?: string },
     ): Promise<{
         object: string
         url: string
@@ -199,19 +199,19 @@ export namespace subscriptions {
         data: [SubscriptionResponse]
     }> {
         return client(`/subscriptions?${qs.stringify(params)}`, params, 'GET', {
-            headers: returnToHeaders({stripeAccount}),
+            headers: returnToHeaders(settings),
         })
     }
 
     export function deleteDiscount(
         id: string,
-        stripeAccount?: string,
+        settings?: { stripeAccount?: string },
     ): Promise<{
         object: string
         deleted: boolean
     }> {
         return client(`/subscriptions/${id}/discount`, {}, 'DELETE', {
-            headers: returnToHeaders({stripeAccount}),
+            headers: returnToHeaders(settings),
         })
     }
 }
