@@ -1,5 +1,6 @@
 import qs from 'qs'
 import { CouponsResponse } from '../../types'
+import { returnToHeaders } from '../../util'
 export namespace coupons {
     export let client: Function
 
@@ -19,19 +20,22 @@ export namespace coupons {
             max_redemtions?: number
             redeem_by?: number
         },
-        stripeAccount?: string,
+        settings?: {
+            stripeAccount?: string
+            idempotencyKey?: string
+        },
     ): Promise<CouponsResponse> {
         return client('/coupons', params, 'POST', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders(settings),
         })
     }
 
     export function retrieve(
         id: string,
-        stripeAccount?: string,
+        settings?: { stripeAccount?: string },
     ): Promise<CouponsResponse> {
         return client(`/coupons/${id}`, {}, 'GET', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders(settings),
         })
     }
 
@@ -41,23 +45,26 @@ export namespace coupons {
             metadata?: object
             name?: string
         },
-        stripeAccount?: string,
+        settings?: {
+            stripeAccount?: string
+            idempotencyKey?: string
+        },
     ): Promise<CouponsResponse> {
         return client(`/coupons/${id}`, params, 'POST', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders(settings),
         })
     }
 
     export function del(
         id: string,
-        stripeAccount?: string,
+        settings?: { stripeAccount?: string },
     ): Promise<{
         id: string
         object: string
         deleted: boolean
     }> {
         return client(`/coupons/${id}`, {}, 'DELETE', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders(settings),
         })
     }
 
@@ -68,7 +75,7 @@ export namespace coupons {
             limit?: number
             starting_after?: string
         },
-        stripeAccount?: string,
+        settings?: { stripeAccount?: string },
     ): Promise<{
         object: string
         url: string
@@ -76,7 +83,7 @@ export namespace coupons {
         data: [CouponsResponse]
     }> {
         return client(`/coupons?${qs.stringify(params)}`, {}, 'GET', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders(settings),
         })
     }
 }

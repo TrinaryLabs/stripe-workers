@@ -1,4 +1,5 @@
 import { TokensResponse } from '../../types'
+import { returnToHeaders } from '../../util'
 export namespace tokens {
     export let client: Function
 
@@ -75,7 +76,7 @@ export namespace tokens {
                             back?: string
                             front?: string
                         }
-                    } 
+                    }
                 }
                 individual?: {
                     address?: {
@@ -206,19 +207,22 @@ export namespace tokens {
                 cvc?: string
             }
         },
-        stripeAccount?: string,
+        settings?: {
+            stripeAccount?: string
+            idempotencyKey?: string
+        },
     ): Promise<TokensResponse> {
         return client('/tokens', params, 'POST', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders(settings),
         })
     }
 
     export function retrieve(
         id: string,
-        stripeAccount?: string,
+        settings?: { stripeAccount?: string },
     ): Promise<TokensResponse> {
         return client(`/tokens/${id}`, {}, 'GET', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders(settings),
         })
     }
 }

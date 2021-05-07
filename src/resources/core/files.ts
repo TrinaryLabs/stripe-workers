@@ -1,5 +1,6 @@
 import qs from 'qs'
 import { FilesResponse } from '../../types'
+import { returnToHeaders } from '../../util'
 
 export namespace files {
     export let client: Function
@@ -14,20 +15,23 @@ export namespace files {
                 metadata?: object
             }
         },
-        stripeAccount?: string,
+        settings?: {
+            stripeAccount?: string
+            idempotencyKey?: string
+        },
     ): Promise<FilesResponse> {
         return client('/files', params, 'POST', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders(settings),
             host: 'https://files.stripe.com/v1',
         })
     }
 
     export function retrieve(
         id: string,
-        stripeAccount?: string,
+        settings?: { stripeAccount?: string },
     ): Promise<FilesResponse> {
         return client(`/files/${id}`, {}, 'GET', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders(settings),
         })
     }
 
@@ -44,7 +48,7 @@ export namespace files {
             limit?: number
             starting_after?: string
         },
-        stripeAccount?: string,
+        settings?: { stripeAccount?: string },
     ): Promise<{
         object: string
         url: string
@@ -52,7 +56,7 @@ export namespace files {
         data: [FilesResponse]
     }> {
         return client(`/files?${qs.stringify(params)}`, {}, 'GET', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders(settings),
         })
     }
 }

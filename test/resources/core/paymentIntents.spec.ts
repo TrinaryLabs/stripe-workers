@@ -12,7 +12,26 @@ describe('Payment Intents Resource', async () => {
                 currency: 'usd',
                 payment_method_types: ['card'],
             }
-            const response = await stripe.paymentIntents.create(params)
+            const response = await stripe.paymentIntents.create(params, {
+                idempotencyKey: 'hello123',
+            })
+            lastPaymentId = response.id
+
+            expect(response.amount).to.equal(200)
+            expect(response.currency).to.equal('usd')
+        })
+    })
+
+    describe('create - with same idempotency key', async () => {
+        it('Sends the correct request', async () => {
+            const params = {
+                amount: 200,
+                currency: 'usd',
+                payment_method_types: ['card'],
+            }
+            const response = await stripe.paymentIntents.create(params, {
+                idempotencyKey: 'hello123',
+            })
             lastPaymentId = response.id
 
             expect(response.amount).to.equal(200)
@@ -30,7 +49,9 @@ describe('Payment Intents Resource', async () => {
 
     describe('retrieve', async () => {
         it('Sends the correct request', async () => {
-            const response = await stripe.paymentIntents.retrieve(PAYMENT_INTENT_TEST_ID)
+            const response = await stripe.paymentIntents.retrieve(
+                PAYMENT_INTENT_TEST_ID,
+            )
 
             expect(response.id).to.equal(PAYMENT_INTENT_TEST_ID)
         })
@@ -38,9 +59,12 @@ describe('Payment Intents Resource', async () => {
 
     describe('update', async () => {
         it('Sends the correct request', async () => {
-            const response = await stripe.paymentIntents.update(PAYMENT_INTENT_TEST_ID, {
-                metadata: { key: 'value' },
-            })
+            const response = await stripe.paymentIntents.update(
+                PAYMENT_INTENT_TEST_ID,
+                {
+                    metadata: { key: 'value' },
+                },
+            )
 
             expect(response.id).to.equal(PAYMENT_INTENT_TEST_ID)
         })

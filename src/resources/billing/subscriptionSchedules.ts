@@ -1,5 +1,6 @@
 import qs from 'qs'
 import { SubscriptionSchedulesResponse } from '../../types'
+import { returnToHeaders } from '../../util'
 export namespace subscriptionSchedules {
     export let client: Function
 
@@ -27,7 +28,7 @@ export namespace subscriptionSchedules {
                             }
                             quantity?: number
                             tax_rates?: [string]
-                        }
+                        },
                     ]
                     add_invoice_items?: [
                         {
@@ -44,7 +45,7 @@ export namespace subscriptionSchedules {
                             }
                             quantity?: number
                             tax_rates?: [string]
-                        }
+                        },
                     ]
                     application_fee_percent?: number
                     billing_cycle_anchor?: string
@@ -68,7 +69,7 @@ export namespace subscriptionSchedules {
                     }
                     trial?: boolean
                     trial_end?: number
-                }
+                },
             ]
             start_date?: number
             dafault_settings?: {
@@ -91,19 +92,22 @@ export namespace subscriptionSchedules {
             end_behavior?: string
             from_subscriptions?: string
         },
-        stripeAccount?: string,
+        settings?: {
+            stripeAccount?: string
+            idempotencyKey?: string
+        },
     ): Promise<SubscriptionSchedulesResponse> {
         return client(`/subscription_schedules`, params, 'POST', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders(settings),
         })
     }
 
     export function retrieve(
         id: string,
-        stripeAccount?: string,
+        settings?: { stripeAccount?: string },
     ): Promise<SubscriptionSchedulesResponse> {
         return client(`/subscription_schedules/${id}`, {}, 'GET', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders(settings),
         })
     }
 
@@ -147,7 +151,7 @@ export namespace subscriptionSchedules {
                             }
                             quantity?: number
                             tax_rates?: [string]
-                        }
+                        },
                     ]
                     application_fee_percent?: number
                     billing_cycle_anchor?: string
@@ -171,7 +175,7 @@ export namespace subscriptionSchedules {
                     }
                     trial?: boolean
                     trial_end?: number
-                }
+                },
             ]
             dafault_settings?: {
                 application_fee_percent?: number
@@ -193,10 +197,13 @@ export namespace subscriptionSchedules {
             end_behavior?: string
             proration_behavior?: string
         },
-        stripeAccount?: string,
+        settings?: {
+            stripeAccount?: string
+            idempotencyKey?: string
+        },
     ): Promise<SubscriptionSchedulesResponse> {
         return client(`/subscription_items/${id}`, params, 'POST', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders(settings),
         })
     }
 
@@ -206,10 +213,13 @@ export namespace subscriptionSchedules {
             invoice_now?: boolean
             prorate?: boolean
         },
-        stripeAccount?: string,
+        settings?: {
+            stripeAccount?: string
+            idempotencyKey?: string
+        },
     ): Promise<SubscriptionSchedulesResponse> {
         return client(`/subscription_schedules/${id}/cancel`, params, 'POST', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders(settings),
         })
     }
 
@@ -218,10 +228,13 @@ export namespace subscriptionSchedules {
         params?: {
             preserve_cancel_date?: boolean
         },
-        stripeAccount?: string,
+        settings?: {
+            stripeAccount?: string
+            idempotencyKey?: string
+        },
     ): Promise<SubscriptionSchedulesResponse> {
         return client(`/subscription_schedules/${id}/release`, params, 'POST', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders(settings),
         })
     }
 
@@ -257,7 +270,7 @@ export namespace subscriptionSchedules {
             scheduled?: boolean
             starting_after?: string
         },
-        stripeAccount?: string,
+        settings?: { stripeAccount?: string },
     ): Promise<{
         object: string
         url: string
@@ -269,9 +282,7 @@ export namespace subscriptionSchedules {
             {},
             'GET',
             {
-                headers: stripeAccount
-                    ? { 'Stripe-Account': stripeAccount }
-                    : {},
+                headers: returnToHeaders(settings),
             },
         )
     }

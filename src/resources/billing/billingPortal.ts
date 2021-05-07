@@ -3,6 +3,7 @@ import {
     BillingPortalResponse,
     BillingPortalConfigurationResponse,
 } from '../../types'
+import { returnToHeaders } from '../../util'
 
 export namespace billingPortal {
     export let client: Function
@@ -14,12 +15,13 @@ export namespace billingPortal {
                 configuration?: string
                 on_behalf_of?: string
             },
-            stripeAccount?: string,
+            settings?: {
+                stripeAccount?: string
+                idempotencyKey?: string
+            },
         ): Promise<BillingPortalResponse> {
             return client('/billing_portal/sessions', params, 'POST', {
-                headers: stripeAccount
-                    ? { 'Stripe-Account': stripeAccount }
-                    : {},
+                headers: returnToHeaders(settings),
             })
         }
     }
@@ -65,12 +67,13 @@ export namespace billingPortal {
                 }
                 default_return_url?: string
             },
-            stripeAccount?: string,
+            settings?: {
+                stripeAccount?: string
+                idempotencyKey?: string
+            },
         ): Promise<BillingPortalConfigurationResponse> {
             return client('/billing_portal/configurations', params, 'POST', {
-                headers: stripeAccount
-                    ? { 'Stripe-Account': stripeAccount }
-                    : {},
+                headers: returnToHeaders(settings),
             })
         }
 
@@ -116,28 +119,27 @@ export namespace billingPortal {
                 }
                 default_return_url?: string
             },
-            stripeAccount?: string,
+            settings?: {
+                stripeAccount?: string
+                idempotencyKey?: string
+            },
         ): Promise<BillingPortalConfigurationResponse> {
             return client(
                 `/billing_portal/configurations/${id}`,
                 params,
                 'POST',
                 {
-                    headers: stripeAccount
-                        ? { 'Stripe-Account': stripeAccount }
-                        : {},
+                    headers: returnToHeaders(settings),
                 },
             )
         }
 
         export function retrieve(
             id: string,
-            stripeAccount?: string,
+            settings?: { stripeAccount?: string },
         ): Promise<BillingPortalConfigurationResponse> {
             return client(`/billing_portal/configurations/${id}`, {}, 'GET', {
-                headers: stripeAccount
-                    ? { 'Stripe-Account': stripeAccount }
-                    : {},
+                headers: returnToHeaders(settings),
             })
         }
 
@@ -149,7 +151,7 @@ export namespace billingPortal {
                 limit?: number
                 starting_after?: string
             },
-            stripeAccount?: string,
+            settings?: { stripeAccount?: string },
         ): Promise<{
             object: string
             url: string
@@ -161,9 +163,7 @@ export namespace billingPortal {
                 {},
                 'GET',
                 {
-                    headers: stripeAccount
-                        ? { 'Stripe-Account': stripeAccount }
-                        : {},
+                    headers: returnToHeaders(settings),
                 },
             )
         }

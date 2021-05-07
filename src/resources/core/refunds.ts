@@ -1,5 +1,6 @@
 import qs from 'qs'
 import { RefundsResponse } from '../../types'
+import { returnToHeaders } from '../../util'
 export namespace refunds {
     export let client: Function
 
@@ -13,19 +14,22 @@ export namespace refunds {
             refund_application_fee?: boolean
             reverse_transfer?: boolean
         },
-        stripeAccount?: string,
+        settings?: {
+            stripeAccount?: string
+            idempotencyKey?: string
+        },
     ): Promise<RefundsResponse> {
         return client('/refunds', params, 'POST', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders(settings),
         })
     }
 
     export function retrieve(
         id: string,
-        stripeAccount?: string,
+        settings?: { stripeAccount?: string },
     ): Promise<RefundsResponse> {
         return client(`/refunds/${id}`, {}, 'GET', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders(settings),
         })
     }
 
@@ -34,10 +38,13 @@ export namespace refunds {
         params: {
             metadata?: object
         },
-        stripeAccount?: string,
+        settings?: {
+            stripeAccount?: string
+            idempotencyKey?: string
+        },
     ): Promise<RefundsResponse> {
         return client(`/refunds/${id}`, params, 'POST', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders(settings),
         })
     }
 
@@ -55,7 +62,7 @@ export namespace refunds {
             limit?: number
             starting_after?: string
         },
-        stripeAccount?: string,
+        settings?: { stripeAccount?: string },
     ): Promise<{
         object: string
         url: string
@@ -63,7 +70,7 @@ export namespace refunds {
         data: [RefundsResponse]
     }> {
         return client(`/refunds?${qs.stringify(params)}`, {}, 'GET', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders(settings),
         })
     }
 }

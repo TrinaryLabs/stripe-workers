@@ -1,4 +1,5 @@
 import { AccountLinksResponse } from '../../types'
+import { returnToHeaders } from '../../util'
 
 export namespace accountLinks {
     export let client: Function
@@ -11,10 +12,13 @@ export namespace accountLinks {
             type: string
             collect?: string
         },
-        stripeAccount?: string,
+        settings?: {
+            stripeAccount?: string
+            idempotencyKey?: string
+        },
     ): Promise<AccountLinksResponse> {
         return client('/account_links', params, 'POST', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders(settings),
         })
     }
 }

@@ -9,11 +9,13 @@ This project is in beta, this SDK is built to follow the offical stripe-api & fo
 ## Setup
 
 ### Add to project
+
 ```bash
 yarn add stripe-workers
 ```
 
 ### Add to code
+
 ```js
 import { Stripe } from 'stripe-workers'
 
@@ -23,6 +25,11 @@ const stripe = new Stripe('Stripe-Secret-Key', {
     userAgent: 'stripe-workers/version', //(optional: string)
 })
 ```
+
+## Examples of use 
+[`Deno`](https://github.com/TrinaryLabs/stripe-workers/tree/master/examples/deno)  
+[`Workers`](https://github.com/TrinaryLabs/stripe-workers/tree/master/examples/workers)
+
 ## 👩 💻 Developing
 
 [`src/index.ts`](./src/index.ts) is the starting point.  

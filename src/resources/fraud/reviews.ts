@@ -1,24 +1,28 @@
 import qs from 'qs'
 import { ReviewsResponse } from '../../types'
+import { returnToHeaders } from '../../util'
 
 export namespace reviews {
     export let client: Function
 
     export function approve(
         id: string,
-        stripeAccount?: string,
+        settings?: {
+            stripeAccount?: string
+            idempotencyKey?: string
+        },
     ): Promise<ReviewsResponse> {
         return client(`/reviews/${id}/approve`, {}, 'POST', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders(settings),
         })
     }
 
     export function retrieve(
         id: string,
-        stripeAccount?: string,
+        settings?: { stripeAccount?: string },
     ): Promise<ReviewsResponse> {
         return client(`/reviews/${id}`, {}, 'GET', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders(settings),
         })
     }
 
@@ -34,7 +38,7 @@ export namespace reviews {
             limit?: number
             starting_after?: string
         },
-        stripeAccount?: string,
+        settings?: { stripeAccount?: string },
     ): Promise<{
         object: string
         url: string
@@ -42,7 +46,7 @@ export namespace reviews {
         data: [ReviewsResponse]
     }> {
         return client(`/reviews?${qs.stringify(params)}`, {}, 'GET', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders(settings),
         })
     }
 }

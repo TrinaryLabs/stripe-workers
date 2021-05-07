@@ -1,5 +1,6 @@
 import qs from 'qs'
 import { SourcesResponse } from '../../types'
+import { returnToHeaders } from '../../util'
 export namespace sources {
     export let client: Function
 
@@ -60,7 +61,7 @@ export namespace sources {
                         parent?: string
                         quantity?: number
                         type?: string
-                    }
+                    },
                 ]
                 shipping?: {
                     address: {
@@ -80,10 +81,13 @@ export namespace sources {
             token?: string
             usage?: string
         },
-        stripeAccount?: string,
+        settings?: {
+            stripeAccount?: string
+            idempotencyKey?: string
+        },
     ): Promise<SourcesResponse> {
         return client('/sources', params, 'POST', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders(settings),
         })
     }
 
@@ -92,10 +96,10 @@ export namespace sources {
         params: {
             client_secret: string
         },
-        stripeAccount?: string,
+        settings?: { stripeAccount?: string },
     ): Promise<SourcesResponse> {
         return client(`/sources/${id}?${qs.stringify(params)}`, {}, 'GET', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders(settings),
         })
     }
 
@@ -147,7 +151,7 @@ export namespace sources {
                         parent?: string
                         quantity?: number
                         type?: string
-                    }
+                    },
                 ]
                 shipping?: {
                     address: {
@@ -165,10 +169,13 @@ export namespace sources {
                 }
             }
         },
-        stripeAccount?: string,
+        settings?: {
+            stripeAccount?: string
+            idempotencyKey?: string
+        },
     ): Promise<SourcesResponse> {
         return client(`/sources/${id}`, params, 'POST', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders(settings),
         })
     }
 }

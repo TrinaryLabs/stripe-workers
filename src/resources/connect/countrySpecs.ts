@@ -1,5 +1,6 @@
 import qs from 'qs'
 import { CountrySpecsResponse } from '../../types'
+import { returnToHeaders } from '../../util'
 
 export namespace countrySpecs {
     export let client: Function
@@ -10,7 +11,7 @@ export namespace countrySpecs {
             ending_before?: string
             starting_after?: string
         },
-        stripeAccount?: string,
+        settings?: { stripeAccount?: string },
     ): Promise<{
         object: string
         url: string
@@ -18,16 +19,16 @@ export namespace countrySpecs {
         data: [CountrySpecsResponse]
     }> {
         return client(`/country_specs?${qs.stringify(params)}`, {}, 'GET', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders(settings),
         })
     }
 
     export function retrieve(
         id: string,
-        stripeAccount?: string,
+        settings?: { stripeAccount?: string },
     ): Promise<CountrySpecsResponse> {
         return client(`/country_specs/${id}`, {}, 'GET', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders(settings),
         })
     }
 }

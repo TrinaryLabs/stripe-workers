@@ -23,7 +23,9 @@ describe('PaymentMethods Resource', async () => {
 
     describe('retrieve', async () => {
         it('Sends the correct request', async () => {
-            const response = await stripe.paymentMethods.retrieve(lastResponseId)
+            const response = await stripe.paymentMethods.retrieve(
+                lastResponseId,
+            )
 
             expect(response.id).to.equal(lastResponseId)
             expect(response.object).to.equal('payment_method')

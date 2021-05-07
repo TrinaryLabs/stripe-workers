@@ -1,5 +1,6 @@
 import qs from 'qs'
 import { TopUpsResponse } from '../../types'
+import { returnToHeaders } from '../../util'
 
 export namespace topups {
     export let client: Function
@@ -14,19 +15,22 @@ export namespace topups {
             statement_descriptor?: string
             transfer_group?: string
         },
-        stripeAccount?: string,
+        settings?: {
+            stripeAccount?: string
+            idempotencyKey?: string
+        },
     ): Promise<TopUpsResponse> {
         return client('/topups', params, 'POST', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders(settings),
         })
     }
 
     export function retrieve(
         id: string,
-        stripeAccount?: string,
+        settings?: { stripeAccount?: string },
     ): Promise<TopUpsResponse> {
         return client(`/topups/${id}`, {}, 'GET', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders(settings),
         })
     }
 
@@ -36,10 +40,13 @@ export namespace topups {
             description?: string
             metadata?: object
         },
-        stripeAccount?: string,
+        settings?: {
+            stripeAccount?: string
+            idempotencyKey?: string
+        },
     ): Promise<TopUpsResponse> {
         return client(`/topups/${id}`, params, 'POST', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders(settings),
         })
     }
 
@@ -62,7 +69,7 @@ export namespace topups {
             limit?: number
             starting_after?: string
         },
-        stripeAccount?: string,
+        settings?: { stripeAccount?: string },
     ): Promise<{
         object: string
         url: string
@@ -70,16 +77,19 @@ export namespace topups {
         data: [TopUpsResponse]
     }> {
         return client(`/topups?${qs.stringify(params)}`, {}, 'GET', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders(settings),
         })
     }
 
     export function cancel(
         id: string,
-        stripeAccount?: string,
+        settings?: {
+            stripeAccount?: string
+            idempotencyKey?: string
+        },
     ): Promise<TopUpsResponse> {
         return client(`/topups/${id}/cancel`, {}, 'POST', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders(settings),
         })
     }
 }

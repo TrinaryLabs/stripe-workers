@@ -161,7 +161,7 @@ export type CreditNotesResponse = {
             amount: number
             inclusive: boolean
             tax_rate: string | TaxRatesResponse
-        }
+        },
     ]
     type: string
     voided_at: number
@@ -850,7 +850,7 @@ export type AccountsResponse = {
                 bank_name: string
                 routing_number: string
                 status: string
-            }
+            },
         ]
         has_more: boolean
         url: string
@@ -916,7 +916,7 @@ export type AccountsCapabilityResponse = {
         errors: [
             {
                 code: string
-            }
+            },
         ]
         eventually_due: [string]
         past_due: [string]
@@ -963,7 +963,7 @@ export type PersonResponse = {
                 code: string
                 reason: string
                 requirement: string
-            }
+            },
         ]
         eventually_due: [string]
         past_due: [string]
@@ -1999,16 +1999,15 @@ export type ReportRunResponse = {
                         created: number
                         expired: boolean
                         expires_at: number
-                        file: string,
+                        file: string
                         livemode: boolean
                         metadata: object
                         url: string
-                    }
-
+                    },
                 ]
                 has_more: boolean
                 url: string
-            }
+            },
         ]
         purpose: string
         size: number
@@ -2052,16 +2051,15 @@ export type SQRResponse = {
                         created: number
                         expired: boolean
                         expires_at: number
-                        file: string,
+                        file: string
                         livemode: boolean
                         metadata: object
                         url: string
-                    }
-
+                    },
                 ]
                 has_more: boolean
                 url: string
-            }
+            },
         ]
         purpose: string
         size: number
@@ -2999,7 +2997,7 @@ export type PaymentIntentsResponse = {
                 interval_description: string
                 payment_schedule: string
                 transaction_type: string
-            },
+            }
             verification_method: string
         }
         alipay: {}
@@ -3197,7 +3195,7 @@ export type CustomersResponse = {
             {
                 name: string
                 value: string
-            }
+            },
         ]
         default_payment_method: string
         footer: string
@@ -3371,7 +3369,6 @@ export type ChargesResponse = {
             last4: string
             mandate: string
             transit_number: string
-
         }
         afterpay_clearpay: {}
         alipay: {
@@ -3572,7 +3569,7 @@ export type ChargesResponse = {
             country: string
             fingerprint: string
             last4: string
-            mandate: string   
+            mandate: string
         }
         sofort: {
             bank_code: string

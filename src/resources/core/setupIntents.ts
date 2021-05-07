@@ -1,5 +1,6 @@
 import qs from 'qs'
 import { SetupIntentsResponse } from '../../types'
+import { returnToHeaders } from '../../util'
 export namespace setupIntents {
     export let client: Function
 
@@ -48,10 +49,13 @@ export namespace setupIntents {
                 currency: string
             }
         },
-        stripeAccount?: string,
+        settings?: {
+            stripeAccount?: string
+            idempotencyKey?: string
+        },
     ): Promise<SetupIntentsResponse> {
         return client('/setup_intents', params, 'POST', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders(settings),
         })
     }
 
@@ -60,16 +64,14 @@ export namespace setupIntents {
         params: {
             client_secret?: string
         },
-        stripeAccount?: string,
+        settings?: { stripeAccount?: string },
     ): Promise<SetupIntentsResponse> {
         return client(
             `/setup_intents/${id}?${qs.stringify(params)}`,
             {},
             'GET',
             {
-                headers: stripeAccount
-                    ? { 'Stripe-Account': stripeAccount }
-                    : {},
+                headers: returnToHeaders(settings),
             },
         )
     }
@@ -101,10 +103,13 @@ export namespace setupIntents {
                 }
             }
         },
-        stripeAccount?: string,
+        settings?: {
+            stripeAccount?: string
+            idempotencyKey?: string
+        },
     ): Promise<SetupIntentsResponse> {
         return client(`/setup_intents/${id}`, params, 'POST', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders(settings),
         })
     }
 
@@ -143,10 +148,13 @@ export namespace setupIntents {
             }
             return_url?: string
         },
-        stripeAccount?: string,
+        settings?: {
+            stripeAccount?: string
+            idempotencyKey?: string
+        },
     ): Promise<SetupIntentsResponse> {
         return client(`/setup_intents/${id}/confirm`, params, 'POST', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders(settings),
         })
     }
 
@@ -155,10 +163,13 @@ export namespace setupIntents {
         params: {
             cancellation_reason?: string
         },
-        stripeAccount?: string,
+        settings?: {
+            stripeAccount?: string
+            idempotencyKey?: string
+        },
     ): Promise<SetupIntentsResponse> {
         return client(`/setup_intents/${id}/cancel`, params, 'POST', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders(settings),
         })
     }
 
@@ -176,7 +187,7 @@ export namespace setupIntents {
             limit?: number
             starting_after?: string
         },
-        stripeAccount?: string,
+        settings?: { stripeAccount?: string },
     ): Promise<{
         object: string
         url: string
@@ -184,7 +195,7 @@ export namespace setupIntents {
         data: [SetupIntentsResponse]
     }> {
         return client(`/setup_intents?${qs.stringify(params)}`, params, 'GET', {
-            headers: stripeAccount ? { 'Stripe-Account': stripeAccount } : {},
+            headers: returnToHeaders(settings),
         })
     }
 }

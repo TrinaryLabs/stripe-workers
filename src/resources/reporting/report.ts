@@ -1,5 +1,6 @@
 import qs from 'qs'
 import { ReportRunResponse, ReportTypeResponse } from '../../types'
+import { returnToHeaders } from '../../util'
 export namespace reporting {
     export let client: Function
     export namespace reportRuns {
@@ -12,28 +13,27 @@ export namespace reporting {
                     currency?: string
                     interval_end?: number
                     interval_start?: number
-                    payout?: string 
+                    payout?: string
                     reporting_category?: string
                     timezone?: string
-                },
+                }
             },
-            stripeAccount?: string,
+            settings?: {
+                stripeAccount?: string
+                idempotencyKey?: string
+            },
         ): Promise<ReportRunResponse> {
             return client(`/reporting/report_runs`, params, 'POST', {
-                headers: stripeAccount
-                    ? { 'Stripe-Account': stripeAccount }
-                    : {},
+                headers: returnToHeaders(settings),
             })
         }
 
         export function retrieve(
             id: string,
-            stripeAccount?: string,
+            settings?: { stripeAccount?: string },
         ): Promise<ReportRunResponse> {
             return client(`/reporting/report_runs/${id}`, {}, 'GET', {
-                headers: stripeAccount
-                    ? { 'Stripe-Account': stripeAccount }
-                    : {},
+                headers: returnToHeaders(settings),
             })
         }
 
@@ -49,7 +49,7 @@ export namespace reporting {
                 limit?: number
                 starting_after?: string
             },
-            stripeAccount?: string,
+            settings?: { stripeAccount?: string },
         ): Promise<{
             object: string
             url: string
@@ -61,9 +61,7 @@ export namespace reporting {
                 {},
                 'GET',
                 {
-                    headers: stripeAccount
-                        ? { 'Stripe-Account': stripeAccount }
-                        : {},
+                    headers: returnToHeaders(settings),
                 },
             )
         }
@@ -72,27 +70,23 @@ export namespace reporting {
     export namespace reportTypes {
         export function retrieve(
             id: string,
-            stripeAccount?: string,
+            settings?: { stripeAccount?: string },
         ): Promise<ReportTypeResponse> {
             return client(`/reporting/report_types/${id}`, {}, 'GET', {
-                headers: stripeAccount
-                    ? { 'Stripe-Account': stripeAccount }
-                    : {},
+                headers: returnToHeaders(settings),
             })
         }
 
-        export function list(
-            stripeAccount?: string,
-        ): Promise<{
+        export function list(settings?: {
+            stripeAccount?: string
+        }): Promise<{
             object: string
             url: string
             has_more: boolean
             data: [ReportTypeResponse]
         }> {
             return client(`/reporting/report_types`, {}, 'GET', {
-                headers: stripeAccount
-                    ? { 'Stripe-Account': stripeAccount }
-                    : {},
+                headers: returnToHeaders(settings),
             })
         }
     }
