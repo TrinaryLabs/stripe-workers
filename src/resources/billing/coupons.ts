@@ -23,18 +23,22 @@ export namespace coupons {
         settings?: {
             stripeAccount?: string
             idempotencyKey?: string
+            expand?: [string]
         },
     ): Promise<CouponsResponse> {
-        return client('/coupons', params, 'POST', {
+        return client(`/coupons?${qs.stringify(settings?.expand)}`, params, 'POST', {
             headers: returnToHeaders(settings),
         })
     }
 
     export function retrieve(
         id: string,
-        settings?: { stripeAccount?: string },
+        settings?: { 
+            stripeAccount?: string
+            expand?: [string]
+        },
     ): Promise<CouponsResponse> {
-        return client(`/coupons/${id}`, {}, 'GET', {
+        return client(`/coupons/${id}?${qs.stringify(settings?.expand)}`, {}, 'GET', {
             headers: returnToHeaders(settings),
         })
     }
@@ -48,9 +52,10 @@ export namespace coupons {
         settings?: {
             stripeAccount?: string
             idempotencyKey?: string
+            expand?: [string]
         },
     ): Promise<CouponsResponse> {
-        return client(`/coupons/${id}`, params, 'POST', {
+        return client(`/coupons/${id}?${qs.stringify(settings?.expand)}`, params, 'POST', {
             headers: returnToHeaders(settings),
         })
     }
@@ -75,14 +80,17 @@ export namespace coupons {
             limit?: number
             starting_after?: string
         },
-        settings?: { stripeAccount?: string },
+        settings?: { 
+            stripeAccount?: string
+            expand?: [string]
+        },
     ): Promise<{
         object: string
         url: string
         has_more: boolean
         data: [CouponsResponse]
     }> {
-        return client(`/coupons?${qs.stringify(params)}`, {}, 'GET', {
+        return client(`/coupons?${qs.stringify(params)}&${qs.stringify(settings?.expand)}`, {}, 'GET', {
             headers: returnToHeaders(settings),
         })
     }

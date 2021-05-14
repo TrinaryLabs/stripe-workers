@@ -39,18 +39,22 @@ export namespace invoiceItems {
         settings?: {
             stripeAccount?: string
             idempotencyKey?: string
+            expand?: [string]
         },
     ): Promise<InvoiceItemsResponse> {
-        return client(`/invoiceitems`, params, 'POST', {
+        return client(`/invoiceitems?${qs.stringify(settings?.expand)}`, params, 'POST', {
             headers: returnToHeaders(settings),
         })
     }
 
     export function retrieve(
         id: string,
-        settings?: { stripeAccount?: string },
+        settings?: {
+            stripeAccount?: string
+            expand?: [string]
+        },
     ): Promise<InvoiceItemsResponse> {
-        return client(`/invoiceitems/${id}`, {}, 'GET', {
+        return client(`/invoiceitems/${id}?${qs.stringify(settings?.expand)}`, {}, 'GET', {
             headers: returnToHeaders(settings),
         })
     }
@@ -82,9 +86,10 @@ export namespace invoiceItems {
         settings?: {
             stripeAccount?: string
             idempotencyKey?: string
+            expand?: [string]
         },
     ): Promise<InvoiceItemsResponse> {
-        return client(`/invoiceitems/${id}`, params, 'POST', {
+        return client(`/invoiceitems/${id}?${qs.stringify(settings?.expand)}`, params, 'POST', {
             headers: returnToHeaders(settings),
         })
     }
@@ -112,14 +117,17 @@ export namespace invoiceItems {
             pending?: boolean
             starting_after?: string
         },
-        settings?: { stripeAccount?: string },
+        settings?: {
+            stripeAccount?: string
+            expand?: [string]
+        },
     ): Promise<{
         object: string
         url: string
         has_more: boolean
         data: [InvoiceItemsResponse]
     }> {
-        return client(`/invoiceitems?${qs.stringify(params)}`, {}, 'GET', {
+        return client(`/invoiceitems?${qs.stringify(params)}&${qs.stringify(settings?.expand)}`, {}, 'GET', {
             headers: returnToHeaders(settings),
         })
     }

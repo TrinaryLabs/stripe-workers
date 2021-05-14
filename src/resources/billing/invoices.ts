@@ -43,18 +43,22 @@ export namespace invoices {
         settings?: {
             stripeAccount?: string
             idempotencyKey?: string
+            expand?: [string]
         },
     ): Promise<InvoicesResponse> {
-        return client(`/invoices`, params, 'POST', {
+        return client(`/invoices?${qs.stringify(settings?.expand)}`, params, 'POST', {
             headers: returnToHeaders(settings),
         })
     }
 
     export function retrieve(
         id: string,
-        settings?: { stripeAccount?: string },
+        settings?: {
+            stripeAccount?: string
+            expand?: [string]
+        },
     ): Promise<InvoicesResponse> {
-        return client(`/invoices/${id}`, {}, 'GET', {
+        return client(`/invoices/${id}?${qs.stringify(settings?.expand)}`, {}, 'GET', {
             headers: returnToHeaders(settings),
         })
     }
@@ -96,9 +100,10 @@ export namespace invoices {
         settings?: {
             stripeAccount?: string
             idempotencyKey?: string
+            expand?: [string]
         },
     ): Promise<InvoicesResponse> {
-        return client(`/invoices/${id}`, params, 'POST', {
+        return client(`/invoices/${id}?${qs.stringify(settings?.expand)}`, params, 'POST', {
             headers: returnToHeaders(settings),
         })
     }
@@ -124,9 +129,10 @@ export namespace invoices {
         settings?: {
             stripeAccount?: string
             idempotencyKey?: string
+            expand?: [string]
         },
     ): Promise<InvoicesResponse> {
-        return client(`/invoices/${id}/finalize`, params, 'POST', {
+        return client(`/invoices/${id}/finalize?${qs.stringify(settings?.expand)}`, params, 'POST', {
             headers: returnToHeaders(settings),
         })
     }
@@ -143,9 +149,10 @@ export namespace invoices {
         settings?: {
             stripeAccount?: string
             idempotencyKey?: string
+            expand?: [string]
         },
     ): Promise<InvoicesResponse> {
-        return client(`/invoices/${id}/pay`, params, 'POST', {
+        return client(`/invoices/${id}/pay?${qs.stringify(settings?.expand)}`, params, 'POST', {
             headers: returnToHeaders(settings),
         })
     }
@@ -155,9 +162,10 @@ export namespace invoices {
         settings?: {
             stripeAccount?: string
             idempotencyKey?: string
+            expand?: [string]
         },
     ): Promise<InvoicesResponse> {
-        return client(`/invoices/${id}/send`, {}, 'POST', {
+        return client(`/invoices/${id}/send?${qs.stringify(settings?.expand)}`, {}, 'POST', {
             headers: returnToHeaders(settings),
         })
     }
@@ -167,9 +175,10 @@ export namespace invoices {
         settings?: {
             stripeAccount?: string
             idempotencyKey?: string
+            expand?: [string]
         },
     ): Promise<InvoicesResponse> {
-        return client(`/invoices/${id}/void`, {}, 'POST', {
+        return client(`/invoices/${id}/void?${qs.stringify(settings?.expand)}`, {}, 'POST', {
             headers: returnToHeaders(settings),
         })
     }
@@ -179,9 +188,10 @@ export namespace invoices {
         settings?: {
             stripeAccount?: string
             idempotencyKey?: string
+            expand?: [string]
         },
     ): Promise<InvoicesResponse> {
-        return client(`/invoices/${id}/mark_uncollectible`, {}, 'POST', {
+        return client(`/invoices/${id}/mark_uncollectible?${qs.stringify(settings?.expand)}`, {}, 'POST', {
             headers: returnToHeaders(settings),
         })
     }
@@ -193,7 +203,10 @@ export namespace invoices {
             limit?: number
             starting_after?: string
         },
-        settings?: { stripeAccount?: string },
+        settings?: { 
+            stripeAccount?: string
+            expand?: [string]
+        },
     ): Promise<{
         object: string
         url: string
@@ -201,7 +214,7 @@ export namespace invoices {
         data: [InvoiceItemsResponse]
     }> {
         return client(
-            `/invoices/${id}/lines?${qs.stringify(params)}`,
+            `/invoices/${id}/lines?${qs.stringify(params)}&${qs.stringify(settings?.expand)}`,
             {},
             'GET',
             {
@@ -281,9 +294,12 @@ export namespace invoices {
             subscription_trial_end?: number
             subscription_trial_from_plan?: boolean
         },
-        settings?: { stripeAccount?: string },
+        settings?: { 
+            stripeAccount?: string
+            expand?: [string]
+        },
     ): Promise<InvoicesResponse> {
-        return client(`/invoices/upcoming?${qs.stringify(params)}`, {}, 'GET', {
+        return client(`/invoices/upcoming?${qs.stringify(params)}&${qs.stringify(settings?.expand)}`, {}, 'GET', {
             headers: returnToHeaders(settings),
         })
     }
@@ -362,7 +378,10 @@ export namespace invoices {
             subscription_trial_end?: number
             subscription_trial_from_plan?: boolean
         },
-        settings?: { stripeAccount?: string },
+        settings?: { 
+            stripeAccount?: string
+            expand?: [string]
+        },
     ): Promise<{
         object: string
         url: string
@@ -370,7 +389,7 @@ export namespace invoices {
         data: [InvoiceItemsResponse]
     }> {
         return client(
-            `/invoices/upcoming/lines?${qs.stringify(params)}`,
+            `/invoices/upcoming/lines?${qs.stringify(params)}&${qs.stringify(settings?.expand)}`,
             {},
             'GET',
             {
@@ -396,14 +415,17 @@ export namespace invoices {
             limit?: number
             starting_after?: string
         },
-        settings?: { stripeAccount?: string },
+        settings?: { 
+            stripeAccount?: string
+            expand?: [string]
+        },
     ): Promise<{
         object: string
         url: string
         has_more: boolean
         data: [InvoicesResponse]
     }> {
-        return client(`/invoices?${qs.stringify(params)}`, {}, 'GET', {
+        return client(`/invoices?${qs.stringify(params)}&${qs.stringify(settings?.expand)}`, {}, 'GET', {
             headers: returnToHeaders(settings),
         })
     }

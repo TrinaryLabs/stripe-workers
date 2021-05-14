@@ -65,18 +65,22 @@ export namespace subscriptions {
         settings?: {
             stripeAccount?: string
             idempotencyKey?: string
+            expand?: [string]
         },
     ): Promise<SubscriptionResponse> {
-        return client(`/subscriptions`, params, 'POST', {
+        return client(`/subscriptions?${qs.stringify(settings?.expand)}`, params, 'POST', {
             headers: returnToHeaders(settings),
         })
     }
 
     export function retrieve(
         id: string,
-        settings?: { stripeAccount?: string },
+        settings?: { 
+            stripeAccount?: string
+            expand?: [string]
+        },
     ): Promise<SubscriptionResponse> {
-        return client(`/subscriptions/${id}`, {}, 'GET', {
+        return client(`/subscriptions/${id}?${qs.stringify(settings?.expand)}`, {}, 'GET', {
             headers: returnToHeaders(settings),
         })
     }
@@ -143,9 +147,10 @@ export namespace subscriptions {
         settings?: {
             stripeAccount?: string
             idempotencyKey?: string
+            expand?: [string]
         },
     ): Promise<SubscriptionResponse> {
-        return client(`/subscriptions/${id}`, params, 'POST', {
+        return client(`/subscriptions/${id}?${qs.stringify(settings?.expand)}`, params, 'POST', {
             headers: returnToHeaders(settings),
         })
     }
@@ -191,14 +196,17 @@ export namespace subscriptions {
             limit?: number
             starting_after?: string
         },
-        settings?: { stripeAccount?: string },
+        settings?: { 
+            stripeAccount?: string
+            expand?: [string]
+        },
     ): Promise<{
         object: string
         url: string
         has_more: boolean
         data: [SubscriptionResponse]
     }> {
-        return client(`/subscriptions?${qs.stringify(params)}`, params, 'GET', {
+        return client(`/subscriptions?${qs.stringify(params)}&${qs.stringify(settings?.expand)}`, params, 'GET', {
             headers: returnToHeaders(settings),
         })
     }

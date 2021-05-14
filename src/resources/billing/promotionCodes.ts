@@ -23,9 +23,10 @@ export namespace promotionCodes {
         settings?: {
             stripeAccount?: string
             idempotencyKey?: string
+            expand?: [string]
         },
     ): Promise<PromotionCodesResponse> {
-        return client('/promotion_codes', params, 'POST', {
+        return client(`/promotion_codes?${qs.stringify(settings?.expand)}`, params, 'POST', {
             headers: returnToHeaders(settings),
         })
     }
@@ -39,18 +40,22 @@ export namespace promotionCodes {
         settings?: {
             stripeAccount?: string
             idempotencyKey?: string
+            expand?: [string]
         },
     ): Promise<PromotionCodesResponse> {
-        return client(`/promotion_codes/${id}`, params, 'POST', {
+        return client(`/promotion_codes/${id}?${qs.stringify(settings?.expand)}`, params, 'POST', {
             headers: returnToHeaders(settings),
         })
     }
 
     export function retrieve(
         id: string,
-        settings?: { stripeAccount?: string },
+        settings?: { 
+            stripeAccount?: string
+            expand?: [string]
+        },
     ): Promise<PromotionCodesResponse> {
-        return client(`/promotion_codes/${id}`, {}, 'GET', {
+        return client(`/promotion_codes/${id}?${qs.stringify(settings?.expand)}`, {}, 'GET', {
             headers: returnToHeaders(settings),
         })
     }
@@ -65,14 +70,17 @@ export namespace promotionCodes {
             limit?: number
             starting_after?: string
         },
-        settings?: { stripeAccount?: string },
+        settings?: { 
+            stripeAccount?: string
+            expand?: [string]
+        },
     ): Promise<{
         object: string
         url: string
         has_more: boolean
         data: [PromotionCodesResponse]
     }> {
-        return client(`/promotion_codes?${qs.stringify(params)}`, {}, 'GET', {
+        return client(`/promotion_codes?${qs.stringify(params)}&${qs.stringify(settings?.expand)}`, {}, 'GET', {
             headers: returnToHeaders(settings),
         })
     }

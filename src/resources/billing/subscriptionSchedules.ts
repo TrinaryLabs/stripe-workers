@@ -95,18 +95,22 @@ export namespace subscriptionSchedules {
         settings?: {
             stripeAccount?: string
             idempotencyKey?: string
+            expand?: [string]
         },
     ): Promise<SubscriptionSchedulesResponse> {
-        return client(`/subscription_schedules`, params, 'POST', {
+        return client(`/subscription_schedules?${qs.stringify(settings?.expand)}`, params, 'POST', {
             headers: returnToHeaders(settings),
         })
     }
 
     export function retrieve(
         id: string,
-        settings?: { stripeAccount?: string },
+        settings?: { 
+            stripeAccount?: string
+            expand?: [string]
+        },
     ): Promise<SubscriptionSchedulesResponse> {
-        return client(`/subscription_schedules/${id}`, {}, 'GET', {
+        return client(`/subscription_schedules/${id}?${qs.stringify(settings?.expand)}`, {}, 'GET', {
             headers: returnToHeaders(settings),
         })
     }
@@ -200,9 +204,10 @@ export namespace subscriptionSchedules {
         settings?: {
             stripeAccount?: string
             idempotencyKey?: string
+            expand?: [string]
         },
     ): Promise<SubscriptionSchedulesResponse> {
-        return client(`/subscription_items/${id}`, params, 'POST', {
+        return client(`/subscription_items/${id}?${qs.stringify(settings?.expand)}`, params, 'POST', {
             headers: returnToHeaders(settings),
         })
     }
@@ -216,9 +221,10 @@ export namespace subscriptionSchedules {
         settings?: {
             stripeAccount?: string
             idempotencyKey?: string
+            expand?: [string]
         },
     ): Promise<SubscriptionSchedulesResponse> {
-        return client(`/subscription_schedules/${id}/cancel`, params, 'POST', {
+        return client(`/subscription_schedules/${id}/cancel?${qs.stringify(settings?.expand)}`, params, 'POST', {
             headers: returnToHeaders(settings),
         })
     }
@@ -231,9 +237,10 @@ export namespace subscriptionSchedules {
         settings?: {
             stripeAccount?: string
             idempotencyKey?: string
+            expand?: [string]
         },
     ): Promise<SubscriptionSchedulesResponse> {
-        return client(`/subscription_schedules/${id}/release`, params, 'POST', {
+        return client(`/subscription_schedules/${id}/release?${qs.stringify(settings?.expand)}`, params, 'POST', {
             headers: returnToHeaders(settings),
         })
     }
@@ -270,7 +277,10 @@ export namespace subscriptionSchedules {
             scheduled?: boolean
             starting_after?: string
         },
-        settings?: { stripeAccount?: string },
+        settings?: { 
+            stripeAccount?: string
+            expand?: [string]
+        },
     ): Promise<{
         object: string
         url: string
@@ -278,7 +288,7 @@ export namespace subscriptionSchedules {
         data: [SubscriptionSchedulesResponse]
     }> {
         return client(
-            `/subscription_schedules?${qs.stringify(params)}`,
+            `/subscription_schedules?${qs.stringify(params)}&${qs.stringify(settings?.expand)}`,
             {},
             'GET',
             {

@@ -32,18 +32,22 @@ export namespace subscriptionItems {
         settings?: {
             stripeAccount?: string
             idempotencyKey?: string
+            expand?: [string]
         },
     ): Promise<SubscriptionItemsResponse> {
-        return client(`/subscription_items`, params, 'POST', {
+        return client(`/subscription_items?${qs.stringify(settings?.expand)}`, params, 'POST', {
             headers: returnToHeaders(settings),
         })
     }
 
     export function retrieve(
         id: string,
-        settings?: { stripeAccount?: string },
+        settings?: { 
+            stripeAccount?: string
+            expand?: [string]
+        },
     ): Promise<SubscriptionItemsResponse> {
-        return client(`/subscription_items/${id}`, {}, 'GET', {
+        return client(`/subscription_items/${id}?${qs.stringify(settings?.expand)}`, {}, 'GET', {
             headers: returnToHeaders(settings),
         })
     }
@@ -76,9 +80,10 @@ export namespace subscriptionItems {
         settings?: {
             stripeAccount?: string
             idempotencyKey?: string
+            expand?: [string]
         },
     ): Promise<SubscriptionItemsResponse> {
-        return client(`/subscription_items/${id}`, params, 'POST', {
+        return client(`/subscription_items/${id}?${qs.stringify(settings?.expand)}`, params, 'POST', {
             headers: returnToHeaders(settings),
         })
     }
@@ -107,7 +112,10 @@ export namespace subscriptionItems {
             limit?: number
             starting_after?: string
         },
-        settings?: { stripeAccount?: string },
+        settings?: { 
+            stripeAccount?: string
+            expand?: [string]
+        },
     ): Promise<{
         object: string
         url: string
@@ -115,7 +123,7 @@ export namespace subscriptionItems {
         data: [SubscriptionItemsResponse]
     }> {
         return client(
-            `/subscription_items?${qs.stringify(params)}`,
+            `/subscription_items?${qs.stringify(params)}&${qs.stringify(settings?.expand)}`,
             {},
             'GET',
             {
