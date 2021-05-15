@@ -10,18 +10,22 @@ export namespace reviews {
         settings?: {
             stripeAccount?: string
             idempotencyKey?: string
+            expand?: [string]
         },
     ): Promise<ReviewsResponse> {
-        return client(`/reviews/${id}/approve`, {}, 'POST', {
+        return client(`/reviews/${id}/approve?${qs.stringify(settings?.expand)}`, {}, 'POST', {
             headers: returnToHeaders(settings),
         })
     }
 
     export function retrieve(
         id: string,
-        settings?: { stripeAccount?: string },
+        settings?: { 
+            stripeAccount?: string
+            expand?: [string]
+        },
     ): Promise<ReviewsResponse> {
-        return client(`/reviews/${id}`, {}, 'GET', {
+        return client(`/reviews/${id}?${qs.stringify(settings?.expand)}`, {}, 'GET', {
             headers: returnToHeaders(settings),
         })
     }
@@ -38,14 +42,17 @@ export namespace reviews {
             limit?: number
             starting_after?: string
         },
-        settings?: { stripeAccount?: string },
+        settings?: { 
+            stripeAccount?: string
+            expand?: [string]
+        },
     ): Promise<{
         object: string
         url: string
         has_more: boolean
         data: [ReviewsResponse]
     }> {
-        return client(`/reviews?${qs.stringify(params)}`, {}, 'GET', {
+        return client(`/reviews?${qs.stringify(params)}&${qs.stringify(settings?.expand)}`, {}, 'GET', {
             headers: returnToHeaders(settings),
         })
     }

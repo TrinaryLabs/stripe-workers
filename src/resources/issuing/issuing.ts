@@ -12,7 +12,10 @@ export namespace issuing {
     export namespace authorizations {
         export function retrieve(
             id: string,
-            settings?: { stripeAccount?: string },
+            settings?: { 
+                stripeAccount?: string
+                expand?: [string]
+            },
         ): Promise<AuthorizationsResponse> {
             return client(`/issuing/authorizations/${id}`, {}, 'GET', {
                 headers: returnToHeaders(settings),
@@ -27,6 +30,7 @@ export namespace issuing {
             settings?: {
                 stripeAccount?: string
                 idempotencyKey?: string
+                expand?: [string]
             },
         ): Promise<AuthorizationsResponse> {
             return client(`/issuing/authorizations/${id}`, params, 'POST', {
@@ -43,6 +47,7 @@ export namespace issuing {
             settings?: {
                 stripeAccount?: string
                 idempotencyKey?: string
+                expand?: [string]
             },
         ): Promise<AuthorizationsResponse> {
             return client(
@@ -63,6 +68,7 @@ export namespace issuing {
             settings?: {
                 stripeAccount?: string
                 idempotencyKey?: string
+                expand?: [string]
             },
         ): Promise<AuthorizationsResponse> {
             return client(
@@ -90,7 +96,10 @@ export namespace issuing {
                 limit?: number
                 starting_after?: string
             },
-            settings?: { stripeAccount?: string },
+            settings?: { 
+                stripeAccount?: string
+                expand?: [string]
+            },
         ): Promise<{
             object: string
             url: string
@@ -302,6 +311,7 @@ export namespace issuing {
             settings?: {
                 stripeAccount?: string
                 idempotencyKey?: string
+                expand?: [string]
             },
         ): Promise<CardsResponse> {
             return client('/issuing/cards', params, 'POST', {
@@ -311,7 +321,10 @@ export namespace issuing {
 
         export function retrieve(
             id: string,
-            settings?: { stripeAccount?: string },
+            settings?: { 
+                stripeAccount?: string
+                expand?: [string]
+            },
         ): Promise<CardsResponse> {
             return client(`/issuing/cards/${id}`, {}, 'GET', {
                 headers: returnToHeaders(settings),
@@ -340,6 +353,7 @@ export namespace issuing {
             settings?: {
                 stripeAccount?: string
                 idempotencyKey?: string
+                expand?: [string]
             },
         ): Promise<CardsResponse> {
             return client(`/issuing/cards/${id}`, params, 'POST', {
@@ -365,7 +379,10 @@ export namespace issuing {
                 starting_after?: string
                 status?: string
             },
-            settings?: { stripeAccount?: string },
+            settings?: { 
+                stripeAccount?: string
+                expand?: [string]
+            },
         ): Promise<{
             object: string
             url: string
@@ -441,6 +458,7 @@ export namespace issuing {
             settings?: {
                 stripeAccount?: string
                 idempotencyKey?: string
+                expand?: [string]
             },
         ): Promise<DisputesResponse> {
             return client('/issuing/disputes', params, 'POST', {
@@ -456,6 +474,7 @@ export namespace issuing {
             settings?: {
                 stripeAccount?: string
                 idempotencyKey?: string
+                expand?: [string]
             },
         ): Promise<DisputesResponse> {
             return client(`/issuing/disputes/${id}/submit`, params, 'POST', {
@@ -465,7 +484,10 @@ export namespace issuing {
 
         export function retrieve(
             id: string,
-            settings?: { stripeAccount?: string },
+            settings?: { 
+                stripeAccount?: string
+                expand?: [string]
+            },
         ): Promise<DisputesResponse> {
             return client(`/issuing/disputes/${id}`, {}, 'GET', {
                 headers: returnToHeaders(settings),
@@ -534,6 +556,7 @@ export namespace issuing {
             settings?: {
                 stripeAccount?: string
                 idempotencyKey?: string
+                expand?: [string]
             },
         ): Promise<DisputesResponse> {
             return client(`/issuing/disputes/${id}`, params, 'POST', {
@@ -555,7 +578,10 @@ export namespace issuing {
                 starting_after?: string
                 status?: string
             },
-            settings?: { stripeAccount?: string },
+            settings?: { 
+                stripeAccount?: string
+                expand?: [string]
+            },
         ): Promise<{
             object: string
             url: string
@@ -576,7 +602,10 @@ export namespace issuing {
     export namespace transactions {
         export function retrieve(
             id: string,
-            settings?: { stripeAccount?: string },
+            settings?: { 
+                stripeAccount?: string
+                expand?: [string]
+            },
         ): Promise<TransactionsResponse> {
             return client(`/issuing/transactions/${id}`, {}, 'GET', {
                 headers: returnToHeaders(settings),
@@ -591,6 +620,7 @@ export namespace issuing {
             settings?: {
                 stripeAccount?: string
                 idempotencyKey?: string
+                expand?: [string]
             },
         ): Promise<TransactionsResponse> {
             return client(`/issuing/transactions/${id}`, params, 'POST', {
@@ -613,7 +643,10 @@ export namespace issuing {
                 starting_after?: string
                 type?: string
             },
-            settings?: { stripeAccount?: string },
+            settings?: { 
+                stripeAccount?: string
+                expand?: [string]
+            },
         ): Promise<{
             object: string
             url: string
