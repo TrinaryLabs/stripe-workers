@@ -42,18 +42,22 @@ export namespace charges {
         settings?: {
             stripeAccount?: string
             idempotencyKey?: string
+            expand?: [string]
         },
     ): Promise<ChargesResponse> {
-        return client(`/charges`, params, 'POST', {
+        return client(`/charges?${qs.stringify(settings?.expand)}`, params, 'POST', {
             headers: returnToHeaders(settings),
         })
     }
 
     export function retrieve(
         id: string,
-        settings?: { stripeAccount?: string },
+        settings?: { 
+            stripeAccount?: string
+            expand?: [string]
+        },
     ): Promise<ChargesResponse> {
-        return client(`/charges/${id}`, {}, 'GET', {
+        return client(`/charges/${id}?${qs.stringify(settings?.expand)}`, {}, 'GET', {
             headers: returnToHeaders(settings),
         })
     }
@@ -87,9 +91,10 @@ export namespace charges {
         settings?: {
             stripeAccount?: string
             idempotencyKey?: string
+            expand?: [string]
         },
     ): Promise<ChargesResponse> {
-        return client(`/charges/${id}`, params, 'POST', {
+        return client(`/charges/${id}?${qs.stringify(settings?.expand)}`, params, 'POST', {
             headers: returnToHeaders(settings),
         })
     }
@@ -110,9 +115,10 @@ export namespace charges {
         settings?: {
             stripeAccount?: string
             idempotencyKey?: string
+            expand?: [string]
         },
     ): Promise<ChargesResponse> {
-        return client(`/charges/${id}/capture`, params, 'POST', {
+        return client(`/charges/${id}/capture?${qs.stringify(settings?.expand)}`, params, 'POST', {
             headers: returnToHeaders(settings),
         })
     }
@@ -132,14 +138,17 @@ export namespace charges {
             starting_after?: string
             transfer_group?: string
         },
-        settings?: { stripeAccount?: string },
+        settings?: { 
+            stripeAccount?: string
+            expand?: [string]
+        },
     ): Promise<{
         object: string
         url: string
         has_more: boolean
         data: [ChargesResponse]
     }> {
-        return client(`/charges?${qs.stringify(params)}`, {}, 'GET', {
+        return client(`/charges?${qs.stringify(params)}&${qs.stringify(settings?.expand)}`, {}, 'GET', {
             headers: returnToHeaders(settings),
         })
     }

@@ -69,6 +69,7 @@ export namespace paymentMethods {
         settings?: {
             stripeAccount?: string
             idempotencyKey?: string
+            expand?: [string]
         },
     ): Promise<PaymentMethodsResponse> {
         return client('/payment_methods', params, 'POST', {
@@ -78,7 +79,10 @@ export namespace paymentMethods {
 
     export function retrieve(
         id: string,
-        settings?: { stripeAccount?: string },
+        settings?: { 
+            stripeAccount?: string
+            expand?: [string]
+        },
     ): Promise<PaymentMethodsResponse> {
         return client(`/payment_methods/${id}`, {}, 'GET', {
             headers: returnToHeaders(settings),
@@ -110,6 +114,7 @@ export namespace paymentMethods {
         settings?: {
             stripeAccount?: string
             idempotencyKey?: string
+            expand?: [string]
         },
     ): Promise<PaymentMethodsResponse> {
         return client(`/payment_methods/${id}`, params, 'POST', {
@@ -125,7 +130,10 @@ export namespace paymentMethods {
             limit?: number
             starting_after?: string
         },
-        settings?: { stripeAccount?: string },
+        settings?: { 
+            stripeAccount?: string
+            expand?: [string]
+        },
     ): Promise<{
         object: string
         url: string
@@ -145,6 +153,7 @@ export namespace paymentMethods {
         settings?: {
             stripeAccount?: string
             idempotencyKey?: string
+            expand?: [string]
         },
     ): Promise<PaymentMethodsResponse> {
         return client(`/payment_methods/${id}/attach`, params, 'POST', {
@@ -157,6 +166,7 @@ export namespace paymentMethods {
         settings?: {
             stripeAccount?: string
             idempotencyKey?: string
+            expand?: [string]
         },
     ): Promise<PaymentMethodsResponse> {
         return client(`/payment_methods/${id}/detach`, {}, 'POST', {

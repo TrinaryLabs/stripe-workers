@@ -14,18 +14,22 @@ export namespace fileLinks {
         settings?: {
             stripeAccount?: string
             idempotencyKey?: string
+            expand?: [string]
         },
     ): Promise<FileLinksResponse> {
-        return client(`/file_links`, params, 'POST', {
+        return client(`/file_links?${qs.stringify(settings?.expand)}`, params, 'POST', {
             headers: returnToHeaders(settings),
         })
     }
 
     export function retrieve(
         id: string,
-        settings?: { stripeAccount?: string },
+        settings?: { 
+            stripeAccount?: string
+            expand?: [string]
+        },
     ): Promise<FileLinksResponse> {
-        return client(`/file_links/${id}`, {}, 'GET', {
+        return client(`/file_links/${id}?${qs.stringify(settings?.expand)}`, {}, 'GET', {
             headers: returnToHeaders(settings),
         })
     }
@@ -39,9 +43,10 @@ export namespace fileLinks {
         settings?: {
             stripeAccount?: string
             idempotencyKey?: string
+            expand?: [string]
         },
     ): Promise<FileLinksResponse> {
-        return client(`/file_links/${id}`, params, 'POST', {
+        return client(`/file_links/${id}?${qs.stringify(settings?.expand)}`, params, 'POST', {
             headers: returnToHeaders(settings),
         })
     }
@@ -61,14 +66,17 @@ export namespace fileLinks {
             starting_after?: string
             type?: string
         },
-        settings?: { stripeAccount?: string },
+        settings?: { 
+            stripeAccount?: string
+            expand?: [string]
+        },
     ): Promise<{
         object: string
         url: string
         has_more: boolean
         data: [FileLinksResponse]
     }> {
-        return client(`/file_links?${qs.stringify(params)}`, params, 'GET', {
+        return client(`/file_links?${qs.stringify(params)}&${qs.stringify(settings?.expand)}`, params, 'GET', {
             headers: returnToHeaders(settings),
         })
     }

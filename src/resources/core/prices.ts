@@ -46,18 +46,22 @@ export namespace prices {
         settings?: {
             stripeAccount?: string
             idempotencyKey?: string
+            expand?: [string]
         },
     ): Promise<PricesResponse> {
-        return client('/prices', params, 'POST', {
+        return client(`/prices?${qs.stringify(settings?.expand)}`, params, 'POST', {
             headers: returnToHeaders(settings),
         })
     }
 
     export function retrieve(
         id: string,
-        settings?: { stripeAccount?: string },
+        settings?: { 
+            stripeAccount?: string
+            expand?: [string]
+        },
     ): Promise<PricesResponse> {
-        return client(`/prices/${id}`, {}, 'GET', {
+        return client(`/prices/${id}?${qs.stringify(settings?.expand)}`, {}, 'GET', {
             headers: returnToHeaders(settings),
         })
     }
@@ -74,9 +78,10 @@ export namespace prices {
         settings?: {
             stripeAccount?: string
             idempotencyKey?: string
+            expand?: [string]
         },
     ): Promise<PricesResponse> {
-        return client(`/prices/${id}`, params, 'POST', {
+        return client(`/prices/${id}?${qs.stringify(settings?.expand)}`, params, 'POST', {
             headers: returnToHeaders(settings),
         })
     }
@@ -102,14 +107,17 @@ export namespace prices {
                 usage_type?: string
             }
         },
-        settings?: { stripeAccount?: string },
+        settings?: { 
+            stripeAccount?: string
+            expand?: [string]
+        },
     ): Promise<{
         object: string
         url: string
         has_more: boolean
         data: [PricesResponse]
     }> {
-        return client(`/prices?${qs.stringify(params)}`, {}, 'GET', {
+        return client(`/prices?${qs.stringify(params)}&${qs.stringify(settings?.expand)}`, {}, 'GET', {
             headers: returnToHeaders(settings),
         })
     }

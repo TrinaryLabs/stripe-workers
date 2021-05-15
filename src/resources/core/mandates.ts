@@ -1,14 +1,18 @@
 import { MandatesReponse } from '../../types'
 import { returnToHeaders } from '../../util'
+import qs from 'qs'
 
 export namespace mandates {
     export let client: Function
 
     export function retrieve(
         id: string,
-        settings?: { stripeAccount?: string },
+        settings?: { 
+            stripeAccount?: string
+            expand?: [string]
+        },
     ): Promise<MandatesReponse> {
-        return client(`/mandates/${id}`, {}, 'GET', {
+        return client(`/mandates/${id}?${qs.stringify(settings?.expand)}`, {}, 'GET', {
             headers: returnToHeaders(settings),
         })
     }

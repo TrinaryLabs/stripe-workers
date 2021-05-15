@@ -18,14 +18,17 @@ export namespace setupAttempts {
             limit?: number
             starting_after?: string
         },
-        settings?: { stripeAccount?: string },
+        settings?: { 
+            stripeAccount?: string
+            expand?: [string]
+        },
     ): Promise<{
         object: string
         url: string
         has_more: boolean
         data: [SetupAttenptsResponse]
     }> {
-        return client(`/setup_attempts?${qs.stringify(params)}`, {}, 'GET', {
+        return client(`/setup_attempts?${qs.stringify(params)}&${qs.stringify(settings?.expand)}`, {}, 'GET', {
             headers: returnToHeaders(settings),
         })
     }

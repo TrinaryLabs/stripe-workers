@@ -17,18 +17,22 @@ export namespace refunds {
         settings?: {
             stripeAccount?: string
             idempotencyKey?: string
+            expand?: [string]
         },
     ): Promise<RefundsResponse> {
-        return client('/refunds', params, 'POST', {
+        return client(`/refunds?${qs.stringify(settings?.expand)}`, params, 'POST', {
             headers: returnToHeaders(settings),
         })
     }
 
     export function retrieve(
         id: string,
-        settings?: { stripeAccount?: string },
+        settings?: { 
+            stripeAccount?: string
+            expand?: [string]
+        },
     ): Promise<RefundsResponse> {
-        return client(`/refunds/${id}`, {}, 'GET', {
+        return client(`/refunds/${id}?${qs.stringify(settings?.expand)}`, {}, 'GET', {
             headers: returnToHeaders(settings),
         })
     }
@@ -41,9 +45,10 @@ export namespace refunds {
         settings?: {
             stripeAccount?: string
             idempotencyKey?: string
+            expand?: [string]
         },
     ): Promise<RefundsResponse> {
-        return client(`/refunds/${id}`, params, 'POST', {
+        return client(`/refunds/${id}?${qs.stringify(settings?.expand)}`, params, 'POST', {
             headers: returnToHeaders(settings),
         })
     }
@@ -62,14 +67,17 @@ export namespace refunds {
             limit?: number
             starting_after?: string
         },
-        settings?: { stripeAccount?: string },
+        settings?: { 
+            stripeAccount?: string
+            expand?: [string]
+        },
     ): Promise<{
         object: string
         url: string
         has_more: boolean
         data: [RefundsResponse]
     }> {
-        return client(`/refunds?${qs.stringify(params)}`, {}, 'GET', {
+        return client(`/refunds?${qs.stringify(params)}&${qs.stringify(settings?.expand)}`, {}, 'GET', {
             headers: returnToHeaders(settings),
         })
     }

@@ -7,9 +7,12 @@ export namespace orderReturns {
 
     export function retrieve(
         id: string,
-        settings?: { stripeAccount?: string },
+        settings?: { 
+            stripeAccount?: string
+            expand?: [string]
+        },
     ): Promise<OrderReturnsResponse> {
-        return client(`/order_returns/${id}`, {}, 'GET', {
+        return client(`/order_returns/${id}?${qs.stringify(settings?.expand)}`, {}, 'GET', {
             headers: returnToHeaders(settings),
         })
     }
@@ -27,14 +30,17 @@ export namespace orderReturns {
             limit?: number
             starting_after?: string
         },
-        settings?: { stripeAccount?: string },
+        settings?: { 
+            stripeAccount?: string
+            expand?: [string]
+        },
     ): Promise<{
         object: string
         url: string
         has_more: boolean
         data: [OrderReturnsResponse]
     }> {
-        return client(`/order_returns?${qs.stringify(params)}`, {}, 'GET', {
+        return client(`/order_returns?${qs.stringify(params)}&${qs.stringify(settings?.expand)}`, {}, 'GET', {
             headers: returnToHeaders(settings),
         })
     }

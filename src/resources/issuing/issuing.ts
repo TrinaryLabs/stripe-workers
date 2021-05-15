@@ -17,7 +17,7 @@ export namespace issuing {
                 expand?: [string]
             },
         ): Promise<AuthorizationsResponse> {
-            return client(`/issuing/authorizations/${id}`, {}, 'GET', {
+            return client(`/issuing/authorizations/${id}?${qs.stringify(settings?.expand)}`, {}, 'GET', {
                 headers: returnToHeaders(settings),
             })
         }
@@ -33,7 +33,7 @@ export namespace issuing {
                 expand?: [string]
             },
         ): Promise<AuthorizationsResponse> {
-            return client(`/issuing/authorizations/${id}`, params, 'POST', {
+            return client(`/issuing/authorizations/${id}?${qs.stringify(settings?.expand)}`, params, 'POST', {
                 headers: returnToHeaders(settings),
             })
         }
@@ -51,7 +51,7 @@ export namespace issuing {
             },
         ): Promise<AuthorizationsResponse> {
             return client(
-                `/issuing/authorizations/${id}/approve`,
+                `/issuing/authorizations/${id}/approve?${qs.stringify(settings?.expand)}`,
                 params,
                 'POST',
                 {
@@ -72,7 +72,7 @@ export namespace issuing {
             },
         ): Promise<AuthorizationsResponse> {
             return client(
-                `/issuing/authorizations/${id}/decline`,
+                `/issuing/authorizations/${id}/decline?${qs.stringify(settings?.expand)}`,
                 params,
                 'POST',
                 {
@@ -107,7 +107,7 @@ export namespace issuing {
             data: [AuthorizationsResponse]
         }> {
             return client(
-                `/issuing/authorizations?${qs.stringify(params)}`,
+                `/issuing/authorizations?${qs.stringify(params)}&${qs.stringify(settings?.expand)}`,
                 {},
                 'GET',
                 {
@@ -314,7 +314,7 @@ export namespace issuing {
                 expand?: [string]
             },
         ): Promise<CardsResponse> {
-            return client('/issuing/cards', params, 'POST', {
+            return client(`/issuing/cards?${qs.stringify(settings?.expand)}`, params, 'POST', {
                 headers: returnToHeaders(settings),
             })
         }
@@ -326,7 +326,7 @@ export namespace issuing {
                 expand?: [string]
             },
         ): Promise<CardsResponse> {
-            return client(`/issuing/cards/${id}`, {}, 'GET', {
+            return client(`/issuing/cards/${id}?${qs.stringify(settings?.expand)}`, {}, 'GET', {
                 headers: returnToHeaders(settings),
             })
         }
@@ -356,7 +356,7 @@ export namespace issuing {
                 expand?: [string]
             },
         ): Promise<CardsResponse> {
-            return client(`/issuing/cards/${id}`, params, 'POST', {
+            return client(`/issuing/cards/${id}?${qs.stringify(settings?.expand)}`, params, 'POST', {
                 headers: returnToHeaders(settings),
             })
         }
@@ -389,7 +389,7 @@ export namespace issuing {
             has_more: boolean
             data: [CardsResponse]
         }> {
-            return client(`/issuing/cards?${qs.stringify(params)}`, {}, 'GET', {
+            return client(`/issuing/cards?${qs.stringify(params)}&${qs.stringify(settings?.expand)}`, {}, 'GET', {
                 headers: returnToHeaders(settings),
             })
         }
@@ -461,7 +461,7 @@ export namespace issuing {
                 expand?: [string]
             },
         ): Promise<DisputesResponse> {
-            return client('/issuing/disputes', params, 'POST', {
+            return client(`/issuing/disputes?${qs.stringify(settings?.expand)}`, params, 'POST', {
                 headers: returnToHeaders(settings),
             })
         }
@@ -477,7 +477,7 @@ export namespace issuing {
                 expand?: [string]
             },
         ): Promise<DisputesResponse> {
-            return client(`/issuing/disputes/${id}/submit`, params, 'POST', {
+            return client(`/issuing/disputes/${id}/submit?${qs.stringify(settings?.expand)}`, params, 'POST', {
                 headers: returnToHeaders(settings),
             })
         }
@@ -489,7 +489,7 @@ export namespace issuing {
                 expand?: [string]
             },
         ): Promise<DisputesResponse> {
-            return client(`/issuing/disputes/${id}`, {}, 'GET', {
+            return client(`/issuing/disputes/${id}?${qs.stringify(settings?.expand)}`, {}, 'GET', {
                 headers: returnToHeaders(settings),
             })
         }
@@ -559,7 +559,7 @@ export namespace issuing {
                 expand?: [string]
             },
         ): Promise<DisputesResponse> {
-            return client(`/issuing/disputes/${id}`, params, 'POST', {
+            return client(`/issuing/disputes/${id}?${qs.stringify(settings?.expand)}`, params, 'POST', {
                 headers: returnToHeaders(settings),
             })
         }
@@ -589,7 +589,7 @@ export namespace issuing {
             data: [DisputesResponse]
         }> {
             return client(
-                `/issuing/disputes?${qs.stringify(params)}`,
+                `/issuing/disputes?${qs.stringify(params)}&${qs.stringify(settings?.expand)}`,
                 {},
                 'GET',
                 {
@@ -607,7 +607,7 @@ export namespace issuing {
                 expand?: [string]
             },
         ): Promise<TransactionsResponse> {
-            return client(`/issuing/transactions/${id}`, {}, 'GET', {
+            return client(`/issuing/transactions/${id}?${qs.stringify(settings?.expand)}`, {}, 'GET', {
                 headers: returnToHeaders(settings),
             })
         }
@@ -623,7 +623,7 @@ export namespace issuing {
                 expand?: [string]
             },
         ): Promise<TransactionsResponse> {
-            return client(`/issuing/transactions/${id}`, params, 'POST', {
+            return client(`/issuing/transactions/${id}?${qs.stringify(settings?.expand)}`, params, 'POST', {
                 headers: returnToHeaders(settings),
             })
         }
@@ -654,7 +654,7 @@ export namespace issuing {
             data: [TransactionsResponse]
         }> {
             return client(
-                `/issuing/transactions?${qs.stringify(params)}`,
+                `/issuing/transactions?${qs.stringify(params)}&${qs.stringify(settings?.expand)}`,
                 {},
                 'GET',
                 {

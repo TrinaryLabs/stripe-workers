@@ -157,9 +157,10 @@ export namespace paymentIntents {
         settings?: {
             stripeAccount?: string
             idempotencyKey?: string
+            expand?: [string]
         },
     ): Promise<PaymentIntentsResponse> {
-        return client('/payment_intents', params, 'POST', {
+        return client(`/payment_intents?${qs.stringify(settings?.expand)}`, params, 'POST', {
             headers: returnToHeaders(settings),
         })
     }
@@ -169,10 +170,13 @@ export namespace paymentIntents {
         params?: {
             client_secret?: string
         },
-        settings?: { stripeAccount?: string },
+        settings?: { 
+            stripeAccount?: string
+            expand?: [string]
+        },
     ): Promise<PaymentIntentsResponse> {
         return client(
-            `/payment_intents/${id}?${qs.stringify(params)}`,
+            `/payment_intents/${id}?${qs.stringify(params)}&${qs.stringify(settings?.expand)}`,
             {},
             'GET',
             {
@@ -334,9 +338,10 @@ export namespace paymentIntents {
         settings?: {
             stripeAccount?: string
             idempotencyKey?: string
+            expand?: [string]
         },
     ): Promise<PaymentIntentsResponse> {
-        return client(`/payment_intents/${id}`, params, 'POST', {
+        return client(`/payment_intents/${id}?${qs.stringify(settings?.expand)}`, params, 'POST', {
             headers: returnToHeaders(settings),
         })
     }
@@ -477,9 +482,10 @@ export namespace paymentIntents {
         settings?: {
             stripeAccount?: string
             idempotencyKey?: string
+            expand?: [string]
         },
     ): Promise<PaymentIntentsResponse> {
-        return client(`/payment_intents/${id}/confirm`, params, 'POST', {
+        return client(`/payment_intents/${id}/confirm?${qs.stringify(settings?.expand)}`, params, 'POST', {
             headers: returnToHeaders(settings),
         })
     }
@@ -498,9 +504,10 @@ export namespace paymentIntents {
         settings?: {
             stripeAccount?: string
             idempotencyKey?: string
+            expand?: [string]
         },
     ): Promise<PaymentIntentsResponse> {
-        return client(`/payment_intents/${id}/capture`, params, 'POST', {
+        return client(`/payment_intents/${id}/capture?${qs.stringify(settings?.expand)}`, params, 'POST', {
             headers: returnToHeaders(settings),
         })
     }
@@ -513,9 +520,10 @@ export namespace paymentIntents {
         settings?: {
             stripeAccount?: string
             idempotencyKey?: string
+            expand?: [string]
         },
     ): Promise<PaymentIntentsResponse> {
-        return client(`/payment_intents/${id}/confirm`, params, 'POST', {
+        return client(`/payment_intents/${id}/confirm?${qs.stringify(settings?.expand)}`, params, 'POST', {
             headers: returnToHeaders(settings),
         })
     }
@@ -533,7 +541,10 @@ export namespace paymentIntents {
             limit?: number
             starting_after?: string
         },
-        settings?: { stripeAccount?: string },
+        settings?: { 
+            stripeAccount?: string
+            expand?: [string]
+        },
     ): Promise<{
         object: string
         url: string
@@ -541,7 +552,7 @@ export namespace paymentIntents {
         data: [PaymentIntentsResponse]
     }> {
         return client(
-            `/payment_intents?${qs.stringify(params)}`,
+            `/payment_intents?${qs.stringify(params)}&${qs.stringify(settings?.expand)}`,
             params,
             'GET',
             {

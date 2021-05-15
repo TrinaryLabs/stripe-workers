@@ -30,18 +30,22 @@ export namespace skus {
         settings?: {
             stripeAccount?: string
             idempotencyKey?: string
+            expand?: [string]
         },
     ): Promise<SKUResponse> {
-        return client('/skus', params, 'POST', {
+        return client(`/skus?${qs.stringify(settings?.expand)}`, params, 'POST', {
             headers: returnToHeaders(settings),
         })
     }
 
     export function retrieve(
         id: string,
-        settings?: { stripeAccount?: string },
+        settings?: { 
+            stripeAccount?: string
+            expand?: [string]
+        },
     ): Promise<SKUResponse> {
-        return client(`/skus/${id}`, {}, 'GET', {
+        return client(`/skus/${id}?${qs.stringify(settings?.expand)}`, {}, 'GET', {
             headers: returnToHeaders(settings),
         })
     }
@@ -71,9 +75,10 @@ export namespace skus {
         settings?: {
             stripeAccount?: string
             idempotencyKey?: string
+            expand?: [string]
         },
     ): Promise<SKUResponse> {
-        return client(`/skus/${id}`, params, 'POST', {
+        return client(`/skus/${id}?${qs.stringify(settings?.expand)}`, params, 'POST', {
             headers: returnToHeaders(settings),
         })
     }
@@ -89,14 +94,17 @@ export namespace skus {
             limit?: number
             starting_after?: string
         },
-        settings?: { stripeAccount?: string },
+        settings?: { 
+            stripeAccount?: string
+            expand?: [string]
+        },
     ): Promise<{
         object: string
         url: string
         has_more: boolean
         data: [SKUResponse]
     }> {
-        return client(`/skus?${qs.stringify(params)}`, {}, 'GET', {
+        return client(`/skus?${qs.stringify(params)}&${qs.stringify(settings?.expand)}`, {}, 'GET', {
             headers: returnToHeaders(settings),
         })
     }

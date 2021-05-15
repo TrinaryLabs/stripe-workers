@@ -66,18 +66,22 @@ export namespace customers {
         settings?: {
             stripeAccount?: string
             idempotencyKey?: string
+            expand?: [string]
         },
     ): Promise<CustomersResponse> {
-        return client('/customers', params, 'POST', {
+        return client(`/customers?${qs.stringify(settings?.expand)}`, params, 'POST', {
             headers: returnToHeaders(settings),
         })
     }
 
     export function retrieve(
         id: string,
-        settings?: { stripeAccount?: string },
+        settings?: { 
+            stripeAccount?: string
+            expand?: [string]
+        },
     ): Promise<CustomersResponse> {
-        return client(`/customers/${id}`, {}, 'GET', {
+        return client(`/customers/${id}?${qs.stringify(settings?.expand)}`, {}, 'GET', {
             headers: returnToHeaders(settings),
         })
     }
@@ -132,9 +136,10 @@ export namespace customers {
         settings?: {
             stripeAccount?: string
             idempotencyKey?: string
+            expand?: [string]
         },
     ): Promise<CustomersResponse> {
-        return client(`/customers/${id}`, params, 'POST', {
+        return client(`/customers/${id}?${qs.stringify(settings?.expand)}`, params, 'POST', {
             headers: returnToHeaders(settings),
         })
     }
@@ -165,14 +170,17 @@ export namespace customers {
             limit?: number
             starting_after?: string
         },
-        settings?: { stripeAccount?: string },
+        settings?: { 
+            stripeAccount?: string
+            expand?: [string]
+        },
     ): Promise<{
         object: string
         url: string
         has_more: boolean
         data: [CustomersResponse]
     }> {
-        return client(`/customers?${qs.stringify(params)}`, {}, 'GET', {
+        return client(`/customers?${qs.stringify(params)}&${qs.stringify(settings?.expand)}`, {}, 'GET', {
             headers: returnToHeaders(settings),
         })
     }
@@ -186,9 +194,10 @@ export namespace customers {
         settings?: {
             stripeAccount?: string
             idempotencyKey?: string
+            expand?: [string]
         },
     ): Promise<SourcesResponse | CardSourceResponse | BankAccountResponse> {
-        return client(`/customers/${cus_id}/sources`, params, 'POST', {
+        return client(`/customers/${cus_id}/sources?${qs.stringify(settings?.expand)}`, params, 'POST', {
             headers: returnToHeaders(settings),
         })
     }
@@ -196,9 +205,12 @@ export namespace customers {
     export function retrieveSource(
         cus_id: string,
         id: string,
-        settings?: { stripeAccount?: string },
+        settings?: { 
+            stripeAccount?: string
+            expand?: [string]
+        },
     ): Promise<CardSourceResponse | BankAccountResponse> {
-        return client(`/customers/${cus_id}/sources/${id}`, {}, 'GET', {
+        return client(`/customers/${cus_id}/sources/${id}?${qs.stringify(settings?.expand)}`, {}, 'GET', {
             headers: returnToHeaders(settings),
         })
     }
@@ -222,9 +234,10 @@ export namespace customers {
         settings?: {
             stripeAccount?: string
             idempotencyKey?: string
+            expand?: [string]
         },
     ): Promise<CardSourceResponse | BankAccountResponse> {
-        return client(`/customers/${cus_id}/sources/${id}`, params, 'POST', {
+        return client(`/customers/${cus_id}/sources/${id}?${qs.stringify(settings?.expand)}`, params, 'POST', {
             headers: returnToHeaders(settings),
         })
     }
@@ -240,10 +253,11 @@ export namespace customers {
         settings?: {
             stripeAccount?: string
             idempotencyKey?: string
+            expand?: [string]
         },
     ): Promise<BankAccountResponse> {
         return client(
-            `/customers/${cus_id}/sources/${ba_id}/verify`,
+            `/customers/${cus_id}/sources/${ba_id}/verify?${qs.stringify(settings?.expand)}`,
             params,
             'POST',
             {
@@ -277,7 +291,10 @@ export namespace customers {
             limit?: number
             starting_after?: string
         },
-        settings?: { stripeAccount?: string },
+        settings?: { 
+            stripeAccount?: string
+            expand?: [string]
+        },
     ): Promise<{
         object: string
         url: string
@@ -285,7 +302,7 @@ export namespace customers {
         data: [CardSourceResponse | BankAccountResponse]
     }> {
         return client(
-            `/customers/${cus_id}/sources?${qs.stringify(params)}`,
+            `/customers/${cus_id}/sources?${qs.stringify(params)}&${qs.stringify(settings?.expand)}`,
             {},
             'GET',
             {
@@ -305,9 +322,10 @@ export namespace customers {
         settings?: {
             stripeAccount?: string
             idempotencyKey?: string
+            expand?: [string]
         },
     ): Promise<CustomerBalanceTransactionResponse> {
-        return client(`/customers/${id}/balance_transactions`, params, 'POST', {
+        return client(`/customers/${id}/balance_transactions?${qs.stringify(settings?.expand)}`, params, 'POST', {
             headers: returnToHeaders(settings),
         })
     }
@@ -315,10 +333,13 @@ export namespace customers {
     export function retrieveBalanceTransaction(
         id: string,
         tra_id: string,
-        settings?: { stripeAccount?: string },
+        settings?: { 
+            stripeAccount?: string
+            expand?: [string]
+        },
     ): Promise<CustomerBalanceTransactionResponse> {
         return client(
-            `/customers/${id}/balance_transactions/${tra_id}`,
+            `/customers/${id}/balance_transactions/${tra_id}?${qs.stringify(settings?.expand)}`,
             {},
             'GET',
             {
@@ -337,10 +358,11 @@ export namespace customers {
         settings?: {
             stripeAccount?: string
             idempotencyKey?: string
+            expand?: [string]
         },
     ): Promise<CustomerBalanceTransactionResponse> {
         return client(
-            `/customers/${id}/balance_transactions/${tra_id}`,
+            `/customers/${id}/balance_transactions/${tra_id}?${qs.stringify(settings?.expand)}`,
             params,
             'POST',
             {
@@ -356,7 +378,10 @@ export namespace customers {
             limit?: number
             starting_after?: string
         },
-        settings?: { stripeAccount?: string },
+        settings?: { 
+            stripeAccount?: string
+            expand?: [string]
+        },
     ): Promise<{
         object: string
         url: string
@@ -364,7 +389,7 @@ export namespace customers {
         data: [CustomerBalanceTransactionResponse]
     }> {
         return client(
-            `/customers/${id}/balance_transactions?${qs.stringify(params)}`,
+            `/customers/${id}/balance_transactions?${qs.stringify(params)}&${qs.stringify(settings?.expand)}`,
             {},
             'GET',
             {
@@ -382,9 +407,10 @@ export namespace customers {
         settings?: {
             stripeAccount?: string
             idempotencyKey?: string
+            expand?: [string]
         },
     ): Promise<TaxIDsResponse> {
-        return client(`/customers/${id}/tax_ids`, params, 'POST', {
+        return client(`/customers/${id}/tax_ids?${qs.stringify(settings?.expand)}`, params, 'POST', {
             headers: returnToHeaders(settings),
         })
     }
@@ -392,9 +418,12 @@ export namespace customers {
     export function retrieveTaxId(
         cus_id: string,
         tax_id: string,
-        settings?: { stripeAccount?: string },
+        settings?: { 
+            stripeAccount?: string
+            expand?: [string]
+        },
     ): Promise<TaxIDsResponse> {
-        return client(`/customers/${cus_id}/tax_ids/${tax_id}`, {}, 'GET', {
+        return client(`/customers/${cus_id}/tax_ids/${tax_id}?${qs.stringify(settings?.expand)}`, {}, 'GET', {
             headers: returnToHeaders(settings),
         })
     }
@@ -420,7 +449,10 @@ export namespace customers {
             limit?: number
             starting_after?: string
         },
-        settings?: { stripeAccount?: string },
+        settings?: { 
+            stripeAccount?: string
+            expand?: [string]
+        },
     ): Promise<{
         object: string
         url: string
@@ -428,7 +460,7 @@ export namespace customers {
         data: [TaxIDsResponse]
     }> {
         return client(
-            `/customers/${id}/tax_ids?${qs.stringify(params)}`,
+            `/customers/${id}/tax_ids?${qs.stringify(params)}&${qs.stringify(settings?.expand)}`,
             {},
             'GET',
             {
