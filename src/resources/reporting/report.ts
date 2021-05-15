@@ -21,18 +21,22 @@ export namespace reporting {
             settings?: {
                 stripeAccount?: string
                 idempotencyKey?: string
+                expand?: [string]
             },
         ): Promise<ReportRunResponse> {
-            return client(`/reporting/report_runs`, params, 'POST', {
+            return client(`/reporting/report_runs?${qs.stringify(settings?.expand)}`, params, 'POST', {
                 headers: returnToHeaders(settings),
             })
         }
 
         export function retrieve(
             id: string,
-            settings?: { stripeAccount?: string },
+            settings?: { 
+                stripeAccount?: string
+                expand?: [string]
+            },
         ): Promise<ReportRunResponse> {
-            return client(`/reporting/report_runs/${id}`, {}, 'GET', {
+            return client(`/reporting/report_runs/${id}?${qs.stringify(settings?.expand)}`, {}, 'GET', {
                 headers: returnToHeaders(settings),
             })
         }
@@ -49,7 +53,10 @@ export namespace reporting {
                 limit?: number
                 starting_after?: string
             },
-            settings?: { stripeAccount?: string },
+            settings?: { 
+                stripeAccount?: string
+                expand?: [string]
+            },
         ): Promise<{
             object: string
             url: string
@@ -57,7 +64,7 @@ export namespace reporting {
             data: [ReportRunResponse]
         }> {
             return client(
-                `/reporting/report_runs?${qs.stringify(params)}`,
+                `/reporting/report_runs?${qs.stringify(params)}&${qs.stringify(settings?.expand)}`,
                 {},
                 'GET',
                 {

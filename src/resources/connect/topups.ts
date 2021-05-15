@@ -18,18 +18,22 @@ export namespace topups {
         settings?: {
             stripeAccount?: string
             idempotencyKey?: string
+            expand?: [string]
         },
     ): Promise<TopUpsResponse> {
-        return client('/topups', params, 'POST', {
+        return client(`/topups?${qs.stringify(settings?.expand)}`, params, 'POST', {
             headers: returnToHeaders(settings),
         })
     }
 
     export function retrieve(
         id: string,
-        settings?: { stripeAccount?: string },
+        settings?: { 
+            stripeAccount?: string
+            expand?: [string]
+        },
     ): Promise<TopUpsResponse> {
-        return client(`/topups/${id}`, {}, 'GET', {
+        return client(`/topups/${id}?${qs.stringify(settings?.expand)}`, {}, 'GET', {
             headers: returnToHeaders(settings),
         })
     }
@@ -43,9 +47,10 @@ export namespace topups {
         settings?: {
             stripeAccount?: string
             idempotencyKey?: string
+            expand?: [string]
         },
     ): Promise<TopUpsResponse> {
-        return client(`/topups/${id}`, params, 'POST', {
+        return client(`/topups/${id}?${qs.stringify(settings?.expand)}`, params, 'POST', {
             headers: returnToHeaders(settings),
         })
     }
@@ -69,14 +74,17 @@ export namespace topups {
             limit?: number
             starting_after?: string
         },
-        settings?: { stripeAccount?: string },
+        settings?: { 
+            stripeAccount?: string
+            expand?: [string]
+        },
     ): Promise<{
         object: string
         url: string
         has_more: boolean
         data: [TopUpsResponse]
     }> {
-        return client(`/topups?${qs.stringify(params)}`, {}, 'GET', {
+        return client(`/topups?${qs.stringify(params)}&${qs.stringify(settings?.expand)}`, {}, 'GET', {
             headers: returnToHeaders(settings),
         })
     }
@@ -86,9 +94,10 @@ export namespace topups {
         settings?: {
             stripeAccount?: string
             idempotencyKey?: string
+            expand?: [string]
         },
     ): Promise<TopUpsResponse> {
-        return client(`/topups/${id}/cancel`, {}, 'POST', {
+        return client(`/topups/${id}/cancel?${qs.stringify(settings?.expand)}`, {}, 'POST', {
             headers: returnToHeaders(settings),
         })
     }

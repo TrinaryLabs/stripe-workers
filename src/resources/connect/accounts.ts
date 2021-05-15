@@ -286,18 +286,22 @@ export namespace accounts {
         settings?: {
             stripeAccount?: string
             idempotencyKey?: string
+            expand?: [string]
         },
     ): Promise<AccountsResponse> {
-        return client('/accounts', params, 'POST', {
+        return client(`/accounts?${qs.stringify(settings?.expand)}`, params, 'POST', {
             headers: returnToHeaders(settings),
         })
     }
 
     export function retrieve(
         id: string,
-        settings?: { stripeAccount?: string },
+        settings?: { 
+            stripeAccount?: string
+            expand?: [string]
+        },
     ): Promise<AccountsResponse> {
-        return client(`/accounts/${id}`, {}, 'GET', {
+        return client(`/accounts/${id}?${qs.stringify(settings?.expand)}`, {}, 'GET', {
             headers: returnToHeaders(settings),
         })
     }
@@ -577,9 +581,10 @@ export namespace accounts {
         settings?: {
             stripeAccount?: string
             idempotencyKey?: string
+            expand?: [string]
         },
     ): Promise<AccountsResponse> {
-        return client(`/accounts/${id}`, params, 'POST', {
+        return client(`/accounts/${id}?${qs.stringify(settings?.expand)}`, params, 'POST', {
             headers: returnToHeaders(settings),
         })
     }
@@ -600,9 +605,12 @@ export namespace accounts {
     export function reject(
         id: string,
         params: { reason: string },
-        settings?: { stripeAccount?: string },
+        settings?: { 
+            stripeAccount?: string
+            expand?: [string]
+        },
     ): Promise<AccountsResponse> {
-        return client(`/accounts/${id}/reject`, params, 'POST', {
+        return client(`/accounts/${id}/reject?${qs.stringify(settings?.expand)}`, params, 'POST', {
             headers: returnToHeaders(settings),
         })
     }
@@ -619,14 +627,17 @@ export namespace accounts {
             ending_before?: string
             starting_after?: string
         },
-        settings?: { stripeAccount?: string },
+        settings?: { 
+            stripeAccount?: string
+            expand?: [string]
+        },
     ): Promise<{
         object: string
         url: string
         has_more: boolean
         data: [AccountsResponse]
     }> {
-        return client(`/accounts`, params, 'GET', {
+        return client(`/accounts?${qs.stringify(settings?.expand)}`, params, 'GET', {
             headers: returnToHeaders(settings),
         })
     }
@@ -648,10 +659,13 @@ export namespace accounts {
     export function retrieveCapability(
         user_id: string,
         cap_id: string,
-        settings?: { stripeAccount?: string },
+        settings?: { 
+            stripeAccount?: string
+            expand?: [string]
+        },
     ): Promise<AccountsCapabilityResponse> {
         return client(
-            `/accounts/${user_id}/capabilities/${cap_id}`,
+            `/accounts/${user_id}/capabilities/${cap_id}?${qs.stringify(settings?.expand)}`,
             {},
             'GET',
             {
@@ -669,10 +683,11 @@ export namespace accounts {
         settings?: {
             stripeAccount?: string
             idempotencyKey?: string
+            expand?: [string]
         },
     ): Promise<AccountsCapabilityResponse> {
         return client(
-            `/accounts/${user_id}/capabilities/${cap_id}`,
+            `/accounts/${user_id}/capabilities/${cap_id}?${qs.stringify(settings?.expand)}`,
             params,
             'POST',
             {
@@ -683,14 +698,17 @@ export namespace accounts {
 
     export function listCapabilities(
         user_id: string,
-        settings?: { stripeAccount?: string },
+        settings?: { 
+            stripeAccount?: string
+            expand?: [string]
+        },
     ): Promise<{
         object: string
         url: string
         has_more: boolean
         data: [AccountsCapabilityResponse]
     }> {
-        return client(`/accounts/${user_id}/capabilities`, {}, 'GET', {
+        return client(`/accounts/${user_id}/capabilities?${qs.stringify(settings?.expand)}`, {}, 'GET', {
             headers: returnToHeaders(settings),
         })
     }
@@ -767,9 +785,10 @@ export namespace accounts {
         settings?: {
             stripeAccount?: string
             idempotencyKey?: string
+            expand?: [string]
         },
     ): Promise<PersonResponse> {
-        return client(`/accounts/${user_id}/persons`, params, 'POST', {
+        return client(`/accounts/${user_id}/persons?${qs.stringify(settings?.expand)}`, params, 'POST', {
             headers: returnToHeaders(settings),
         })
     }
@@ -777,9 +796,12 @@ export namespace accounts {
     export function retrievePerson(
         user_id: string,
         person_id: string,
-        settings?: { stripeAccount?: string },
+        settings?: { 
+            stripeAccount?: string
+            expand?: [string]
+        },
     ): Promise<PersonResponse> {
-        return client(`/accounts/${user_id}/persons/${person_id}`, {}, 'GET', {
+        return client(`/accounts/${user_id}/persons/${person_id}?${qs.stringify(settings?.expand)}`, {}, 'GET', {
             headers: returnToHeaders(settings),
         })
     }
@@ -857,10 +879,11 @@ export namespace accounts {
         settings?: {
             stripeAccount?: string
             idempotencyKey?: string
+            expand?: [string]
         },
     ): Promise<PersonResponse> {
         return client(
-            `/accounts/${user_id}/persons/${person_id}`,
+            `/accounts/${user_id}/persons/${person_id}?${qs.stringify(settings?.expand)}`,
             params,
             'POST',
             {
@@ -901,7 +924,10 @@ export namespace accounts {
             ending_before?: string
             starting_after?: string
         },
-        settings?: { stripeAccount?: string },
+        settings?: { 
+            stripeAccount?: string
+            expand?: [string]
+        },
     ): Promise<{
         object: string
         url: string
@@ -909,7 +935,7 @@ export namespace accounts {
         data: [PersonResponse]
     }> {
         return client(
-            `/accounts/${user_id}/persons?${qs.stringify(params)}`,
+            `/accounts/${user_id}/persons?${qs.stringify(params)}&${qs.stringify(settings?.expand)}`,
             {},
             'GET',
             {
@@ -951,9 +977,10 @@ export namespace accounts {
         settings?: {
             stripeAccount?: string
             idempotencyKey?: string
+            expand?: [string]
         },
     ): Promise<AccountBankAccountResponse | AccountCardResponse> {
-        return client(`/accounts/${id}/external_accounts`, params, 'POST', {
+        return client(`/accounts/${id}/external_accounts?${qs.stringify(settings?.expand)}`, params, 'POST', {
             headers: returnToHeaders(settings),
         })
     }
@@ -961,10 +988,13 @@ export namespace accounts {
     export function retrieveExternalAccount(
         id: string,
         ext_id: string,
-        settings?: { stripeAccount?: string },
+        settings?: { 
+            stripeAccount?: string
+            expand?: [string]
+        },
     ): Promise<AccountBankAccountResponse | AccountCardResponse> {
         return client(
-            `/accounts/${id}/external_accounts/${ext_id}`,
+            `/accounts/${id}/external_accounts/${ext_id}?${qs.stringify(settings?.expand)}`,
             {},
             'GET',
             {
@@ -994,10 +1024,11 @@ export namespace accounts {
         settings?: {
             stripeAccount?: string
             idempotencyKey?: string
+            expand?: [string]
         },
     ): Promise<AccountBankAccountResponse | AccountCardResponse> {
         return client(
-            `/accounts/${id}/external_accounts/${ext_id}`,
+            `/accounts/${id}/external_accounts/${ext_id}?${qs.stringify(settings?.expand)}`,
             params,
             'POST',
             {
@@ -1033,7 +1064,10 @@ export namespace accounts {
             limit?: number
             starting_after?: string
         },
-        settings?: { stripeAccount?: string },
+        settings?: { 
+            stripeAccount?: string
+            expand?: [string]
+        },
     ): Promise<{
         object: string
         url: string
@@ -1041,7 +1075,7 @@ export namespace accounts {
         data: [AccountBankAccountResponse | AccountCardResponse]
     }> {
         return client(
-            `/accounts/${id}/external_accounts?${qs.stringify(params)}`,
+            `/accounts/${id}/external_accounts?${qs.stringify(params)}&${qs.stringify(settings?.expand)}`,
             {},
             'GET',
             {
