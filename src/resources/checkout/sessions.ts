@@ -124,24 +124,38 @@ export namespace checkout {
             settings?: {
                 stripeAccount?: string
                 idempotencyKey?: string
-                expand?: [string]
+                expand?: Array<string>
             },
         ): Promise<CheckoutSessionsResponse> {
-            return client(`/checkout/sessions?${qs.stringify(settings?.expand)}`, params, 'POST', {
-                headers: returnToHeaders(settings),
-            })
+            return client(
+                `/checkout/sessions?${qs.stringify({
+                    expand: settings?.expand,
+                })}`,
+                params,
+                'POST',
+                {
+                    headers: returnToHeaders(settings),
+                },
+            )
         }
 
         export async function retrieve(
             id: string,
-            settings?: { 
+            settings?: {
                 stripeAccount?: string
-                expand?: [string]
+                expand?: Array<string>
             },
         ): Promise<CheckoutSessionsResponse> {
-            return client(`/checkout/sessions/${id}?${qs.stringify(settings?.expand)}`, {}, 'GET', {
-                headers: returnToHeaders(settings),
-            })
+            return client(
+                `/checkout/sessions/${id}?${qs.stringify({
+                    expand: settings?.expand,
+                })}`,
+                {},
+                'GET',
+                {
+                    headers: returnToHeaders(settings),
+                },
+            )
         }
 
         export async function list(
@@ -152,9 +166,9 @@ export namespace checkout {
                 ending_before?: string
                 starting_after?: string
             },
-            settings?: { 
+            settings?: {
                 stripeAccount?: string
-                expand?: [string]
+                expand?: Array<string>
             },
         ): Promise<{
             object: string
@@ -163,7 +177,9 @@ export namespace checkout {
             data: [CheckoutSessionsResponse]
         }> {
             return client(
-                `/checkout/sessions?${qs.stringify(params)}&${qs.stringify(settings?.expand)}`,
+                `/checkout/sessions?${qs.stringify(params)}&${qs.stringify({
+                    expand: settings?.expand,
+                })}`,
                 {},
                 'GET',
                 {
@@ -179,9 +195,9 @@ export namespace checkout {
                 limit?: number
                 starting_after?: string
             },
-            settings?: { 
+            settings?: {
                 stripeAccount?: string
-                expand?: [string]
+                expand?: Array<string>
             },
         ): Promise<{
             object: string
@@ -190,7 +206,9 @@ export namespace checkout {
             data: [CheckoutSessionsResponse]
         }> {
             return client(
-                `/checkout/sessions/${id}/line_items?${qs.stringify(params)}&${qs.stringify(settings?.expand)}`,
+                `/checkout/sessions/${id}/line_items?${qs.stringify(
+                    params,
+                )}&${qs.stringify({ expand: settings?.expand })}`,
                 {},
                 'GET',
                 {

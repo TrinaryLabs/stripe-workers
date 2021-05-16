@@ -45,24 +45,34 @@ export namespace plans {
         settings?: {
             stripeAccount?: string
             idempotencyKey?: string
-            expand?: [string]
+            expand?: Array<string>
         },
     ): Promise<PlansResponse> {
-        return client(`/plans?${qs.stringify(settings?.expand)}`, params, 'POST', {
-            headers: returnToHeaders(settings),
-        })
+        return client(
+            `/plans?${qs.stringify({ expand: settings?.expand })}`,
+            params,
+            'POST',
+            {
+                headers: returnToHeaders(settings),
+            },
+        )
     }
 
     export function retrieve(
         id: string,
-        settings?: { 
+        settings?: {
             stripeAccount?: string
-            expand?: [string]
+            expand?: Array<string>
         },
     ): Promise<PlansResponse> {
-        return client(`/plans/${id}?${qs.stringify(settings?.expand)}`, {}, 'GET', {
-            headers: returnToHeaders(settings),
-        })
+        return client(
+            `/plans/${id}?${qs.stringify({ expand: settings?.expand })}`,
+            {},
+            'GET',
+            {
+                headers: returnToHeaders(settings),
+            },
+        )
     }
 
     export function update(
@@ -85,12 +95,17 @@ export namespace plans {
         settings?: {
             stripeAccount?: string
             idempotencyKey?: string
-            expand?: [string]
+            expand?: Array<string>
         },
     ): Promise<PlansResponse> {
-        return client(`/plans/${id}?${qs.stringify(settings?.expand)}`, params, 'POST', {
-            headers: returnToHeaders(settings),
-        })
+        return client(
+            `/plans/${id}?${qs.stringify({ expand: settings?.expand })}`,
+            params,
+            'POST',
+            {
+                headers: returnToHeaders(settings),
+            },
+        )
     }
 
     export function del(
@@ -120,9 +135,9 @@ export namespace plans {
             limit?: number
             starting_after?: string
         },
-        settings?: { 
+        settings?: {
             stripeAccount?: string
-            expand?: [string]
+            expand?: Array<string>
         },
     ): Promise<{
         object: string
@@ -130,8 +145,15 @@ export namespace plans {
         has_more: boolean
         data: [PlansResponse]
     }> {
-        return client(`/plans?${qs.stringify(params)}&${qs.stringify(settings?.expand)}`, {}, 'GET', {
-            headers: returnToHeaders(settings),
-        })
+        return client(
+            `/plans?${qs.stringify(params)}&${qs.stringify({
+                expand: settings?.expand,
+            })}`,
+            {},
+            'GET',
+            {
+                headers: returnToHeaders(settings),
+            },
+        )
     }
 }

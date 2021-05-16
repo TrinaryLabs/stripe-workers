@@ -18,9 +18,9 @@ export namespace setupAttempts {
             limit?: number
             starting_after?: string
         },
-        settings?: { 
+        settings?: {
             stripeAccount?: string
-            expand?: [string]
+            expand?: Array<string>
         },
     ): Promise<{
         object: string
@@ -28,8 +28,15 @@ export namespace setupAttempts {
         has_more: boolean
         data: [SetupAttenptsResponse]
     }> {
-        return client(`/setup_attempts?${qs.stringify(params)}&${qs.stringify(settings?.expand)}`, {}, 'GET', {
-            headers: returnToHeaders(settings),
-        })
+        return client(
+            `/setup_attempts?${qs.stringify(params)}&${qs.stringify({
+                expand: settings?.expand,
+            })}`,
+            {},
+            'GET',
+            {
+                headers: returnToHeaders(settings),
+            },
+        )
     }
 }

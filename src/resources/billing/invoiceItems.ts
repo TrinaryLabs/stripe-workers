@@ -39,24 +39,34 @@ export namespace invoiceItems {
         settings?: {
             stripeAccount?: string
             idempotencyKey?: string
-            expand?: [string]
+            expand?: Array<string>
         },
     ): Promise<InvoiceItemsResponse> {
-        return client(`/invoiceitems?${qs.stringify(settings?.expand)}`, params, 'POST', {
-            headers: returnToHeaders(settings),
-        })
+        return client(
+            `/invoiceitems?${qs.stringify({ expand: settings?.expand })}`,
+            params,
+            'POST',
+            {
+                headers: returnToHeaders(settings),
+            },
+        )
     }
 
     export function retrieve(
         id: string,
         settings?: {
             stripeAccount?: string
-            expand?: [string]
+            expand?: Array<string>
         },
     ): Promise<InvoiceItemsResponse> {
-        return client(`/invoiceitems/${id}?${qs.stringify(settings?.expand)}`, {}, 'GET', {
-            headers: returnToHeaders(settings),
-        })
+        return client(
+            `/invoiceitems/${id}?${qs.stringify({ expand: settings?.expand })}`,
+            {},
+            'GET',
+            {
+                headers: returnToHeaders(settings),
+            },
+        )
     }
 
     export function update(
@@ -86,12 +96,17 @@ export namespace invoiceItems {
         settings?: {
             stripeAccount?: string
             idempotencyKey?: string
-            expand?: [string]
+            expand?: Array<string>
         },
     ): Promise<InvoiceItemsResponse> {
-        return client(`/invoiceitems/${id}?${qs.stringify(settings?.expand)}`, params, 'POST', {
-            headers: returnToHeaders(settings),
-        })
+        return client(
+            `/invoiceitems/${id}?${qs.stringify({ expand: settings?.expand })}`,
+            params,
+            'POST',
+            {
+                headers: returnToHeaders(settings),
+            },
+        )
     }
 
     export function del(
@@ -119,7 +134,7 @@ export namespace invoiceItems {
         },
         settings?: {
             stripeAccount?: string
-            expand?: [string]
+            expand?: Array<string>
         },
     ): Promise<{
         object: string
@@ -127,8 +142,15 @@ export namespace invoiceItems {
         has_more: boolean
         data: [InvoiceItemsResponse]
     }> {
-        return client(`/invoiceitems?${qs.stringify(params)}&${qs.stringify(settings?.expand)}`, {}, 'GET', {
-            headers: returnToHeaders(settings),
-        })
+        return client(
+            `/invoiceitems?${qs.stringify(params)}&${qs.stringify({
+                expand: settings?.expand,
+            })}`,
+            {},
+            'GET',
+            {
+                headers: returnToHeaders(settings),
+            },
+        )
     }
 }

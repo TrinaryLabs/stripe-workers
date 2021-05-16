@@ -95,24 +95,38 @@ export namespace subscriptionSchedules {
         settings?: {
             stripeAccount?: string
             idempotencyKey?: string
-            expand?: [string]
+            expand?: Array<string>
         },
     ): Promise<SubscriptionSchedulesResponse> {
-        return client(`/subscription_schedules?${qs.stringify(settings?.expand)}`, params, 'POST', {
-            headers: returnToHeaders(settings),
-        })
+        return client(
+            `/subscription_schedules?${qs.stringify({
+                expand: settings?.expand,
+            })}`,
+            params,
+            'POST',
+            {
+                headers: returnToHeaders(settings),
+            },
+        )
     }
 
     export function retrieve(
         id: string,
-        settings?: { 
+        settings?: {
             stripeAccount?: string
-            expand?: [string]
+            expand?: Array<string>
         },
     ): Promise<SubscriptionSchedulesResponse> {
-        return client(`/subscription_schedules/${id}?${qs.stringify(settings?.expand)}`, {}, 'GET', {
-            headers: returnToHeaders(settings),
-        })
+        return client(
+            `/subscription_schedules/${id}?${qs.stringify({
+                expand: settings?.expand,
+            })}`,
+            {},
+            'GET',
+            {
+                headers: returnToHeaders(settings),
+            },
+        )
     }
 
     export function update(
@@ -204,12 +218,19 @@ export namespace subscriptionSchedules {
         settings?: {
             stripeAccount?: string
             idempotencyKey?: string
-            expand?: [string]
+            expand?: Array<string>
         },
     ): Promise<SubscriptionSchedulesResponse> {
-        return client(`/subscription_items/${id}?${qs.stringify(settings?.expand)}`, params, 'POST', {
-            headers: returnToHeaders(settings),
-        })
+        return client(
+            `/subscription_items/${id}?${qs.stringify({
+                expand: settings?.expand,
+            })}`,
+            params,
+            'POST',
+            {
+                headers: returnToHeaders(settings),
+            },
+        )
     }
 
     export function cancel(
@@ -221,12 +242,19 @@ export namespace subscriptionSchedules {
         settings?: {
             stripeAccount?: string
             idempotencyKey?: string
-            expand?: [string]
+            expand?: Array<string>
         },
     ): Promise<SubscriptionSchedulesResponse> {
-        return client(`/subscription_schedules/${id}/cancel?${qs.stringify(settings?.expand)}`, params, 'POST', {
-            headers: returnToHeaders(settings),
-        })
+        return client(
+            `/subscription_schedules/${id}/cancel?${qs.stringify({
+                expand: settings?.expand,
+            })}`,
+            params,
+            'POST',
+            {
+                headers: returnToHeaders(settings),
+            },
+        )
     }
 
     export function release(
@@ -237,12 +265,19 @@ export namespace subscriptionSchedules {
         settings?: {
             stripeAccount?: string
             idempotencyKey?: string
-            expand?: [string]
+            expand?: Array<string>
         },
     ): Promise<SubscriptionSchedulesResponse> {
-        return client(`/subscription_schedules/${id}/release?${qs.stringify(settings?.expand)}`, params, 'POST', {
-            headers: returnToHeaders(settings),
-        })
+        return client(
+            `/subscription_schedules/${id}/release?${qs.stringify({
+                expand: settings?.expand,
+            })}`,
+            params,
+            'POST',
+            {
+                headers: returnToHeaders(settings),
+            },
+        )
     }
 
     export function list(
@@ -277,9 +312,9 @@ export namespace subscriptionSchedules {
             scheduled?: boolean
             starting_after?: string
         },
-        settings?: { 
+        settings?: {
             stripeAccount?: string
-            expand?: [string]
+            expand?: Array<string>
         },
     ): Promise<{
         object: string
@@ -288,7 +323,9 @@ export namespace subscriptionSchedules {
         data: [SubscriptionSchedulesResponse]
     }> {
         return client(
-            `/subscription_schedules?${qs.stringify(params)}&${qs.stringify(settings?.expand)}`,
+            `/subscription_schedules?${qs.stringify(params)}&${qs.stringify({
+                expand: settings?.expand,
+            })}`,
             {},
             'GET',
             {

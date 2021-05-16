@@ -10,14 +10,21 @@ export namespace radar {
     export namespace earlyFraudWarnings {
         export function retrieve(
             id: string,
-            settings?: { 
+            settings?: {
                 stripeAccount?: string
-                expand?: [string]
+                expand?: Array<string>
             },
         ): Promise<EarlyFraudWarningsResponse> {
-            return client(`/radar/early_fraud_warnings/${id}?${qs.stringify(settings?.expand)}`, {}, 'GET', {
-                headers: returnToHeaders(settings),
-            })
+            return client(
+                `/radar/early_fraud_warnings/${id}?${qs.stringify({
+                    expand: settings?.expand,
+                })}`,
+                {},
+                'GET',
+                {
+                    headers: returnToHeaders(settings),
+                },
+            )
         }
 
         export function list(
@@ -27,9 +34,9 @@ export namespace radar {
                 limit?: number
                 starting_after?: string
             },
-            settings?: { 
+            settings?: {
                 stripeAccount?: string
-                expand?: [string]
+                expand?: Array<string>
             },
         ): Promise<{
             object: string
@@ -38,7 +45,9 @@ export namespace radar {
             data: [EarlyFraudWarningsResponse]
         }> {
             return client(
-                `/radar/early_fraud_warnings?${qs.stringify(params)}&${qs.stringify(settings?.expand)}`,
+                `/radar/early_fraud_warnings?${qs.stringify(
+                    params,
+                )}&${qs.stringify({ expand: settings?.expand })}`,
                 {},
                 'GET',
                 {

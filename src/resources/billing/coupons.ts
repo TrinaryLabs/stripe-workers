@@ -23,24 +23,34 @@ export namespace coupons {
         settings?: {
             stripeAccount?: string
             idempotencyKey?: string
-            expand?: [string]
+            expand?: Array<string>
         },
     ): Promise<CouponsResponse> {
-        return client(`/coupons?${qs.stringify(settings?.expand)}`, params, 'POST', {
-            headers: returnToHeaders(settings),
-        })
+        return client(
+            `/coupons?${qs.stringify({ expand: settings?.expand })}`,
+            params,
+            'POST',
+            {
+                headers: returnToHeaders(settings),
+            },
+        )
     }
 
     export function retrieve(
         id: string,
-        settings?: { 
+        settings?: {
             stripeAccount?: string
-            expand?: [string]
+            expand?: Array<string>
         },
     ): Promise<CouponsResponse> {
-        return client(`/coupons/${id}?${qs.stringify(settings?.expand)}`, {}, 'GET', {
-            headers: returnToHeaders(settings),
-        })
+        return client(
+            `/coupons/${id}?${qs.stringify({ expand: settings?.expand })}`,
+            {},
+            'GET',
+            {
+                headers: returnToHeaders(settings),
+            },
+        )
     }
 
     export function update(
@@ -52,12 +62,17 @@ export namespace coupons {
         settings?: {
             stripeAccount?: string
             idempotencyKey?: string
-            expand?: [string]
+            expand?: Array<string>
         },
     ): Promise<CouponsResponse> {
-        return client(`/coupons/${id}?${qs.stringify(settings?.expand)}`, params, 'POST', {
-            headers: returnToHeaders(settings),
-        })
+        return client(
+            `/coupons/${id}?${qs.stringify({ expand: settings?.expand })}`,
+            params,
+            'POST',
+            {
+                headers: returnToHeaders(settings),
+            },
+        )
     }
 
     export function del(
@@ -80,9 +95,9 @@ export namespace coupons {
             limit?: number
             starting_after?: string
         },
-        settings?: { 
+        settings?: {
             stripeAccount?: string
-            expand?: [string]
+            expand?: Array<string>
         },
     ): Promise<{
         object: string
@@ -90,8 +105,15 @@ export namespace coupons {
         has_more: boolean
         data: [CouponsResponse]
     }> {
-        return client(`/coupons?${qs.stringify(params)}&${qs.stringify(settings?.expand)}`, {}, 'GET', {
-            headers: returnToHeaders(settings),
-        })
+        return client(
+            `/coupons?${qs.stringify(params)}&${qs.stringify({
+                expand: settings?.expand,
+            })}`,
+            {},
+            'GET',
+            {
+                headers: returnToHeaders(settings),
+            },
+        )
     }
 }

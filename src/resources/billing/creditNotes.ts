@@ -29,11 +29,13 @@ export namespace creditNotes {
         },
         settings?: {
             stripeAccount?: string
-            expand?: [string]
+            expand?: Array<string>
         },
     ): Promise<CreditNotesResponse> {
         return client(
-            `/credit_notes/preview?${qs.stringify(params)}&${qs.stringify(settings?.expand)}`,
+            `/credit_notes/preview?${qs.stringify(params)}&${qs.stringify({
+                expand: settings?.expand,
+            })}`,
             {},
             'GET',
             {
@@ -67,24 +69,34 @@ export namespace creditNotes {
         settings?: {
             stripeAccount?: string
             idempotencyKey?: string
-            expand?: [string]
+            expand?: Array<string>
         },
     ): Promise<CreditNotesResponse> {
-        return client(`/credit_notes?${qs.stringify(settings?.expand)}`, params, 'POST', {
-            headers: returnToHeaders(settings),
-        })
+        return client(
+            `/credit_notes?${qs.stringify({ expand: settings?.expand })}`,
+            params,
+            'POST',
+            {
+                headers: returnToHeaders(settings),
+            },
+        )
     }
 
     export function retrieve(
         id: string,
-        settings?: { 
+        settings?: {
             stripeAccount?: string
-            expand?: [string]
+            expand?: Array<string>
         },
     ): Promise<CreditNotesResponse> {
-        return client(`/credit_notes/${id}?${qs.stringify(settings?.expand)}`, {}, 'GET', {
-            headers: returnToHeaders(settings),
-        })
+        return client(
+            `/credit_notes/${id}?${qs.stringify({ expand: settings?.expand })}`,
+            {},
+            'GET',
+            {
+                headers: returnToHeaders(settings),
+            },
+        )
     }
 
     export function update(
@@ -96,12 +108,17 @@ export namespace creditNotes {
         settings?: {
             stripeAccount?: string
             idempotencyKey?: string
-            expand?: [string]
+            expand?: Array<string>
         },
     ): Promise<CreditNotesResponse> {
-        return client(`/credit_notes/${id}?${qs.stringify(settings?.expand)}`, params, 'POST', {
-            headers: returnToHeaders(settings),
-        })
+        return client(
+            `/credit_notes/${id}?${qs.stringify({ expand: settings?.expand })}`,
+            params,
+            'POST',
+            {
+                headers: returnToHeaders(settings),
+            },
+        )
     }
 
     export function listLineItems(
@@ -113,7 +130,7 @@ export namespace creditNotes {
         },
         settings?: {
             stripeAccount?: string
-            expand?: [string]
+            expand?: Array<string>
         },
     ): Promise<{
         object: string
@@ -122,7 +139,9 @@ export namespace creditNotes {
         data: [CreditNotesLines]
     }> {
         return client(
-            `/credit_notes/${id}/lines?${qs.stringify(params)}&${qs.stringify(settings?.expand)}`,
+            `/credit_notes/${id}/lines?${qs.stringify(params)}&${qs.stringify({
+                expand: settings?.expand,
+            })}`,
             {},
             'GET',
             {
@@ -158,7 +177,7 @@ export namespace creditNotes {
         },
         settings?: {
             stripeAccount?: string
-            expand?: [string]
+            expand?: Array<string>
         },
     ): Promise<{
         object: string
@@ -167,7 +186,11 @@ export namespace creditNotes {
         data: [CreditNotesLines]
     }> {
         return client(
-            `/credit_notes/preview/lines?${qs.stringify(params)}&${qs.stringify(settings?.expand)}`,
+            `/credit_notes/preview/lines?${qs.stringify(params)}&${qs.stringify(
+                {
+                    expand: settings?.expand,
+                },
+            )}`,
             {},
             'GET',
             {
@@ -181,12 +204,19 @@ export namespace creditNotes {
         settings?: {
             stripeAccount?: string
             idempotencyKey?: string
-            expand?: [string]
+            expand?: Array<string>
         },
     ): Promise<CreditNotesResponse> {
-        return client(`/credit_notes/${id}/void?${qs.stringify(settings?.expand)}`, {}, 'POST', {
-            headers: returnToHeaders(settings),
-        })
+        return client(
+            `/credit_notes/${id}/void?${qs.stringify({
+                expand: settings?.expand,
+            })}`,
+            {},
+            'POST',
+            {
+                headers: returnToHeaders(settings),
+            },
+        )
     }
 
     export function list(
@@ -198,7 +228,7 @@ export namespace creditNotes {
         },
         settings?: {
             stripeAccount?: string
-            expand?: [string]
+            expand?: Array<string>
         },
     ): Promise<{
         object: string
@@ -206,8 +236,15 @@ export namespace creditNotes {
         has_more: boolean
         data: [CreditNotesResponse]
     }> {
-        return client(`/credit_notes?${qs.stringify(params)}&${qs.stringify(settings?.expand)}`, {}, 'GET', {
-            headers: returnToHeaders(settings),
-        })
+        return client(
+            `/credit_notes?${qs.stringify(params)}&${qs.stringify({
+                expand: settings?.expand,
+            })}`,
+            {},
+            'GET',
+            {
+                headers: returnToHeaders(settings),
+            },
+        )
     }
 }

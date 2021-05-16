@@ -21,24 +21,38 @@ export namespace reporting {
             settings?: {
                 stripeAccount?: string
                 idempotencyKey?: string
-                expand?: [string]
+                expand?: Array<string>
             },
         ): Promise<ReportRunResponse> {
-            return client(`/reporting/report_runs?${qs.stringify(settings?.expand)}`, params, 'POST', {
-                headers: returnToHeaders(settings),
-            })
+            return client(
+                `/reporting/report_runs?${qs.stringify({
+                    expand: settings?.expand,
+                })}`,
+                params,
+                'POST',
+                {
+                    headers: returnToHeaders(settings),
+                },
+            )
         }
 
         export function retrieve(
             id: string,
-            settings?: { 
+            settings?: {
                 stripeAccount?: string
-                expand?: [string]
+                expand?: Array<string>
             },
         ): Promise<ReportRunResponse> {
-            return client(`/reporting/report_runs/${id}?${qs.stringify(settings?.expand)}`, {}, 'GET', {
-                headers: returnToHeaders(settings),
-            })
+            return client(
+                `/reporting/report_runs/${id}?${qs.stringify({
+                    expand: settings?.expand,
+                })}`,
+                {},
+                'GET',
+                {
+                    headers: returnToHeaders(settings),
+                },
+            )
         }
 
         export function list(
@@ -53,9 +67,9 @@ export namespace reporting {
                 limit?: number
                 starting_after?: string
             },
-            settings?: { 
+            settings?: {
                 stripeAccount?: string
-                expand?: [string]
+                expand?: Array<string>
             },
         ): Promise<{
             object: string
@@ -64,7 +78,9 @@ export namespace reporting {
             data: [ReportRunResponse]
         }> {
             return client(
-                `/reporting/report_runs?${qs.stringify(params)}&${qs.stringify(settings?.expand)}`,
+                `/reporting/report_runs?${qs.stringify(params)}&${qs.stringify({
+                    expand: settings?.expand,
+                })}`,
                 {},
                 'GET',
                 {

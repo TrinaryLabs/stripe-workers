@@ -668,7 +668,7 @@ export type CheckoutSessionsResponse = {
     line_items: {}
     metadata: object
     mode: string
-    payment_intent: string
+    payment_intent: string | PaymentIntentsResponse
     payment_method_types: [string]
     payment_status: string
     success_url: string

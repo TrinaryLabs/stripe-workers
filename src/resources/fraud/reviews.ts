@@ -10,24 +10,36 @@ export namespace reviews {
         settings?: {
             stripeAccount?: string
             idempotencyKey?: string
-            expand?: [string]
+            expand?: Array<string>
         },
     ): Promise<ReviewsResponse> {
-        return client(`/reviews/${id}/approve?${qs.stringify(settings?.expand)}`, {}, 'POST', {
-            headers: returnToHeaders(settings),
-        })
+        return client(
+            `/reviews/${id}/approve?${qs.stringify({
+                expand: settings?.expand,
+            })}`,
+            {},
+            'POST',
+            {
+                headers: returnToHeaders(settings),
+            },
+        )
     }
 
     export function retrieve(
         id: string,
-        settings?: { 
+        settings?: {
             stripeAccount?: string
-            expand?: [string]
+            expand?: Array<string>
         },
     ): Promise<ReviewsResponse> {
-        return client(`/reviews/${id}?${qs.stringify(settings?.expand)}`, {}, 'GET', {
-            headers: returnToHeaders(settings),
-        })
+        return client(
+            `/reviews/${id}?${qs.stringify({ expand: settings?.expand })}`,
+            {},
+            'GET',
+            {
+                headers: returnToHeaders(settings),
+            },
+        )
     }
 
     export function list(
@@ -42,9 +54,9 @@ export namespace reviews {
             limit?: number
             starting_after?: string
         },
-        settings?: { 
+        settings?: {
             stripeAccount?: string
-            expand?: [string]
+            expand?: Array<string>
         },
     ): Promise<{
         object: string
@@ -52,8 +64,15 @@ export namespace reviews {
         has_more: boolean
         data: [ReviewsResponse]
     }> {
-        return client(`/reviews?${qs.stringify(params)}&${qs.stringify(settings?.expand)}`, {}, 'GET', {
-            headers: returnToHeaders(settings),
-        })
+        return client(
+            `/reviews?${qs.stringify(params)}&${qs.stringify({
+                expand: settings?.expand,
+            })}`,
+            {},
+            'GET',
+            {
+                headers: returnToHeaders(settings),
+            },
+        )
     }
 }

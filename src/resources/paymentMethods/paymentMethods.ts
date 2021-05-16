@@ -69,7 +69,7 @@ export namespace paymentMethods {
         settings?: {
             stripeAccount?: string
             idempotencyKey?: string
-            expand?: [string]
+            expand?: Array<string>
         },
     ): Promise<PaymentMethodsResponse> {
         return client('/payment_methods', params, 'POST', {
@@ -79,9 +79,9 @@ export namespace paymentMethods {
 
     export function retrieve(
         id: string,
-        settings?: { 
+        settings?: {
             stripeAccount?: string
-            expand?: [string]
+            expand?: Array<string>
         },
     ): Promise<PaymentMethodsResponse> {
         return client(`/payment_methods/${id}`, {}, 'GET', {
@@ -114,7 +114,7 @@ export namespace paymentMethods {
         settings?: {
             stripeAccount?: string
             idempotencyKey?: string
-            expand?: [string]
+            expand?: Array<string>
         },
     ): Promise<PaymentMethodsResponse> {
         return client(`/payment_methods/${id}`, params, 'POST', {
@@ -130,9 +130,9 @@ export namespace paymentMethods {
             limit?: number
             starting_after?: string
         },
-        settings?: { 
+        settings?: {
             stripeAccount?: string
-            expand?: [string]
+            expand?: Array<string>
         },
     ): Promise<{
         object: string
@@ -153,7 +153,7 @@ export namespace paymentMethods {
         settings?: {
             stripeAccount?: string
             idempotencyKey?: string
-            expand?: [string]
+            expand?: Array<string>
         },
     ): Promise<PaymentMethodsResponse> {
         return client(`/payment_methods/${id}/attach`, params, 'POST', {
@@ -166,7 +166,7 @@ export namespace paymentMethods {
         settings?: {
             stripeAccount?: string
             idempotencyKey?: string
-            expand?: [string]
+            expand?: Array<string>
         },
     ): Promise<PaymentMethodsResponse> {
         return client(`/payment_methods/${id}/detach`, {}, 'POST', {
