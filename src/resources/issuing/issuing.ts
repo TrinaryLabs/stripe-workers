@@ -12,11 +12,21 @@ export namespace issuing {
     export namespace authorizations {
         export function retrieve(
             id: string,
-            settings?: { stripeAccount?: string },
+            settings?: {
+                stripeAccount?: string
+                expand?: Array<string>
+            },
         ): Promise<AuthorizationsResponse> {
-            return client(`/issuing/authorizations/${id}`, {}, 'GET', {
-                headers: returnToHeaders(settings),
-            })
+            return client(
+                `/issuing/authorizations/${id}?${qs.stringify({
+                    expand: settings?.expand,
+                })}`,
+                {},
+                'GET',
+                {
+                    headers: returnToHeaders(settings),
+                },
+            )
         }
 
         export function update(
@@ -27,11 +37,19 @@ export namespace issuing {
             settings?: {
                 stripeAccount?: string
                 idempotencyKey?: string
+                expand?: Array<string>
             },
         ): Promise<AuthorizationsResponse> {
-            return client(`/issuing/authorizations/${id}`, params, 'POST', {
-                headers: returnToHeaders(settings),
-            })
+            return client(
+                `/issuing/authorizations/${id}?${qs.stringify({
+                    expand: settings?.expand,
+                })}`,
+                params,
+                'POST',
+                {
+                    headers: returnToHeaders(settings),
+                },
+            )
         }
 
         export function approve(
@@ -43,10 +61,13 @@ export namespace issuing {
             settings?: {
                 stripeAccount?: string
                 idempotencyKey?: string
+                expand?: Array<string>
             },
         ): Promise<AuthorizationsResponse> {
             return client(
-                `/issuing/authorizations/${id}/approve`,
+                `/issuing/authorizations/${id}/approve?${qs.stringify({
+                    expand: settings?.expand,
+                })}`,
                 params,
                 'POST',
                 {
@@ -63,10 +84,13 @@ export namespace issuing {
             settings?: {
                 stripeAccount?: string
                 idempotencyKey?: string
+                expand?: Array<string>
             },
         ): Promise<AuthorizationsResponse> {
             return client(
-                `/issuing/authorizations/${id}/decline`,
+                `/issuing/authorizations/${id}/decline?${qs.stringify({
+                    expand: settings?.expand,
+                })}`,
                 params,
                 'POST',
                 {
@@ -90,7 +114,10 @@ export namespace issuing {
                 limit?: number
                 starting_after?: string
             },
-            settings?: { stripeAccount?: string },
+            settings?: {
+                stripeAccount?: string
+                expand?: Array<string>
+            },
         ): Promise<{
             object: string
             url: string
@@ -98,7 +125,11 @@ export namespace issuing {
             data: [AuthorizationsResponse]
         }> {
             return client(
-                `/issuing/authorizations?${qs.stringify(params)}`,
+                `/issuing/authorizations?${qs.stringify(params)}&${qs.stringify(
+                    {
+                        expand: settings?.expand,
+                    },
+                )}`,
                 {},
                 'GET',
                 {
@@ -302,20 +333,36 @@ export namespace issuing {
             settings?: {
                 stripeAccount?: string
                 idempotencyKey?: string
+                expand?: Array<string>
             },
         ): Promise<CardsResponse> {
-            return client('/issuing/cards', params, 'POST', {
-                headers: returnToHeaders(settings),
-            })
+            return client(
+                `/issuing/cards?${qs.stringify({ expand: settings?.expand })}`,
+                params,
+                'POST',
+                {
+                    headers: returnToHeaders(settings),
+                },
+            )
         }
 
         export function retrieve(
             id: string,
-            settings?: { stripeAccount?: string },
+            settings?: {
+                stripeAccount?: string
+                expand?: Array<string>
+            },
         ): Promise<CardsResponse> {
-            return client(`/issuing/cards/${id}`, {}, 'GET', {
-                headers: returnToHeaders(settings),
-            })
+            return client(
+                `/issuing/cards/${id}?${qs.stringify({
+                    expand: settings?.expand,
+                })}`,
+                {},
+                'GET',
+                {
+                    headers: returnToHeaders(settings),
+                },
+            )
         }
 
         export function update(
@@ -340,11 +387,19 @@ export namespace issuing {
             settings?: {
                 stripeAccount?: string
                 idempotencyKey?: string
+                expand?: Array<string>
             },
         ): Promise<CardsResponse> {
-            return client(`/issuing/cards/${id}`, params, 'POST', {
-                headers: returnToHeaders(settings),
-            })
+            return client(
+                `/issuing/cards/${id}?${qs.stringify({
+                    expand: settings?.expand,
+                })}`,
+                params,
+                'POST',
+                {
+                    headers: returnToHeaders(settings),
+                },
+            )
         }
 
         export function list(
@@ -365,16 +420,26 @@ export namespace issuing {
                 starting_after?: string
                 status?: string
             },
-            settings?: { stripeAccount?: string },
+            settings?: {
+                stripeAccount?: string
+                expand?: Array<string>
+            },
         ): Promise<{
             object: string
             url: string
             has_more: boolean
             data: [CardsResponse]
         }> {
-            return client(`/issuing/cards?${qs.stringify(params)}`, {}, 'GET', {
-                headers: returnToHeaders(settings),
-            })
+            return client(
+                `/issuing/cards?${qs.stringify(params)}&${qs.stringify({
+                    expand: settings?.expand,
+                })}`,
+                {},
+                'GET',
+                {
+                    headers: returnToHeaders(settings),
+                },
+            )
         }
     }
 
@@ -441,11 +506,19 @@ export namespace issuing {
             settings?: {
                 stripeAccount?: string
                 idempotencyKey?: string
+                expand?: Array<string>
             },
         ): Promise<DisputesResponse> {
-            return client('/issuing/disputes', params, 'POST', {
-                headers: returnToHeaders(settings),
-            })
+            return client(
+                `/issuing/disputes?${qs.stringify({
+                    expand: settings?.expand,
+                })}`,
+                params,
+                'POST',
+                {
+                    headers: returnToHeaders(settings),
+                },
+            )
         }
 
         export function submit(
@@ -456,20 +529,38 @@ export namespace issuing {
             settings?: {
                 stripeAccount?: string
                 idempotencyKey?: string
+                expand?: Array<string>
             },
         ): Promise<DisputesResponse> {
-            return client(`/issuing/disputes/${id}/submit`, params, 'POST', {
-                headers: returnToHeaders(settings),
-            })
+            return client(
+                `/issuing/disputes/${id}/submit?${qs.stringify({
+                    expand: settings?.expand,
+                })}`,
+                params,
+                'POST',
+                {
+                    headers: returnToHeaders(settings),
+                },
+            )
         }
 
         export function retrieve(
             id: string,
-            settings?: { stripeAccount?: string },
+            settings?: {
+                stripeAccount?: string
+                expand?: Array<string>
+            },
         ): Promise<DisputesResponse> {
-            return client(`/issuing/disputes/${id}`, {}, 'GET', {
-                headers: returnToHeaders(settings),
-            })
+            return client(
+                `/issuing/disputes/${id}?${qs.stringify({
+                    expand: settings?.expand,
+                })}`,
+                {},
+                'GET',
+                {
+                    headers: returnToHeaders(settings),
+                },
+            )
         }
 
         export function update(
@@ -534,11 +625,19 @@ export namespace issuing {
             settings?: {
                 stripeAccount?: string
                 idempotencyKey?: string
+                expand?: Array<string>
             },
         ): Promise<DisputesResponse> {
-            return client(`/issuing/disputes/${id}`, params, 'POST', {
-                headers: returnToHeaders(settings),
-            })
+            return client(
+                `/issuing/disputes/${id}?${qs.stringify({
+                    expand: settings?.expand,
+                })}`,
+                params,
+                'POST',
+                {
+                    headers: returnToHeaders(settings),
+                },
+            )
         }
 
         export function list(
@@ -555,7 +654,10 @@ export namespace issuing {
                 starting_after?: string
                 status?: string
             },
-            settings?: { stripeAccount?: string },
+            settings?: {
+                stripeAccount?: string
+                expand?: Array<string>
+            },
         ): Promise<{
             object: string
             url: string
@@ -563,7 +665,9 @@ export namespace issuing {
             data: [DisputesResponse]
         }> {
             return client(
-                `/issuing/disputes?${qs.stringify(params)}`,
+                `/issuing/disputes?${qs.stringify(params)}&${qs.stringify({
+                    expand: settings?.expand,
+                })}`,
                 {},
                 'GET',
                 {
@@ -576,11 +680,21 @@ export namespace issuing {
     export namespace transactions {
         export function retrieve(
             id: string,
-            settings?: { stripeAccount?: string },
+            settings?: {
+                stripeAccount?: string
+                expand?: Array<string>
+            },
         ): Promise<TransactionsResponse> {
-            return client(`/issuing/transactions/${id}`, {}, 'GET', {
-                headers: returnToHeaders(settings),
-            })
+            return client(
+                `/issuing/transactions/${id}?${qs.stringify({
+                    expand: settings?.expand,
+                })}`,
+                {},
+                'GET',
+                {
+                    headers: returnToHeaders(settings),
+                },
+            )
         }
 
         export function update(
@@ -591,11 +705,19 @@ export namespace issuing {
             settings?: {
                 stripeAccount?: string
                 idempotencyKey?: string
+                expand?: Array<string>
             },
         ): Promise<TransactionsResponse> {
-            return client(`/issuing/transactions/${id}`, params, 'POST', {
-                headers: returnToHeaders(settings),
-            })
+            return client(
+                `/issuing/transactions/${id}?${qs.stringify({
+                    expand: settings?.expand,
+                })}`,
+                params,
+                'POST',
+                {
+                    headers: returnToHeaders(settings),
+                },
+            )
         }
 
         export function list(
@@ -613,7 +735,10 @@ export namespace issuing {
                 starting_after?: string
                 type?: string
             },
-            settings?: { stripeAccount?: string },
+            settings?: {
+                stripeAccount?: string
+                expand?: Array<string>
+            },
         ): Promise<{
             object: string
             url: string
@@ -621,7 +746,9 @@ export namespace issuing {
             data: [TransactionsResponse]
         }> {
             return client(
-                `/issuing/transactions?${qs.stringify(params)}`,
+                `/issuing/transactions?${qs.stringify(params)}&${qs.stringify({
+                    expand: settings?.expand,
+                })}`,
                 {},
                 'GET',
                 {

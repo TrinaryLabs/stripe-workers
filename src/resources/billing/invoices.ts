@@ -43,20 +43,34 @@ export namespace invoices {
         settings?: {
             stripeAccount?: string
             idempotencyKey?: string
+            expand?: Array<string>
         },
     ): Promise<InvoicesResponse> {
-        return client(`/invoices`, params, 'POST', {
-            headers: returnToHeaders(settings),
-        })
+        return client(
+            `/invoices?${qs.stringify({ expand: settings?.expand })}`,
+            params,
+            'POST',
+            {
+                headers: returnToHeaders(settings),
+            },
+        )
     }
 
     export function retrieve(
         id: string,
-        settings?: { stripeAccount?: string },
+        settings?: {
+            stripeAccount?: string
+            expand?: Array<string>
+        },
     ): Promise<InvoicesResponse> {
-        return client(`/invoices/${id}`, {}, 'GET', {
-            headers: returnToHeaders(settings),
-        })
+        return client(
+            `/invoices/${id}?${qs.stringify({ expand: settings?.expand })}`,
+            {},
+            'GET',
+            {
+                headers: returnToHeaders(settings),
+            },
+        )
     }
 
     export function update(
@@ -96,11 +110,17 @@ export namespace invoices {
         settings?: {
             stripeAccount?: string
             idempotencyKey?: string
+            expand?: Array<string>
         },
     ): Promise<InvoicesResponse> {
-        return client(`/invoices/${id}`, params, 'POST', {
-            headers: returnToHeaders(settings),
-        })
+        return client(
+            `/invoices/${id}?${qs.stringify({ expand: settings?.expand })}`,
+            params,
+            'POST',
+            {
+                headers: returnToHeaders(settings),
+            },
+        )
     }
 
     export function del(
@@ -124,11 +144,19 @@ export namespace invoices {
         settings?: {
             stripeAccount?: string
             idempotencyKey?: string
+            expand?: Array<string>
         },
     ): Promise<InvoicesResponse> {
-        return client(`/invoices/${id}/finalize`, params, 'POST', {
-            headers: returnToHeaders(settings),
-        })
+        return client(
+            `/invoices/${id}/finalize?${qs.stringify({
+                expand: settings?.expand,
+            })}`,
+            params,
+            'POST',
+            {
+                headers: returnToHeaders(settings),
+            },
+        )
     }
 
     export function pay(
@@ -143,11 +171,17 @@ export namespace invoices {
         settings?: {
             stripeAccount?: string
             idempotencyKey?: string
+            expand?: Array<string>
         },
     ): Promise<InvoicesResponse> {
-        return client(`/invoices/${id}/pay`, params, 'POST', {
-            headers: returnToHeaders(settings),
-        })
+        return client(
+            `/invoices/${id}/pay?${qs.stringify({ expand: settings?.expand })}`,
+            params,
+            'POST',
+            {
+                headers: returnToHeaders(settings),
+            },
+        )
     }
 
     export function sendInvoice(
@@ -155,11 +189,19 @@ export namespace invoices {
         settings?: {
             stripeAccount?: string
             idempotencyKey?: string
+            expand?: Array<string>
         },
     ): Promise<InvoicesResponse> {
-        return client(`/invoices/${id}/send`, {}, 'POST', {
-            headers: returnToHeaders(settings),
-        })
+        return client(
+            `/invoices/${id}/send?${qs.stringify({
+                expand: settings?.expand,
+            })}`,
+            {},
+            'POST',
+            {
+                headers: returnToHeaders(settings),
+            },
+        )
     }
 
     export function voidInvoice(
@@ -167,11 +209,19 @@ export namespace invoices {
         settings?: {
             stripeAccount?: string
             idempotencyKey?: string
+            expand?: Array<string>
         },
     ): Promise<InvoicesResponse> {
-        return client(`/invoices/${id}/void`, {}, 'POST', {
-            headers: returnToHeaders(settings),
-        })
+        return client(
+            `/invoices/${id}/void?${qs.stringify({
+                expand: settings?.expand,
+            })}`,
+            {},
+            'POST',
+            {
+                headers: returnToHeaders(settings),
+            },
+        )
     }
 
     export function markUncollectible(
@@ -179,11 +229,19 @@ export namespace invoices {
         settings?: {
             stripeAccount?: string
             idempotencyKey?: string
+            expand?: Array<string>
         },
     ): Promise<InvoicesResponse> {
-        return client(`/invoices/${id}/mark_uncollectible`, {}, 'POST', {
-            headers: returnToHeaders(settings),
-        })
+        return client(
+            `/invoices/${id}/mark_uncollectible?${qs.stringify({
+                expand: settings?.expand,
+            })}`,
+            {},
+            'POST',
+            {
+                headers: returnToHeaders(settings),
+            },
+        )
     }
 
     export function listLineItems(
@@ -193,7 +251,10 @@ export namespace invoices {
             limit?: number
             starting_after?: string
         },
-        settings?: { stripeAccount?: string },
+        settings?: {
+            stripeAccount?: string
+            expand?: Array<string>
+        },
     ): Promise<{
         object: string
         url: string
@@ -201,7 +262,9 @@ export namespace invoices {
         data: [InvoiceItemsResponse]
     }> {
         return client(
-            `/invoices/${id}/lines?${qs.stringify(params)}`,
+            `/invoices/${id}/lines?${qs.stringify(params)}&${qs.stringify({
+                expand: settings?.expand,
+            })}`,
             {},
             'GET',
             {
@@ -281,11 +344,21 @@ export namespace invoices {
             subscription_trial_end?: number
             subscription_trial_from_plan?: boolean
         },
-        settings?: { stripeAccount?: string },
+        settings?: {
+            stripeAccount?: string
+            expand?: Array<string>
+        },
     ): Promise<InvoicesResponse> {
-        return client(`/invoices/upcoming?${qs.stringify(params)}`, {}, 'GET', {
-            headers: returnToHeaders(settings),
-        })
+        return client(
+            `/invoices/upcoming?${qs.stringify(params)}&${qs.stringify({
+                expand: settings?.expand,
+            })}`,
+            {},
+            'GET',
+            {
+                headers: returnToHeaders(settings),
+            },
+        )
     }
 
     export function listUpcomingLineItems(
@@ -362,7 +435,10 @@ export namespace invoices {
             subscription_trial_end?: number
             subscription_trial_from_plan?: boolean
         },
-        settings?: { stripeAccount?: string },
+        settings?: {
+            stripeAccount?: string
+            expand?: Array<string>
+        },
     ): Promise<{
         object: string
         url: string
@@ -370,7 +446,9 @@ export namespace invoices {
         data: [InvoiceItemsResponse]
     }> {
         return client(
-            `/invoices/upcoming/lines?${qs.stringify(params)}`,
+            `/invoices/upcoming/lines?${qs.stringify(params)}&${qs.stringify({
+                expand: settings?.expand,
+            })}`,
             {},
             'GET',
             {
@@ -396,15 +474,25 @@ export namespace invoices {
             limit?: number
             starting_after?: string
         },
-        settings?: { stripeAccount?: string },
+        settings?: {
+            stripeAccount?: string
+            expand?: Array<string>
+        },
     ): Promise<{
         object: string
         url: string
         has_more: boolean
         data: [InvoicesResponse]
     }> {
-        return client(`/invoices?${qs.stringify(params)}`, {}, 'GET', {
-            headers: returnToHeaders(settings),
-        })
+        return client(
+            `/invoices?${qs.stringify(params)}&${qs.stringify({
+                expand: settings?.expand,
+            })}`,
+            {},
+            'GET',
+            {
+                headers: returnToHeaders(settings),
+            },
+        )
     }
 }

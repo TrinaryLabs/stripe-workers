@@ -10,11 +10,21 @@ export namespace applicationFees {
 
     export function retrieve(
         id: string,
-        settings?: { stripeAccount?: string },
+        settings?: {
+            stripeAccount?: string
+            expand?: Array<string>
+        },
     ): Promise<ApplicationFeesResponse> {
-        return client(`/application_fees/${id}`, {}, 'GET', {
-            headers: returnToHeaders(settings),
-        })
+        return client(
+            `/application_fees/${id}?${qs.stringify({
+                expand: settings?.expand,
+            })}`,
+            {},
+            'GET',
+            {
+                headers: returnToHeaders(settings),
+            },
+        )
     }
 
     export function list(
@@ -29,16 +39,26 @@ export namespace applicationFees {
             ending_before?: string
             starting_after?: string
         },
-        settings?: { stripeAccount?: string },
+        settings?: {
+            stripeAccount?: string
+            expand?: Array<string>
+        },
     ): Promise<{
         object: string
         url: string
         has_more: boolean
         data: [ApplicationFeesResponse]
     }> {
-        return client(`/application_fees?${qs.stringify(params)}`, {}, 'GET', {
-            headers: returnToHeaders(settings),
-        })
+        return client(
+            `/application_fees?${qs.stringify(params)}&${qs.stringify({
+                expand: settings?.expand,
+            })}`,
+            {},
+            'GET',
+            {
+                headers: returnToHeaders(settings),
+            },
+        )
     }
 
     export function createRefund(
@@ -50,20 +70,33 @@ export namespace applicationFees {
         settings?: {
             stripeAccount?: string
             idempotencyKey?: string
+            expand?: Array<string>
         },
     ): Promise<ApplicationFeesRefundResponse> {
-        return client(`/application_fees/${id}/refunds`, params, 'POST', {
-            headers: returnToHeaders(settings),
-        })
+        return client(
+            `/application_fees/${id}/refunds?${qs.stringify({
+                expand: settings?.expand,
+            })}`,
+            params,
+            'POST',
+            {
+                headers: returnToHeaders(settings),
+            },
+        )
     }
 
     export function retrieveRefund(
         fee_id: string,
         refund_id: string,
-        settings?: { stripeAccount?: string },
+        settings?: {
+            stripeAccount?: string
+            expand?: Array<string>
+        },
     ): Promise<ApplicationFeesRefundResponse> {
         return client(
-            `/application_fees/${fee_id}/refunds/${refund_id}`,
+            `/application_fees/${fee_id}/refunds/${refund_id}?${qs.stringify({
+                expand: settings?.expand,
+            })}`,
             {},
             'GET',
             {
@@ -81,10 +114,13 @@ export namespace applicationFees {
         settings?: {
             stripeAccount?: string
             idempotencyKey?: string
+            expand?: Array<string>
         },
     ): Promise<ApplicationFeesRefundResponse> {
         return client(
-            `/application_fees/${fee_id}/refunds/${refund_id}`,
+            `/application_fees/${fee_id}/refunds/${refund_id}?${qs.stringify({
+                expand: settings?.expand,
+            })}`,
             params,
             'POST',
             {
@@ -100,7 +136,10 @@ export namespace applicationFees {
             ending_before?: string
             starting_after?: string
         },
-        settings?: { stripeAccount?: string },
+        settings?: {
+            stripeAccount?: string
+            expand?: Array<string>
+        },
     ): Promise<{
         object: string
         url: string
@@ -108,7 +147,9 @@ export namespace applicationFees {
         data: [ApplicationFeesRefundResponse]
     }> {
         return client(
-            `/application_fees/${id}/refunds?${qs.stringify(params)}`,
+            `/application_fees/${id}/refunds?${qs.stringify(
+                params,
+            )}&${qs.stringify({ expand: settings?.expand })}`,
             {},
             'GET',
             {

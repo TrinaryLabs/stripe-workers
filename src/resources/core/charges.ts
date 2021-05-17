@@ -42,20 +42,34 @@ export namespace charges {
         settings?: {
             stripeAccount?: string
             idempotencyKey?: string
+            expand?: Array<string>
         },
     ): Promise<ChargesResponse> {
-        return client(`/charges`, params, 'POST', {
-            headers: returnToHeaders(settings),
-        })
+        return client(
+            `/charges?${qs.stringify({ expand: settings?.expand })}`,
+            params,
+            'POST',
+            {
+                headers: returnToHeaders(settings),
+            },
+        )
     }
 
     export function retrieve(
         id: string,
-        settings?: { stripeAccount?: string },
+        settings?: {
+            stripeAccount?: string
+            expand?: Array<string>
+        },
     ): Promise<ChargesResponse> {
-        return client(`/charges/${id}`, {}, 'GET', {
-            headers: returnToHeaders(settings),
-        })
+        return client(
+            `/charges/${id}?${qs.stringify({ expand: settings?.expand })}`,
+            {},
+            'GET',
+            {
+                headers: returnToHeaders(settings),
+            },
+        )
     }
 
     export function update(
@@ -87,11 +101,17 @@ export namespace charges {
         settings?: {
             stripeAccount?: string
             idempotencyKey?: string
+            expand?: Array<string>
         },
     ): Promise<ChargesResponse> {
-        return client(`/charges/${id}`, params, 'POST', {
-            headers: returnToHeaders(settings),
-        })
+        return client(
+            `/charges/${id}?${qs.stringify({ expand: settings?.expand })}`,
+            params,
+            'POST',
+            {
+                headers: returnToHeaders(settings),
+            },
+        )
     }
 
     export function capture(
@@ -110,11 +130,19 @@ export namespace charges {
         settings?: {
             stripeAccount?: string
             idempotencyKey?: string
+            expand?: Array<string>
         },
     ): Promise<ChargesResponse> {
-        return client(`/charges/${id}/capture`, params, 'POST', {
-            headers: returnToHeaders(settings),
-        })
+        return client(
+            `/charges/${id}/capture?${qs.stringify({
+                expand: settings?.expand,
+            })}`,
+            params,
+            'POST',
+            {
+                headers: returnToHeaders(settings),
+            },
+        )
     }
 
     export function list(
@@ -132,15 +160,25 @@ export namespace charges {
             starting_after?: string
             transfer_group?: string
         },
-        settings?: { stripeAccount?: string },
+        settings?: {
+            stripeAccount?: string
+            expand?: Array<string>
+        },
     ): Promise<{
         object: string
         url: string
         has_more: boolean
         data: [ChargesResponse]
     }> {
-        return client(`/charges?${qs.stringify(params)}`, {}, 'GET', {
-            headers: returnToHeaders(settings),
-        })
+        return client(
+            `/charges?${qs.stringify(params)}&${qs.stringify({
+                expand: settings?.expand,
+            })}`,
+            {},
+            'GET',
+            {
+                headers: returnToHeaders(settings),
+            },
+        )
     }
 }

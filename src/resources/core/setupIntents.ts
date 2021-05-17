@@ -52,11 +52,17 @@ export namespace setupIntents {
         settings?: {
             stripeAccount?: string
             idempotencyKey?: string
+            expand?: Array<string>
         },
     ): Promise<SetupIntentsResponse> {
-        return client('/setup_intents', params, 'POST', {
-            headers: returnToHeaders(settings),
-        })
+        return client(
+            `/setup_intents?${qs.stringify({ expand: settings?.expand })}`,
+            params,
+            'POST',
+            {
+                headers: returnToHeaders(settings),
+            },
+        )
     }
 
     export function retrieve(
@@ -64,10 +70,15 @@ export namespace setupIntents {
         params: {
             client_secret?: string
         },
-        settings?: { stripeAccount?: string },
+        settings?: {
+            stripeAccount?: string
+            expand?: Array<string>
+        },
     ): Promise<SetupIntentsResponse> {
         return client(
-            `/setup_intents/${id}?${qs.stringify(params)}`,
+            `/setup_intents/${id}?${qs.stringify(params)}&${qs.stringify({
+                expand: settings?.expand,
+            })}`,
             {},
             'GET',
             {
@@ -106,11 +117,19 @@ export namespace setupIntents {
         settings?: {
             stripeAccount?: string
             idempotencyKey?: string
+            expand?: Array<string>
         },
     ): Promise<SetupIntentsResponse> {
-        return client(`/setup_intents/${id}`, params, 'POST', {
-            headers: returnToHeaders(settings),
-        })
+        return client(
+            `/setup_intents/${id}?${qs.stringify({
+                expand: settings?.expand,
+            })}`,
+            params,
+            'POST',
+            {
+                headers: returnToHeaders(settings),
+            },
+        )
     }
 
     export function confirm(
@@ -151,11 +170,19 @@ export namespace setupIntents {
         settings?: {
             stripeAccount?: string
             idempotencyKey?: string
+            expand?: Array<string>
         },
     ): Promise<SetupIntentsResponse> {
-        return client(`/setup_intents/${id}/confirm`, params, 'POST', {
-            headers: returnToHeaders(settings),
-        })
+        return client(
+            `/setup_intents/${id}/confirm?${qs.stringify({
+                expand: settings?.expand,
+            })}`,
+            params,
+            'POST',
+            {
+                headers: returnToHeaders(settings),
+            },
+        )
     }
 
     export function cancel(
@@ -166,11 +193,19 @@ export namespace setupIntents {
         settings?: {
             stripeAccount?: string
             idempotencyKey?: string
+            expand?: Array<string>
         },
     ): Promise<SetupIntentsResponse> {
-        return client(`/setup_intents/${id}/cancel`, params, 'POST', {
-            headers: returnToHeaders(settings),
-        })
+        return client(
+            `/setup_intents/${id}/cancel?${qs.stringify({
+                expand: settings?.expand,
+            })}`,
+            params,
+            'POST',
+            {
+                headers: returnToHeaders(settings),
+            },
+        )
     }
 
     export function list(
@@ -187,15 +222,25 @@ export namespace setupIntents {
             limit?: number
             starting_after?: string
         },
-        settings?: { stripeAccount?: string },
+        settings?: {
+            stripeAccount?: string
+            expand?: Array<string>
+        },
     ): Promise<{
         object: string
         url: string
         has_more: boolean
         data: [SetupIntentsResponse]
     }> {
-        return client(`/setup_intents?${qs.stringify(params)}`, params, 'GET', {
-            headers: returnToHeaders(settings),
-        })
+        return client(
+            `/setup_intents?${qs.stringify(params)}&${qs.stringify({
+                expand: settings?.expand,
+            })}`,
+            params,
+            'GET',
+            {
+                headers: returnToHeaders(settings),
+            },
+        )
     }
 }

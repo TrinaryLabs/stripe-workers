@@ -19,20 +19,34 @@ export namespace payouts {
         settings?: {
             stripeAccount?: string
             idempotencyKey?: string
+            expand?: Array<string>
         },
     ): Promise<PayoutsResponse> {
-        return client('/payouts', params, 'POST', {
-            headers: returnToHeaders(settings),
-        })
+        return client(
+            `/payouts?${qs.stringify({ expand: settings?.expand })}`,
+            params,
+            'POST',
+            {
+                headers: returnToHeaders(settings),
+            },
+        )
     }
 
     export function retrieve(
         id: string,
-        settings?: { stripeAccount?: string },
+        settings?: {
+            stripeAccount?: string
+            expand?: Array<string>
+        },
     ): Promise<PayoutsResponse> {
-        return client(`/payouts/${id}`, {}, 'GET', {
-            headers: returnToHeaders(settings),
-        })
+        return client(
+            `/payouts/${id}?${qs.stringify({ expand: settings?.expand })}`,
+            {},
+            'GET',
+            {
+                headers: returnToHeaders(settings),
+            },
+        )
     }
 
     export function update(
@@ -43,11 +57,17 @@ export namespace payouts {
         settings?: {
             stripeAccount?: string
             idempotencyKey?: string
+            expand?: Array<string>
         },
     ): Promise<PayoutsResponse> {
-        return client(`/payouts/${id}`, params, 'POST', {
-            headers: returnToHeaders(settings),
-        })
+        return client(
+            `/payouts/${id}?${qs.stringify({ expand: settings?.expand })}`,
+            params,
+            'POST',
+            {
+                headers: returnToHeaders(settings),
+            },
+        )
     }
 
     export function list(
@@ -70,16 +90,26 @@ export namespace payouts {
             limit?: number
             starting_after?: string
         },
-        settings?: { stripeAccount?: string },
+        settings?: {
+            stripeAccount?: string
+            expand?: Array<string>
+        },
     ): Promise<{
         object: string
         url: string
         has_more: boolean
         data: [PayoutsResponse]
     }> {
-        return client(`/payouts?${qs.stringify(params)}`, {}, 'GET', {
-            headers: returnToHeaders(settings),
-        })
+        return client(
+            `/payouts?${qs.stringify(params)}&${qs.stringify({
+                expand: settings?.expand,
+            })}`,
+            {},
+            'GET',
+            {
+                headers: returnToHeaders(settings),
+            },
+        )
     }
 
     export function cancel(
@@ -87,11 +117,19 @@ export namespace payouts {
         settings?: {
             stripeAccount?: string
             idempotencyKey?: string
+            expand?: Array<string>
         },
     ): Promise<PayoutsResponse> {
-        return client(`/payouts/${id}/cancel`, {}, 'POST', {
-            headers: returnToHeaders(settings),
-        })
+        return client(
+            `/payouts/${id}/cancel?${qs.stringify({
+                expand: settings?.expand,
+            })}`,
+            {},
+            'POST',
+            {
+                headers: returnToHeaders(settings),
+            },
+        )
     }
 
     export function reverse(
@@ -102,10 +140,18 @@ export namespace payouts {
         settings?: {
             stripeAccount?: string
             idempotencyKey?: string
+            expand?: Array<string>
         },
     ): Promise<PayoutsResponse> {
-        return client(`/payouts/${id}/reverse`, params, 'POST', {
-            headers: returnToHeaders(settings),
-        })
+        return client(
+            `/payouts/${id}/reverse?${qs.stringify({
+                expand: settings?.expand,
+            })}`,
+            params,
+            'POST',
+            {
+                headers: returnToHeaders(settings),
+            },
+        )
     }
 }

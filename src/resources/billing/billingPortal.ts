@@ -18,11 +18,19 @@ export namespace billingPortal {
             settings?: {
                 stripeAccount?: string
                 idempotencyKey?: string
+                expand?: Array<string>
             },
         ): Promise<BillingPortalResponse> {
-            return client('/billing_portal/sessions', params, 'POST', {
-                headers: returnToHeaders(settings),
-            })
+            return client(
+                `/billing_portal/sessions?${qs.stringify({
+                    expand: settings?.expand,
+                })}`,
+                params,
+                'POST',
+                {
+                    headers: returnToHeaders(settings),
+                },
+            )
         }
     }
 

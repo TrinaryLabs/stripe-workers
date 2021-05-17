@@ -32,20 +32,36 @@ export namespace subscriptionItems {
         settings?: {
             stripeAccount?: string
             idempotencyKey?: string
+            expand?: Array<string>
         },
     ): Promise<SubscriptionItemsResponse> {
-        return client(`/subscription_items`, params, 'POST', {
-            headers: returnToHeaders(settings),
-        })
+        return client(
+            `/subscription_items?${qs.stringify({ expand: settings?.expand })}`,
+            params,
+            'POST',
+            {
+                headers: returnToHeaders(settings),
+            },
+        )
     }
 
     export function retrieve(
         id: string,
-        settings?: { stripeAccount?: string },
+        settings?: {
+            stripeAccount?: string
+            expand?: Array<string>
+        },
     ): Promise<SubscriptionItemsResponse> {
-        return client(`/subscription_items/${id}`, {}, 'GET', {
-            headers: returnToHeaders(settings),
-        })
+        return client(
+            `/subscription_items/${id}?${qs.stringify({
+                expand: settings?.expand,
+            })}`,
+            {},
+            'GET',
+            {
+                headers: returnToHeaders(settings),
+            },
+        )
     }
 
     export function update(
@@ -76,11 +92,19 @@ export namespace subscriptionItems {
         settings?: {
             stripeAccount?: string
             idempotencyKey?: string
+            expand?: Array<string>
         },
     ): Promise<SubscriptionItemsResponse> {
-        return client(`/subscription_items/${id}`, params, 'POST', {
-            headers: returnToHeaders(settings),
-        })
+        return client(
+            `/subscription_items/${id}?${qs.stringify({
+                expand: settings?.expand,
+            })}`,
+            params,
+            'POST',
+            {
+                headers: returnToHeaders(settings),
+            },
+        )
     }
 
     export function del(
@@ -107,7 +131,10 @@ export namespace subscriptionItems {
             limit?: number
             starting_after?: string
         },
-        settings?: { stripeAccount?: string },
+        settings?: {
+            stripeAccount?: string
+            expand?: Array<string>
+        },
     ): Promise<{
         object: string
         url: string
@@ -115,7 +142,9 @@ export namespace subscriptionItems {
         data: [SubscriptionItemsResponse]
     }> {
         return client(
-            `/subscription_items?${qs.stringify(params)}`,
+            `/subscription_items?${qs.stringify(params)}&${qs.stringify({
+                expand: settings?.expand,
+            })}`,
             {},
             'GET',
             {

@@ -26,7 +26,8 @@ const stripe = new Stripe('Stripe-Secret-Key', {
 })
 ```
 
-## Examples of use 
+## Examples of use
+
 [`Deno`](https://github.com/TrinaryLabs/stripe-workers/tree/master/examples/deno)  
 [`Workers`](https://github.com/TrinaryLabs/stripe-workers/tree/master/examples/workers)
 

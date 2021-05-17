@@ -18,20 +18,34 @@ export namespace transfers {
         settings?: {
             stripeAccount?: string
             idempotencyKey?: string
+            expand?: Array<string>
         },
     ): Promise<TransfersResponse> {
-        return client(`/transfers`, params, 'POST', {
-            headers: returnToHeaders(settings),
-        })
+        return client(
+            `/transfers?${qs.stringify({ expand: settings?.expand })}`,
+            params,
+            'POST',
+            {
+                headers: returnToHeaders(settings),
+            },
+        )
     }
 
     export function retrieve(
         id: string,
-        settings?: { stripeAccount?: string },
+        settings?: {
+            stripeAccount?: string
+            expand?: Array<string>
+        },
     ): Promise<TransfersResponse> {
-        return client(`/transfers/${id}`, {}, 'GET', {
-            headers: returnToHeaders(settings),
-        })
+        return client(
+            `/transfers/${id}?${qs.stringify({ expand: settings?.expand })}`,
+            {},
+            'GET',
+            {
+                headers: returnToHeaders(settings),
+            },
+        )
     }
 
     export function update(
@@ -43,11 +57,17 @@ export namespace transfers {
         settings?: {
             stripeAccount?: string
             idempotencyKey?: string
+            expand?: Array<string>
         },
     ): Promise<TransfersResponse> {
-        return client(`/transfers/${id}`, params, 'POST', {
-            headers: returnToHeaders(settings),
-        })
+        return client(
+            `/transfers/${id}?${qs.stringify({ expand: settings?.expand })}`,
+            params,
+            'POST',
+            {
+                headers: returnToHeaders(settings),
+            },
+        )
     }
 
     export function list(
@@ -64,16 +84,26 @@ export namespace transfers {
             starting_after?: string
             transfer_group?: string
         },
-        settings?: { stripeAccount?: string },
+        settings?: {
+            stripeAccount?: string
+            expand?: Array<string>
+        },
     ): Promise<{
         object: string
         url: string
         has_more: boolean
         data: [TransfersResponse]
     }> {
-        return client(`/topups?${qs.stringify(params)}`, {}, 'GET', {
-            headers: returnToHeaders(settings),
-        })
+        return client(
+            `/topups?${qs.stringify(params)}&${qs.stringify({
+                expand: settings?.expand,
+            })}`,
+            {},
+            'GET',
+            {
+                headers: returnToHeaders(settings),
+            },
+        )
     }
 
     export function createReversal(
@@ -87,21 +117,39 @@ export namespace transfers {
         settings?: {
             stripeAccount?: string
             idempotencyKey?: string
+            expand?: Array<string>
         },
     ): Promise<TransfersReversalResponse> {
-        return client(`/transfers/${id}/reversals`, params, 'POST', {
-            headers: returnToHeaders(settings),
-        })
+        return client(
+            `/transfers/${id}/reversals?${qs.stringify({
+                expand: settings?.expand,
+            })}`,
+            params,
+            'POST',
+            {
+                headers: returnToHeaders(settings),
+            },
+        )
     }
 
     export function retrieveReversal(
         id: string,
         rever_id: string,
-        settings?: { stripeAccount?: string },
+        settings?: {
+            stripeAccount?: string
+            expand?: Array<string>
+        },
     ): Promise<TransfersReversalResponse> {
-        return client(`/transfers/${id}/reversals/${rever_id}`, {}, 'GET', {
-            headers: returnToHeaders(settings),
-        })
+        return client(
+            `/transfers/${id}/reversals/${rever_id}?${qs.stringify(
+                settings?.expand,
+            )}`,
+            {},
+            'GET',
+            {
+                headers: returnToHeaders(settings),
+            },
+        )
     }
 
     export function updateReversal(
@@ -113,10 +161,13 @@ export namespace transfers {
         settings?: {
             stripeAccount?: string
             idempotencyKey?: string
+            expand?: Array<string>
         },
     ): Promise<TransfersReversalResponse> {
         return client(
-            `/transfers/${id}/reversals/${rever_id}`,
+            `/transfers/${id}/reversals/${rever_id}?${qs.stringify(
+                settings?.expand,
+            )}`,
             params,
             'POST',
             {
@@ -132,7 +183,10 @@ export namespace transfers {
             limit?: number
             starting_after?: string
         },
-        settings?: { stripeAccount?: string },
+        settings?: {
+            stripeAccount?: string
+            expand?: Array<string>
+        },
     ): Promise<{
         object: string
         url: string
@@ -140,7 +194,9 @@ export namespace transfers {
         data: [TransfersReversalResponse]
     }> {
         return client(
-            `/transfer/${id}/reversals?${qs.stringify(params)}`,
+            `/transfer/${id}/reversals?${qs.stringify(params)}&${qs.stringify(
+                settings?.expand,
+            )}`,
             {},
             'GET',
             {

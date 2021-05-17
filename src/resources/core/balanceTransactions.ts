@@ -7,11 +7,21 @@ export namespace balanceTransactions {
 
     export function retrieve(
         id: string,
-        settings?: { stripeAccount?: string },
+        settings?: {
+            stripeAccount?: string
+            expand?: Array<string>
+        },
     ): Promise<BalanceTransactionsResponse> {
-        return client(`/balance_transactions/${id}`, {}, 'GET', {
-            headers: returnToHeaders(settings),
-        })
+        return client(
+            `/balance_transactions/${id}?${qs.stringify({
+                expand: settings?.expand,
+            })}`,
+            {},
+            'GET',
+            {
+                headers: returnToHeaders(settings),
+            },
+        )
     }
 
     export function list(
@@ -40,7 +50,10 @@ export namespace balanceTransactions {
             source?: string
             starting_after?: string
         },
-        settings?: { stripeAccount?: string },
+        settings?: {
+            stripeAccount?: string
+            expand?: Array<string>
+        },
     ): Promise<{
         object: string
         url: string
@@ -48,7 +61,9 @@ export namespace balanceTransactions {
         data: [BalanceTransactionsResponse]
     }> {
         return client(
-            `/balance_transactions?${qs.stringify(params)}`,
+            `/balance_transactions?${qs.stringify(params)}&${qs.stringify({
+                expand: settings?.expand,
+            })}`,
             {},
             'GET',
             {

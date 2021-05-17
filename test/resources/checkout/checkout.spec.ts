@@ -88,6 +88,23 @@ describe('Checkout', async () => {
             })
         })
 
+        describe('retrieve - expand paymentIntent', async () => {
+            it('Sends the correct request', async () => {
+                let data = await stripe.checkout.sessions.retrieve(
+                    lastCheckoutId,
+                    {
+                        expand: ['payment_intent'],
+                    },
+                )
+
+                expect(data.object).to.equal('checkout.session')
+                expect(data.amount_total).to.equal(246)
+                expect(data.client_reference_id).to.equal('1234')
+                expect(data.id).to.equal(lastCheckoutId)
+                expect(data.payment_intent).to.not.equal(null)
+            })
+        })
+
         describe('listLineItems', async () => {
             it('Sends the correct request', async () => {
                 let data = await stripe.checkout.sessions.listLineItems(

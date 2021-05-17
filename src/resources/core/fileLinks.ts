@@ -14,20 +14,34 @@ export namespace fileLinks {
         settings?: {
             stripeAccount?: string
             idempotencyKey?: string
+            expand?: Array<string>
         },
     ): Promise<FileLinksResponse> {
-        return client(`/file_links`, params, 'POST', {
-            headers: returnToHeaders(settings),
-        })
+        return client(
+            `/file_links?${qs.stringify({ expand: settings?.expand })}`,
+            params,
+            'POST',
+            {
+                headers: returnToHeaders(settings),
+            },
+        )
     }
 
     export function retrieve(
         id: string,
-        settings?: { stripeAccount?: string },
+        settings?: {
+            stripeAccount?: string
+            expand?: Array<string>
+        },
     ): Promise<FileLinksResponse> {
-        return client(`/file_links/${id}`, {}, 'GET', {
-            headers: returnToHeaders(settings),
-        })
+        return client(
+            `/file_links/${id}?${qs.stringify({ expand: settings?.expand })}`,
+            {},
+            'GET',
+            {
+                headers: returnToHeaders(settings),
+            },
+        )
     }
 
     export function update(
@@ -39,11 +53,17 @@ export namespace fileLinks {
         settings?: {
             stripeAccount?: string
             idempotencyKey?: string
+            expand?: Array<string>
         },
     ): Promise<FileLinksResponse> {
-        return client(`/file_links/${id}`, params, 'POST', {
-            headers: returnToHeaders(settings),
-        })
+        return client(
+            `/file_links/${id}?${qs.stringify({ expand: settings?.expand })}`,
+            params,
+            'POST',
+            {
+                headers: returnToHeaders(settings),
+            },
+        )
     }
 
     export function list(
@@ -61,15 +81,25 @@ export namespace fileLinks {
             starting_after?: string
             type?: string
         },
-        settings?: { stripeAccount?: string },
+        settings?: {
+            stripeAccount?: string
+            expand?: Array<string>
+        },
     ): Promise<{
         object: string
         url: string
         has_more: boolean
         data: [FileLinksResponse]
     }> {
-        return client(`/file_links?${qs.stringify(params)}`, params, 'GET', {
-            headers: returnToHeaders(settings),
-        })
+        return client(
+            `/file_links?${qs.stringify(params)}&${qs.stringify({
+                expand: settings?.expand,
+            })}`,
+            params,
+            'GET',
+            {
+                headers: returnToHeaders(settings),
+            },
+        )
     }
 }
