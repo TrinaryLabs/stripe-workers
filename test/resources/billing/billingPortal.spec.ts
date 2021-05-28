@@ -54,7 +54,9 @@ describe('BillingPortal', async () => {
         })
         describe('list', async () => {
             it('Sends the correct request', async () => {
-                let data = await stripe.billingPortal.configurations.list({})
+                let data = await stripe.billingPortal.configurations.list({
+                    limit: 10
+                })
 
                 expect(data.url).to.equal(`/v1/billing_portal/configurations`)
             })

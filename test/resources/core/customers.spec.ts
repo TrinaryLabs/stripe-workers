@@ -47,7 +47,9 @@ describe('Customers Resource', async () => {
 
     describe('list', async () => {
         it('Sends the correct request', async () => {
-            const response = await stripe.customers.list()
+            const response = await stripe.customers.list({
+                limit: 10
+            })
 
             expect(response.object).to.equal('list')
         })
