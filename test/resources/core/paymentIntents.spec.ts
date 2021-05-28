@@ -42,7 +42,7 @@ describe('Payment Intents Resource', async () => {
     describe('list', async () => {
         it('Sends the correct request', async () => {
             const response = await stripe.paymentIntents.list({
-                limit: 10
+                limit: 10,
             })
 
             expect(response.object).to.equal('list')
