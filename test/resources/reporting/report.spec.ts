@@ -31,7 +31,9 @@ describe('Reporting', async () => {
 
         describe('list', async () => {
             it('Sends the correct request', async () => {
-                const response = await stripe.reporting.reportRuns.list()
+                const response = await stripe.reporting.reportRuns.list({
+                    limit: 10,
+                })
 
                 expect(response.url).to.equal('/v1/reporting/report_runs')
                 expect(response.object).to.equal('list')
