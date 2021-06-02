@@ -1,3 +1,49 @@
+export type VerificationSessionResponse = {
+    id: string
+    object: string
+    client_secret: string
+    created: number
+    last_error: {
+        code: string
+        reason: string
+    }
+    last_verification_report: string
+    livemode: boolean
+    metadata: object
+    options: {
+        document: {
+            allowed_types: Array<string>
+            require_id_number: boolean
+            require_live_capture: boolean
+            require_matching_selfie: boolean
+        }
+        id_number: {}
+    }
+    redaction: {
+        status: string
+    }
+    type: string
+    url: string
+    verified_outputs: {
+        address: {
+            city: string
+            country: string
+            line1: string
+            line2: string
+            postal_code: string
+            state: string
+        }
+        dob: {
+            day: number
+            month: number
+            year: number
+        }
+        first_name: string
+        id_number: string
+        id_number_type: string
+    }
+}
+
 export type BillingPortalResponse = {
     id: string
     object: string
