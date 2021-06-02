@@ -1,5 +1,8 @@
 import qs from 'qs'
-import { VerificationSessionResponse } from '../../types'
+import {
+    VerificationReportResponse,
+    VerificationSessionResponse,
+} from '../../types'
 import { returnToHeaders } from '../../util'
 
 export namespace identity {
@@ -54,7 +57,12 @@ export namespace identity {
                 idempotencyKey?: string
                 expand?: Array<string>
             },
-        ): Promise<VerificationSessionResponse> {
+        ): Promise<{
+            object: string
+            url: string
+            has_more: boolean
+            data: [VerificationSessionResponse]
+        }> {
             return client(
                 `/identity/verification_sessions?${qs.stringify(
                     params,
@@ -150,6 +158,63 @@ export namespace identity {
                 })}`,
                 {},
                 'POST',
+                {
+                    headers: returnToHeaders(settings),
+                },
+            )
+        }
+    }
+    export namespace verificationReports {
+        export async function retrieve(
+            id: string,
+            settings?: {
+                stripeAccount?: string
+                expand?: Array<string>
+            },
+        ): Promise<VerificationReportResponse> {
+            return client(
+                `/identity/verification_reports/${id}?${qs.stringify({
+                    expand: settings?.expand,
+                })}`,
+                {},
+                'GET',
+                {
+                    headers: returnToHeaders(settings),
+                },
+            )
+        }
+        export async function list(
+            params: {
+                created?: {
+                    gt?: number
+                    gte?: number
+                    lt?: number
+                    lte?: number
+                }
+                status?: string
+                ending_before?: string
+                limit?: number
+                starting_after?: string
+            },
+            settings?: {
+                stripeAccount?: string
+                idempotencyKey?: string
+                expand?: Array<string>
+            },
+        ): Promise<{
+            object: string
+            url: string
+            has_more: boolean
+            data: [VerificationReportResponse]
+        }> {
+            return client(
+                `/identity/verification_reports?${qs.stringify(
+                    params,
+                )}&${qs.stringify({
+                    expand: settings?.expand,
+                })}`,
+                {},
+                'GET',
                 {
                     headers: returnToHeaders(settings),
                 },
