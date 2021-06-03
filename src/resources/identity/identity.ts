@@ -7,7 +7,7 @@ import { returnToHeaders } from '../../util'
 
 export namespace identity {
     export let client: Function
-    export namespace VerificationSession {
+    export namespace verificationSessions {
         export async function create(
             params: {
                 type: string

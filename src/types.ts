@@ -101,6 +101,7 @@ export type VerificationSessionResponse = {
     redaction: {
         status: string
     }
+    status: string
     type: string
     url: string
     verified_outputs: {
