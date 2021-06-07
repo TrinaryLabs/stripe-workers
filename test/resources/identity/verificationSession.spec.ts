@@ -12,14 +12,15 @@ describe('Identity', async () => {
                 lastResponseId = data.id
                 expect(data.object).to.equal('identity.verification_session')
                 expect(data.type).to.equal('document')
-                
             })
         })
 
         describe('retrieve', async () => {
             it('Sends the correct request', async () => {
-                const data = await stripe.identity.verificationSessions.retrieve(lastResponseId)
-                
+                const data = await stripe.identity.verificationSessions.retrieve(
+                    lastResponseId,
+                )
+
                 expect(data.object).to.equal('identity.verification_session')
                 expect(data.type).to.equal('document')
             })
@@ -27,8 +28,10 @@ describe('Identity', async () => {
 
         describe('list', async () => {
             it('Sends the correct request', async () => {
-                const data = await stripe.identity.verificationSessions.list({limit: 10})
-                
+                const data = await stripe.identity.verificationSessions.list({
+                    limit: 10,
+                })
+
                 expect(data.object).to.equal('list')
                 expect(data.url).to.equal('/v1/identity/verification_sessions')
             })
@@ -36,11 +39,14 @@ describe('Identity', async () => {
 
         describe('update', async () => {
             it('Sends the correct request', async () => {
-                const data = await stripe.identity.verificationSessions.update(lastResponseId, {
-                    metadata: {
-                        thing2: 'yes',
+                const data = await stripe.identity.verificationSessions.update(
+                    lastResponseId,
+                    {
+                        metadata: {
+                            thing2: 'yes',
+                        },
                     },
-                })
+                )
 
                 expect(data.object).to.equal('identity.verification_session')
                 expect(data.type).to.equal('document')
@@ -49,7 +55,9 @@ describe('Identity', async () => {
 
         describe('cancel', async () => {
             it('Sends the correct request', async () => {
-                const data = await stripe.identity.verificationSessions.cancel(lastResponseId)
+                const data = await stripe.identity.verificationSessions.cancel(
+                    lastResponseId,
+                )
 
                 expect(data.object).to.equal('identity.verification_session')
                 expect(data.type).to.equal('document')
@@ -59,8 +67,10 @@ describe('Identity', async () => {
 
         describe('redact', async () => {
             it('Sends the correct request', async () => {
-                const data = await stripe.identity.verificationSessions.redact(lastResponseId)
-                
+                const data = await stripe.identity.verificationSessions.redact(
+                    lastResponseId,
+                )
+
                 expect(data.object).to.equal('identity.verification_session')
                 expect(data.type).to.equal('document')
             })
