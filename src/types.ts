@@ -1,3 +1,129 @@
+export type VerificationReportResponse = {
+    id: string
+    object: string
+    created: number
+    document: {
+        address: {
+            city: string
+            country: string
+            line1: string
+            line2: string
+            postal_code: string
+            state: string
+        }
+        dob: {
+            day: number
+            month: number
+            year: number
+        }
+        error: {
+            code: string
+            reason: string
+        }
+        expiration_date: {
+            day: number
+            month: number
+            year: number
+        }
+        files: Array<string>
+        first_name: string
+        issued_date: {
+            day: number
+            month: number
+            year: number
+        }
+        issuing_country: string
+        last_name: string
+        number: string
+        status: string
+        type: string
+    }
+    id_number: {
+        dob: {
+            day: number
+            month: number
+            year: number
+        }
+        error: {
+            code: string
+            reason: string
+        }
+        first_name: string
+        id_number: string
+        id_number_type: string
+        last_name: string
+        status: string
+    }
+    livemode: boolean
+    options: {
+        document: {
+            allowed_types: Array<string>
+            require_id_number: boolean
+            require_live_capture: boolean
+            require_matching_selfie: boolean
+        }
+        id_number: {}
+    }
+    selfie: {
+        document: string
+        error: {
+            code: string
+            reason: string
+        }
+        selfie: string
+        status: string
+    }
+    type: string
+    verification_session: string
+}
+
+export type VerificationSessionResponse = {
+    id: string
+    object: string
+    client_secret: string
+    created: number
+    last_error: {
+        code: string
+        reason: string
+    }
+    last_verification_report: string
+    livemode: boolean
+    metadata: object
+    options: {
+        document: {
+            allowed_types: Array<string>
+            require_id_number: boolean
+            require_live_capture: boolean
+            require_matching_selfie: boolean
+        }
+        id_number: {}
+    }
+    redaction: {
+        status: string
+    }
+    status: string
+    type: string
+    url: string
+    verified_outputs: {
+        address: {
+            city: string
+            country: string
+            line1: string
+            line2: string
+            postal_code: string
+            state: string
+        }
+        dob: {
+            day: number
+            month: number
+            year: number
+        }
+        first_name: string
+        id_number: string
+        id_number_type: string
+    }
+}
+
 export type BillingPortalResponse = {
     id: string
     object: string

@@ -37,6 +37,7 @@ import { files } from './resources/core/files'
 import { subscriptionItems } from './resources/billing/subscriptionItems'
 import { paymentMethods } from './resources/paymentMethods/paymentMethods'
 import { sources } from './resources/paymentMethods/sources'
+import { identity } from './resources/identity/identity'
 
 import { HTTPClient } from './client'
 export class Stripe {
@@ -79,6 +80,7 @@ export class Stripe {
     subscriptionItems: typeof subscriptionItems
     paymentMethods: typeof paymentMethods
     sources: typeof sources
+    identity: typeof identity
 
     constructor(
         stripe_secret: string,
@@ -134,6 +136,7 @@ export class Stripe {
         this.subscriptionItems = subscriptionItems
         this.paymentMethods = paymentMethods
         this.sources = sources
+        this.identity = identity
 
         this.checkout.client = client.request
         this.billingPortal.client = client.request
@@ -175,5 +178,6 @@ export class Stripe {
         this.paymentMethods.client = client.request
         this.sources.client = client.request
         this.paymentIntents.client = client.request
+        this.identity.client = client.request
     }
 }
