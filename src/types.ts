@@ -802,6 +802,10 @@ export type CheckoutSessionsResponse = {
     allow_promotion_codes: boolean | undefined
     amount_subtotal: number | undefined
     amount_total: number | undefined
+    automatic_tax: {
+        enabled: boolean
+        status: string
+    }
     billing_address_collection: string
     currency: string | undefined
     customer_details: {
@@ -841,6 +845,9 @@ export type CheckoutSessionsResponse = {
     }
     submit_type: string | undefined
     subscription: string
+    tax_id_collection: {
+        enabled: boolean
+    }
     total_details: {
         amount_discount: number
         amount_shipping: number
