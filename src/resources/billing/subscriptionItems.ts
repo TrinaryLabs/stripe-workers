@@ -27,7 +27,7 @@ export namespace subscriptionItems {
                 unit_amount?: number
             }
             proration_date?: number
-            tax_rates?: string[]
+            tax_rates?: Array<string>
         },
         settings?: {
             stripeAccount?: string
@@ -87,7 +87,7 @@ export namespace subscriptionItems {
                 unit_amount?: number
             }
             proration_date?: number
-            tax_rates?: string[]
+            tax_rates?: Array<string>
         },
         settings?: {
             stripeAccount?: string

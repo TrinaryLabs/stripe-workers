@@ -7,7 +7,7 @@ export namespace webhookEndpoints {
 
     export function create(
         params: {
-            enabled_events: string[]
+            enabled_events: Array<string>
             url: string
             api_version?: string
             description?: string
@@ -36,7 +36,7 @@ export namespace webhookEndpoints {
     export function update(
         id: string,
         params: {
-            enabled_events: string[]
+            enabled_events: Array<string>
             url: string
             description?: string
             metadata?: object

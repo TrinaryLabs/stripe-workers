@@ -44,7 +44,7 @@ export namespace billingPortal {
                 }
                 features: {
                     customer_update?: {
-                        allowed_updates: string[]
+                        allowed_updates: Array<string>
                         enabled: boolean
                     }
                     invoice_history?: {
@@ -62,11 +62,11 @@ export namespace billingPortal {
                         enabled?: boolean
                     }
                     subscription_update?: {
-                        default_allowed_updates: string[]
+                        default_allowed_updates: Array<string>
                         enabled: boolean
                         products: [
                             {
-                                prices: string[]
+                                prices: Array<string>
                                 product: string
                             },
                         ]
@@ -96,7 +96,7 @@ export namespace billingPortal {
                 }
                 features?: {
                     customer_update?: {
-                        allowed_updates: string[]
+                        allowed_updates: Array<string>
                         enabled: boolean
                     }
                     invoice_history?: {
@@ -114,11 +114,11 @@ export namespace billingPortal {
                         enabled?: boolean
                     }
                     subscription_update?: {
-                        default_allowed_updates: string[]
+                        default_allowed_updates: Array<string>
                         enabled: boolean
                         products: [
                             {
-                                prices: string[]
+                                prices: Array<string>
                                 product: string
                             },
                         ]

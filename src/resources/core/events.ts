@@ -15,7 +15,7 @@ export namespace events {
 
     export function list(
         params?: {
-            types?: string[]
+            types?: Array<string>
             created?: {
                 gt?: string
                 gte?: string

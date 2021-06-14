@@ -49,6 +49,9 @@ export namespace checkout {
                 ]
                 metadata?: object
                 allow_promotion_codes?: boolean
+                automatic_tax?: {
+                    enabled: boolean
+                }
                 billing_address_collection?: string
                 discounts?: Array<string>
                 locale?: string
@@ -119,6 +122,9 @@ export namespace checkout {
                     }
                     trial_end?: number
                     trial_period_days?: number
+                }
+                tax_id_collection?: {
+                    enabled: boolean
                 }
             },
             settings?: {

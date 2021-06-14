@@ -15,7 +15,7 @@ export namespace paymentIntents {
             metadata?: object
             off_session?: boolean
             payment_method?: string
-            payment_method_types?: string[]
+            payment_method_types?: Array<string>
             receipt_email?: string
             setup_future_usage?: string
             shipping?: {
@@ -203,7 +203,7 @@ export namespace paymentIntents {
             metadata?: object
             off_session?: boolean
             payment_method?: string
-            payment_method_types?: string[]
+            payment_method_types?: Array<string>
             receipt_email?: string
             setup_future_usage?: string
             shipping?: {
@@ -489,7 +489,7 @@ export namespace paymentIntents {
                     preferred_language?: string
                 }
             }
-            payment_method_types?: string[]
+            payment_method_types?: Array<string>
             return_url?: string
             use_stripe_sdk?: boolean
         },
