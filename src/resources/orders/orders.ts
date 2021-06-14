@@ -132,7 +132,7 @@ export namespace orders {
                 lte?: string
             }
             ending_before?: string
-            ids?: string[]
+            ids?: Array<string>
             limit?: number
             starting_after?: string
             status_transitions?: {
@@ -161,7 +161,7 @@ export namespace orders {
                     lte?: string
                 }
             }
-            upstream_ids?: string[]
+            upstream_ids?: Array<string>
         },
         settings?: {
             stripeAccount?: string

@@ -15,12 +15,12 @@ export namespace invoices {
             subscription?: string
             account_tax_ids?: string
             application_fee_amount?: number
-            custom_fields?: string[]
+            custom_fields?: Array<string>
             days_until_due?: number
             dafault_payment_method?: string
             dafault_source?: string
             dafault_tax_rates?: [string]
-            discounts?: string[]
+            discounts?: Array<string>
             due_date?: number
             footer?: string
             payment_settings?: {
@@ -82,7 +82,7 @@ export namespace invoices {
             metadata?: object
             account_tax_ids?: string
             application_fee_amount?: number
-            custom_fields?: string[]
+            custom_fields?: Array<string>
             days_until_due?: number
             dafault_payment_method?: string
             dafault_source?: string
@@ -277,7 +277,7 @@ export namespace invoices {
         params?: {
             customer: string
             subscription?: string
-            discounts?: string[]
+            discounts?: Array<string>
             invoice_items?: [
                 {
                     amount?: number
@@ -365,7 +365,7 @@ export namespace invoices {
         params?: {
             customer: string
             subscription?: string
-            discounts?: string[]
+            discounts?: Array<string>
             ending_before?: string
             invoice_items?: [
                 {

@@ -81,7 +81,7 @@ export namespace invoiceItems {
             }
             price?: string
             discountable?: boolean
-            discounts?: string[]
+            discounts?: Array<string>
             price_data?: {
                 currency: string
                 product: string

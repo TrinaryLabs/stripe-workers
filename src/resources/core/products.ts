@@ -12,10 +12,10 @@ export namespace products {
             active?: boolean
             description?: string
             metadata?: object
-            attributes?: string[]
+            attributes?: Array<string>
             caption?: string
-            deactivate_on?: string[]
-            images?: string[]
+            deactivate_on?: Array<string>
+            images?: Array<string>
             package_dimensions?: {
                 height: number
                 length: number
@@ -53,10 +53,10 @@ export namespace products {
             description?: string
             metadata?: object
             name?: string
-            attributes?: string[]
+            attributes?: Array<string>
             caption?: string
-            deactivate_on?: string[]
-            images?: string[]
+            deactivate_on?: Array<string>
+            images?: Array<string>
             package_dimensions?: {
                 height: number
                 length: number
@@ -88,7 +88,7 @@ export namespace products {
                 lte?: string
             }
             ending_before?: string
-            ids?: string[]
+            ids?: Array<string>
             limit?: number
             shippable?: boolean
             starting_after?: string

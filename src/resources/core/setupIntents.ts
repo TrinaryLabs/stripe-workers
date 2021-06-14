@@ -11,7 +11,7 @@ export namespace setupIntents {
             description?: string
             metadata?: object
             payment_method?: string
-            payment_method_types?: string[]
+            payment_method_types?: Array<string>
             usage?: string
             mandate_data?: {
                 customer_acceptance: {
@@ -94,7 +94,7 @@ export namespace setupIntents {
             description?: string
             metadata?: object
             payment_method?: string
-            payment_method_types?: string[]
+            payment_method_types?: Array<string>
             payment_method_options?: {
                 acss_debit?: {
                     currency?: string

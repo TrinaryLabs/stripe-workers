@@ -150,7 +150,7 @@ export type BillingPortalConfigurationResponse = {
     default_return_url: string
     features: {
         customer_update: {
-            allowed_updates: string[]
+            allowed_updates: Array<string>
             enabled: boolean
         }
         invoice_history: {
@@ -168,7 +168,7 @@ export type BillingPortalConfigurationResponse = {
             enabled: boolean
         }
         subscription_update: {
-            default_allowed_updates: string[]
+            default_allowed_updates: Array<string>
             enabled: boolean
             proration_behavior: string
             products: [

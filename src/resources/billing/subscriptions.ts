@@ -32,7 +32,7 @@ export namespace subscriptions {
             cancel_at_period_end?: boolean
             default_payment_method?: string
             metadata?: object
-            add_invoice_items?: string[]
+            add_invoice_items?: Array<string>
             application_fee_percent?: string
             backdate_start_date?: number
             billing_cycle_anchor?: number
@@ -123,7 +123,7 @@ export namespace subscriptions {
             ]
             cancel_at_period_end?: boolean
             metadata?: object
-            add_invoice_items?: string[]
+            add_invoice_items?: Array<string>
             application_fee_percent?: string
             proration_behavior?: string
             billing_cycle_anchor?: string

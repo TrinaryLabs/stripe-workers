@@ -116,7 +116,7 @@ export namespace prices {
             ending_before?: string
             limit?: number
             starting_after?: string
-            lookup_keys?: string[]
+            lookup_keys?: Array<string>
             recurring?: {
                 interval?: string
                 usage_type?: string

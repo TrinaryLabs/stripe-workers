@@ -104,7 +104,7 @@ export namespace skus {
             product?: string
             attributes?: object
             ending_before?: string
-            ids?: string[]
+            ids?: Array<string>
             in_stock?: boolean
             limit?: number
             starting_after?: string
